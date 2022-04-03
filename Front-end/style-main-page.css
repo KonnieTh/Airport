@@ -1,0 +1,98 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+:root{
+    font-size: 21px;
+}
+
+.header{
+    min-height: 100vh;
+    min-width: 100%;
+    left:0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("athens.jpg");
+    /*width: 100%;*/
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.menu a img{
+    height: 50px;
+    width: 160px;
+}
+
+.menu{
+    display: grid;
+    grid-template-columns: repeat(10, 1.5fr);
+    align-items: center;
+    position: sticky;
+    top:0;
+}
+.menu div{
+    margin: 1em;
+    text-align: center;
+    align-self: center;
+}
+
+.menu a{
+    text-decoration: none;
+    color: white;
+}
+
+.menu > div:nth-child(n+2):nth-child(-n+6)::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 2px;
+    margin: auto;
+    background-color: white;
+    transition: 0.5s ease;
+}
+.menu > div:nth-child(n+2):nth-child(-n+6):hover::after {
+    width: 100%;
+  }
+/*
+.menu > div:nth-child(n+2):nth-child(-n+6):hover{
+    text-decoration: underline white 2px;
+    text-underline-offset: 3px;
+    transition: linear 0.5s;
+    width: 100%;
+}*/
+
+.sign-up{
+    grid-column: 9;
+}
+.log-in{
+    grid-column: 10;
+}
+.sign-up, .log-in {
+    border-radius: 22px;
+    padding: 1em;
+    border: none;
+    background-color: rgb(111, 111, 111);
+    margin: 0 0.5em;
+   
+}
+.sign-up a, .log-in a{
+    color: white;
+    text-decoration: none;
+}
+
+.sign-up:hover, .log-in:hover{
+    background-color: rgb(86, 85, 85);
+}
+
+.menu > img{
+    height: 35px;
+    width: 40px;
+    left: 0;
+}
+p{
+    margin: auto;
+}
+.header .description{
+    color: white;
+    margin: 20% 20%;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.6);
+}
