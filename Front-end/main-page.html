@@ -1,30 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Icarus</title>
-    <link rel="airport icon" href="\images\airport_logo.png">
-    <link rel="stylesheet" href="style-main-page.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icarus</title>
+  <link rel="airport icon" href="\images\airport_logo.png">
+  <link rel="stylesheet" href="style-main-page.css">
+  <link rel="stylesheet" href="project.css"> 
 </head>
 <body>
-    <div class="header" id="lo">
-        <div class="menu">
+  <script src="toturial.js"></script> 
+  <div class="header" id="lo">
+    <div class="menu">
+        <div class="menu-left">
             <div class="logo"><a href="#lo"><img src="\images\Icarus-logo.png"></a></div>
             <div class="flights"><a href="#lo">Πτήσεις</a></div>
-            <div class="parking"><a href="#lo">Πάρκινγκ</a></div>
+            <div class="parking"><a href="parking.html" target="_blank">Πάρκινγκ</a></div>
             <div class="companies"><a href="#lo">Εταιρείες</a></div>
             <div class="shops"><a href="#lo">Καταστήματα</a></div>
             <div class="luggages"><a href="#lo">Αποσκευές</a></div>
+        </div>
+        <div class="menu-right">
             <button class="sign-up"><a href="#lo">Εγγραφή</a></button>
             <button class="log-in"><a href="#lo">Είσοδος</a></button>
         </div>
-        <div class="description">
-            <p>
-                Σχετικά με εμάς:
-            </p>
-        </div>
+    </div> 
+    <div class="description">
+        <p>
+            Σχετικά με εμάς:
+        </p>
     </div>
+  </div>
+  <br>
+  <br>
+  <h2 class="passengers-information">Πληροφορίες Επιβατών</h2>
+  <br>
+  <div class="main-menu">
+    <div class="special-needs">
+        <button onclick="on()" title="Πληροφορίες για άτομα με αναπηρία ή μειωμένη κινητικότητα"><h2>Υπηρεσίες Υποστήριξης Επιβατών</h2></button>                
+    </div>  
+    <div class="covid-19">
+        <button onclick="on1()" title="Covid-19 Χρήσιμες Πληροφορίες για τους επιβάτες"><h2>Πληροφορίες για covid-19</h2></button>
+    </div>  
+    <div class="parking-info">
+        <button onclick="document.getElementById('details-about-parking').scrollIntoView();" title="Πληροφορίες για τη στάθμευση στο αεροδρόμιο" ><h2>Στάθμευση στο αεροδρόμιο</h2></button> 
+    </div>  
+    <div class="pets">
+        <button onclick="on1()" title="" ><h2>Ταξιδεύοντας με κατοικίδια</h2></button> 
+    </div>  
+    <!--div class="luggage-allowance">
+        <button onclick="on1()" title="Πληροφορίες σχετικά με " ><h2>Επιτρεπόμενα όρια αποσκευών</h2></button> 
+    </div-->  
+    <div class="currency">
+        <button onclick="on1()" title="Πληροφορίες σχετικά με συναλλαγματικούς περιορισμούς" ><h2>Συναλλαγματικοί περιορισμοί</h2></button> 
+    </div>  
+    <div class="tourism col-md-4 col-sm-12">
+        <button onclick="on1()" title="" ><h2>Διακοπές στην Ελλάδα</h2></button> 
+    </div>  
+  </div>
+  <br>
+  <!--div id="special-needs-text" class="container-md">
+    <button class="exit-symbol" onclick="off()"></button>
+    <h2>Άτομα με Αναπηρία και Μειωμένη Κινητικότητα</h2>
+    <div>Επιβάτες με αναπηρία και επιβάτες με μειωμένη κινητικότητα, οι οποίοι χρειάζονται βοήθεια για τη μετακίνησή τους στους χώρους του αεροδρομίου, θα πρέπει να έχουν υποβάλει εγκαίρως το σχετικό αίτημα επικοινωνώντας με την αεροπορική εταιρία ή ταξιδιωτικό τους γραφείο τουλάχιστον 48 ώρες πριν την δημοσιευμένη ώρα αναχώρησης της πτήσης.</div><br>
+    <div>Με την άφιξη τους στο αεροδρόμιο, Άτομα με αναπηρία ή μειωμένη κινητικότητα θα πρέπει να κατευθύνονται στo check-in της αεροπορικής εταιρίας που ταξιδεύουν ή στα σημεία με τη σχετική σήμανση προκειμένου να ενημερώσουν τους παρόχους υπηρεσιών επίγειας βοήθειας για την άφιξη τους.
+    </div><br>
+    <h2 >Σκύλοι Συνοδείας</h2>
+    <div>Όταν ένα άτομο με αναπηρία ή Μειωμένη Κινητικότητα απαιτεί τη χρήση αναγνωρισμένου σκύλου υποστήριξης, θα πρέπει να ενημερώνει την αεροπορική εταιρεία ή το ταξιδιωτικό γραφείο τουλάχιστον 48 ώρες πριν από τη δημοσιευμένη ώρα αναχώρησης της πτήσης και σύμφωνα με την ισχύοντες κανονισμούς σχετικά με τη μεταφορά σκύλων υποστήριξης επί του σκάφους.</div>            
+  </div-->
+  <br>
+  <br>
+  <br><br>
+  <footer>
+    <h2>Αεροδρόμιο Icarus</h2><br>
+    <div class="about-us">
+        <a >Επικοινωνία</a>
+        <a >Στατιστικά στοιχεία</a>
+        <a >Ανακοινώσεις</a>
+        <a >Feedback</a>
+        <a >Το Αεροδρόμιο</a>   
+    </div>
+    <br>
+    <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: Καθημερινά 00:01 - 24:00</div>
+    <div class="communication">Τηλέφωνο επικοινωνίας :</div>
+</footer>
 </body>
 </html>
