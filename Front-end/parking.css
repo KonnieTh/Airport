@@ -8,6 +8,7 @@
     color:white;
     font-size:16px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("/images/parking.jpg");
+    background-size:cover;
 }
 
 .logo a img{
@@ -78,8 +79,6 @@
     left: 0;
 }
 
-
-
 .content{
     background-color:rgba(0, 0, 0, 0.7);
     margin:0% 12%;
@@ -120,14 +119,6 @@
     text-align:center;
     padding:10px;
 }
-/*.leftside .more-info{
-    background-color:rgb(34, 167, 212);
-    width:25%;
-    height:2em;
-    border-radius:10px;
-    margin:auto;
-    padding-top:15px;
-}*/
 .leftside a,.rightside [type=submit]{
     background-color:rgb(34, 167, 212);
     border-radius:10px;
@@ -186,40 +177,28 @@ footer{
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
-    justify-content:space-between;
-    padding-left:6em;
+    justify-content:center;
+    /*padding-left:6em;*/
 }
-footer .communication-details h3{
+footer>div{
+    padding:0em 6.5em;
+}
+
+footer .communication-details .part1,footer .communication-details .part2{
+    display:grid;
+    grid-template-columns:repeat(2,auto);
+    text-align:left;
+    gap:2em;
+}
+
+footer h3{
     /*text-decoration:underline grey;*/
     border-bottom:0.2em solid grey;
-    padding:0.5em 2em;
-}
-footer .communication-details div{
-    padding:0.5em 2em;
-}
-footer .communication-details{
-    margin:auto;
-}
-footer .more{
-    width:30%;
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:space-around;
-    padding-right:20em;
-    padding-top:1em;
+    text-align:center;
 }
 
 
-
-
-
-/*footer .about-us{
-    display:flex;
-    flex-wrap:wrap-reverse;
-    flex-direction:row;
-    justify-content:space-between;
-    margin:auto;
-    width:60%;
-}*/
-
+footer .anakoinoseis:hover,footer .feedback:hover{
+    color:rgb(249, 249, 142);
+    cursor:pointer;
+}
