@@ -71,6 +71,7 @@
 
 .sign-up:hover, .log-in:hover{
     background-color: rgb(86, 85, 85);
+    cursor:pointer;
 }
 
 .menu > img{
