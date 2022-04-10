@@ -76,6 +76,7 @@
 
 .sign-up:hover, .log-in:hover{
     background-color: rgb(86, 85, 85);
+    cursor:pointer;
 }
 
 .menu > img{
@@ -99,23 +100,27 @@ p{
 .passengers-information{
     font-size:30px;
     text-align:center;
+    color:white;
+    margin-bottom:1em;
+    border-bottom:0.1em solid white;
 }
 
 .main-menu{
     width:100%;
+    background-color:rgb(111, 111, 111);
+    padding:1em 0em 1.5em 0em;
 }
-
-.main-menu{
-    width:75%;
-    margin:auto;
+.choices{
+    width:70%;
     display:flex;
     flex-direction:row;
     justify-content:center;
     gap:10px;
     flex-wrap:wrap;
+    margin:auto;
+    
 }
-
-.main-menu div{
+.choices div{
     width:15em;
     height:9em;
     flex-shrink:2;
@@ -135,7 +140,7 @@ p{
     padding-bottom:1em;
 }*/
 
-.main-menu button{
+.choices button{
     width:23.6em;
     background-color:rgba(0,0,0,0);
     background-image: linear-gradient(to bottom, rgba(121, 109, 109, 0), rgba(0, 0, 0, 0.9));
@@ -150,9 +155,11 @@ p{
     cursor:pointer;
 }
 
-.special-needs h2:hover{
-    color:orange;
+.special-needs h2:hover,.covid-19 h2:hover,.parking-info h2:hover,.pets h2:hover,.luggage-allowance h2:hover,.currency h2:hover,.tourism h2:hover{
+    text-decoration:underline;
+    color:white;
 }
+
 
 /*
 #special-needs-text{
@@ -215,11 +222,6 @@ p{
     font-size:18px;
     cursor:pointer;
 }
-
-.covid-19 h2:hover{
-    color:orange;
-}
-
 .parking-info{
     background-image:url("/images/parking.jpg");
     background-size:cover;
@@ -237,10 +239,6 @@ p{
     color:white;
     font-size:18px;
     cursor:pointer;
-}
-
-.parking-info h2:hover{
-    color:orange;
 }
 
 .pets{
@@ -261,9 +259,6 @@ p{
     font-size:18px;
     cursor:pointer;
 }
-.pets h2:hover{
-    color:orange;
-}
 
 .luggage-allowance{
     background-image:url("/images/luggage.jpg");
@@ -281,9 +276,6 @@ p{
     color:white;
     font-size:18px;
     cursor:pointer;
-}
-.luggage-allowance h2:hover{
-    color:orange;
 }
 
 .currency{
@@ -303,13 +295,11 @@ p{
     font-size:18px;
     cursor:pointer;
 }
-.currency h2:hover{
-    color:orange;
-}
 
 .tourism{
     background-image:url("/images/tourism.jpg");
     background-size:cover;
+    padding-left:0.025em;
 }
 /*.tourism button{
     width:16em;
@@ -324,41 +314,42 @@ p{
     font-size:18px;
     cursor:pointer;
 }
-.tourism h2:hover{
-    color:orange;
-}
+
+
 
 footer{
-    background-color:cyan;
-}
-footer h2{
-    text-align:center;
-}
-footer{
+    color:white;
+    font-size:0.8em;
     width:100%;
-    text-align:center;
-    margin:auto;
-}
-footer .about-us{
+    padding:1em 0em;
+    background-color:rgb(25, 25, 25);
     display:flex;
-    flex-wrap:wrap-reverse;
     flex-direction:row;
-    justify-content:space-between;
-    margin:auto;
-    width:60%;
+    flex-wrap:wrap;
+    justify-content:center;
+    /*padding-left:6em;*/
 }
-footer a{
-    text-decoration:none;
-    font-size:20px;
-    color:black;
+footer>div{
+    padding:0em 6.5em;
+}
+
+footer .communication-details .part1,footer .communication-details .part2{
+    display:grid;
+    grid-template-columns:repeat(2,auto);
+    text-align:left;
+    gap:2em;
+}
+
+footer h3{
+    /*text-decoration:underline grey;*/
+    border-bottom:0.2em solid grey;
+    text-align:center;
+}
+
+
+footer .anakoinoseis:hover,footer .feedback:hover{
+    color:rgb(249, 249, 142);
     cursor:pointer;
-    text-align:center;
-}
-footer a:hover{
-    color:yellow;
-}
-footer .working-hours,footer .communication{
-    text-align:center;
 }
 
 
