@@ -287,7 +287,7 @@ p{
 }
 
 
-#pets_text button{
+#pets_text .exit-symbol{
     background-image:url("/images/exit.jpg");
     background-size:cover;
     width:1.7em;
@@ -321,6 +321,33 @@ p{
     padding:0em 0.2em;
 }
 
+#pets_text .edit,#pets_text .edit:active,#pets_text .edit:visited,#pets_text .edit:active{
+    padding:0.5em;
+    font-size:1em;
+    float:right;
+    border-radius:10px;
+    border:none;
+    margin-top:1em;
+    background-color:orange;
+    color:white;
+    cursor:pointer;
+    text-decoration:none;
+    margin:0.5em 0.5em;
+}
+
+#pets_text .edit:hover{
+    background-color:blue;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+
+
+
+
+
+
 
 
 .currency{
@@ -346,11 +373,11 @@ p{
     max-width:50em;
     height:32em;
     margin:auto;
-    margin-top:1em;
     background-color:white;
     border:0.2em solid black;
     border-radius:10px;
     overflow-y:scroll;
+    margin-top:1em;
 }
 
 #currency_text ::-webkit-scrollbar{
@@ -373,7 +400,7 @@ p{
     background:hsl(120 100% 10%/1);
 }
 
-#currency_text button{
+#currency_text .exit-symbol{
     background-image:url("/images/exit.jpg");
     background-size:cover;
     width:1.7em;
@@ -442,6 +469,33 @@ p{
     z-index:1;
 }
 
+#currency_text .edit,#currency_text .edit:active,#currency_text .edit:visited,#currency_text .edit:active{
+    padding:0.5em;
+    font-size:1em;
+    float:right;
+    border-radius:10px;
+    border:none;
+    margin-top:1em;
+    background-color:orange;
+    color:white;
+    cursor:pointer;
+    text-decoration:none;
+    margin:0.5em 0.5em;
+}
+
+#currency_text .edit:hover{
+    background-color:blue;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+
+
+
+
+
+
 
 
 .tourism{
@@ -463,6 +517,10 @@ p{
     cursor:pointer;
 }
 
+
+
+
+
 #customs_insection_text .wrap{
     padding-left:0.2em;
     max-width:50em;
@@ -478,19 +536,18 @@ p{
 #customs_insection_text{
     display:none;
     position:fixed;
+    z-index:1;
     top:0;
     left:0;
     width:100%;
     height:100%;
     margin:auto;
     background-color:rgba(0,0,0,0.3);
-    z-index:1;
 }
-
 
 #customs_insection_text ::-webkit-scrollbar{
     width:1em;
-    height:1em;
+    height:0.5em;
 }
 
 #customs_insection_text ::-webkit-scrollbar-track{
@@ -508,7 +565,7 @@ p{
     background:hsl(120 100% 10%/1);
 }
 
-#customs_insection_text button{
+#customs_insection_text .exit-symbol{
     background-image:url("/images/exit.jpg");
     background-size:cover;
     width:1.7em;
@@ -519,7 +576,6 @@ p{
     cursor:pointer;
     float:right;
 }
-
 
 #customs_insection_text .wrap{
     padding-left:0.3em;
@@ -533,6 +589,10 @@ p{
 #customs_insection_text .wrap ul{
     margin-bottom:0.5em;
     margin-left:1em;
+}
+
+#customs_insection_text #custom-text{
+    padding-right:1em;
 }
 
 #customs_insection_text .wrap .head{
@@ -556,6 +616,28 @@ p{
 #customs_insection_text .main_text div{
     margin-bottom:0.5em;
 }
+
+#customs_insection_text .edit,#customs_insection_text .edit:active,#customs_insection_text .edit:visited,#customs_insection_text .edit:active{
+    padding:0.5em;
+    font-size:1em;
+    float:right;
+    border-radius:10px;
+    border:none;
+    margin:0.5em 0.5em;
+    background-color:orange;
+    color:white;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+#customs_insection_text .edit:hover{
+    background-color:blue;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+
 
 
 footer{
@@ -593,7 +675,44 @@ footer .anakoinoseis:hover,footer .feedback:hover{
     cursor:pointer;
 }
 
-@media only screen and (max-width:800px){
-   
-        
+/*@media only screen and (max-width:800px){     
+}*/
+
+
+#text-editor{
+    display:none;
+    margin:2em 0em;
+    background-color:white;
+}
+
+.text-editor-header{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:auto;
+}
+.text-editor-header .btn{
+    padding:0em 1em;
+    cursor:pointer;
+}
+.text-editor-header .btn:hover{
+    background-color: orange;
+}
+#text-editor .content{
+    min-height:20em;
+    width:60%;
+    border:0.2em solid black;
+    border-radius:10px;
+    margin:auto;
+    margin-top:1em;
+    padding:2% 5% 1% 5%;
+    overflow-y:scroll;
+}
+.text-editor-header .save{
+    text-decoration:none;
+}
+.text-editor-header .save:hover{
+    background-color:orange;
 }
