@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icarus</title>
+    <link rel="airport icon" href="\images\airport_logo.png">
+    <link rel="stylesheet" href="parking.css"> 
+</head>
+<body>
+    <div class="menu">
+        <div class="menu-left">
+            <div class="logo"><a href="main-page.html"><img src="\images\Icarus-logo.png"></a></div>
+            <div class="flights"><a href="flights.html">Πτήσεις</a></div>
+            <div class="parking"><a href="parking.html">Πάρκινγκ</a></div>
+            <div class="companies"><a href="#lo">Εταιρείες</a></div>
+            <div class="shops"><a href="#lo">Καταστήματα</a></div>
+            <div class="luggages"><a href="#lo">Αποσκευές</a></div>
+        </div>
+        <div class="menu-right">
+            <button class="sign-up"><a href="sign-up.html">Εγγραφή</a></button>
+            <button class="log-in"><a href="log-in.html">Είσοδος</a></button>
+        </div>
+    </div> 
+    <br>
+    <br>
+    <div class="content">
+        <h2 class="header-parking">Parking</h2>
+        <p>Κάντε κράτηση για θέση parking εύκολα και γρήγορα!</p>
+        <div class="details-parking" id="details-about-parking">
+            <div class="leftside">
+                <h2>Διαθεσιμότητα Θέσεων Parking</h2>
+                <div class="parking-availability">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th>Tερματικός</th>
+                        <th>Διαθεσιμότητα</th>
+                        <th>Ποσοστό Πληρότητας</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>P1</td>
+                        <td>30</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td>P2</td>
+                        <td>19</td>
+                        <td>68%</td>
+                    </tr>
+                    <tr>
+                        <td>P3</td>
+                        <td>24</td>
+                        <td>60%</td>
+                    </tr>
+                    <tr>
+                        <td>P4</td>
+                        <td>42</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td>P5</td>
+                        <td>31</td>
+                        <td>48%</td>
+                    </tr>
+                </table>
+                <br>
+                <br>
+                <div class="more-info">
+                    <a href="page1.html" target="_blank" role="button">Περισσότερες Πληροφορίες</a>
+                </div>
+                <br><br>
+                </div> 
+            </div>       
+            <div class="rightside">
+                <h2>Κράτηση Θέσης Parking</h2><br>
+                <div>Κάντε κράτηση θέσης στον τερματικό της επιλογής σας.</div>
+                <br>
+                <form action="" method="post">
+                    <div class="part1">
+                        <label for="entry-date">Ημερομηνία Έναρξης Κράτησης</label>
+                        <label for="entry-time">Επιλέξτε ώρα</label>
+                        <input type="date" id="entry-date" name="user_entry_date"  min="2022-04-01" class="form-control" required>
+                        <input type="time" id="entry-time" name="user_entry_time" class="form-control" required>
+                        <label for="exit-date" >Ημερομηνία Λήξης Κράτησης</label>
+                        <label for="exit-time">Επιλέξτε ώρα</label>
+                        <input type="date" id="entry-date" name="user_exit_date" min="2022-04-01" class="form-control" required>
+                        <input type="time" id="exit-time" name="user_exit_time" class="form-control" required>
+                    </div><br>
+                    <div class="part2">
+                        <label for="terminal">Τερματικός:</label>
+                        <select id="terminal" name="user_terminal" selected="Terminal P1">
+                            <option value="terminal_P1">P1</option>
+                            <option value="terminal_P2">P2</option>
+                            <option value="terminal_P3">P3</option>
+                            <option value="terminal_P4">P4</option>
+                            <option value="terminal_P5">P5</option>
+                        </select><br><br>
+                        <input type="submit" name="Book now">  
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="anakoinoseis">
+            <a><h3>Ανακοινώσεις</h3></a>
+        </div>
+        <div class="communication-details"><h3>Στοιχεία επικοινωνίας</h3>
+            <div class="part1"> 
+                <div>📞 2610567891</div>
+                <div>📌 Αττική Οδός, Δήμος Σπάτων - Αρτέμιδος 190 04</div>
+            </div>
+            <div class="part2">
+                <div>📧 info@icarus.gr</div>
+                <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: 24/7</div>
+            </div>
+        </div>
+        <div class="feedback">
+            <a><h3>Feedback</h3></a>
+        </div>
+    </footer>
+</body>
+</html>

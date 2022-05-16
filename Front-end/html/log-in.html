@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icarus</title>
+    <link rel="airport icon" href="\images\airport_logo.png">
+    <link rel="stylesheet" href="log-in.css">
+</head>
+<body>
+    <div class="menu">
+        <div class="menu-left">
+            <div class="logo"><a href="main-page.html"><img src="\images\Icarus-logo.png"></a></div>
+            <div class="flights"><a href="flights.html">Πτήσεις</a></div>
+            <div class="parking"><a href="parking.html">Πάρκινγκ</a></div>
+            <div class="companies"><a href="#lo">Εταιρείες</a></div>
+            <div class="shops"><a href="#lo">Καταστήματα</a></div>
+            <div class="luggages"><a href="#lo">Αποσκευές</a></div>
+        </div>
+        <div class="menu-right">
+            <button class="sign-up"><a href="sign-up.html">Εγγραφή</a></button>
+            <button class="log-in"><a href="log-in.html">Είσοδος</a></button>
+        </div>
+    </div>
+    <div class="login">
+        <form>     
+            <div class="login2">
+                <label for="username">Όνομα χρήστη</label><br>
+                <input type="text" id="username" name="username" size="25" required><br>
+                <label for="passw">Κωδικός</label><br>
+                <input type="password" name="password" size="25" autocomplete="new-password" minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}" required id="id_password">
+            </div>
+            <div class="sub">
+                <button type="submit">Είσοδος</button>
+            </div>
+        </form>
+        <div class="image">
+            <p>
+                Ξεκίνα το ταξίδι σου!
+            </p>
+            <img src="/images/plane-takeoff.gif">
+        </div>   
+    </div>
+    <footer>
+        <div class="anakoinoseis">
+            <a><h3>Ανακοινώσεις</h3></a>
+        </div>
+        <div class="communication-details"><h3>Στοιχεία επικοινωνίας</h3>
+            <div class="part1"> 
+                <div>📞 2610567891</div>
+                <div>📌 Αττική Οδός, Δήμος Σπάτων - Αρτέμιδος 190 04</div>
+            </div>
+            <div class="part2">
+                <div>📧 info@icarus.gr</div>
+                <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: 24/7</div>
+            </div>
+        </div>
+        <div class="feedback">
+            <a><h3>Feedback</h3></a>
+        </div>
+    </footer>
+</body>
+</html>
