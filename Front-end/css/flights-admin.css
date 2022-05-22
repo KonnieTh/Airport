@@ -198,17 +198,19 @@ form input[type="submit"]:hover{
 }
 
 .container{
-    height:30em;
+    height:33em;
     background-color:white;
     overflow-y:scroll;
-    width:101.3%;
+    width:103%;
 }
 
 .flights-header{
-    width:100%;
+    width:74%;
     background-color:rgb(86, 85, 85);
     padding:0.2em 0em;
+    padding-right:0.5em;
 }
+
 
 .flights-info .date{
     margin:0.5em 0em;
@@ -227,55 +229,68 @@ form input[type="submit"]:hover{
     text-align:center;
 }
 
+
+
+
 .nonvisible{
     display:none;
 }
 
+.edit-button,.remove-button{
+    width:auto;
+    margin:1em 1em;
+    padding:0.2em 0.2em;
+    border-radius:10px;
+    border:none;
+    background-color:blue;
+    color:white;
+    font-size:1em;
+    cursor:pointer;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+.edit-button:hover,.remove-button:hover{
+    background-color:orange;
+}
+
+.edit-button.touched{
+    background-color:orange ;
+    color:white;
+}
+
+
+
 
 footer{
-    font-size: 0.8em;
     width:100%;
-    margin-top:3em;
-    padding:1em 0em 0em 0em;
+    margin-top:1em;
+    padding:1em 0em;
     background-color:rgb(25, 25, 25);
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
-    justify-content:space-around;
-    bottom:0;
+    justify-content:center;
+    position:relative;
+}
+
+footer>div{
+    padding:0em 6.5em;
+}
+
+footer .communication-details .part1,footer .communication-details .part2{
+    display:grid;
+    grid-template-columns:repeat(2,auto);
+    text-align:left;
+    gap:2em;
 }
 
 footer h3{
     border-bottom:0.2em solid grey;
     text-align:center;
 }
-footer .anakoinoseis, footer .links, footer .communication-details{
-    display: flex;
-    flex-direction: column;
-}
-footer .communication-details div{
-    align-self: center;
-    padding-top: 0.2em;
-}
-footer .communication-details{
-    padding-bottom: 1em;
-}
-footer .anakoinoseis div{
-   padding-top: 0.5em;
-   align-self: center;
-}
-
-footer .anakoinoseis .anak:hover{
-    color:rgb(249, 249, 142);
-    cursor:pointer;
-}
-
-footer .links div{
-   padding-top: 0.5em;
-   align-self: center;
-}
-
-footer .links .lin:hover{
+footer .anakoinoseis:hover,footer .feedback:hover{
     color:rgb(249, 249, 142);
     cursor:pointer;
 }

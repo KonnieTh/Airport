@@ -1,4 +1,4 @@
-*{
+ *{
     padding: 0;
     margin: 0;
 }
@@ -8,18 +8,17 @@
     background-size:cover;
     color:white;
     background-position: center;
-    font-size:16px;
     scroll-behavior: smooth;
 }
 
-.logo a img{
+/* .logo a img{
     height: 50px;
     width: 160px;
-}
-
+} */
+/*
 .menu{
     /*background-image: url("/images/flights.jpg");*/
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -80,7 +79,7 @@
     height: 35px;
     width: 40px;
     left: 0;
-}
+} */ */
 
 
 
@@ -308,7 +307,7 @@ tbody tr:last-child{
 
 
 
-footer{
+/* footer{
     font-size: 0.8em;
     width:100%;
     margin-top:3em;
@@ -356,4 +355,4 @@ footer .links .lin:hover{
     cursor:pointer;
 }
 
-
+ */
