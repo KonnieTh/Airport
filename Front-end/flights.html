@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="css/flights.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/sign-up.css">
+    <link rel="stylesheet" href="css/log-in.css">
+    <script defer src="js/sign-up.js"></script>
+    <script defer src="js/log-in.js"></script>
 </head>
 <body>
     <div class="menu">
@@ -19,9 +23,69 @@
             <div class="shops"><a href="shops.html">Καταστήματα</a></div>
         </div>
         <div class="menu-right">
-            <button class="sign-up"><a href="sign-up.html">Εγγραφή</a></button>
-            <button class="log-in"><a href="log-in.html">Είσοδος</a></button>
+            <button class="sign-up">Εγγραφή</button>
+            <button class="log-in">Είσοδος</button>
         </div>
+    </div>
+    <div class="signup">
+        <form>
+            <div class="close">&times;</div>
+            <div class="name">
+                <label for="fname">Ονοματεπώνυμο</label><br>
+                <input type="text" id="fname" name="fname" placeholder="Όνομα" size="26" required>
+                <input type="text" id="lname" name="lname" placeholder="Επώνυμο" size="26" required>
+            </div>
+            <div class="communication">
+                <label for="number">Στοιχεία επικοινωνίας</label><br>
+                <input type="tel" id="number" name="number" placeholder="Τηλέφωνο"  pattern="\d{10}" size="25" required>
+                <input type="email" id="mail" name="mail" placeholder="Διεύθυνση email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" size="25" required>
+            </div>       
+            <div class="country">
+                <label for="country">Χώρα Καταγωγής</label><br>
+                <select id="country" name="country" required>
+                    <option value="Greece" selected>Ελλάδα</option>
+                    <option value="Cyprus">Κύπρος</option>
+                    <option value="Another-country">Άλλο</option>
+                </select>
+            </div>
+            <div class="age-sex">
+                <label for="age">Ηλικία</label><br>
+                <input type="number" id="age" name="age" size="3"  value="18" required>
+                <span>
+                    <select name="gender" required id="id_gender">
+                        <option value="" selected>Φύλο</option>
+                        <option value="male">Άνδρας</option>
+                        <option value="female">Γυναίκα</option>
+                        <option value="other">Άλλο</option>
+                    </select>
+                </span>
+            </div>
+            <div class="login2">
+                <label for="username">Στοιχεία σύνδεσης</label><br>
+                <input type="text" id="username" name="username" placeholder="Όνομα χρήστη" size="25" required>
+                <input type="password" name="password" placeholder="Κωδικός" autocomplete="new-password" minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}" required id="id_password">
+                <div>
+                    Ο κωδικός πρέπει να περιέχει τουλάχιστον 6 λατινικούς χαρακτήρες, οι οποίοι θα είναι, είτε πεζά, είτε κεφαλαία γράμματα.
+                </div>
+            </div>
+            <div class="sub">
+                <button type="submit">Εγγραφή</button>
+            </div>
+        </form> 
+    </div>
+    <div class="login">
+        <form>     
+            <div class="close">&times;</div>
+            <div class="login3">
+                <label for="username">Όνομα χρήστη</label><br>
+                <input type="text" id="username2" name="username" size="25" required><br>
+                <label for="passw">Κωδικός</label><br>
+                <input type="password" name="password" size="25" autocomplete="new-password" minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}" required id="id_password2">
+            </div>
+            <div class="sub">
+                <button type="submit">Είσοδος</button>
+            </div>
+        </form> 
     </div>
     <div class="choices">
         <button class="arrivals" onclick="arrivals_form()">Αφίξεις</button>

@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="css/shops.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sign-up.css">
+    <link rel="stylesheet" href="css/log-in.css">
     <link rel="stylesheet" href="css/footer.css">
     <script defer src="js/shops.js"></script>
     <script defer src="js/sign-up.js"></script>
+    <script defer src="js/log-in.js"></script>
 </head>
 <body>
     <div class="menu">
@@ -22,8 +24,8 @@
             <div class="shops"><a href="shops.html">Καταστήματα</a></div>
         </div>
         <div class="menu-right">
-            <button class="sign-up"><a href="sign-up.html">Εγγραφή</a></button>
-            <button class="log-in"><a href="log-in.html">Είσοδος</a></button>
+            <button class="sign-up">Εγγραφή</button>
+            <button class="log-in">Είσοδος</button>
         </div>
     </div>
     <div class="signup">
@@ -59,7 +61,7 @@
                     </select>
                 </span>
             </div>
-            <div class="login">
+            <div class="login2">
                 <label for="username">Στοιχεία σύνδεσης</label><br>
                 <input type="text" id="username" name="username" placeholder="Όνομα χρήστη" size="25" required>
                 <input type="password" name="password" placeholder="Κωδικός" autocomplete="new-password" minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}" required id="id_password">
@@ -69,6 +71,20 @@
             </div>
             <div class="sub">
                 <button type="submit">Εγγραφή</button>
+            </div>
+        </form> 
+    </div>
+    <div class="login">
+        <form>     
+            <div class="close">&times;</div>
+            <div class="login3">
+                <label for="username">Όνομα χρήστη</label><br>
+                <input type="text" id="username2" name="username" size="25" required><br>
+                <label for="passw">Κωδικός</label><br>
+                <input type="password" name="password" size="25" autocomplete="new-password" minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}" required id="id_password2">
+            </div>
+            <div class="sub">
+                <button type="submit">Είσοδος</button>
             </div>
         </form> 
     </div>
