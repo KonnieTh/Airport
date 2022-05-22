@@ -1,88 +1,13 @@
-*{
-    padding: 0;
-    margin: 0;
-}
-
-:root{
-    font-size: 21px;
-}
 .header{
     min-height: 100vh;
     min-width: 100%;
     left:0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("/images/athens.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("/Front-end/images/athens.jpg");
     background-size: cover;
     background-position: center;
     position: relative;
 }
-.logo a img{
-    height: 50px;
-    width: 160px;
-}
 
-.menu{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top:0;
-    flex-wrap: wrap;
-}
-
-.menu .menu-left {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.menu div{
-    margin: 1em;
-    text-align: center;
-    align-self: center;
-}
-
-.menu a{
-    text-decoration: none;
-    color: white;
-}
-
-.menu .menu-left div:nth-child(n+2):nth-child(-n+6)::after {
-    content: "";
-    display: block;
-    width: 0%;
-    height: 2px;
-    margin: auto;
-    background-color: white;
-    transition: 0.5s ease;
-}
-.menu .menu-left div:nth-child(n+2):nth-child(-n+6):hover::after {
-    width: 100%;
-}
-
-.sign-up, .log-in {
-    border-radius: 22px;
-    padding: 1.25em 2em;
-    border: none;
-    background-color: rgb(111, 111, 111);
-    margin-right: 2em;
-}
-.sign-up a, .log-in a{
-    color: white;
-    text-decoration: none;
-}
-
-.sign-up:hover, .log-in:hover{
-    background-color: rgb(86, 85, 85);
-    cursor:pointer;
-}
-
-.menu > img{
-    height: 35px;
-    width: 40px;
-    left: 0;
-}
 p{
     margin: auto;
     text-align: center;
@@ -128,7 +53,7 @@ p{
 }
 
 .special-needs{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/wheelchair.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/wheelchair.jpg");
     background-size:cover;
 }
 /*.special-needs button{
@@ -204,7 +129,7 @@ p{
 */
 
 .covid-19{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/covid.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/covid.jpg");
     background-size:cover;
 }
 
@@ -223,7 +148,7 @@ p{
     cursor:pointer;
 }
 .parking-info{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/parking.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/parking.jpg");
     background-size:cover;
 }
 /*.parking-info button{
@@ -242,7 +167,7 @@ p{
 }
 
 .pets{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/pets.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/pets.jpg");
     background-size:cover;
 }
 
@@ -288,7 +213,7 @@ p{
 
 
 #pets_text button{
-    background-image:url("/images/exit.jpg");
+    background-image:url("/Front-end/images/exit.jpg");
     background-size:cover;
     width:1.7em;
     height:1.7em;
@@ -324,7 +249,7 @@ p{
 
 
 .currency{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/currency.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/currency.jpg");
     background-size:cover;
 }
 /*.currency button{
@@ -374,7 +299,7 @@ p{
 }
 
 #currency_text button{
-    background-image:url("/images/exit.jpg");
+    background-image:url("/Front-end/images/exit.jpg");
     background-size:cover;
     width:1.7em;
     height:1.7em;
@@ -445,7 +370,7 @@ p{
 
 
 .tourism{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/tourism.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/tourism.jpg");
     background-size:cover;
     padding-left:0.025em;
 }
@@ -509,7 +434,7 @@ p{
 }
 
 #customs_insection_text button{
-    background-image:url("/images/exit.jpg");
+    background-image:url("/Front-end/images/exit.jpg");
     background-size:cover;
     width:1.7em;
     height:1.7em;
@@ -556,44 +481,6 @@ p{
 #customs_insection_text .main_text div{
     margin-bottom:0.5em;
 }
-
-
 footer{
-    color:white;
-    font-size:0.8em;
-    width:100%;
-    padding:1em 0em;
-    background-color:rgb(25, 25, 25);
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:center;
-    /*padding-left:6em;*/
-}
-footer>div{
-    padding:0em 6.5em;
-}
-
-footer .communication-details .part1,footer .communication-details .part2{
-    display:grid;
-    grid-template-columns:repeat(2,auto);
-    text-align:left;
-    gap:2em;
-}
-
-footer h3{
-    /*text-decoration:underline grey;*/
-    border-bottom:0.2em solid grey;
-    text-align:center;
-}
-
-
-footer .anakoinoseis:hover,footer .feedback:hover{
-    color:rgb(249, 249, 142);
-    cursor:pointer;
-}
-
-@media only screen and (max-width:800px){
-   
-        
+    margin-top: 0;
 }

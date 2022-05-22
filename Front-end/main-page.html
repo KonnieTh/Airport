@@ -5,57 +5,58 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Icarus</title>
-  <link rel="airport icon" href="\images\airport_logo.png">
-  <link rel="stylesheet" href="style-main-page.css">
+  <link rel="airport icon" href="images/airport_logo.png">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/style-main-page.css">
 </head>
 <body>
-  <div class="header" id="lo">
-    <div class="menu">
-        <div class="menu-left">
-            <div class="logo"><a href="main-page.html"><img src="\images\Icarus-logo.png"></a></div>
-            <div class="flights"><a href="flights.html">Πτήσεις</a></div>
-            <div class="parking"><a href="parking.html">Πάρκινγκ</a></div>
-            <div class="companies"><a href="companies.html">Εταιρείες</a></div>
-            <div class="shops"><a href="#lo">Καταστήματα</a></div>
-            <div class="luggages"><a href="luggage.html">Αποσκευές</a></div>
+    <div class="header">
+        <div class="menu">
+            <div class="menu-left">
+                <div class="logo"><a href="main-page.html"><img src="images/Icarus-logo.png"></a></div>
+                <div class="flights"><a href="flights.html">Πτήσεις</a></div>
+                <div class="companies"><a href="companies.html">Εταιρείες</a></div>
+                <div class="shops"><a href="shops.html">Καταστήματα</a></div>
+            </div>
+            <div class="menu-right">
+                <button class="sign-up"><a href="sign-up.html">Εγγραφή</a></button>
+                <button class="log-in"><a href="log-in.html">Είσοδος</a></button>
+            </div>
         </div>
-        <div class="menu-right">
-            <button class="sign-up"><a href="sign-up.html">Εγγραφή</a></button>
-            <button class="log-in"><a href="log-in.html">Είσοδος</a></button>
+        <div class="description">
+            <p>
+                Ξεκινήστε το ταξίδι σας εδώ!
+            </p>
         </div>
-    </div> 
-    <div class="description">
-        <p>
-             Ξεκινήστε το ταξίδι σας εδώ!
-        </p>
     </div>
-  </div>
-  <div class="main-menu">
-    <h2 class="passengers-information">Πληροφορίες Επιβατών</h2>
-    <div class="choices">
-        <div class="special-needs">
-            <button onclick="" title="Πληροφορίες για άτομα με αναπηρία ή μειωμένη κινητικότητα"><h2>Υπηρεσίες Υποστήριξης Επιβατών</h2></button>                
-        </div>  
-        <div class="covid-19">
-            <button onclick="" title="Covid-19 Χρήσιμες Πληροφορίες για τους επιβάτες"><h2>Πληροφορίες για covid-19</h2></button>
-        </div>  
-        <div class="parking-info">
-            <button onclick="document.getElementById('details-about-parking').scrollIntoView();" title="Πληροφορίες για τη στάθμευση στο αεροδρόμιο" ><h2>Στάθμευση στο αεροδρόμιο</h2></button> 
-        </div>  
-        <div class="pets">
-            <button onclick="pets_on()" title="Πληροφορίες σχετικά με τα κατοικίδια" ><h2>Ταξιδεύοντας με κατοικίδια</h2></button> 
-        </div>  
-        <!--div class="luggage-allowance">
-            <button onclick="on1()" title="Πληροφορίες σχετικά με " ><h2>Επιτρεπόμενα όρια αποσκευών</h2></button> 
-        </div-->  
-        <div class="currency">
-            <button onclick="currency_on()" title="Πληροφορίες σχετικά με συναλλαγματικούς περιορισμούς" ><h2>Συναλλαγματικοί περιορισμοί</h2></button> 
-        </div>  
-        <div class="tourism col-md-4 col-sm-12">
-            <button onclick="customs_on()" title="" ><h2>Διακοπές στην Ελλάδα</h2></button> 
-        </div>  
-      </div>
-  </div>
+    </div>
+    <div class="main-menu">
+        <h2 class="passengers-information">Πληροφορίες Επιβατών</h2>
+        <div class="choices">
+            <div class="special-needs">
+                <button onclick="" title="Πληροφορίες για άτομα με αναπηρία ή μειωμένη κινητικότητα"><h2>Υπηρεσίες Υποστήριξης Επιβατών</h2></button>                
+            </div>  
+            <div class="covid-19">
+                <button onclick="" title="Covid-19 Χρήσιμες Πληροφορίες για τους επιβάτες"><h2>Πληροφορίες για covid-19</h2></button>
+            </div>  
+            <div class="parking-info">
+                <button onclick="document.getElementById('details-about-parking').scrollIntoView();" title="Πληροφορίες για τη στάθμευση στο αεροδρόμιο" ><h2>Στάθμευση στο αεροδρόμιο</h2></button> 
+            </div>  
+            <div class="pets">
+                <button onclick="pets_on()" title="Πληροφορίες σχετικά με τα κατοικίδια" ><h2>Ταξιδεύοντας με κατοικίδια</h2></button> 
+            </div>  
+            <!--div class="luggage-allowance">
+                <button onclick="on1()" title="Πληροφορίες σχετικά με " ><h2>Επιτρεπόμενα όρια αποσκευών</h2></button> 
+            </div-->  
+            <div class="currency">
+                <button onclick="currency_on()" title="Πληροφορίες σχετικά με συναλλαγματικούς περιορισμούς" ><h2>Συναλλαγματικοί περιορισμοί</h2></button> 
+            </div>  
+            <div class="tourism col-md-4 col-sm-12">
+                <button onclick="customs_on()" title="" ><h2>Διακοπές στην Ελλάδα</h2></button> 
+            </div>  
+        </div>
+    </div>
   <!--div id="special-needs-text" >
     <button class="exit-symbol" onclick="off()"></button>
     <h2>Άτομα με Αναπηρία και Μειωμένη Κινητικότητα</h2>
@@ -169,21 +170,32 @@
   <footer>
     <div class="anakoinoseis">
         <a><h3>Ανακοινώσεις</h3></a>
+        <div class="anak">
+            Επείγουσες ανακοινώσεις
+        </div>
+        <div class="anak">
+            Γενικές ανακοινώσεις
+        </div>
     </div>
     <div class="communication-details"><h3>Στοιχεία επικοινωνίας</h3>
-        <div class="part1"> 
-            <div>📞 2610567891</div>
-            <div>📌 Αττική Οδός, Δήμος Σπάτων - Αρτέμιδος 190 04</div>
-        </div>
-        <div class="part2">
-            <div>📧 info@icarus.gr</div>
-            <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: 24/7</div>
-        </div>
+        <div>📞 2610567891</div>
+        <div>📌 Αττική Οδός, Δήμος Σπάτων - Αρτέμιδος 190 04</div>
+        <div>📧 info@icarus.gr</div>
+        <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: 24/7</div>
     </div>
-    <div class="feedback">
-        <a><h3>Feedback</h3></a>
+    <div class="links">
+        <h3>Χρήσιμα links</h3>
+        <div class="lin">
+            Aναχωρήσεις-Aφίξεις
+        </div>
+        <div class="lin">
+            Σχετικά με εμάς
+        </div>
+        <div class="lin">
+            Μέτρα Covid
+        </div>
     </div>
 </footer>
-<script src="main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

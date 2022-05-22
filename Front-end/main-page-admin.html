@@ -5,31 +5,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Icarus</title>
-  <link rel="airport icon" href="\images\airport_logo.png">
-  <link rel="stylesheet" href="style-main-page-admin.css">
+  <link rel="airport icon" href="images/airport_logo.png">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/style-main-page-admin.css">
 </head>
 <body>
-  <div class="header" id="lo">
-    <div class="menu">
-        <div class="menu-left">
-            <div class="logo"><a href="main-page.html"><img src="\images\Icarus-logo.png"></a></div>
-            <div class="flights"><a href="flights.html">Πτήσεις</a></div>
-            <div class="parking"><a href="parking.html">Πάρκινγκ</a></div>
-            <div class="companies"><a href="companies.html">Εταιρείες</a></div>
-            <div class="shops"><a href="#lo">Καταστήματα</a></div>
-            <div class="luggages"><a href="luggage.html">Αποσκευές</a></div>
+    <div class="header">
+        <div class="menu">
+            <div class="menu-left">
+                <div class="logo"><a href="main-page.html"><img src="images/Icarus-logo.png"></a></div>
+                <div class="flights"><a href="flights.html">Πτήσεις</a></div>
+                <div class="companies"><a href="companies.html">Εταιρείες</a></div>
+                <div class="shops"><a href="shops.html">Καταστήματα</a></div>
+            </div>
+            <div class="menu-right">
+                <button class="sign-up"><a href="sign-up.html">Εγγραφή</a></button>
+                <button class="log-in"><a href="log-in.html">Είσοδος</a></button>
+            </div>
         </div>
-        <div class="menu-right">
-            <button class="sign-up"><a href="sign-up.html">Εγγραφή</a></button>
-            <button class="log-in"><a href="log-in.html">Είσοδος</a></button>
+        <div class="description" id="description">
+            <p>
+                Ξεκινήστε το ταξίδι σας εδώ!
+            </p>
         </div>
-    </div> 
-    <div class="description" id="description">
-        <p>
-             Ξεκινήστε το ταξίδι σας εδώ!
-        </p>
     </div>
-  </div>
   <div id="text-editor">
     <div class="text-editor-header">
             <button class="btn" title="Bold Text" data-element="bold"><i class="fa fa-bold"></i></button>
@@ -195,22 +195,33 @@
   <footer>
     <div class="anakoinoseis">
         <a><h3>Ανακοινώσεις</h3></a>
+        <div class="anak">
+            Επείγουσες ανακοινώσεις
+        </div>
+        <div class="anak">
+            Γενικές ανακοινώσεις
+        </div>
     </div>
     <div class="communication-details"><h3>Στοιχεία επικοινωνίας</h3>
-        <div class="part1"> 
-            <div>📞 2610567891</div>
-            <div>📌 Αττική Οδός, Δήμος Σπάτων - Αρτέμιδος 190 04</div>
-        </div>
-        <div class="part2">
-            <div>📧 info@icarus.gr</div>
-            <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: 24/7</div>
-        </div>
+        <div>📞 2610567891</div>
+        <div>📌 Αττική Οδός, Δήμος Σπάτων - Αρτέμιδος 190 04</div>
+        <div>📧 info@icarus.gr</div>
+        <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: 24/7</div>
     </div>
-    <div class="feedback">
-        <a><h3>Feedback</h3></a>
+    <div class="links">
+        <h3>Χρήσιμα links</h3>
+        <div class="lin">
+            Aναχωρήσεις-Aφίξεις
+        </div>
+        <div class="lin">
+            Σχετικά με εμάς
+        </div>
+        <div class="lin">
+            Μέτρα Covid
+        </div>
     </div>
 </footer>
-<script src="main.js"></script>
+<script src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/553fd7f413.js" crossorigin="anonymous"></script>
 </body>
 </html>
