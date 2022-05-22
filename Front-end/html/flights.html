@@ -25,80 +25,161 @@
             </div>
         </div> 
     </div>
+    <div class="choices">
+        <button class="arrivals" onclick="arrivals_form()">Αφίξεις</button>
+        <button class="departures" onclick="departures_form()">Αναχωρήσεις</button>
+    </div>
+    <div class="flights-menu">
+        <div class="form" id="arrivals">
+            <form action="" method="post">
+                <div class="selection">
+                    <div class="arrival">
+                        <label for="departure-airport">Αναζήτηση Αεροδρομίου</label><br>
+                        <select id="departure-airport" name="user_departure_airport" required>
+                            <option value="PUTSA">PUTSA1</option>
+                            <option value="PUTSA">PUTSA2</option>
+                        </select>
+                    </div>
+                    <div class="airline">
+                        <label for="airline_departure">Αεροπορική Εταιρεία</label><br>
+                        <select id="airline_departure" name="user_airline_departure">
+                            
+                        </select>
+                    </div>
+                    <div class="number_flight">
+                        <label for="number_of_flight">Αριθμός Πτήσης</label><br>
+                        <input type="text" id="number_of_flight" name="user_number_of_flight">
+                    </div>
+                    <div class="date-selection">
+                        <label class="date">Ημερομηνία άφιξης</label><br>
+                        <input type="date" name="date" required>
+                    </div>
+                    <!--div class="via-flight">
+                        <label><input type="checkbox" name="items" value="via" required>Ενδιάμεσοι Σταθμοί</label><br> 
+                    </div-->
+                    <div class="sub">
+                        <input type="submit" value="Αναζήτηση" onclick="arrivals_on()">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="form" id="departures">
+            <form action="" method="post">
+                <div class="selection">
+                    <div class="departure">
+                        <label for="arrival-airport">Αναζήτηση Αεροδρομίου</label><br>
+                        <select id="arrival-airport" name="user_arrival_airport" required></select>
+                    </div>
+                    <div class="airline">
+                        <label for="airline_arrival">Αεροπορική Εταιρεία</label><br>
+                        <select id="airline_arrival" name="user_airline_arrival">
+                            
+                        </select>
+                    </div>
+                    <div class="number_flight">
+                        <label for="number_of_flight">Αριθμός Πτήσης</label><br>
+                        <input type="text" id="number_of_flight" name="user_number_of_flight">
+                    </div>
+                    <div class="date-selection">
+                        <label for="date">Ημερομηνία αναχώρησης</label><br>
+                        <input type="date" name="date" required>
+                    </div>
+                    <!--div class="via-flight">
+                        <label><input type="checkbox" name="items" value="via" required>Ενδιάμεσοι Σταθμοί</label><br> 
+                    </div-->
+                    <div class="sub">
+                        <input type="submit" value="Αναζήτηση" onclick="departures_on()">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="flights-info">
+            <table class="arrivals-table flights-header">
+                <thead>
+                    <tr class="row">
+                        <th rowspan="2">Αεροπορική Εταιρεία</th>
+                        <th>Προέλευση</th>
+                        <th>Αριθμός πτήσης</th>
+                        <th>Προγραμματισμένη ώρα</th>
+                        <th>Κατάσταση</th>
+                        <th>Terminal</th>
+                    </tr>
+                </thead>
+            </table>
+            <table class="departures-table flights-header">
+                <thead>
+                    <tr class="row">
+                        <th rowspan="2">Αεροπορική Εταιρεία</th>
+                        <th>Προορισμός</th>
+                        <th>Αριθμός πτήσης</th>
+                        <th>Προγραμματισμένη ώρα</th>
+                        <th>Κατάσταση</th>
+                        <th>Terminal</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="date">Date</div>
+            <div class="container">
+                <table class="flight-arrivals">
+                    <tbody></tbody>
+                </table>
+                <table class="flight-departures">
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="anakoinoseis">
+            <a><h3>Ανακοινώσεις</h3></a>
+            <div class="anak">
+                Επείγουσες ανακοινώσεις
+            </div>
+            <div class="anak">
+                Γενικές ανακοινώσεις
+            </div>
+        </div>
+        <div class="communication-details"><h3>Στοιχεία επικοινωνίας</h3>
+            <div>📞 2610567891</div>
+            <div>📌 Αττική Οδός, Δήμος Σπάτων - Αρτέμιδος 190 04</div>
+            <div>📧 info@icarus.gr</div>
+            <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: 24/7</div>
+        </div>
+        <div class="links">
+            <h3>Χρήσιμα links</h3>
+            <div class="lin">
+                Aναχωρήσεις-Aφίξεις
+            </div>
+            <div class="lin">
+                Σχετικά με εμάς
+            </div>
+            <div class="lin">
+                Μέτρα Covid
+            </div>
+        </div>
+    </footer>
+    <script src="flights.js"></script>
+</body>
+</html>
+
+
+
+<!--div class="arrivals-table">
     <div class="form">
-        <form action="" method="post">
+        <form id="arrivals" action="" method="post">
             <div class="selection">
                 <div class="departure">
-                    <label for="departure-airport">Χώρα Αναχώρησης</label><br>
-                    <select id="departure-airport" name="user_departure_airport" required>
-                        <option value="Albania">Αλβανία</option>
-                        <option value="Australia">Αυστραλία</option>
-                        <option value="Austria">Αυστρία</option>
-                        <option value="Belgium">Βέλγιο</option>
-                        <option value="Bulgary">Βουλγαρία</option>
-                        <option value="Canada">Καναδάς</option>
-                        <option value="Cypros">Κύπρος</option>
-                        <option value="Germany">Γερμανία</option>
-                        <option value="China">Κίνα</option>
-                        <option value="Egypt">Αίγυπτος</option>
-                        <option value="France">Γαλλία</option>
-                        <option value="Germany">Γερμανία</option>
-                        <option value="Great Britain">Μεγάλο Βασίλειο</option>
-                        <option value="Greece" selected>Ελλάδα</option>
-                        <option value="Israel">Ισραήλ</option>
-                        <option value="Italy">Ιταλία</option>
-                        <option value="Japan">Ιαπωνία</option>
-                        <option value="Malta">Μάλτα</option>
-                        <option value="Norway">Νορβηγία</option>
-                        <option value="Poland">Πολωνία</option>
-                        <option value="Portugal">Πορτογαλία</option>
-                        <option value="Romania">Ρουμανία</option>
-                        <option value="Scotland">Σκωτία</option>
-                        <option value="Serbia">Σερβία</option>
-                        <option value="Singapore">Σιγκαπούρη</option>
-                        <option value="Spain">Ισπανία</option>
-                        <option value="Sweden">Σουηδία</option>
-                        <option value="Switzerland">Ελβετία</option>
-                        <option value="Turkey">Τουρκία</option>
-                        <option value="United Arab Erimates">Ηνωμένα Αραβικά Εμιράτα</option>
-                        <option value="US">Ηνωμένες Πολιτείες Αμερικής</option>                    
+                    <label for="departure-airport">Αναζήτηση Αεροδρομίου Αναχώρισης</label><br>
+                    <select id="departure-airport" name="user_departure_airport" required></select>
+                </div>
+                <div class="airline">
+                    <label for="airline_departure">Αεροπορική Εταιρεία</label><br>
+                    <select id="airline_departure" name="user_airline_departure">
                     </select>
                 </div>
-                <div class="arrival">
-                    <label for="arrival-departure">Χώρα Άφιξης</label><br>
-                    <select id="arrival-departure" name="user_arrival_departure" required>
-                        <option value="Albania">Αλβανία</option>
-                        <option value="Australia">Αυστραλία</option>
-                        <option value="Austria">Αυστρία</option>
-                        <option value="Belgium">Βέλγιο</option>
-                        <option value="Bulgary">Βουλγαρία</option>
-                        <option value="Canada">Καναδάς</option>
-                        <option value="Cypros">Κύπρος</option>
-                        <option value="Germany">Γερμανία</option>
-                        <option value="China">Κίνα</option>
-                        <option value="Egypt">Αίγυπτος</option>
-                        <option value="France">Γαλλία</option>
-                        <option value="Germany">Γερμανία</option>
-                        <option value="Great Britain">Μεγάλο Βασίλειο</option>
-                        <option value="Greece" selected>Ελλάδα</option>
-                        <option value="Israel">Ισραήλ</option>
-                        <option value="Italy">Ιταλία</option>
-                        <option value="Japan">Ιαπωνία</option>
-                        <option value="Malta">Μάλτα</option>
-                        <option value="Norway">Νορβηγία</option>
-                        <option value="Poland">Πολωνία</option>
-                        <option value="Portugal">Πορτογαλία</option>
-                        <option value="Romania">Ρουμανία</option>
-                        <option value="Scotland">Σκωτία</option>
-                        <option value="Serbia">Σερβία</option>
-                        <option value="Singapore">Σιγκαπούρη</option>
-                        <option value="Spain">Ισπανία</option>
-                        <option value="Sweden">Σουηδία</option>
-                        <option value="Switzerland">Ελβετία</option>
-                        <option value="Turkey">Τουρκία</option>
-                        <option value="United Arab Erimates">Ηνωμένα Αραβικά Εμιράτα</option>
-                        <option value="US">Ηνωμένες Πολιτείες Αμερικής</option>  
-                    </select>
+                <div class="number_flight">
+                    <label for="number_of_flight">Αριθμός Πτήσης</label><br>
+                    <input type="text" id="number_of_flight" name="user_number_of_flight">
                 </div>
                 <div class="date-selection">
                     <label class="date">Ημερομηνία αναχώρησης</label><br>
@@ -113,23 +194,119 @@
             </div>
         </form>
     </div>
-    <footer>
-        <div class="anakoinoseis">
-            <a><h3>Ανακοινώσεις</h3></a>
-        </div>
-        <div class="communication-details"><h3>Στοιχεία επικοινωνίας</h3>
-            <div class="part1"> 
-                <div>📞 2610567891</div>
-                <div>📌 Αττική Οδός, Δήμος Σπάτων - Αρτέμιδος 190 04</div>
+    <table class="flights-header">
+        <thead>
+            <tr class="row">
+                <th rowspan="2">Αεροπορική Εταιρεία</th>
+                <th>Αριθμός πτήσης</th>
+                <th>Προορισμός</th>
+                <th>Προγραμματισμένη ώρα</th>
+                <th>Κατάσταση</th>
+                <th>Terminal</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div class="departures-table">
+    <div class="form">
+        <form id="departures" action="" method="post">
+            <div class="selection">
+                <div class="departure">
+                    <label for="departure-airport">Αναζήτηση Αεροδρομίου Άφιξης</label><br>
+                    <select id="departure-airport" name="user_departure_airport" required></select>
+                </div>
+                <div class="airline">
+                    <label for="airline_departure">Αεροπορική Εταιρεία</label><br>
+                    <select id="airline_departure" name="user_airline_departure">
+
+                    </select>
+                </div>
+                <div class="number_flight">
+                    <label for="number_of_flight">Αριθμός Πτήσης</label><br>
+                    <input type="text" id="number_of_flight" name="user_number_of_flight">
+                </div>
+                <div class="date-selection">
+                    <label for="date">Ημερομηνία άφιξης</label><br>
+                    <input type="date" name="date" required>
+                </div>
+                <div class="via-flight">
+                    <label><input type="checkbox" name="items" value="via" required>Ενδιάμεσοι Σταθμοί</label><br> 
+                </div>
+                <div class="sub">
+                    <input type="submit" value="Αναζήτηση">
+                </div>
             </div>
-            <div class="part2">
-                <div>📧 info@icarus.gr</div>
-                <div class="working-hours">Ώρες λειτουργίας αεροδρομίου: 24/7</div>
-            </div>
-        </div>
-        <div class="feedback">
-            <a><h3>Feedback</h3></a>
-        </div>
-    </footer>
-</body>
-</html>
+        </form>
+    </div>
+    <table class="flights-header">
+        <thead>
+            <tr class="row">
+                <th rowspan="2">Αεροπορική Εταιρεία</th>
+                <th>Αριθμός πτήσης</th>
+                <th>Προορισμός</th>
+                <th>Προγραμματισμένη ώρα</th>
+                <th>Κατάσταση</th>
+                <th>Terminal</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="date">Date</div>
+    <table class="flights-info">
+        <tr class="row">
+            <td colspan="2">Αεροπορική Εταιρεία</td>
+            <td>Αριθμός πτήσης</td>
+            <td>Προορισμός</td>
+            <td>Προγραμματισμένη ώρα</td>
+            <td>Κατάσταση</td>
+            <td>Terminal</td>
+        </tr>
+        <tr class="row">
+            <td colspan="2">Αεροπορική Εταιρεία</td>
+            <td>Αριθμός πτήσης</td>
+            <td>Προορισμός</td>
+            <td>Προγραμματισμένη ώρα</td>
+            <td>Κατάσταση</td>
+            <td>Terminal</td>
+        </tr>
+        <tr class="row">
+            <td colspan="2">Αεροπορική Εταιρεία</td>
+            <td>Αριθμός πτήσης</td>
+            <td>Προορισμός</td>
+            <td>Προγραμματισμένη ώρα</td>
+            <td>Κατάσταση</td>
+            <td>Terminal</td>
+        </tr>
+        <tr class="row">
+            <td colspan="2">Αεροπορική Εταιρεία</td>
+            <td>Αριθμός πτήσης</td>
+            <td>Προορισμός</td>
+            <td>Προγραμματισμένη ώρα</td>
+            <td>Κατάσταση</td>
+            <td>Terminal</td>
+        </tr>
+        <tr class="row">
+            <td colspan="2">Αεροπορική Εταιρεία</td>
+            <td>Αριθμός πτήσης</td>
+            <td>Προορισμός</td>
+            <td>Προγραμματισμένη ώρα</td>
+            <td>Κατάσταση</td>
+            <td>Terminal</td>
+        </tr>
+        <tr class="row">
+            <td colspan="2">Αεροπορική Εταιρεία</td>
+            <td>Αριθμός πτήσης</td>
+            <td>Προορισμός</td>
+            <td>Προγραμματισμένη ώρα</td>
+            <td>Κατάσταση</td>
+            <td>Terminal</td>
+        </tr>
+        <tr class="row">
+            <td colspan="2">Αεροπορική Εταιρεία</td>
+            <td>Αριθμός πτήσης</td>
+            <td>Προορισμός</td>
+            <td>Προγραμματισμένη ώρα</td>
+            <td>Κατάσταση</td>
+            <td>Terminal</td>
+        </tr>
+    </table>
+</div-->
