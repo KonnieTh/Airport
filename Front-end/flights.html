@@ -91,42 +91,38 @@
         <button class="arrivals" onclick="arrivals_form()">Αφίξεις</button>
         <button class="departures" onclick="departures_form()">Αναχωρήσεις</button>
     </div>
+    <iframe name="hiddenFrame" class="hide"></iframe>
     <div class="flights-menu">
-        <div class="form" id="arrivals">
-            <form action="" method="post">
+        <div class="arrivals-form" id="arrivals">
+            <form action="http://localhost:8080/user_arrivals" method="post" onsubmit="arrivals_on()" target="hiddenFrame">
                 <div class="selection">
                     <div class="arrival">
                         <label for="departure-airport">Αναζήτηση Αεροδρομίου</label><br>
                         <select id="departure-airport" name="user_departure_airport" required>
-                            <option value="PUTSA">PUTSA1</option>
-                            <option value="PUTSA">PUTSA2</option>
                         </select>
                     </div>
                     <div class="airline">
                         <label for="airline_departure">Αεροπορική Εταιρεία</label><br>
-                        <select id="airline_departure" name="user_airline_departure">
+                        <select id="airline_arrival" name="user_airline_departure">
                             
                         </select>
                     </div>
                     <div class="number_flight">
-                        <label for="number_of_flight">Αριθμός Πτήσης</label><br>
+                        <label for="number_of_flight">Κωδικός Πτήσης</label><br>
                         <input type="text" id="number_of_flight" name="user_number_of_flight">
                     </div>
                     <div class="date-selection">
                         <label class="date">Ημερομηνία άφιξης</label><br>
                         <input type="date" name="date" required>
                     </div>
-                    <!--div class="via-flight">
-                        <label><input type="checkbox" name="items" value="via" required>Ενδιάμεσοι Σταθμοί</label><br> 
-                    </div-->
                     <div class="sub">
-                        <input type="submit" value="Αναζήτηση" onclick="arrivals_on()">
+                        <input type="submit" value="Αναζήτηση">
                     </div>
                 </div>
             </form>
         </div>
-        <div class="form" id="departures">
-            <form action="" method="post">
+        <div class="departures-form" id="departures">
+            <form action="http://localhost:8080/user_departures" method="post" target="hiddenFrame" onsubmit="departures_on()">
                 <div class="selection">
                     <div class="departure">
                         <label for="arrival-airport">Αναζήτηση Αεροδρομίου</label><br>
@@ -134,23 +130,20 @@
                     </div>
                     <div class="airline">
                         <label for="airline_arrival">Αεροπορική Εταιρεία</label><br>
-                        <select id="airline_arrival" name="user_airline_arrival">
+                        <select id="airline_departure" name="user_airline_departure">
                             
                         </select>
                     </div>
                     <div class="number_flight">
-                        <label for="number_of_flight">Αριθμός Πτήσης</label><br>
+                        <label for="number_of_flight">Κωδικός Πτήσης</label><br>
                         <input type="text" id="number_of_flight" name="user_number_of_flight">
                     </div>
                     <div class="date-selection">
                         <label for="date">Ημερομηνία αναχώρησης</label><br>
                         <input type="date" name="date" required>
                     </div>
-                    <!--div class="via-flight">
-                        <label><input type="checkbox" name="items" value="via" required>Ενδιάμεσοι Σταθμοί</label><br> 
-                    </div-->
                     <div class="sub">
-                        <input type="submit" value="Αναζήτηση" onclick="departures_on()">
+                        <input type="submit" value="Αναζήτηση">
                     </div>
                 </div>
             </form>
