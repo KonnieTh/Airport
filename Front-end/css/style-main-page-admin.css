@@ -194,6 +194,7 @@ p{
     margin:auto;
     background-color:rgba(0,0,0,0.3);
     z-index:2;
+    color:black;
 }
 
 #pets_text .wrap{
@@ -390,6 +391,7 @@ p{
     margin:auto;
     background-color:rgba(0,0,0,0.3);
     z-index:1;
+    color:black;
 }
 
 #currency_text .edit,#currency_text .edit:active,#currency_text .edit:visited,#currency_text .edit:active{
@@ -466,6 +468,7 @@ p{
     height:100%;
     margin:auto;
     background-color:rgba(0,0,0,0.3);
+    color:black;
 }
 
 #customs_insection_text ::-webkit-scrollbar{
