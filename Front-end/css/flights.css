@@ -53,14 +53,20 @@
     position:relative;
 }
 
-.form{
+.arrivals-form,.departures-form{
     background-color:rgba(0,0,0,0.9);
     color:white;
     padding:1em 0em 0em 0em;
     display:none;
 }
 
-form .selection{
+.arrivals-form form,.departures-form form{
+    width:100%;
+    background-color:rgba(0,0,0,0.9);
+}
+
+
+.arrivals-form form .selection,.departures-form form .selection{
     flex:1;
     width:80%;
     display:grid;
@@ -76,7 +82,7 @@ form .selection{
     align-self: center;
 }
 
-form .selection select {
+.arrivals-form form .selection select,.departures-form form .selection select{
     width:75%;
     margin:auto;
     height:2em;
@@ -91,20 +97,21 @@ form .selection select {
     min-width: 100px;
 }
 
-form input[type="submit"]{
+.arrivals-form form input[type="submit"],.departures-form form input[type="submit"]{
     background-color: rgb(34, 167, 212);
     padding: 1em 2em;
     border-radius:10px;
     border:none;
     color:white;
     cursor:pointer; 
+    margin:auto;
     transition-duration: 150ms;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
     margin-bottom:1em;
 }
 
-form input[type="submit"]:hover{
+.arrivals-form form input[type="submit"]:hover,.departures-form form input[type="submit"]:hover{
     background-color:rgb(20, 115, 147);
 }
 
@@ -147,5 +154,8 @@ form input[type="submit"]:hover{
 }
 
 .nonvisible{
+    display:none;
+}
+iframe{
     display:none;
 }
