@@ -4,7 +4,6 @@
     background-position: center;
     scroll-behavior: smooth;
 }
-
 .companies{
     font-weight: bold;
 }
@@ -12,7 +11,6 @@
 div.main{
     width:100%;
 }
-
 div.choices{
     margin:auto;
     background-color:rgb(111, 111, 111);
@@ -23,6 +21,7 @@ div.choices{
     justify-content:center;
     flex-wrap:wrap;
     gap:10px;
+    padding:0.5em;
 }
 
 button.btn{
@@ -64,6 +63,7 @@ button.btn:hover,button.btn:active{
     overflow-y:scroll;
     height:40em;
     border:0.2em solid white;
+    margin-top:1em;
 }
 
 .company-info{
@@ -100,22 +100,22 @@ button.btn:hover,button.btn:active{
 
 .company-info .row-info{
     display:grid;
-    grid-template:1fr/2fr 1fr 1fr;
+    /* grid-template-columns:repeat(2,auto); */
+    justify-content:space-around;
+    grid-template:1fr/2fr 0.9fr;
     height:8em;
     text-align:center;
     padding:0.5em 0em;
-
 }
 
 .company-info .row-info .icon{
-    width:25%;
-    height:50%;
+    width:23%;
+    height:42%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    margin-left:40%;
+    margin-left:23%;
     padding:1em;
-
 
 }
 
@@ -154,6 +154,7 @@ button.btn:hover,button.btn:active{
     transition-duration: 200ms;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
+    font-size:0.8em;
 }
 
 .companies-flights button.touched{
@@ -163,7 +164,7 @@ button.btn:hover,button.btn:active{
     border:none;
     background-color:rgb(171, 171, 15) ;
     color:white;
-    font-size:1em;
+    font-size:0.8em;
 }
 
 .companies-flights button:hover{
@@ -192,6 +193,8 @@ button.btn:hover,button.btn:active{
     background-color:black;
     overflow-y:scroll;
     width:101.5%;
+    font-size:0.7em;
+    
 }
 
 .arrivals-table,.departures-table{
@@ -222,4 +225,41 @@ tbody tr:last-child{
 
 .nonvisible{
     display:none;
+}
+
+@media only screen and (max-width: 1400px) {
+    .company-info .row-info{
+        display:grid;
+        /* grid-template-columns:repeat(2,auto); */
+        justify-content:space-around;
+        grid-template:1fr/2fr 0.9fr;
+        height:12em;
+        text-align:center;
+        padding:0.5em 0em;
+    }
+    .telephone div,.website div,.lost-found div,.entrance div{
+        display:inline;  
+    }
+    .row-info .details{
+        padding-right:2em;
+    }
+    div.selection{
+        width:100%;
+    }
+    div.container{
+        font-size:0.6em;
+        margin:auto;
+        width:94%;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+    div.container{
+        font-size:0.4em;
+        margin:auto;
+        width:94%;
+        height:40em;
+    }
+
 }

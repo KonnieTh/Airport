@@ -16,12 +16,13 @@ div.choices {
     margin:auto;
     background-color:rgb(111, 111, 111);
     display:flex;
-    width:30%;
+    width: clamp(400px,50%,1000px);
     height:auto;
     flex-direction:row;
     justify-content:center;
     flex-wrap:wrap;
     gap:10px;
+    padding:0.5em;
 }
 
 button.btn {
@@ -65,6 +66,7 @@ button.btn:hover,button.btn:active {
     overflow-y: scroll;
     height: 40em;
     border: 0.2em solid white;
+    margin-top:1em;
 }
 
 .company-info {
@@ -99,19 +101,20 @@ button.btn:hover,button.btn:active {
 
 .company-info .row-info {
     display: grid;
-    grid-template: 1fr/2fr 1fr 1fr;
+    grid-template: 1fr/2fr 0.9fr;
+    justify-content:space-around;
     height:11em;
     text-align: center;
     padding: 0.5em 0em;
 }
 
 .company-info .row-info .icon {
-    width: 25%;
-    height: 50%;
+    width: 23%;
+    height:42%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    margin-left:40%;
+    margin-left:23%;
     padding:1em;
 }
 
@@ -130,8 +133,13 @@ button.btn:hover,button.btn:active {
     display:inline;
 }
 
+.buttons{
+    display:grid;
+    grid-template:1fr/auto auto;
+    gap:10px;
+}
 
-button.edit{
+button.edit,button.remove{
     background-color: blue;
     color: white;
     padding:1em 1em;
@@ -141,14 +149,15 @@ button.edit{
     transition-duration: 200ms;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
-    margin: auto;
+    margin-top:1em;
+    margin-right:10%;
 }
 
 .edit:hover,.remove:hover {
     background-color: orange;
 }
 
-.edit.touched {
+.edit.touched,.remove.touched {
     background-color: orange;
     color: white;
 }
@@ -210,6 +219,7 @@ button.edit{
     background-color:black;
     overflow-y:scroll;
     width:101.5%;
+    font-size:0.7em;
 }
 
 .arrivals-table,.departures-table{
@@ -240,4 +250,49 @@ tbody tr:last-child{
 
 .nonvisible{
     display:none;
+}
+
+@media only screen and (max-width: 1400px) {
+    .company-info .row-info{
+        display:grid;
+        /* grid-template-columns:repeat(2,auto); */
+        justify-content:space-around;
+        grid-template:1fr/2fr 0.9fr;
+        height:12em;
+        text-align:center;
+        padding:0.5em 0em;
+    }
+    .telephone div,.website div,.lost-found div,.entrance div{
+        display:inline;  
+    }
+    .row-info .details{
+        padding-right:2em;
+    }
+    div.selection{
+        width:100%;
+    }
+    div.container{
+        font-size:0.6em;
+        margin:auto;
+        width:94%;
+    }
+
+    
+}
+
+
+@media only screen and (max-width: 700px) {
+    div.container{
+        font-size:0.4em;
+        margin:auto;
+        width:94%;
+        height:40em;
+    }
+
+}
+
+@media only screen and (max-width: 900px) {
+    .buttons{
+        display:inline;
+    }
 }
