@@ -3,8 +3,6 @@ const xhr = new XMLHttpRequest();
 xhr.withCredentials = true;
 const xhr1 = new XMLHttpRequest();
 xhr1.withCredentials = true;
-let names=[];
-let names_sort=[];
 let airlines;
 let airline_details;
 let airline_name = document.querySelector('.companies-flights .company');
@@ -66,26 +64,26 @@ function getflights(url,type){
             }
         }
     })
-    .catch(error => {
-        let table;
-        if (type==="arrival"){
-            table = document.querySelector('.arrivals-table tbody');
-        }else{
-            table = document.querySelector('.departures-table tbody');
-        }        
-        let count=0;
-        if (error=="TypeError: data is not iterable"){
-            if (count<1){
-                const div = document.createElement("div");
-                div.appendChild(document.createTextNode("No flights found from this airline"));
-                table.appendChild(div);
-                count+=1;
-            }
-        }
-        else{
-            console.log(error);
-        }
-    })
+    // .catch(error => {
+    //     let table;
+    //     if (type==="arrival"){
+    //         table = document.querySelector('.arrivals-table tbody');
+    //     }else{
+    //         table = document.querySelector('.departures-table tbody');
+    //     }        
+    //     let count=0;
+    //     if (error=="TypeError: data is not iterable"){
+    //         if (count<1){
+    //             const div = document.createElement("div");
+    //             div.appendChild(document.createTextNode("No flights found from this airline"));
+    //             table.appendChild(div);
+    //             count+=1;
+    //         }
+    //     }
+    //     else{
+    //         console.log(error);
+    //     }
+    // })
 }
 
 function arrivals_on() {
@@ -97,7 +95,7 @@ function arrivals_on() {
     arrivals.style.display = "block";
     const departures = document.querySelector('.departures-table');
     departures.style.display = "none";
-    url = `http://localhost:8080/arrivals/${selected_airline_iata}`;
+    url = `http://localhost:3000/arrivals/airline/${selected_airline_iata}`;
     getflights(url,"arrival");  
 }
 
@@ -110,7 +108,7 @@ function departures_on() {
     arrivals.style.display = "none";
     const departures = document.querySelector('.departures-table');
     departures.style.display = "block";
-    url = `http://localhost:8080/departures/${selected_airline_iata}`;
+    url = `http://localhost:3000/departures/airline/${selected_airline_iata}`;
     getflights(url,"departures");  
 }
 
@@ -126,27 +124,32 @@ function flights_catalog(airline,flight_type){
     // airline_name.appendChild(document.createTextNode(airline.name))
     if (flight_type = "arrivals"){
         arrivals_on();
-        url = `http://localhost:8080/arrivals/${airline.iata_code}`;
+        url = `http://localhost:3000/arrivals/airline/${airline.iata_code}`;
         getflights(url,"arrival");   
     }
     else{
         departures_on();
-        url = `http://localhost:8081/departures/${airline.iata_code}`;
+        url = `http://localhost:8081/departures/airline/${airline.iata_code}`;
         getflights(url,"departure");
     }
 }
 
 
-function display(firstletter){
+async function display(firstletter){
+    let editbtns = [];
+    let deletebtns = [];
+    let index=0;
     dis.innerHTML="";
     dis = document.querySelector(".company-info");
-    for (let i of names_sort){
-        if (i[0]==firstletter){
+    let response = await fetch(`http://localhost:3000/airlines/filter/${firstletter}`);
+    if(response.status==200){
+        let data = await response.json();
+        for(let i=0;i<data.length;i++){
             const element_row = document.createElement("div");
             element_row.classList.add("row");
             const airline_name = document.createElement("div");
             airline_name.classList.add("company");
-            const text = document.createTextNode(i);
+            const text = document.createTextNode(data[i].name);
             airline_name.appendChild(text);
             const links = document.createElement("a");
             links.addEventListener('click',function(){
@@ -158,8 +161,7 @@ function display(firstletter){
             const text1 = document.createTextNode("Πτήσεις >");
             links.appendChild(text1);
             links.addEventListener("click",function(){
-                const index = names.indexOf(i);
-                flights_catalog(airlines[index],"arrivals");
+                flights_catalog(data[i],"arrivals");
             })
             element_row.appendChild(airline_name);
             element_row.appendChild(links);
@@ -168,9 +170,8 @@ function display(firstletter){
             element_row_info.classList.add("row-info");
             const icon = document.createElement('img');
             icon.classList.add("icon");
-            const index = names.indexOf(i);
             // console.log(names[index],airlines[index].iata_code);
-            fetch(`http://pics.avs.io/150/150/${airlines[index].iata_code}.png`)
+            fetch(`http://pics.avs.io/150/150/${data[i].iata}.png`)
                 .then(response=> response.blob())
                 .then(blob => icon.src = URL.createObjectURL(blob))
                 .catch(error => console.log(error))
@@ -178,154 +179,215 @@ function display(firstletter){
             element_row_info.appendChild(icon);
             const details = document.createElement('div');
             details.classList.add("details");
-            const options = {
-                method: 'GET',
-                url: 'https://iata-and-icao-codes.p.rapidapi.com/airline',
-                params: {iata_code: `${airlines[index].iata_code}`},
-                headers: {
-                'X-RapidAPI-Host': 'iata-and-icao-codes.p.rapidapi.com',
-                'X-RapidAPI-Key': '72241a884dmsh8de9c7fffb619bep154dbejsn38d304e0a370'
-                }
-            }
-
-            axios.request(options).then(function (response) {
-                airline_details=response.data;
-                const tel = document.createElement('div');
-                tel.classList.add("telephone");
-                const text2 = document.createTextNode(`Τηλέφωνο: `);
-                tel.appendChild(text2);
-                const teltext = document.createElement('div');
-                teltext.appendChild(document.createTextNode("Αριθμός"));
-                tel.appendChild(teltext);
-                
-                const web = document.createElement('div');
-                web.classList.add("website");
-                const text3 = document.createTextNode(`Website: `);
-                web.appendChild(text3);
-                const telweb = document.createElement('div');
-                telweb.appendChild(document.createTextNode("Site"));
-                web.appendChild(telweb);
+            
+            const tel = document.createElement('div');
+            tel.classList.add("telephone");
+            const text2 = document.createTextNode(`Τηλέφωνο: `);
+            tel.appendChild(text2);
+            const teltext = document.createElement('div');
+            teltext.appendChild(document.createTextNode(data[i].telephone));
+            tel.appendChild(teltext);
+            
+            const web = document.createElement('div');
+            web.classList.add("website");
+            const text3 = document.createTextNode(`Website: `);
+            web.appendChild(text3);
+            const telweb = document.createElement('div');
+            telweb.appendChild(document.createTextNode(data[i].website));
+            web.appendChild(telweb);
 
 
-                const lostfound = document.createElement('div');
-                lostfound.classList.add("lost-found");
-                const text4 = document.createTextNode(`Lost & Found: `);
-                lostfound.appendChild(text4);
-                const tellostfound = document.createElement('div');
-                tellostfound.appendChild(document.createTextNode("Αριθμός"));
-                lostfound.appendChild(tellostfound);
+            // const lostfound = document.createElement('div');
+            // lostfound.classList.add("lost-found");
+            // const text4 = document.createTextNode(`Lost & Found: `);
+            // lostfound.appendChild(text4);
+            // const tellostfound = document.createElement('div');
+            // tellostfound.appendChild(document.createTextNode("Αριθμός"));
+            // lostfound.appendChild(tellostfound);
 
-                details.appendChild(tel);
-                details.appendChild(web);
-                details.appendChild(lostfound);
+            details.appendChild(tel);
+            details.appendChild(web);
+            // details.appendChild(lostfound);
 
-                const entrance = document.createElement("div");
-                entrance.classList.add("entrance");
-                const text5 = document.createTextNode(`Entrance: `);
-                entrance.appendChild(text5);
-                const en = document.createElement('div');
-                en.appendChild(document.createTextNode("Θύρα"));
-                entrance.appendChild(en);
-                
-
-                details.appendChild(entrance);
-                element_row_info.appendChild(details);
-                // element_row_info.appendChild(entrance);
-
-                const editbtn = document.createElement("button");
-                editbtn.classList.add("edit");
-                editbtn.addEventListener('click', function () {
-                    editbtn.classList.add("touched");
-                    editbtn.disabled = "true";
-                    const telephone = document.querySelector(".details .telephone div");
-                    const newItem = document.createElement("input");
-                    newItem.setAttribute("type", "telephone");
-                    newItem.addEventListener('keyup', (e) => {
-                        if (e.keyCode === 13) {
-                            let newcontent = document.createTextNode(e.target.value);
-                            console.log(newcontent);
-                            telephone.innerText = newcontent;
-                            let newItem4 = document.createElement("div");
-                            newItem4.appendChild(newcontent);
-                            newItem.parentNode.replaceChild(newItem4, newItem);
-                        }
-                    })
-                    telephone.parentNode.replaceChild(newItem, telephone);  
-                    
-                    const website = document.querySelector(".details .website div");
-                    const newItem1 = document.createElement("input");
-                    newItem1.setAttribute("type", "website");
-                    newItem1.addEventListener('keyup', (e) => {
-                        if (e.keyCode === 13) {
-                            let newcontent = document.createTextNode(e.target.value);
-                            console.log(newcontent);
-                            let newItem4 = document.createElement("div");
-                            newItem4.appendChild(newcontent);
-                            newItem1.parentNode.replaceChild(newItem4, newItem1);
-                        }
-                    })
-                    website.parentNode.replaceChild(newItem1, website);
-
-                    const lostfound = document.querySelector(".details .lost-found div");
-                    const newItem2 = document.createElement("input");
-                    newItem2.setAttribute("type", "telephone");
-                    newItem2.addEventListener('keyup', (e) => {
-                        if (e.keyCode === 13) {
-                            let newcontent = document.createTextNode(e.target.value);
-                            console.log(newcontent);
-                            let newItem4 = document.createElement("div");
-                            newItem4.appendChild(newcontent);
-                            newItem2.parentNode.replaceChild(newItem4, newItem2);
-                        }
-                    })
-                    lostfound.parentNode.replaceChild(newItem2, lostfound);
-
-                    const entrance = document.querySelector(".details .entrance div");
-                    const newItem3 = document.createElement("input");
-                    newItem3.setAttribute("type", "number");
-                    newItem3.addEventListener('keyup', (e) => {
-                        if (e.keyCode === 13) {
-                            let newcontent = document.createTextNode(e.target.value);
-                            console.log(newcontent);
-                            let newItem4 = document.createElement("div");
-                            newItem4.appendChild(newcontent);
-                            newItem3.parentNode.replaceChild(newItem4, newItem3);
-                            editbtn.classList.remove("touched");
-                            editbtn.removeAttribute("disabled");
-                        }
-                    })
-                    entrance.parentNode.replaceChild(newItem3, entrance);
-                })
-
-                const comment1 = document.createTextNode("Επεξεργασία");
-                editbtn.appendChild(comment1);
-                element_row_info.appendChild(editbtn);
-
-            }).catch(function (error) {
-                console.error(error);
-            });
+            const entrance = document.createElement("div");
+            entrance.classList.add("entrance");
+            const text5 = document.createTextNode(`Entrance: `);
+            entrance.appendChild(text5);
+            const en = document.createElement('div');
+            en.appendChild(document.createTextNode(data[i].gate));
+            entrance.appendChild(en);
+            
+            details.appendChild(entrance);
+            element_row_info.appendChild(details);
             dis.appendChild(element_row_info);
+            const buttons = document.createElement("div");
+            buttons.classList.add("buttons");
+
+            const editbtn = document.createElement("button");
+            editbtn.classList.add("edit");
+            editbtn.addEventListener('click', function(){
+                editInfo(i,data[i],editbtn);
+
+            });
+            const comment1 = document.createTextNode("Επεξεργασία");
+            editbtn.appendChild(comment1);
+            editbtns.push(editbtn);
+            buttons.appendChild(editbtn);
+
+            const deletebtn = document.createElement("button");
+            deletebtn.classList.add("remove");
+            deletebtn.addEventListener('click', function(){
+                console.log(i,data[i]);
+            });
+            const comment2 = document.createTextNode("Διαγραφή");
+            deletebtn.appendChild(comment2);
+            deletebtns.push(deletebtn);
+            buttons.appendChild(deletebtn);
+
+            details.appendChild(buttons);
+            index+=1;
         }
     }
 }
 
 
-xhr1.addEventListener("readystatechange", function () {
-	if (this.readyState === this.DONE) {
-        airlines=JSON.parse(this.responseText);
-        for(let i=0;i<airlines.length;i++){
-            names.push(airlines[i].name);
-            names_sort.push(airlines[i].name);
-        }
-        names_sort.sort();
-        display("A");
-    }
-});
 
-xhr1.open("GET", "https://iata-and-icao-codes.p.rapidapi.com/airlines");
-xhr1.setRequestHeader("X-RapidAPI-Host", "iata-and-icao-codes.p.rapidapi.com");
-xhr1.setRequestHeader("X-RapidAPI-Key", "72241a884dmsh8de9c7fffb619bep154dbejsn38d304e0a370");
-xhr1.send(data);
+function editInfo(index,data,editbtn){
+    console.log(index,data);
+    editbtn.classList.add("touched");
+    editbtn.disabled = "true";
+    console.log(index);
+    let telephone = document.querySelectorAll(".details .telephone")[index];
+    telephone = telephone.querySelector("div");
+    const newItem = document.createElement("input");
+    newItem.setAttribute("type", "telephone");
+    newItem.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
+            let newcontent = document.createTextNode(e.target.value);
+            console.log(newcontent);
+            telephone.innerText = newcontent;
+            let newItem4 = document.createElement("div");
+            newItem4.appendChild(newcontent);
+            newItem.parentNode.replaceChild(newItem4, newItem);
+        }
+    })
+    telephone.parentNode.replaceChild(newItem, telephone);  
+    
+    let website = document.querySelectorAll(".details .website")[index];
+    website = website.querySelector("div");
+    const newItem1 = document.createElement("input");
+    newItem1.setAttribute("type", "website");
+    newItem1.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
+            let newcontent = document.createTextNode(e.target.value);
+            console.log(newcontent);
+            let newItem4 = document.createElement("div");
+            newItem4.appendChild(newcontent);
+            newItem1.parentNode.replaceChild(newItem4, newItem1);
+        }
+    })
+    website.parentNode.replaceChild(newItem1, website);
+
+    // const lostfound = document.querySelector(".details .lost-found div");
+    // const newItem2 = document.createElement("input");
+    // newItem2.setAttribute("type", "telephone");
+    // newItem2.addEventListener('keyup', (e) => {
+    //     if (e.keyCode === 13) {
+    //         let newcontent = document.createTextNode(e.target.value);
+    //         console.log(newcontent);
+    //         let newItem4 = document.createElement("div");
+    //         newItem4.appendChild(newcontent);
+    //         newItem2.parentNode.replaceChild(newItem4, newItem2);
+    //     }
+    // })
+    // lostfound.parentNode.replaceChild(newItem2, lostfound);
+
+    let entrance = document.querySelectorAll(".details .entrance")[index];
+    entrance = entrance.querySelector("div");
+    const newItem3 = document.createElement("input");
+    newItem3.setAttribute("type", "number");
+    newItem3.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
+            let newcontent = document.createTextNode(e.target.value);
+            console.log(newcontent);
+            let newItem4 = document.createElement("div");
+            newItem4.appendChild(newcontent);
+            newItem3.parentNode.replaceChild(newItem4, newItem3);
+            editbtn.classList.remove("touched");
+            editbtn.removeAttribute("disabled");
+        }
+    })
+    entrance.parentNode.replaceChild(newItem3, entrance);
+}
+
+// console.log(i.name);
+//                 editbtn.classList.add("touched");
+//                 editbtn.disabled = "true";
+//                 const telephone = document.querySelector(".details .telephone div");
+//                 const newItem = document.createElement("input");
+//                 newItem.setAttribute("type", "telephone");
+//                 newItem.addEventListener('keyup', (e) => {
+//                     if (e.keyCode === 13) {
+//                         let newcontent = document.createTextNode(e.target.value);
+//                         console.log(newcontent);
+//                         telephone.innerText = newcontent;
+//                         let newItem4 = document.createElement("div");
+//                         newItem4.appendChild(newcontent);
+//                         newItem.parentNode.replaceChild(newItem4, newItem);
+//                     }
+//                 })
+//                 telephone.parentNode.replaceChild(newItem, telephone);  
+                
+//                 const website = document.querySelector(".details .website div");
+//                 const newItem1 = document.createElement("input");
+//                 newItem1.setAttribute("type", "website");
+//                 newItem1.addEventListener('keyup', (e) => {
+//                     if (e.keyCode === 13) {
+//                         let newcontent = document.createTextNode(e.target.value);
+//                         console.log(newcontent);
+//                         let newItem4 = document.createElement("div");
+//                         newItem4.appendChild(newcontent);
+//                         newItem1.parentNode.replaceChild(newItem4, newItem1);
+//                     }
+//                 })
+//                 website.parentNode.replaceChild(newItem1, website);
+
+//                 // const lostfound = document.querySelector(".details .lost-found div");
+//                 // const newItem2 = document.createElement("input");
+//                 // newItem2.setAttribute("type", "telephone");
+//                 // newItem2.addEventListener('keyup', (e) => {
+//                 //     if (e.keyCode === 13) {
+//                 //         let newcontent = document.createTextNode(e.target.value);
+//                 //         console.log(newcontent);
+//                 //         let newItem4 = document.createElement("div");
+//                 //         newItem4.appendChild(newcontent);
+//                 //         newItem2.parentNode.replaceChild(newItem4, newItem2);
+//                 //     }
+//                 // })
+//                 // lostfound.parentNode.replaceChild(newItem2, lostfound);
+
+//                 const entrance = document.querySelector(".details .entrance div");
+//                 const newItem3 = document.createElement("input");
+//                 newItem3.setAttribute("type", "number");
+//                 newItem3.addEventListener('keyup', (e) => {
+//                     if (e.keyCode === 13) {
+//                         let newcontent = document.createTextNode(e.target.value);
+//                         console.log(newcontent);
+//                         let newItem4 = document.createElement("div");
+//                         newItem4.appendChild(newcontent);
+//                         newItem3.parentNode.replaceChild(newItem4, newItem3);
+//                         editbtn.classList.remove("touched");
+//                         editbtn.removeAttribute("disabled");
+//                     }
+//                 })
+//                 entrance.parentNode.replaceChild(newItem3, entrance);
+//             })
+            
+//             const comment1 = document.createTextNode("Επεξεργασία");
+//             editbtn.appendChild(comment1);
+//             editbtns.push(editbtn);
+//             details.appendChild(editbtn);
+//             index+=1;
 
 let Div = document.querySelector("div.choices");
 for (let i = 65; i < 91; i++) {
@@ -348,3 +410,83 @@ for (let i = 65; i < 91; i++) {
     newButton.appendChild(content);
     Div.appendChild(newButton);
 }
+
+const buttonA = document.querySelector(".btn");
+buttonA.classList.add("touched");
+
+display("A");
+
+
+
+// details.appendChild(entrance);
+//                 element_row_info.appendChild(details);
+//                 // element_row_info.appendChild(entrance);
+
+//                 const editbtn = document.createElement("button");
+//                 editbtn.classList.add("edit");
+//                 editbtn.addEventListener('click', function () {
+//                     editbtn.classList.add("touched");
+//                     editbtn.disabled = "true";
+//                     const telephone = document.querySelector(".details .telephone div");
+//                     const newItem = document.createElement("input");
+//                     newItem.setAttribute("type", "telephone");
+//                     newItem.addEventListener('keyup', (e) => {
+//                         if (e.keyCode === 13) {
+//                             let newcontent = document.createTextNode(e.target.value);
+//                             console.log(newcontent);
+//                             telephone.innerText = newcontent;
+//                             let newItem4 = document.createElement("div");
+//                             newItem4.appendChild(newcontent);
+//                             newItem.parentNode.replaceChild(newItem4, newItem);
+//                         }
+//                     })
+//                     telephone.parentNode.replaceChild(newItem, telephone);  
+                    
+//                     const website = document.querySelector(".details .website div");
+//                     const newItem1 = document.createElement("input");
+//                     newItem1.setAttribute("type", "website");
+//                     newItem1.addEventListener('keyup', (e) => {
+//                         if (e.keyCode === 13) {
+//                             let newcontent = document.createTextNode(e.target.value);
+//                             console.log(newcontent);
+//                             let newItem4 = document.createElement("div");
+//                             newItem4.appendChild(newcontent);
+//                             newItem1.parentNode.replaceChild(newItem4, newItem1);
+//                         }
+//                     })
+//                     website.parentNode.replaceChild(newItem1, website);
+
+//                     const lostfound = document.querySelector(".details .lost-found div");
+//                     const newItem2 = document.createElement("input");
+//                     newItem2.setAttribute("type", "telephone");
+//                     newItem2.addEventListener('keyup', (e) => {
+//                         if (e.keyCode === 13) {
+//                             let newcontent = document.createTextNode(e.target.value);
+//                             console.log(newcontent);
+//                             let newItem4 = document.createElement("div");
+//                             newItem4.appendChild(newcontent);
+//                             newItem2.parentNode.replaceChild(newItem4, newItem2);
+//                         }
+//                     })
+//                     lostfound.parentNode.replaceChild(newItem2, lostfound);
+
+//                     const entrance = document.querySelector(".details .entrance div");
+//                     const newItem3 = document.createElement("input");
+//                     newItem3.setAttribute("type", "number");
+//                     newItem3.addEventListener('keyup', (e) => {
+//                         if (e.keyCode === 13) {
+//                             let newcontent = document.createTextNode(e.target.value);
+//                             console.log(newcontent);
+//                             let newItem4 = document.createElement("div");
+//                             newItem4.appendChild(newcontent);
+//                             newItem3.parentNode.replaceChild(newItem4, newItem3);
+//                             editbtn.classList.remove("touched");
+//                             editbtn.removeAttribute("disabled");
+//                         }
+//                     })
+//                     entrance.parentNode.replaceChild(newItem3, entrance);
+//                 })
+                
+//                 const comment1 = document.createTextNode("Επεξεργασία");
+//                 editbtn.appendChild(comment1);
+//                 details.appendChild(editbtn);
