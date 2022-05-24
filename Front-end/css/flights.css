@@ -59,6 +59,8 @@
     padding:1em 0em 0em 0em;
     display:none;
     min-width: 320px;
+    margin-bottom: 10%;
+    margin-top: 0.75em;
 }
 
 .arrivals-form form,.departures-form form{
