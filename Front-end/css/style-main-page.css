@@ -56,14 +56,14 @@ p{
     background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/wheelchair.jpg");
     background-size:cover;
 }
-/*.special-needs button{
+.special-needs button{
     width:23.6em;
     background-color:rgba(0,0,0,0);
     background-image: linear-gradient(to bottom, rgba(121, 109, 109, 0), rgba(0, 0, 0, 0.9));
     border:none;
     margin-top:11.6em;
     padding-bottom:1em;
-}*/
+}
 
 .choices button{
     width:23.6em;
@@ -86,39 +86,50 @@ p{
 }
 
 
-/*
+
 #special-needs-text{
-    position: fixed;
-    display: none;
-    width: 100%;
-    height:100%;
+    position:fixed;
+    display:none;
     top:0;
     left:0;
-    right:0;
-    bottom:0;
-    background-color:white;
-    border:0.1em solid black;
-    border-radius:5px;
-    z-index: 2;
-    line-height: 1.2;
-    text-align:justify;
-    overflow-y: auto;
-    scrollbar-color: rebeccapurple green;
-    scrollbar-width:thin;
+    width:100%;
+    height:100%;
+    margin:auto;
+    background-color:rgba(0,0,0,0.3);
+    z-index:2;
 }
 
-
-#special-needs-text button{
-    background-image:url("exit.jpg");
-    background-size:cover;
-    width:1.7em;
-    height:1.7em;
-    border:none;
+.wrap div, .wrap h2{
+    padding: 1em 1em 0em 1em;
+}
+.wrap h2{
+    border-bottom: 1px solid white;
+}
+#special-needs-text .close{
+    position:absolute;
+    top:13px;
+    right:13px;
+    width:13px;
+    height:13px;
+    padding: 0.1em;
+    background:rgb(160, 133, 133);
+    text-align:center;
+    line-height:15px;
+    border-radius:15px;
     cursor:pointer;
-    margin-top:0.3em;
-    float:right;
 }
-
+#special-needs-text .wrap{
+    position: relative;
+    padding-left:0.2em;
+    max-width:50em;
+    height:32em;
+    margin:auto;
+    margin-top:1em;
+    background-color:rgb(90, 23, 38);
+    border:0.2em solid black;
+    border-radius:10px;
+    overflow-y:scroll;
+}
 #special-needs-text h2{
     text-align:center;
 }
@@ -126,7 +137,6 @@ p{
     line-height:150%;
     text-align:justify;
 }
-*/
 
 .covid-19{
     background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/covid.jpg");
@@ -196,33 +206,35 @@ p{
     margin:auto;
     background-color:rgba(0,0,0,0.3);
     z-index:2;
-    color:black;
 }
 
 #pets_text .wrap{
-    max-width:40em;
-    height:auto;
+    position: relative;
+    padding-left:0.2em;
+    max-width:50em;
+    height:32em;
     margin:auto;
-    margin-top:10em;
-    padding-bottom:1em;
-    background-color:white;
+    margin-top:1em;
+    background-color:rgb(90, 23, 38);
     border:0.2em solid black;
     border-radius:10px;
-    overflow-y: auto;
+    overflow-y:scroll;
 
 }
 
 
-#pets_text button{
-    background-image:url("/Front-end/images/exit.jpg");
-    background-size:cover;
-    width:1.7em;
-    height:1.7em;
-    margin-top:0.5em;
-    margin-right:0.3em;
-    border:none;
+#pets_text .close{
+    position:absolute;
+    top:13px;
+    right:13px;
+    width:13px;
+    height:13px;
+    padding: 0.1em;
+    background:rgb(160, 133, 133);
+    text-align:center;
+    line-height:15px;
+    border-radius:15px;
     cursor:pointer;
-    float:right;
 }
 
 #pets_text h1{
@@ -233,10 +245,6 @@ p{
     font-size:1.1em;
     padding:0.5em 0em;
     text-align:center;
-}
-
-#pets_text .pets-header{
-    border-bottom:0.2em solid black;
 }
 
 #pets_text .main_text{
@@ -268,12 +276,13 @@ p{
 }
 
 #currency_text .wrap{
+    position: relative;
     padding-left:0.2em;
     max-width:50em;
     height:32em;
     margin:auto;
     margin-top:1em;
-    background-color:white;
+    background-color:rgb(90, 23, 38);
     border:0.2em solid black;
     border-radius:10px;
     overflow-y:scroll;
@@ -290,7 +299,7 @@ p{
 }
 
 #currency_text ::-webkit-scrollbar-thumb{
-    background:blue;
+    background:rgb(5, 5, 6);
     border:0.1em solid lightblue;
     border-radius:100vw;
 }
@@ -299,21 +308,18 @@ p{
     background:hsl(120 100% 10%/1);
 }
 
-#currency_text button{
-    background-image:url("/Front-end/images/exit.jpg");
-    background-size:cover;
-    width:1.7em;
-    height:1.7em;
-    margin-top:0.5em;
-    margin-right:0.3em;
-    border:none;
+#currency_text .close{
+    position:absolute;
+    top:13px;
+    right:13px;
+    width:13px;
+    height:13px;
+    padding: 0.1em;
+    background:rgb(160, 133, 133);
+    text-align:center;
+    line-height:15px;
+    border-radius:15px;
     cursor:pointer;
-    float:right;
-}
-
-
-#currency_text .currency-header{
-    border-bottom:0.2em solid black;
 }
 
 #currency_text h1{
@@ -366,7 +372,6 @@ p{
     margin:auto;
     background-color:rgba(0,0,0,0.3);
     z-index:1;
-    color:black;
 }
 
 
@@ -404,12 +409,13 @@ p{
 }
 
 #customs_insection_text .wrap{
+    position: relative;
     padding-left:0.2em;
     max-width:50em;
     height:32em;
     margin:auto;
     margin-top:1em;
-    background-color:white;
+    background-color:rgb(90, 23, 38);
     border:0.2em solid black;
     border-radius:10px;
     overflow-y:scroll;
@@ -425,7 +431,6 @@ p{
     margin:auto;
     background-color:rgba(0,0,0,0.3);
     z-index:1;
-    color:black;
 }
 
 
@@ -449,16 +454,18 @@ p{
     background:hsl(120 100% 10%/1);
 }
 
-#customs_insection_text button{
-    background-image:url("/Front-end/images/exit.jpg");
-    background-size:cover;
-    width:1.7em;
-    height:1.7em;
-    margin-top:0.5em;
-    margin-right:0.3em;
-    border:none;
+#customs_insection_text .close{
+    position:absolute;
+    top:13px;
+    right:13px;
+    width:13px;
+    height:13px;
+    padding: 0.1em;
+    background:rgb(160, 133, 133);
+    text-align:center;
+    line-height:15px;
+    border-radius:15px;
     cursor:pointer;
-    float:right;
 }
 
 
@@ -474,11 +481,6 @@ p{
 #customs_insection_text .wrap ul{
     margin-bottom:0.5em;
     margin-left:1em;
-}
-
-#customs_insection_text .wrap .head{
-    border-bottom:0.2em solid black;
-    margin-bottom:1em;
 }
 
 #customs_insection_text h1,#customs_insection_text h2{

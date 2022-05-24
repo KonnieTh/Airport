@@ -1,4 +1,23 @@
+function sn_on() {
+    document.getElementById("special-needs-text").style.display = "block";
+}
+function sn_off() {
+    document.getElementById("special-needs-text").style.display = "none";
+}
 
+function covid_on() {
+    document.getElementById("pets_text").style.display = "block";
+}
+function covid_off() {
+    document.getElementById("pets_text").style.display = "none";
+}
+
+function parking_on() {
+    document.getElementById("pets_text").style.display = "block";
+}
+function parking_off() {
+    document.getElementById("pets_text").style.display = "none";
+}
 
 function pets_on() {
     document.getElementById("pets_text").style.display = "block";
