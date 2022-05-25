@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Icarus</title>
     <link rel="airport icon" href="images/airport_logo.png">
-    <link rel="stylesheet" href="css/flights-admin.css">
+    <link rel="stylesheet" href="css/flights.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/sign-up.css">
+    <link rel="stylesheet" href="css/log-in.css">
+    <script defer src="js/sign-up.js"></script>
+    <script defer src="js/log-in.js"></script>
 </head>
 <body>
     <div class="menu">
@@ -19,67 +23,125 @@
             <div class="shops"><a href="shops.html">Καταστήματα</a></div>
         </div>
         <div class="menu-right">
-            <button class="sign-up">Λογαριασμός</button>
+            <button class="sign-up">Εγγραφή</button>
+            <button class="log-in">Είσοδος</button>
         </div>
     </div>
-    <div class="choices">
-        <button class="arrivals" onclick="arrivals_on()">Αφίξεις</button>
-        <button class="departures" onclick="departures_on()">Αναχωρήσεις</button>
+    <div class="signup">
+        <form>
+            <div class="close">&times;</div>
+            <div class="name">
+                <label for="fname">Ονοματεπώνυμο</label><br>
+                <input type="text" id="fname" name="fname" placeholder="Όνομα" size="26" required>
+                <input type="text" id="lname" name="lname" placeholder="Επώνυμο" size="26" required>
+            </div>
+            <div class="communication">
+                <label for="number">Στοιχεία επικοινωνίας</label><br>
+                <input type="tel" id="number" name="number" placeholder="Τηλέφωνο"  pattern="\d{10}" size="25" required>
+                <input type="email" id="mail" name="mail" placeholder="Διεύθυνση email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" size="25" required>
+            </div>       
+            <div class="country">
+                <label for="country">Χώρα Καταγωγής</label><br>
+                <select id="country" name="country" required>
+                    <option value="Greece" selected>Ελλάδα</option>
+                    <option value="Cyprus">Κύπρος</option>
+                    <option value="Another-country">Άλλο</option>
+                </select>
+            </div>
+            <div class="age-sex">
+                <label for="age">Ηλικία</label><br>
+                <input type="number" id="age" name="age" size="3"  value="18" required>
+                <span>
+                    <select name="gender" required id="id_gender">
+                        <option value="" selected>Φύλο</option>
+                        <option value="male">Άνδρας</option>
+                        <option value="female">Γυναίκα</option>
+                        <option value="other">Άλλο</option>
+                    </select>
+                </span>
+            </div>
+            <div class="login2">
+                <label for="username">Στοιχεία σύνδεσης</label><br>
+                <input type="text" id="username" name="username" placeholder="Όνομα χρήστη" size="25" required>
+                <input type="password" name="password" placeholder="Κωδικός" autocomplete="new-password" minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}" required id="id_password">
+                <div>
+                    Ο κωδικός πρέπει να περιέχει τουλάχιστον 6 λατινικούς χαρακτήρες, οι οποίοι θα είναι, είτε πεζά, είτε κεφαλαία γράμματα.
+                </div>
+            </div>
+            <div class="sub">
+                <button type="submit">Εγγραφή</button>
+            </div>
+        </form> 
     </div>
+    <div class="login">
+        <form>     
+            <div class="close">&times;</div>
+            <div class="login3">
+                <label for="username">Όνομα χρήστη</label><br>
+                <input type="text" id="username2" name="username" size="25" required><br>
+                <label for="passw">Κωδικός</label><br>
+                <input type="password" name="password" size="25" autocomplete="new-password" minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}" required id="id_password2">
+            </div>
+            <div class="sub">
+                <button type="submit">Είσοδος</button>
+            </div>
+        </form> 
+    </div>
+    <div class="choices">
+        <button class="arrivals" onclick="arrivals_form()">Αφίξεις</button>
+        <button class="departures" onclick="departures_form()">Αναχωρήσεις</button>
+    </div>
+    <iframe name="hiddenFrame" class="hide"></iframe>
     <div class="flights-menu">
-        <div class="form" id="arrivals">
-            <form action="" method="post">
+        <div class="arrivals-form" id="arrivals">
+            <form action="http://localhost:3000/user_arrivals" method="post" onsubmit="arrivals_on()" target="hiddenFrame">
                 <div class="selection">
-                    <div class="departure">
-                        <label for="departure-airport">Αναζήτηση Αεροδρομίου Αναχώρισης</label><br>
-                        <select id="departure-airport" name="user_departure_airport" required></select>
+                    <div class="arrival">
+                        <label for="departure-airport">Αναζήτηση Αεροδρομίου</label><br>
+                        <select id="departure-airport" name="user_departure_airport" required>
+                        </select>
                     </div>
                     <div class="airline">
                         <label for="airline_departure">Αεροπορική Εταιρεία</label><br>
-                        <select id="airline_departure" name="user_airline_departure">
+                        <select id="airline_arrival" name="user_airline_departure">
+                            
                         </select>
                     </div>
                     <div class="number_flight">
-                        <label for="number_of_flight">Αριθμός Πτήσης</label><br>
+                        <label for="number_of_flight">Κωδικός Πτήσης</label><br>
                         <input type="text" id="number_of_flight" name="user_number_of_flight">
                     </div>
                     <div class="date-selection">
-                        <label class="date">Ημερομηνία αναχώρησης</label><br>
+                        <label class="date">Ημερομηνία άφιξης</label><br>
                         <input type="date" name="date" required>
                     </div>
-                    <!--div class="via-flight">
-                        <label><input type="checkbox" name="items" value="via" required>Ενδιάμεσοι Σταθμοί</label><br> 
-                    </div-->
                     <div class="sub">
                         <input type="submit" value="Αναζήτηση">
                     </div>
                 </div>
             </form>
         </div>
-        <div class="form" id="departures">
-            <form action="" method="post">
+        <div class="departures-form" id="departures">
+            <form action='http://localhost:3000/user_departures' method="post" onsubmit="departures_on()" target="hiddenFrame">
                 <div class="selection">
                     <div class="departure">
-                        <label for="departure-airport">Αναζήτηση Αεροδρομίου Άφιξης</label><br>
-                        <select id="departure-airport" name="user_departure_airport" required></select>
+                        <label for="arrival-airport">Αναζήτηση Αεροδρομίου</label><br>
+                        <select id="arrival-airport" name="user_arrival_airport" required></select>
                     </div>
                     <div class="airline">
-                        <label for="airline_departure">Αεροπορική Εταιρεία</label><br>
+                        <label for="airline_arrival">Αεροπορική Εταιρεία</label><br>
                         <select id="airline_departure" name="user_airline_departure">
-    
+                            
                         </select>
                     </div>
                     <div class="number_flight">
-                        <label for="number_of_flight">Αριθμός Πτήσης</label><br>
+                        <label for="number_of_flight">Κωδικός Πτήσης</label><br>
                         <input type="text" id="number_of_flight" name="user_number_of_flight">
                     </div>
                     <div class="date-selection">
-                        <label for="date">Ημερομηνία άφιξης</label><br>
+                        <label for="date">Ημερομηνία αναχώρησης</label><br>
                         <input type="date" name="date" required>
                     </div>
-                    <!--div class="via-flight">
-                        <label><input type="checkbox" name="items" value="via" required>Ενδιάμεσοι Σταθμοί</label><br> 
-                    </div-->
                     <div class="sub">
                         <input type="submit" value="Αναζήτηση">
                     </div>
@@ -87,115 +149,235 @@
             </form>
         </div>
         <div class="flights-info">
-            <table class="flights-header">
+            <table class="arrivals-table flights-header">
+                <thead>
                     <tr class="row">
-                        <th>Αεροπορική Εταιρεία</th>
+                        <th rowspan="2">Αεροπορική Εταιρεία</th>
+                        <th>Προέλευση</th>
                         <th>Αριθμός πτήσης</th>
-                        <th>Προορισμός</th>
                         <th>Προγραμματισμένη ώρα</th>
                         <th>Κατάσταση</th>
                         <th>Terminal</th>
                     </tr>
+                </thead>
+            </table>
+            <table class="departures-table flights-header">
+                <thead>
+                    <tr class="row">
+                        <th rowspan="2">Αεροπορική Εταιρεία</th>
+                        <th>Προορισμός</th>
+                        <th>Αριθμός πτήσης</th>
+                        <th>Προγραμματισμένη ώρα</th>
+                        <th>Κατάσταση</th>
+                        <th>Terminal</th>
+                    </tr>
+                </thead>
             </table>
             <div class="date">Date</div>
             <div class="container">
                 <table class="flight-arrivals">
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
+                    <tbody>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr class="row">
+                            <td>Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                    </tbody>
                 </table>
                 <table class="flight-departures">
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
-                    <tr class="row">
-
-                        <td colspan="2">Αεροπορική Εταιρεία</td>
-                        <td>Αριθμός πτήσης</td>
-                        <td>Προορισμός</td>
-                        <td>Προγραμματισμένη ώρα</td>
-                        <td>Κατάσταση</td>
-                        <td>Terminal</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2">Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">Αεροπορική Εταιρεία</td>
+                            <td>Προορισμός</td>
+                            <td>Αριθμός πτήσης</td>
+                            <td>Προγραμματισμένη ώρα</td>
+                            <td>Κατάσταση</td>
+                            <td>Terminal</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <!--button class="remove-button" onclick="remove()">Διαγραφή στοιχείου</button-->
     <footer>
         <div class="anakoinoseis">
             <a><h3>Ανακοινώσεις</h3></a>
@@ -225,8 +407,6 @@
             </div>
         </div>
     </footer>
-    <script src="js/flights-admin.js"></script>
+    <script src="js/flights.js"></script>
 </body>
 </html>
-
-
