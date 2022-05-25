@@ -1,6 +1,6 @@
-:root {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/Front-end/images/flights.jpg");
-    background-size: cover;
+:root{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("/Front-end/images/flights.jpg");
+    background-size:cover;
     background-position: center;
     scroll-behavior: smooth;
 }
@@ -8,15 +8,14 @@
     font-weight: bold;
 }
 
-div.main {
-    width: 100%;
+div.main{
+    width:100%;
 }
-
-div.choices {
+div.choices{
     margin:auto;
-    background-color:rgb(111, 111, 111);
+    background-color:rgba(0,0,0,0.6);
     display:flex;
-    width: clamp(400px,50%,1000px);
+    width: 30em;
     height:auto;
     flex-direction:row;
     justify-content:center;
@@ -25,91 +24,92 @@ div.choices {
     padding:0.5em;
 }
 
-button.btn {
-    padding:1em 0.8em;
+button.btn{
+    padding:0.8em 0.8em;
     border:none;
-    border:0.1em solid orange;
+    border:0.1em solid rgb(111, 111, 111);
     cursor:pointer;
     color:white;
-    background-color:blue;
+    background-color:white;
     border-radius:500px;
+    color:black;
 }
 
 button.touched{
-    padding:1em 0.8em;
+    padding:0.8em 0.8em;
     border:none;
-    border:0.1em solid orange;
+    border:0.1em solid rgb(111, 111, 111);
     cursor:pointer;
-    color:blue;
-    background-color:orange;
+    color:white;
+    background-color: rgb(111, 111, 111);
     border-radius:500px;
     cursor:default;
 }
 
-button.btn:hover,button.btn:active {
-    background-color: orange;
-    color: white;
+button.btn:hover,button.btn:active{
+    background-color:rgb(111, 111, 111);
+    color:white;
     transition-duration: 150ms;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
-    margin-bottom: 1em;
+}
+.selection{
+    background-color:black;
+    width:80%;
+    margin:auto;
 }
 
-
-.selection {
-    background-color: black;
-    width: 80%;
-    margin: auto;
-}
-
-.airlines-container {
-    overflow-y: scroll;
-    height: 40em;
-    border: 0.2em solid white;
+.airlines-container{
+    overflow-y:scroll;
+    height:40em;
+    border:0.2em solid white;
     margin-top:1em;
 }
 
-.company-info {
-    display: grid;
-    grid-template: 1fr/1fr;
+.company-info{
+    display:grid;
+    grid-template:1fr/1fr;
+
 }
 
-.company-info .row {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    justify-content: space-around;
-    background-color: orange;
+.company-info .row{
+    display:grid;
+    grid-template-columns:repeat(2,auto);
+    justify-content:space-around;
+    background-color:orange;
 }
 
-.company-info .row .company {
-    padding: 1em 0em;
-    font-size: 1.2em;
+.company-info .row .company{
+    padding:1em 0em;
+    font-size:1.2em;
+    
 }
 
-.company-info .row a {
-    padding: 1.3em 0em;
-    color: white;
-    text-decoration: none;
+.company-info .row a{
+    padding:1.3em 0em;
+    color:white;
+    text-decoration:none;
     transition-duration: 200ms;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
 }
 
-.company-info .row a:hover {
-    color: blue;
+.company-info .row a:hover{
+    color:blue;
 }
 
-.company-info .row-info {
-    display: grid;
-    grid-template: 1fr/2fr 0.9fr;
+.company-info .row-info{
+    display:grid;
+    /* grid-template-columns:repeat(2,auto); */
     justify-content:space-around;
-    height:11em;
-    text-align: center;
-    padding: 0.5em 0em;
+    grid-template:1fr/2fr 0.9fr;
+    height:8em;
+    text-align:center;
+    padding:0.5em 0em;
 }
 
-.company-info .row-info .icon {
-    width: 23%;
+.company-info .row-info .icon{
+    width:23%;
     height:42%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -118,50 +118,22 @@ button.btn:hover,button.btn:active {
     padding:1em;
 }
 
-.company-info .row-info .details div {
-    padding: 0.2em 0em;
-    margin: auto;
-    text-align: justify;
-}
-
-.company-info .row-info .entrance {
-    margin: auto;
-    text-align: center;
-}
-
 .telephone div,.website div,.lost-found div,.entrance div{
     display:inline;
 }
 
-.buttons{
-    display:grid;
-    grid-template:1fr/auto auto;
-    gap:10px;
+
+.company-info .row-info .details div{
+    padding:0.2em 0em;
+    margin:auto;
+    text-align:justify;
 }
 
-button.edit,button.remove{
-    background-color: blue;
-    color: white;
-    padding:1em 1em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: 200ms;
-    transition-timing-function: ease-in-out;
-    transition-delay: 0s;
-    margin-top:1em;
-    margin-right:10%;
-}
+.company-info .row-info .entrance{
+    margin:auto;
+    text-align:center;
 
-.edit:hover,.remove:hover {
-    background-color: orange;
 }
-
-.edit.touched,.remove.touched {
-    background-color: orange;
-    color: white;
-}
-
 
 .companies-flights{
     margin:1em 0em;
@@ -181,6 +153,7 @@ button.edit,button.remove{
     transition-duration: 200ms;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
+    font-size:0.8em;
 }
 
 .companies-flights button.touched{
@@ -190,7 +163,7 @@ button.edit,button.remove{
     border:none;
     background-color:rgb(171, 171, 15) ;
     color:white;
-    font-size:1em;
+    font-size:0.8em;
 }
 
 .companies-flights button:hover{
@@ -252,6 +225,40 @@ tbody tr:last-child{
     display:none;
 }
 
+
+
+
+.buttons{
+    display:grid;
+    grid-template:1fr/auto auto;
+    gap:10px;
+}
+
+button.edit,button.remove{
+    background-color: blue;
+    color: white;
+    padding:1em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    margin-top:1em;
+    margin-right:10%;
+}
+
+.edit:hover,.remove:hover {
+    background-color: orange;
+}
+
+.edit.touched,.remove.touched {
+    background-color: orange;
+    color: white;
+}
+
+
+
 @media only screen and (max-width: 1400px) {
     .company-info .row-info{
         display:grid;
@@ -269,30 +276,105 @@ tbody tr:last-child{
         padding-right:2em;
     }
     div.selection{
-        width:100%;
+        width:90%;
     }
-    div.container{
-        font-size:0.6em;
-        margin:auto;
-        width:94%;
-    }
-
-    
 }
 
-
 @media only screen and (max-width: 700px) {
+    div.choices{
+        width:14em;
+    }
+    .company-info{
+        font-size:0.5em;
+    }
     div.container{
         font-size:0.4em;
         margin:auto;
         width:94%;
         height:40em;
     }
-
-}
-
-@media only screen and (max-width: 900px) {
-    .buttons{
-        display:inline;
+    div.selection{
+        width:auto;
+    }
+    button.edit,button.remove{
+        display:block;
+        background-color: blue;
+        color: white;
+        padding:1em 1em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition-duration: 200ms;
+        transition-timing-function: ease-in-out;
+        transition-delay: 0s;
+        margin-top:0.3em;
+        margin-right:10%;
+        font-size:0.8em;
+    }
+    .company-info .row-info{
+        display:grid;
+        grid-template:1fr/2fr 1fr;
+        height:15em;
+        text-align:center;
+        padding:0.5em 0em;
     }
 }
+
+@media only screen and (max-width: 450px) {
+    div.choices .departures{
+        width:35%;
+    }
+    div.selection{
+        width:90%;
+    }
+    .company-info .row-info{
+        display:grid;
+        grid-template:1fr/2fr 1fr;
+        height:20em;
+        text-align:center;
+        padding:0.5em 0em;
+    }
+    .buttons{
+        display:grid;
+        grid-template:1fr 1fr/1fr;
+    }
+    button.edit,button.remove{
+        display:block;
+        background-color: blue;
+        color: white;
+        padding:0.5em 0.5em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition-duration: 200ms;
+        transition-timing-function: ease-in-out;
+        transition-delay: 0s;
+        margin-top:0.3em;
+        margin-right:10%;
+        font-size:0.8em;
+    }
+    .edit:hover,.remove:hover {
+        background-color: orange;
+    }
+    .edit.touched,.remove.touched {
+        background-color: orange;
+        color: white;
+        /* padding:0.5em 0.5em !important; */
+    }
+    .company-info .row-info .icon{
+        width:32%;
+        height:42%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        margin-left:23%;
+        padding:1em;
+    }
+    
+}
+
+
+footer{
+    margin-top: 0;
+}
+
