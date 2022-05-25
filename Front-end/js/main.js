@@ -49,9 +49,9 @@ function edit(a, b) {
     document.getElementById("text-editor").style.display = "block";
     document.getElementById("description").style.display = "none";
     document.getElementById("main-menu").style.display = "none";
-    document.getElementById('lo').style.backgroundImage = "none";
-    document.getElementById('lo').style.backgroundColor = "rgb(46, 46, 46)";
-    document.getElementById('lo').style.minHeight = "10em";
+    document.querySelector('.header').style.backgroundImage = "none";
+    document.querySelector('.header').style.backgroundColor = "rgb(46, 46, 46)";
+    document.querySelector('.header').style.minHeight = "10em";
     let text = document.getElementById(a);
     let text2 = document.getElementById("textarea");
     text2.innerHTML = text.innerHTML;
@@ -65,8 +65,8 @@ function save() {
     document.getElementById("text-editor").style.display = "none";
     document.getElementById("description").style.display = "block";
     document.getElementById("main-menu").style.display = "block";
-    document.getElementById('lo').style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('/images/athens.jpg')";
-    document.getElementById('lo').style.minHeight = "100vh";
+    document.querySelector('.header').style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('/Front-end/images/athens.jpg')";
+    document.querySelector('.header').style.minHeight = "100vh";
 }
 
 const elements = document.querySelectorAll(".text-editor-header .btn");
