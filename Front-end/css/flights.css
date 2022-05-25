@@ -136,18 +136,41 @@
     background-color:white;
     overflow-y:scroll;
     width:101.3%;
+    font-size: 0.6em;
+    /* display:none; */
+}
+.container::-webkit-scrollbar {
+    width:10px;
 }
 
+.container::-webkit-scrollbar-track{
+    background:#f1f1f1;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+.container ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+  
+
+
+
 .flights-header{
-    width:100%;
+    width:100.8%;
     background-color:rgb(86, 85, 85);
     padding:0.2em 0em;
+    font-size: 0.6em;
+    /* display:none; */
 }
 
 .flights-info .date{
     margin:0.5em 0em;
     padding:0em 0.5em;
     font-size:1.7em;
+    /* display:none; */
 }
 
 .flight-arrivals,.flight-departures{
@@ -166,4 +189,48 @@
 }
 iframe{
     display:none;
+}
+footer{
+    margin-top:0;
+}
+
+
+@media only screen and (max-width: 1400px) {
+    .choices{
+        font-size:0.7em;
+    }
+    .arrivals-form,.departures-form{
+        font-size:0.7em;
+    }
+    .flights-info{
+        font-size:0.7em;
+    }
+    .container{
+        width:102.5%;
+    }
+    .flights-header{
+        width:101.8%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .choices{
+        font-size:0.7em;
+    }
+    .arrivals-form,.departures-form{
+        font-size:0.7em;
+    }
+    .flights-info{
+        font-size:0.6em;
+    }
+    .container{
+        width:99.5%;
+    }
+    .container::-webkit-scrollbar {
+        width:2px;
+    }
+    .flights-header{
+        width:99%;
+    }
+    
 }

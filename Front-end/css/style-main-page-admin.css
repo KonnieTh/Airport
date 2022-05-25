@@ -104,8 +104,6 @@ p{
     scrollbar-color: rebeccapurple green;
     scrollbar-width:thin;
 }
-
-
 #special-needs-text button{
     background-image:url("exit.jpg");
     background-size:cover;
@@ -116,7 +114,6 @@ p{
     margin-top:0.3em;
     float:right;
 }
-
 #special-needs-text h2{
     text-align:center;
 }
@@ -559,6 +556,7 @@ footer{
 
 
 #text-editor{
+    color:black;
     display:none;
     margin:2em 0em;
     background-color:white;
