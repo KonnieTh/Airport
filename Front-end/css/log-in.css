@@ -42,11 +42,21 @@ body.active{
     box-shadow:2px 2px 5px 5px rgba(0,0,0,0.35);
     border-radius:10px;
     padding-top: 1em;
-    left:30%
+    left:30%;
 }
 @media only screen and (max-width: 600px) {
     .login form{
-        left:20%
+        left:20%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .login form{
+        left:10%;
+    }
+  }
+  @media only screen and (max-width: 450px) {
+    .login form{
+        left:0;
     }
   }
 .login3 div{
