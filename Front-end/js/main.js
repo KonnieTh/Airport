@@ -6,17 +6,17 @@ function sn_off() {
 }
 
 function covid_on() {
-    document.getElementById("pets_text").style.display = "block";
+    document.getElementById("covid").style.display = "block";
 }
 function covid_off() {
-    document.getElementById("pets_text").style.display = "none";
+    document.getElementById("covid").style.display = "none";
 }
 
 function parking_on() {
-    document.getElementById("pets_text").style.display = "block";
+    document.getElementById("parking").style.display = "block";
 }
 function parking_off() {
-    document.getElementById("pets_text").style.display = "none";
+    document.getElementById("parking").style.display = "none";
 }
 
 function pets_on() {
