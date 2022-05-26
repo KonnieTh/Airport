@@ -299,7 +299,7 @@ p{
 }
 
 #currency_text ::-webkit-scrollbar-thumb{
-    background:rgb(5, 5, 6);
+    background:rgb(160, 133, 133);
     border:0.1em solid lightblue;
     border-radius:100vw;
 }
@@ -445,7 +445,7 @@ p{
 }
 
 #customs_insection_text ::-webkit-scrollbar-thumb{
-    background:blue;
+    background:rgb(160, 133, 133);
     border:0.1em solid lightblue;
     border-radius:100vw;
 }
