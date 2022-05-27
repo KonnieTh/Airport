@@ -10,7 +10,18 @@ let airline_name = document.querySelector('.companies-flights .company');
 let dis = document.querySelector(".company-info");
 let selected_airline_iata;
 
+
+function covid_on() {
+    document.getElementById("covid").style.display = "block";
+}
+function covid_off() {
+    document.getElementById("covid").style.display = "none";
+}
+
+
+
 function getflights(url,type){
+    console.log(url);
     fetch(url)
     .then(response => {
         return response.json();
@@ -19,73 +30,74 @@ function getflights(url,type){
         if (type==="arrival"){
             console.log(data);
             const table = document.querySelector('.arrivals-table tbody');
-            for (let i of data){
-                const row = document.createElement("tr");
-                row.classList.add("row");
-                const td1 = document.createElement("td");
-                td1.appendChild(document.createTextNode(i.departure.airport));
-                row.appendChild(td1);
-                const td2 = document.createElement("td");
-                td2.appendChild(document.createTextNode(i.flight.iata));
-                row.appendChild(td2);
-                const td3 = document.createElement("td");
-                td3.appendChild(document.createTextNode(i.arrival.scheduled));
-                row.appendChild(td3);
-                const td4 = document.createElement("td");
-                td4.appendChild(document.createTextNode(i.arrival.actual));
-                row.appendChild(td4);
-                const td5 = document.createElement("td");
-                td5.appendChild(document.createTextNode(i.arrival.terminal));
-                row.appendChild(td5);
+            table.innerHTML="";
+            if(data.length>0){
+                for (let i of data){
+                    const row = document.createElement("tr");
+                    row.classList.add("row");
+                    const td1 = document.createElement("td");
+                    td1.appendChild(document.createTextNode(i[2]));
+                    row.appendChild(td1);
+                    const td2 = document.createElement("td");
+                    td2.appendChild(document.createTextNode(i[3]));
+                    row.appendChild(td2);
+                    const td3 = document.createElement("td");
+                    td3.appendChild(document.createTextNode(i[0]+" "+i[1]));
+                    row.appendChild(td3);
+                    const td4 = document.createElement("td");
+                    td4.appendChild(document.createTextNode(i[4]));
+                    row.appendChild(td4);
+                    const td5 = document.createElement("td");
+                    td5.appendChild(document.createTextNode(i[5]));
+                    row.appendChild(td5);
+                    table.appendChild(row);
+                }
+            }
+            else{
+                const row = document.createElement("div");
+                row.appendChild(document.createTextNode("Δεν γίνονται πτήσεις αυτή τη στιγμή"));
+                row.style.width="120%";
+                row.style.margin="1em";
                 table.appendChild(row);
             }
         }
         else if(type==="departures"){
             console.log(data);
             const table = document.querySelector('.departures-table tbody');
-            for (let i of data){
-                const row = document.createElement("tr");
-                row.classList.add("row");
-                const td1 = document.createElement("td");
-                td1.appendChild(document.createTextNode(i.arrival.airport));
-                row.appendChild(td1);
-                const td2 = document.createElement("td");
-                td2.appendChild(document.createTextNode(i.flight.iata));
-                row.appendChild(td2);
-                const td3 = document.createElement("td");
-                td3.appendChild(document.createTextNode(i.departure.scheduled));
-                row.appendChild(td3);
-                const td4 = document.createElement("td");
-                td4.appendChild(document.createTextNode(i.departure.actual));
-                row.appendChild(td4);
-                const td5 = document.createElement("td");
-                td5.appendChild(document.createTextNode(i.arrival.terminal));
-                row.appendChild(td5);
+            table.innerHTML="";
+            if(data.length>0){
+                for (let i of data){
+                    const row = document.createElement("tr");
+                    row.classList.add("row");
+                    const td1 = document.createElement("td");
+                    td1.appendChild(document.createTextNode(i[2]));
+                    row.appendChild(td1);
+                    const td2 = document.createElement("td");
+                    td2.appendChild(document.createTextNode(i[3]));
+                    row.appendChild(td2);
+                    const td3 = document.createElement("td");
+                    td3.appendChild(document.createTextNode(i[0]+" "+i[1]));
+                    row.appendChild(td3);
+                    const td4 = document.createElement("td");
+                    td4.appendChild(document.createTextNode(i[4]));
+                    row.appendChild(td4);
+                    const td5 = document.createElement("td");
+                    td5.appendChild(document.createTextNode(i[5]));
+                    row.appendChild(td5);
+                    table.appendChild(row);
+                }
+            }
+            else{
+                const row = document.createElement("div");
+                row.appendChild(document.createTextNode("Δεν γίνονται πτήσεις αυτή τη στιγμή"));
+                row.style.width="120%";
+                row.style.margin="1em";
                 table.appendChild(row);
             }
         }
     })
-    // .catch(error => {
-    //     let table;
-    //     if (type==="arrival"){
-    //         table = document.querySelector('.arrivals-table tbody');
-    //     }else{
-    //         table = document.querySelector('.departures-table tbody');
-    //     }        
-    //     let count=0;
-    //     if (error=="TypeError: data is not iterable"){
-    //         if (count<1){
-    //             const div = document.createElement("div");
-    //             div.appendChild(document.createTextNode("No flights found from this airline"));
-    //             table.appendChild(div);
-    //             count+=1;
-    //         }
-    //     }
-    //     else{
-    //         console.log(error);
-    //     }
-    // })
 }
+
 
 function arrivals_on() {
     const arrivalbutton = document.querySelector("button.arrivals");
@@ -136,17 +148,20 @@ function flights_catalog(airline,flight_type){
 
 
 async function display(firstletter){
+    let editbtns = [];
+    let deletebtns = [];
+    let index=0;
     dis.innerHTML="";
     dis = document.querySelector(".company-info");
     let response = await fetch(`http://localhost:3000/airlines/filter/${firstletter}`);
     if(response.status==200){
         let data = await response.json();
-        for(let i of data){
+        for(let i=0;i<data.length;i++){
             const element_row = document.createElement("div");
             element_row.classList.add("row");
             const airline_name = document.createElement("div");
             airline_name.classList.add("company");
-            const text = document.createTextNode(i.name);
+            const text = document.createTextNode(data[i].name);
             airline_name.appendChild(text);
             const links = document.createElement("a");
             links.addEventListener('click',function(){
@@ -158,7 +173,7 @@ async function display(firstletter){
             const text1 = document.createTextNode("Πτήσεις >");
             links.appendChild(text1);
             links.addEventListener("click",function(){
-                flights_catalog(i,"arrivals");
+                flights_catalog(data[i],"arrivals");
             })
             element_row.appendChild(airline_name);
             element_row.appendChild(links);
@@ -168,10 +183,12 @@ async function display(firstletter){
             const icon = document.createElement('img');
             icon.classList.add("icon");
             // console.log(names[index],airlines[index].iata_code);
-            fetch(`http://pics.avs.io/150/150/${i.iata}.png`)
+            fetch(`http://pics.avs.io/150/150/${data[i].iata}.png`)
                 .then(response=> response.blob())
-                .then(blob => icon.src = URL.createObjectURL(blob))
+                .then(blob =>
+                     icon.src = URL.createObjectURL(blob))
                 .catch(error => console.log(error))
+            
             icon.style.backgroundColor="white";
             element_row_info.appendChild(icon);
             const details = document.createElement('div');
@@ -179,42 +196,52 @@ async function display(firstletter){
             
             const tel = document.createElement('div');
             tel.classList.add("telephone");
-            const text2 = document.createTextNode(`Τηλέφωνο: `);
+            const text2 = document.createTextNode(`Κρατήσεις: `);
             tel.appendChild(text2);
             const teltext = document.createElement('div');
-            teltext.appendChild(document.createTextNode(i.telephone));
+            teltext.appendChild(document.createTextNode(data[i].telephone));
             tel.appendChild(teltext);
+
+            const tel1 = document.createElement('div');
+            tel1.classList.add("airport");
+            const text6 = document.createTextNode(`Αεροδρόμιο: `);
+            tel1.appendChild(text6);
+            const teltext1 = document.createElement('div');
+            teltext1.appendChild(document.createTextNode(data[i].airport_tel));
+            tel1.appendChild(teltext1);
+            
             
             const web = document.createElement('div');
             web.classList.add("website");
-            const text3 = document.createTextNode(`Website: `);
+            const text3 = document.createTextNode(`Email: `);
             web.appendChild(text3);
             const telweb = document.createElement('div');
-            telweb.appendChild(document.createTextNode(i.website));
+            telweb.appendChild(document.createTextNode(data[i].email));
             web.appendChild(telweb);
 
-
-            // const lostfound = document.createElement('div');
-            // lostfound.classList.add("lost-found");
-            // const text4 = document.createTextNode(`Lost & Found: `);
-            // lostfound.appendChild(text4);
-            // const tellostfound = document.createElement('div');
-            // tellostfound.appendChild(document.createTextNode("Αριθμός"));
-            // lostfound.appendChild(tellostfound);
-
-            details.appendChild(tel);
-            details.appendChild(web);
-            // details.appendChild(lostfound);
+            const lostfound = document.createElement('div');
+            lostfound.classList.add("lost-found");
+            const text4 = document.createTextNode(`Lost&Found: `);
+            lostfound.appendChild(text4);
+            const tellostfound = document.createElement('div');
+            tellostfound.appendChild(document.createTextNode(data[i].lostfound));
+            lostfound.appendChild(tellostfound);
 
             const entrance = document.createElement("div");
             entrance.classList.add("entrance");
             const text5 = document.createTextNode(`Entrance: `);
             entrance.appendChild(text5);
             const en = document.createElement('div');
-            en.appendChild(document.createTextNode(i.gate));
+            en.appendChild(document.createTextNode(data[i].entrance));
             entrance.appendChild(en);
             
+            details.appendChild(tel);
+            details.appendChild(tel1);
+            details.appendChild(web);
+            details.appendChild(lostfound);
             details.appendChild(entrance);
+
+
             element_row_info.appendChild(details);
             dis.appendChild(element_row_info);
         }

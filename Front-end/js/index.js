@@ -15,6 +15,7 @@ const { nextTick } = require('process');
 const { json } = require('express/lib/response');
 const Database = require('better-sqlite3');
 const bcrypt = require('bcrypt');
+const { insertBefore } = require('parse5-htmlparser2-tree-adapter');
 app.use(cors());
 
 app.use(express.json());
@@ -1042,7 +1043,8 @@ app.get('/departures/airline/:iata', (req,res) =>{
 
 
 
-app.post('/airlines_edit',(req,res)=>{
+app.put('/airlines_edit',(req,res)=>{
+  console.log(req.body);
   const airlines = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
       if (err) {
           console.log(err)
@@ -1051,15 +1053,15 @@ app.post('/airlines_edit',(req,res)=>{
           console.log("Connection successful")
       }
   });
+
   const sql = `update airlines
-                set telephone = '${req.body.telephone}',website='${req.body.website}',gate='${req.body.gate},airport_tel='${req.body.airport}',lostfound='${req.body.lostfound}'
+                set telephone = '${req.body.telephone}',email='${req.body.email}',entrance='${req.body.entrance}',airport_tel='${req.body.airport}',lostfound='${req.body.lostfound}'
                 where iata='${req.body.iata}';`;
   airlines.exec(sql);
 })
 
 
-
-app.post('/airlines_delete',(req,res)=>{
+app.delete('/airlines_delete',(req,res)=>{
   const airlines = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
       if (err) {
           console.log(err)
@@ -1072,6 +1074,33 @@ app.post('/airlines_delete',(req,res)=>{
                 where iata='${req.body.iata}';`;
   airlines.exec(sql);
 })
+
+app.post('/new_airline',(req,res)=>{
+  const airlines = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
+    if (err) {
+        console.log(err)
+    }
+    else{
+        console.log("Connection successful")
+    }
+});
+  const sql = `INSERT INTO airlines (name,iata,icao,telephone,airport_tel,email,lostfound,entrance,iconsrc) VALUES(?,?,?,?,?,?,?,?,?)`;
+  const insert = airlines.prepare(sql);
+  const name  = req.body.name;
+  const iata = req.body.iata;
+  const icao = req.body.icao;
+  const tel = req.body.telephone;
+  const airport = req.body.airport;
+  const email = req.body.email;
+  const lostfound = req.body.lostfound;
+  const  entrance= req.body.entrance;
+  const iconsrc= req.body.iconsrc;
+  insert.run(name,iata,icao,tel,airport,email,lostfound,entrance,iconsrc);
+  airlines.close((err)=>{
+    if(err) return console.log(err);
+  })
+})
+
 
 
 app.get('/airlines/filter/:letter',(req,res)=>{
@@ -1104,60 +1133,63 @@ app.get('/airlines',(req,res)=>{
 })
 
 
+
+
+
 // Creation of Database of airlines
-// const db = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
-//     if (err) {
-//         console.log(err)
-//     }
-//     else{
-//         console.log("Connection successful")
-//     }
-// });
+const db = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
+    if (err) {
+        console.log(err)
+    }
+    else{
+        console.log("Connection successful")
+    }
+});
 
-// let sql = `CREATE TABLE IF NOT EXISTS airlines('id' INTEGER PRIMARY KEY AUTOINCREMENT,'name' TEXT,'iata' TEXT,'icao' TEXT,'telephone' TEXT,'airport_tel' TEXT,'website' TEXT,'lostfound' TEXT,'gate' TEXT,'iconsrc' TEXT);`
+let sql = `CREATE TABLE IF NOT EXISTS airlines('id' INTEGER PRIMARY KEY AUTOINCREMENT,'name' TEXT,'iata' TEXT,'icao' TEXT,'telephone' TEXT,'airport_tel' TEXT,'email' TEXT,'lostfound' TEXT,'entrance' TEXT,'iconsrc' TEXT);`
 
-// db.exec(sql);
+db.exec(sql);
 
 
-// sql = `INSERT INTO airlines (name,iata,icao,telephone,airport_tel,website,lostfound,gate,iconsrc) VALUES(?,?,?,?,?,?,?,?,?)`;
+sql = `INSERT INTO airlines (name,iata,icao,telephone,airport_tel,email,lostfound,entrance,iconsrc) VALUES(?,?,?,?,?,?,?,?,?)`;
 
-// const insert = db.prepare(sql);
+const insert = db.prepare(sql);
 
-// const url = 'https://iata-and-icao-codes.p.rapidapi.com/airlines';
+const url = 'https://iata-and-icao-codes.p.rapidapi.com/airlines';
 
-// const options = {
-//   method: 'GET',
-//   headers: {
-//     'X-RapidAPI-Host': 'iata-and-icao-codes.p.rapidapi.com',
-//     'X-RapidAPI-Key': '72241a884dmsh8de9c7fffb619bep154dbejsn38d304e0a370'
-//   }
-// };
+const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Host': 'iata-and-icao-codes.p.rapidapi.com',
+    'X-RapidAPI-Key': '72241a884dmsh8de9c7fffb619bep154dbejsn38d304e0a370'
+  }
+};
 
-// fetch(url, options)
-// 	.then(res => res.json())
-// 	.then(data =>{
-//         for(let i of data){
-//             let str = i.name.split(" ");
-//             console.log(str);
-//             let name="";
-//             for(let j=0;j<str.length-1;j++){
-//                 str[j] = str[j].toLowerCase();
-//                 name += str[j].charAt(0).toUpperCase() + str[j].slice(1) + " ";
-//             }
-//             str[str.length-1] = str[str.length-1].toLowerCase();
-//             name += str[str.length-1].charAt(0).toUpperCase() + str[str.length-1].slice(1);
-//             console.log(name);
-//             const iata_code = i.iata_code;
-//             const icao_code = i.icao_code;
-//             insert.run(name,iata_code,icao_code,null,null,null,null,null,null);
-//             console.log("A new row has been created");
-//         }
-//         console.log("DONE");
-//         db.close((err) =>{
-//             if (err) return console.log(err);
-//         })
-//     })
-// 	.catch(err => console.error('error:' + err));
+fetch(url, options)
+	.then(res => res.json())
+	.then(data =>{
+        for(let i of data){
+            let str = i.name.split(" ");
+            console.log(str);
+            let name="";
+            for(let j=0;j<str.length-1;j++){
+                str[j] = str[j].toLowerCase();
+                name += str[j].charAt(0).toUpperCase() + str[j].slice(1) + " ";
+            }
+            str[str.length-1] = str[str.length-1].toLowerCase();
+            name += str[str.length-1].charAt(0).toUpperCase() + str[str.length-1].slice(1);
+            console.log(name);
+            const iata_code = i.iata_code;
+            const icao_code = i.icao_code;
+            insert.run(name,iata_code,icao_code,null,null,null,null,null,null);
+            console.log("A new row has been created");
+        }
+        console.log("DONE");
+        db.close((err) =>{
+            if (err) return console.log(err);
+        })
+    })
+	.catch(err => console.error('error:' + err));
 
 app.listen(3000);
 

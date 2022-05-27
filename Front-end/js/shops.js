@@ -11,3 +11,10 @@ for(let i=0;i<6;i++){
         }
     });
 }
+
+function covid_on() {
+    document.getElementById("covid").style.display = "block";
+}
+function covid_off() {
+    document.getElementById("covid").style.display = "none";
+}

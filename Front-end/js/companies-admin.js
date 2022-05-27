@@ -8,6 +8,17 @@ let airline_details;
 let airline_name = document.querySelector('.companies-flights .company');
 let dis = document.querySelector(".company-info");
 let selected_airline_iata;
+// const insert_form = document.querySelector(".new_airline");
+// console.log(insert_form);
+// insert_form.style.display="block";
+
+function covid_on() {
+    document.getElementById("covid").style.display = "block";
+}
+function covid_off() {
+    document.getElementById("covid").style.display = "none";
+}
+
 
 function getflights(url,type){
     console.log(url);
@@ -19,75 +30,76 @@ function getflights(url,type){
         if (type==="arrival"){
             console.log(data);
             const table = document.querySelector('.arrivals-table tbody');
-            for (let i of data){
-                const row = document.createElement("tr");
-                row.classList.add("row");
-                const td1 = document.createElement("td");
-                td1.appendChild(document.createTextNode(i[2]));
-                row.appendChild(td1);
-                const td2 = document.createElement("td");
-                td2.appendChild(document.createTextNode(i[3]));
-                row.appendChild(td2);
-                const td3 = document.createElement("td");
-                td3.appendChild(document.createTextNode(i[0]+" "+i[1]));
-                row.appendChild(td3);
-                const td4 = document.createElement("td");
-                td4.appendChild(document.createTextNode(i[4]));
-                row.appendChild(td4);
-                const td5 = document.createElement("td");
-                td5.appendChild(document.createTextNode(i[5]));
-                row.appendChild(td5);
+            table.innerHTML="";
+            if(data.length>0){
+                for (let i of data){
+                    const row = document.createElement("tr");
+                    row.classList.add("row");
+                    const td1 = document.createElement("td");
+                    td1.appendChild(document.createTextNode(i[2]));
+                    row.appendChild(td1);
+                    const td2 = document.createElement("td");
+                    td2.appendChild(document.createTextNode(i[3]));
+                    row.appendChild(td2);
+                    const td3 = document.createElement("td");
+                    td3.appendChild(document.createTextNode(i[0]+" "+i[1]));
+                    row.appendChild(td3);
+                    const td4 = document.createElement("td");
+                    td4.appendChild(document.createTextNode(i[4]));
+                    row.appendChild(td4);
+                    const td5 = document.createElement("td");
+                    td5.appendChild(document.createTextNode(i[5]));
+                    row.appendChild(td5);
+                    table.appendChild(row);
+                }
+            }
+            else{
+                const row = document.createElement("div");
+                row.appendChild(document.createTextNode("Δεν γίνονται πτήσεις αυτή τη στιγμή"));
+                row.style.width="120%";
+                row.style.margin="1em";
                 table.appendChild(row);
             }
         }
         else if(type==="departures"){
             console.log(data);
             const table = document.querySelector('.departures-table tbody');
-            for (let i of data){
-                const row = document.createElement("tr");
-                row.classList.add("row");
-                const td1 = document.createElement("td");
-                td1.appendChild(document.createTextNode(i[2]));
-                row.appendChild(td1);
-                const td2 = document.createElement("td");
-                td2.appendChild(document.createTextNode(i[3]));
-                row.appendChild(td2);
-                const td3 = document.createElement("td");
-                td3.appendChild(document.createTextNode(i[0]+" "+i[1]));
-                row.appendChild(td3);
-                const td4 = document.createElement("td");
-                td4.appendChild(document.createTextNode(i[4]));
-                row.appendChild(td4);
-                const td5 = document.createElement("td");
-                td5.appendChild(document.createTextNode(i[5]));
-                row.appendChild(td5);
+            table.innerHTML="";
+            if(data.length>0){
+                for (let i of data){
+                    const row = document.createElement("tr");
+                    row.classList.add("row");
+                    const td1 = document.createElement("td");
+                    td1.appendChild(document.createTextNode(i[2]));
+                    row.appendChild(td1);
+                    const td2 = document.createElement("td");
+                    td2.appendChild(document.createTextNode(i[3]));
+                    row.appendChild(td2);
+                    const td3 = document.createElement("td");
+                    td3.appendChild(document.createTextNode(i[0]+" "+i[1]));
+                    row.appendChild(td3);
+                    const td4 = document.createElement("td");
+                    td4.appendChild(document.createTextNode(i[4]));
+                    row.appendChild(td4);
+                    const td5 = document.createElement("td");
+                    td5.appendChild(document.createTextNode(i[5]));
+                    row.appendChild(td5);
+                    table.appendChild(row);
+                }
+            }
+            else{
+                const row = document.createElement("div");
+                row.appendChild(document.createTextNode("Δεν γίνονται πτήσεις αυτή τη στιγμή"));
+                row.style.width="120%";
+                row.style.margin="1em";
                 table.appendChild(row);
             }
         }
     })
-    // .catch(error => {
-    //     let table;
-    //     if (type==="arrival"){
-    //         table = document.querySelector('.arrivals-table tbody');
-    //     }else{
-    //         table = document.querySelector('.departures-table tbody');
-    //     }        
-    //     let count=0;
-    //     if (error=="TypeError: data is not iterable"){
-    //         if (count<1){
-    //             const div = document.createElement("div");
-    //             div.appendChild(document.createTextNode("No flights found from this airline"));
-    //             table.appendChild(div);
-    //             count+=1;
-    //         }
-    //     }
-    //     else{
-    //         console.log(error);
-    //     }
-    // })
 }
 
-function arrivals_on() {
+function arrivals_on(){
+    console.log(1);
     const arrivalbutton = document.querySelector("button.arrivals");
     arrivalbutton.classList.add("touched");
     const departuresbutton = document.querySelector("button.departures");
@@ -174,8 +186,10 @@ async function display(firstletter){
             // console.log(names[index],airlines[index].iata_code);
             fetch(`http://pics.avs.io/150/150/${data[i].iata}.png`)
                 .then(response=> response.blob())
-                .then(blob => icon.src = URL.createObjectURL(blob))
+                .then(blob =>
+                     icon.src = URL.createObjectURL(blob))
                 .catch(error => console.log(error))
+            
             icon.style.backgroundColor="white";
             element_row_info.appendChild(icon);
             const details = document.createElement('div');
@@ -194,16 +208,16 @@ async function display(firstletter){
             const text6 = document.createTextNode(`Αεροδρόμιο: `);
             tel1.appendChild(text6);
             const teltext1 = document.createElement('div');
-            teltext1.appendChild(document.createTextNode(data[i].telephone));
+            teltext1.appendChild(document.createTextNode(data[i].airport_tel));
             tel1.appendChild(teltext1);
             
             
             const web = document.createElement('div');
             web.classList.add("website");
-            const text3 = document.createTextNode(`Website: `);
+            const text3 = document.createTextNode(`Email: `);
             web.appendChild(text3);
             const telweb = document.createElement('div');
-            telweb.appendChild(document.createTextNode(data[i].website));
+            telweb.appendChild(document.createTextNode(data[i].email));
             web.appendChild(telweb);
 
             const lostfound = document.createElement('div');
@@ -211,7 +225,7 @@ async function display(firstletter){
             const text4 = document.createTextNode(`Lost&Found: `);
             lostfound.appendChild(text4);
             const tellostfound = document.createElement('div');
-            tellostfound.appendChild(document.createTextNode("Αριθμός"));
+            tellostfound.appendChild(document.createTextNode(data[i].lostfound));
             lostfound.appendChild(tellostfound);
 
             const entrance = document.createElement("div");
@@ -219,7 +233,7 @@ async function display(firstletter){
             const text5 = document.createTextNode(`Entrance: `);
             entrance.appendChild(text5);
             const en = document.createElement('div');
-            en.appendChild(document.createTextNode(data[i].gate));
+            en.appendChild(document.createTextNode(data[i].entrance));
             entrance.appendChild(en);
             
             details.appendChild(tel);
@@ -263,7 +277,12 @@ async function display(firstletter){
 
 
 
+
+
 function editInfo(index,data,editbtn){
+    const telephonevalid = /[0-9]{10}/;
+    const emailvalid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
     const details = document.querySelectorAll(".row-info .details .buttons")[index];
     const deletebtn = details.querySelector(".remove");
     details.removeChild(deletebtn);
@@ -278,31 +297,37 @@ function editInfo(index,data,editbtn){
     let telephone = document.querySelectorAll(".details .telephone")[index];
     telephone = telephone.querySelector("div");
     const newItem = document.createElement("input");
-    newItem.setAttribute("type", "telephone");
+    newItem.setAttribute("type", "tel");
+    newItem.setAttribute("placeholder","Τηλέφωνο");
     telephone.parentNode.replaceChild(newItem, telephone);  
 
     let telephone1 = document.querySelectorAll(".details .airport")[index];
     telephone1 = telephone1.querySelector("div");
     const newItem3 = document.createElement("input");
-    newItem3.setAttribute("type", "telephone");
+    newItem3.setAttribute("type", "tel");
+    newItem3.setAttribute("placeholder","Τηλέφωνο");
     telephone1.parentNode.replaceChild(newItem3, telephone1);  
 
     let website = document.querySelectorAll(".details .website")[index];
     website = website.querySelector("div");
     const newItem1 = document.createElement("input");
-    newItem1.setAttribute("type", "website");
+    newItem1.setAttribute("type", "email");
+    newItem1.placeholder="Διεύθυνση email";
     website.parentNode.replaceChild(newItem1, website);
 
     let entrance = document.querySelectorAll(".details .entrance")[index];
     entrance = entrance.querySelector("div");
     const newItem2 = document.createElement("input");
-    newItem2.setAttribute("type", "text");
+    newItem2.setAttribute("type", "number");
+    newItem2.min="1";
+    newItem2.max="10";
     entrance.parentNode.replaceChild(newItem2, entrance);
 
     let lostfound = document.querySelectorAll(".details .lost-found")[index]
     lostfound = lostfound.querySelector("div");
     const newItem4 = document.createElement("input");
-    newItem4.setAttribute("type", "telephone");
+    newItem4.setAttribute("type", "tel");
+    newItem4.placeholder="Τηλέφωνο";
     lostfound.parentNode.replaceChild(newItem4, lostfound);  
 
     submitbtn.addEventListener("click",function(){
@@ -310,35 +335,52 @@ function editInfo(index,data,editbtn){
         const iata = data.iata;
         const telephone = newItem.value;
         const airport = newItem3.value;
-        const website = newItem1.value;
+        const email = newItem1.value;
         const lostfound = newItem4.value;
-        const gate = newItem2.value;
-
-        inputs = {iata,telephone,airport,airport,website,lostfound,gate};
-        fetch('http://localhost:3000/airlines_edit',{
-            method:"POST",
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify(inputs)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Success:",data);
-        })
-        .catch((error) =>{
-            console.error("Error:",error);
-        })
+        const entrance = newItem2.value;
+        let errors = 0;
+        // && telephonevalid.test(airport) && telephonevalid.test(lostfound) && emailvalid.test(email)
+        if(telephonevalid.test(telephone)==false && telephone!=""){
+            errors+=1;
+        }
+        if(telephonevalid.test(airport)==false && airport!=""){
+            console.log(airport)
+            errors+=1;
+        }
+        if(telephonevalid.test(lostfound)==false && lostfound!=""){
+            errors+=1;
+        }
+        if(emailvalid.test(email)==false && email!=""){
+            errors+=1;
+        }
+        if(errors>0){
+            alert("Κάτι δεν πήγε καλά με τα στοιχεία που έβαλες. Προσπάθησε ξανά!!!")
+        }
+        if(errors==0){
+            inputs = {iata,telephone,airport,email,lostfound,entrance};
+            fetch('http://localhost:3000/airlines_edit',{
+                method:"PUT",
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify(inputs)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Success:",data);
+            })
+            .catch((error) =>{
+                console.error("Error:",error);
+            })
+        }
     })
-
     details.appendChild(submitbtn);
-
 }
 
 function deleteInfo(data){
     alert("Προσοχή! Η ακόλουθη κίνηση οδηγεί στη διαγραφή του στοιχείου από τη βάση δεδομένων!")
     fetch('http://localhost:3000/airlines_delete',{
-        method:"POST",
+        method:"DELETE",
         headers:{
             'Content-Type': 'application/json',
         },
@@ -353,11 +395,10 @@ function deleteInfo(data){
     })
 }
 
-function insert_airline(){
-     
+function add_airline() {
+    const insert_form = document.querySelector(".new_airline");
+    insert_form.style.display="block";
 }
-
-
 
 let Div = document.querySelector("div.choices");
 for (let i = 65; i < 91; i++) {
