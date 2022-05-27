@@ -103,7 +103,7 @@ button.btn:hover,button.btn:active{
     /* grid-template-columns:repeat(2,auto); */
     justify-content:space-around;
     grid-template:1fr/2fr 0.9fr;
-    height:8em;
+    height:12em;
     text-align:center;
     padding:0.5em 0em;
 }
@@ -132,7 +132,6 @@ button.btn:hover,button.btn:active{
 .company-info .row-info .entrance{
     margin:auto;
     text-align:center;
-
 }
 
 .companies-flights{
@@ -192,7 +191,7 @@ button.btn:hover,button.btn:active{
     background-color:black;
     overflow-y:scroll;
     width:101.5%;
-    font-size:0.7em;
+    font-size:0.9em;
 }
 
 .arrivals-table,.departures-table{
@@ -234,7 +233,7 @@ tbody tr:last-child{
     gap:10px;
 }
 
-button.edit,button.remove{
+button.edit,button.remove,button.submit{
     background-color: blue;
     color: white;
     padding:1em 1em;
@@ -248,7 +247,23 @@ button.edit,button.remove{
     margin-right:10%;
 }
 
-.edit:hover,.remove:hover {
+button.insert{
+    background-color: blue;
+    color: white;
+    padding:1em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    /* float:right; */
+    margin-bottom:3em;
+    margin-top:1em;
+    margin-right:10%;
+}
+
+.edit:hover,.remove:hover,.submit:hover,.insert:hover {
     background-color: orange;
 }
 
@@ -257,6 +272,27 @@ button.edit,button.remove{
     color: white;
 }
 
+form.new_airline{
+    border:0.2em solid red;
+    width:50%;
+    margin:auto;
+}
+
+form.new_airline>label{
+    margin-left:22%;
+}
+
+form.new_airline div{
+    margin-top:1em;
+    display:grid;
+    grid-template-columns: repeat(2,auto);
+    text-align: justify;
+}
+
+form.new_airline input[type="submit"]{
+    margin-top:1em;
+    margin-left:40%;
+}
 
 
 @media only screen and (max-width: 1400px) {
@@ -265,7 +301,7 @@ button.edit,button.remove{
         /* grid-template-columns:repeat(2,auto); */
         justify-content:space-around;
         grid-template:1fr/2fr 0.9fr;
-        height:12em;
+        height:14em;
         text-align:center;
         padding:0.5em 0em;
     }
@@ -278,7 +314,31 @@ button.edit,button.remove{
     div.selection{
         width:90%;
     }
+    button.insert{
+        margin:auto;
+        margin-bottom:3em;
+        margin-top:1em;
+        margin-right:5em;
+    }
 }
+
+@media only screen and (max-width: 1000px) {
+    div.container{
+        font-size:0.7em;
+    }
+    button.insert{
+        margin:auto;
+        margin-bottom:3em;
+        margin-top:1em;
+        margin-right:4em;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    div.container{
+        font-size:0.6em;
+    }
+    
 
 @media only screen and (max-width: 700px) {
     div.choices{
@@ -296,7 +356,7 @@ button.edit,button.remove{
     div.selection{
         width:auto;
     }
-    button.edit,button.remove{
+    button.edit,button.remove,button.submit{
         display:block;
         background-color: blue;
         color: white;
@@ -314,10 +374,23 @@ button.edit,button.remove{
     .company-info .row-info{
         display:grid;
         grid-template:1fr/2fr 1fr;
-        height:15em;
+        height:18em;
         text-align:center;
         padding:0.5em 0em;
     }
+
+    .main~div{
+        margin-left:35%;
+    }
+    button.insert{
+        float:none;
+        margin:auto;
+        margin-bottom:1em;
+        margin-top:1em;
+        font-size:0.4em;
+    }
+}
+
 }
 
 @media only screen and (max-width: 450px) {
@@ -330,15 +403,15 @@ button.edit,button.remove{
     .company-info .row-info{
         display:grid;
         grid-template:1fr/2fr 1fr;
-        height:20em;
+        height:26em;
         text-align:center;
         padding:0.5em 0em;
     }
     .buttons{
         display:grid;
-        grid-template:1fr 1fr/1fr;
+        grid-template:1fr 1fr 1fr/1fr;
     }
-    button.edit,button.remove{
+    button.edit,button.remove,button.submit{
         display:block;
         background-color: blue;
         color: white;
@@ -353,7 +426,7 @@ button.edit,button.remove{
         margin-right:10%;
         font-size:0.8em;
     }
-    .edit:hover,.remove:hover {
+    .edit:hover,.remove:hover{
         background-color: orange;
     }
     .edit.touched,.remove.touched {
@@ -370,8 +443,8 @@ button.edit,button.remove{
         margin-left:23%;
         padding:1em;
     }
-    
 }
+
 
 
 footer{
