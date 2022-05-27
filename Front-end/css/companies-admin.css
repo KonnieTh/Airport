@@ -225,13 +225,12 @@ tbody tr:last-child{
 }
 
 
-
-
 .buttons{
     display:grid;
     grid-template:1fr/auto auto;
     gap:10px;
 }
+
 
 button.edit,button.remove,button.submit{
     background-color: blue;
@@ -244,7 +243,6 @@ button.edit,button.remove,button.submit{
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
     margin-top:1em;
-    margin-right:10%;
 }
 
 button.insert{
@@ -257,10 +255,9 @@ button.insert{
     transition-duration: 200ms;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
-    /* float:right; */
     margin-bottom:3em;
     margin-top:1em;
-    margin-right:10%;
+    margin-left:80%;
 }
 
 .edit:hover,.remove:hover,.submit:hover,.insert:hover {
@@ -273,25 +270,121 @@ button.insert{
 }
 
 form.new_airline{
-    border:0.2em solid red;
     width:50%;
     margin:auto;
+    background-color:rgba(111,111,111,0.6);
+    border-radius:10px;
 }
 
-form.new_airline>label{
-    margin-left:22%;
+form.new_airline .airline{
+    margin:auto;
+    margin-left:20%;
+    padding-top:1em;
 }
 
 form.new_airline div{
     margin-top:1em;
     display:grid;
     grid-template-columns: repeat(2,auto);
-    text-align: justify;
+    justify-content:space-evenly;
+    gap:10px;
+    text-align:justify;
 }
 
 form.new_airline input[type="submit"]{
+    background-color: blue;
+    color: white;
+    padding:1em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    margin-top:1.4em;
+    margin-left:43%;
+    margin-bottom:1.4em;
+}
+form.new_airline input[type="submit"]:hover{
+    background-color:orange;
+}
+
+
+form.new_airline{
+    display:none;
+}
+
+
+#covid{
+    position:fixed;
+    display:none;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    margin:auto;
+    background-color:rgba(0,0,0,0.3);
+    z-index:2;
+}
+
+#covid .close{
+    position:absolute;
+    top:13px;
+    right:13px;
+    width:13px;
+    height:13px;
+    padding: 0.1em;
+    background:rgb(160, 133, 133);
+    text-align:center;
+    line-height:15px;
+    border-radius:15px;
+    cursor:pointer;
+}
+#covid .wrap{
+    position: relative;
+    padding-left:0.2em;
+    max-width:50em;
+    height:32em;
+    margin:auto;
     margin-top:1em;
-    margin-left:40%;
+    background-color:rgb(90, 23, 38);
+    border:0.2em solid black;
+    border-radius:10px;
+    overflow-y:scroll;
+}
+#covid h2{
+    text-align:center;
+}
+#covid div{
+    line-height:150%;
+    text-align:justify;
+}
+#covid ::-webkit-scrollbar{
+    width:1em;
+    height:1em;
+}
+
+#covid ::-webkit-scrollbar-track{
+    background:lightblue;
+    border-radius:100vw;
+}
+
+#covid ::-webkit-scrollbar-thumb{
+    background:rgb(160, 133, 133);
+    border:0.1em solid lightblue;
+    border-radius:100vw;
+}
+
+#covid ::-webkit-scrollbar-hover{
+    background:hsl(120 100% 10%/1);
+}
+
+#covid ul{
+    list-style-type: square;
+    margin: 1em 2em 1em 2em;
+}
+#covid ul li{
+    margin-bottom: 1em;
 }
 
 
@@ -301,7 +394,7 @@ form.new_airline input[type="submit"]{
         /* grid-template-columns:repeat(2,auto); */
         justify-content:space-around;
         grid-template:1fr/2fr 0.9fr;
-        height:14em;
+        height:16em;
         text-align:center;
         padding:0.5em 0em;
     }
@@ -314,11 +407,14 @@ form.new_airline input[type="submit"]{
     div.selection{
         width:90%;
     }
-    button.insert{
+    /* button.insert{
         margin:auto;
         margin-bottom:3em;
         margin-top:1em;
         margin-right:5em;
+    } */
+    form.new_airline{
+        width:60%;
     }
 }
 
@@ -327,10 +423,11 @@ form.new_airline input[type="submit"]{
         font-size:0.7em;
     }
     button.insert{
-        margin:auto;
-        margin-bottom:3em;
-        margin-top:1em;
-        margin-right:4em;
+        margin-left:40%;
+    }
+    form.new_airline{
+        font-size:0.8em;
+        width:70%;
     }
 }
 
@@ -338,6 +435,24 @@ form.new_airline input[type="submit"]{
     div.container{
         font-size:0.6em;
     }
+    form.new_airline{
+        font-size:0.6em;
+        width:50%
+    }
+    form.new_airline .airline{
+        margin-left:17%;
+    }
+    form.new_airline input{
+        font-size:0.6em;
+    }
+    form.new_airline input[type="submit"]{
+        padding:0.8em 0.8em;
+    }
+    button.insert{
+        margin-left:35%;
+        font-size:0.6em;
+    }
+}
     
 
 @media only screen and (max-width: 700px) {
@@ -374,7 +489,7 @@ form.new_airline input[type="submit"]{
     .company-info .row-info{
         display:grid;
         grid-template:1fr/2fr 1fr;
-        height:18em;
+        height:20em;
         text-align:center;
         padding:0.5em 0em;
     }
@@ -383,15 +498,14 @@ form.new_airline input[type="submit"]{
         margin-left:35%;
     }
     button.insert{
-        float:none;
-        margin:auto;
-        margin-bottom:1em;
-        margin-top:1em;
-        font-size:0.4em;
+        font-size:0.5em;
+        margin-left:4%;
+    }
+    form.new_airline{
+        width:70%;
     }
 }
 
-}
 
 @media only screen and (max-width: 450px) {
     div.choices .departures{
@@ -443,8 +557,25 @@ form.new_airline input[type="submit"]{
         margin-left:23%;
         padding:1em;
     }
+    button.insert{
+        margin-right:50%;
+    }
 }
 
+@media only screen and (max-width:500px){
+    form.new_airline{
+        width:75%;
+        padding-left:1.5em;
+    }
+    form.new_airline .airline label{
+        font-size:1em;
+        width:80%;
+        
+    }
+    form.new_airline .airline label input{
+        margin-left:20%;
+    }
+}
 
 
 footer{
