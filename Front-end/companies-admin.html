@@ -64,23 +64,52 @@
             </div>
         </div>
     </div>
-    <!-- <div>
-        <button class="insert" onclick="insert_airline()">Πρσθήκη Αεροπορικής Εταιρείας</button>
+    <div class="insertbutton">
+        <button class="insert" onclick="add_airline()">Πρσθήκη Αεροπορικής Εταιρείας</button>
     </div>
-    <form class="new_airline" action="/new_airline" method="POST">
-        <label for="name">Όνομα Αεροπορικής Εταιρείας: <input type="text" name="name"></label>
+    <form class="new_airline" action="http://localhost:3000/new_airline" method="POST">
+        <div class="airline">
+            <label for="name">Όνομα Αεροπορικής Εταιρείας: <input type="text" name="name" placeholder="Όνομα" required></label>
+        </div>
         <div>
-        <label for="iata">Iata_code: <input type="text" name="iata"></label>
-        <label for="icao">Icao_code: <input type="text" name="icao"></label>
-        <label for="telephone">Κρατήσεις: <input type="telephone" name="telephone"></label>
-        <label for="airport">Αεροδρόμιο: <input type="name" name="airport"></label>
-        <label for="web">Website: <input type="website" name="web"></label>
-        <label for="lostfound">Lost&Found: <input type="telephone" name="lostfound"></label>
-        <label for="entrance">Entrance: <input type="number" name="entrance"></label>
-        <!-- <label for="iconsrc">Icon path /Front-end/images/: <input type="text" name="iconsrc"></label> -->
-        <!-- </div>
+        <label for="iata">Iata_code: <input type="text" name="iata" placeholder="iata code" required></label>
+        <label for="icao">Icao_code: <input type="text" name="icao" placeholder="icao code"></label>
+        <label for="telephone">Κρατήσεις: <input type="tel" name="telephone" placeholder="Τηλέφωνο"  pattern="\d{10}"></label>
+        <label for="airport">Αεροδρόμιο: <input type="tel" name="airport" placeholder="Τηλέφωνο"  pattern="\d{10}"></label>
+        <label for="email">Email: <input type="email" name="email" placeholder="Διεύθυνση email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"></label>
+        <label for="lostfound">Lost&Found: <input type="tel" name="lostfound" placeholder="Τηλέφωνο"  pattern="\d{10}"></label>
+        <label for="entrance">Entrance: <input type="number" name="entrance" min="1"></label>
+        <label for="iconsrc">Icon_path: <input type="text" name="iconsrc"></label>
+        </div>
         <input type="submit" value="Υποβολή">
-    </form> --> -->
+    </form>
+    <div id="covid" >
+        <div class="wrap">
+            <div class="close"  onclick="covid_off()">&times;</div>
+            <h2>Ειδικά μέτρα για τον ιό Covid-19</h2>
+            <div>Σύμφωνα με τις οδηγίες των εθνικών υγειονομικών αρχών, η σχολαστική τήρηση των κανόνων για το πλύσιμο / απολύμανση των χεριών και για την αναπνευστική υγιεινή, τη χρήση μασκών προσώπου, τη διατήρηση φυσικής απόστασης, τον πολύ καλό καθαρισμό και απολύμανση των χώρων και των επιφανειών, ειδικά εκείνων που αγγίζονται συχνά, αποτελούν τη βάση για την προστασία των επιβατών και των εργαζομένων στο Αεροδρόμιο Icarus. Οι επιβάτες που ταξιδεύουν με πτήσεις εσωτερικού ή εξωτερικού, θα πρέπει να έχουν υπόψη τους τα εξής:</div><br>
+            <ul>
+                <li>
+                    Η χρήση μάσκας προσώπου είναι υποχρεωτική σε όλους σε όλους τους εσωτερικούς χώρους του αεροδρομίου . Σημειώστε ότι, σύμφωνα με τον Εθνικό Οργανισμό Δημόσιας Υγείας, δεν πρέπει να χρησιμοποιούνται μάσκες προσώπου με βαλβίδες μονής κατεύθυνσης. Εξαιρούνται τα παιδιά κάτω των 4 ετών καθώς και άτομα με αναπνευστικά προβλήματα. Οι επιβάτες θα πρέπει επίσης να γνωρίζουν ότι μπορεί να τους ζητηθεί να αφαιρέσουν προσωρινά τη μάσκα τους κατά τη διάρκεια των διαδικασιών ελέγχου ασφάλειας και ταυτότητας.
+                </li>
+                <li>
+                    Η χρήση μάσκας προσώπου είναι επίσης υποχρεωτική κατά την επιβίβαση, και μπορεί να είναι επίσης σε πολλές περιπτώσεις κατά τη διάρκεια της πτήσης. Συνιστάται η αλλαγή της μάσκας προσώπου κάθε 4 ώρες ή στην περίπτωση που η μάσκα προσώπου είναι βρεγμένη ή λερωμένη. Βεβαιωθείτε ότι έχετε αρκετές μάσκες για ολόκληρο το ταξίδι σας.
+                </li>
+                <li>
+                    Οι υπάλληλοι του αεροδρομίου είναι εξοπλισμένοι με όλα τα είδη προσωπικής προστασίας (μάσκες, γάντια, απολυμαντικά υγρά), τα οποία χρησιμοποιούν ανά πάσα στιγμή κατά τη διάρκεια της εργασίας τους.
+                </li>
+                <li>
+                    Απολυμαντικά χεριών είναι διαθέσιμα σε περισσότερα από 300 σημεία στο αεροδρόμιο, συμπεριλαμβανομένων και των τουαλετών, για χρήση από τους επιβάτες κατά τις διαδικασίες αναχώρησης και άφιξης.
+                </li>
+                <li>
+                    Η τήρηση των αποστάσεων είναι ένα βασικό μέτρο για τους επιβάτες και το προσωπικό του αεροδρομίου και συνιστάται να τηρείται απόσταση 1 μέτρου σε όλες τις φάσεις των διαδικασιών, όταν είναι εφικτό. 
+                </li>
+                <li>
+                    Τα καθίσματα σε όλους τους χώρους αναμονής έχουν αναδιαταχθεί, προκειμένου να επιτραπεί η τήρηση των ελάχιστων αποστάσεων. Συνιστάται να μείνει κενή μία θέση δίπλα σε κάθε καθήμενο επιβάτη. Οι οικογένειες ή τα ζευγάρια που ταξιδεύουν μαζί δεν χρειάζεται να κρατούν αυτή την απόσταση.     
+                </li>
+            </ul>
+        </div>
+    </div>
     <footer>
         <div class="anakoinoseis">
             <a><h3>Ανακοινώσεις</h3></a>
@@ -100,13 +129,13 @@
         <div class="links">
             <h3>Χρήσιμα links</h3>
             <div class="lin">
-                Aναχωρήσεις-Aφίξεις
+                <a href="flights.html">Aναχωρήσεις-Aφίξεις</a>
             </div>
             <div class="lin">
-                Σχετικά με εμάς
+                <a href="main-page.html#header">Σχετικά με εμάς</a>
             </div>
             <div class="lin">
-                Μέτρα Covid
+                <a href="companies-admin.html#covid" onclick="covid_on()">Μέτρα Covid</a>
             </div>
         </div>
     </footer>
