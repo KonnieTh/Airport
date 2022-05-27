@@ -33,15 +33,13 @@ body.active{
     border-radius:15px;
     cursor:pointer;
 }
-.login .close{
-    right:0;
-}
+
 .login form{
     position: relative;
-    height: 500px;
+    height: 450px;
     box-shadow:2px 2px 5px 5px rgba(0,0,0,0.35);
     border-radius:10px;
-    padding-top: 1em;
+    padding-top: 0.2em;
     left:30%;
 }
 @media only screen and (max-width: 600px) {
@@ -56,7 +54,7 @@ body.active{
   }
   @media only screen and (max-width: 450px) {
     .login form{
-        left:0;
+        left:5%;
     }
   }
 .login3 div{

@@ -9,13 +9,12 @@
 }
 
 p{
-    margin: auto;
-    text-align: center;
+    text-align:center;
 }
 
 .header .description{
-    color: white;
-    margin: 20% 20%;
+    color: rgb(229, 223, 223);
+    margin: 12% 15% 0% 15%;
     padding: 1em;
     background-color: rgba(0, 0, 0, 0.6);
 }
