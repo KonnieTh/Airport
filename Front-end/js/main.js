@@ -4,7 +4,6 @@ function sn_on() {
 function sn_off() {
     document.getElementById("special-needs-text").style.display = "none";
 }
-
 function covid_on() {
     document.getElementById("covid").style.display = "block";
 }
@@ -40,27 +39,63 @@ function customs_off() {
     document.getElementById("customs_insection_text").style.display = "none";
 }
 
+// fetch('http://localhost:3000/airlines_edit',{
+//     method:"PUT",
+//     headers:{
+//         'Content-Type': 'application/json',
+//     },
+//     body:JSON.stringify(inputs)
+// })
+// .then(response => response.json())
+// .then(data => {
+//     console.log("Success:",data);
+// })
+// .catch((error) =>{
+//     console.error("Error:",error);
+// })
 
 let d;
+let titlos; 
 
 function edit(a, b) {
     d = a;
-    document.getElementById(b).style.display = "none";
+    const list = [[".currencytext","currency"],[".parkingtext","parking"],[".covidtext","covid"],[".specialneedstext","special_needs"],[".petstext","pets"],[".customstext","customs"]]
+    for(let i of list){
+        if (i[0]==a){
+            titlos = i[1];
+        }
+    }
+    console.log(a,b);
+    document.querySelector(`#${b}`).style.display = "none";
     document.getElementById("text-editor").style.display = "block";
     document.getElementById("description").style.display = "none";
     document.getElementById("main-menu").style.display = "none";
     document.querySelector('.header').style.backgroundImage = "none";
     document.querySelector('.header').style.backgroundColor = "rgb(46, 46, 46)";
     document.querySelector('.header').style.minHeight = "10em";
-    let text = document.getElementById(a);
+    let text = document.querySelector(`${a}`);
     let text2 = document.getElementById("textarea");
     text2.innerHTML = text.innerHTML;
 }
 
 function save() {
     let text2 = document.getElementById("textarea");
-    let text = document.getElementById(d);
-    text.innerHTML = text2.innerHTML;
+    const keimeno = text2.innerHTML;
+    const inputs = {titlos,keimeno};
+    fetch('http://localhost:3000/edit_text',{
+        method:"PUT",
+        headers:{
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify(inputs)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Success:",data);
+    })
+    .catch((error) =>{
+        console.error("Error:",error);
+    })
     document.getElementById("customs_insection_text").style.display = "none";
     document.getElementById("text-editor").style.display = "none";
     document.getElementById("description").style.display = "block";
@@ -85,3 +120,29 @@ elements.forEach(element => {
 
     });
 });
+
+
+function getTexts(){
+    texts=[[".currencytext","currency"],[".parkingtext","parking"],[".covidtext","covid"],[".specialneedstext","special_needs"],[".petstext","pets"],[".customstext","customs"]]
+    for(let i of texts){
+        console.log(i[1]);
+        const text = document.querySelector(`${i[0]}`);
+        text.innerHTML="";
+        fetch(`http://localhost:3000/text/${i[1]}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Success:",data);
+            for(let i of data){
+                text.innerHTML = i.keimeno;
+            }
+        })
+        .catch((error) =>{
+            console.error("Error:",error);
+        })
+    }
+}
+
+getTexts();
+
+
+// ,[".parkingtext","parking"],[".covidtext","covid"],[".specialneedstext","special_needs"],[".petstext","pets"],[".customstext","customs"]

@@ -1133,63 +1133,118 @@ app.get('/airlines',(req,res)=>{
 })
 
 
-
-
-
 // Creation of Database of airlines
-const db = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
+// const db = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
+//     if (err) {
+//         console.log(err)
+//     }
+//     else{
+//         console.log("Connection successful")
+//     }
+// });
+
+// let sql = `CREATE TABLE IF NOT EXISTS airlines('id' INTEGER PRIMARY KEY AUTOINCREMENT,'name' TEXT,'iata' TEXT,'icao' TEXT,'telephone' TEXT,'airport_tel' TEXT,'email' TEXT,'lostfound' TEXT,'entrance' TEXT,'iconsrc' TEXT);`
+
+// db.exec(sql);
+
+
+// sql = `INSERT INTO airlines (name,iata,icao,telephone,airport_tel,email,lostfound,entrance,iconsrc) VALUES(?,?,?,?,?,?,?,?,?)`;
+
+// const insert = db.prepare(sql);
+
+// const url = 'https://iata-and-icao-codes.p.rapidapi.com/airlines';
+
+// const options = {
+//   method: 'GET',
+//   headers: {
+//     'X-RapidAPI-Host': 'iata-and-icao-codes.p.rapidapi.com',
+//     'X-RapidAPI-Key': '72241a884dmsh8de9c7fffb619bep154dbejsn38d304e0a370'
+//   }
+// };
+
+// fetch(url, options)
+// 	.then(res => res.json())
+// 	.then(data =>{
+//         for(let i of data){
+//             let str = i.name.split(" ");
+//             console.log(str);
+//             let name="";
+//             for(let j=0;j<str.length-1;j++){
+//                 str[j] = str[j].toLowerCase();
+//                 name += str[j].charAt(0).toUpperCase() + str[j].slice(1) + " ";
+//             }
+//             str[str.length-1] = str[str.length-1].toLowerCase();
+//             name += str[str.length-1].charAt(0).toUpperCase() + str[str.length-1].slice(1);
+//             console.log(name);
+//             const iata_code = i.iata_code;
+//             const icao_code = i.icao_code;
+//             insert.run(name,iata_code,icao_code,null,null,null,null,null,null);
+//             console.log("A new row has been created");
+//         }
+//         console.log("DONE");
+//         db.close((err) =>{
+//             if (err) return console.log(err);
+//         })
+//     })
+// 	.catch(err => console.error('error:' + err));
+
+
+/////Creation of database of text
+
+// const db = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
+//     if (err) {
+//         console.log(err)
+//     }
+//     else{
+//         console.log("Connection successful")
+//     }
+// });
+
+// let sql = `CREATE TABLE IF NOT EXISTS innerTexts('id' INTEGER PRIMARY KEY AUTOINCREMENT,'titlos' TEXT,'keimeno' TEXT);`
+// db.exec(sql);
+
+
+
+app.get('/text/:titlos',(req,res)=>{
+  console.log(req.params);
+  
+  const airlines = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
     if (err) {
         console.log(err)
     }
     else{
         console.log("Connection successful")
     }
-});
+  });
+  const sql = `select * from innerTexts where titlos='${req.params.titlos}'`;
+  const getresult = airlines.prepare(sql).all();
+  res.json(getresult);
+  airlines.close((err)=>{
+    if(err) return console.log(err);
+  })
+})
 
-let sql = `CREATE TABLE IF NOT EXISTS airlines('id' INTEGER PRIMARY KEY AUTOINCREMENT,'name' TEXT,'iata' TEXT,'icao' TEXT,'telephone' TEXT,'airport_tel' TEXT,'email' TEXT,'lostfound' TEXT,'entrance' TEXT,'iconsrc' TEXT);`
 
-db.exec(sql);
+app.put('/edit_text',(req,res)=>{
+  console.log(req.body);
+  const airlines = new Database('airport.db',Database.OPEN_READWRITE,(err) =>{
+    if (err) {
+        console.log(err)
+    }
+    else{
+        console.log("Connection successful")
+    }
+  });
+  const sql = `update innerTexts
+              set keimeno='${req.body.keimeno}'
+              where titlos='${req.body.titlos}'`;
+  airlines.exec(sql);
 
+  airlines.close((err)=>{
+    if(err) return console.log(err);
+  })
+})
 
-sql = `INSERT INTO airlines (name,iata,icao,telephone,airport_tel,email,lostfound,entrance,iconsrc) VALUES(?,?,?,?,?,?,?,?,?)`;
-
-const insert = db.prepare(sql);
-
-const url = 'https://iata-and-icao-codes.p.rapidapi.com/airlines';
-
-const options = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Host': 'iata-and-icao-codes.p.rapidapi.com',
-    'X-RapidAPI-Key': '72241a884dmsh8de9c7fffb619bep154dbejsn38d304e0a370'
-  }
-};
-
-fetch(url, options)
-	.then(res => res.json())
-	.then(data =>{
-        for(let i of data){
-            let str = i.name.split(" ");
-            console.log(str);
-            let name="";
-            for(let j=0;j<str.length-1;j++){
-                str[j] = str[j].toLowerCase();
-                name += str[j].charAt(0).toUpperCase() + str[j].slice(1) + " ";
-            }
-            str[str.length-1] = str[str.length-1].toLowerCase();
-            name += str[str.length-1].charAt(0).toUpperCase() + str[str.length-1].slice(1);
-            console.log(name);
-            const iata_code = i.iata_code;
-            const icao_code = i.icao_code;
-            insert.run(name,iata_code,icao_code,null,null,null,null,null,null);
-            console.log("A new row has been created");
-        }
-        console.log("DONE");
-        db.close((err) =>{
-            if (err) return console.log(err);
-        })
-    })
-	.catch(err => console.error('error:' + err));
 
 app.listen(3000);
 
