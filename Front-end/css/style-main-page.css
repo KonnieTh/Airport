@@ -328,6 +328,10 @@ p{
     background:hsl(120 100% 10%/1);
 }
 
+#parking li{
+    list-style:none;
+}
+
 #pets_text{
     position:fixed;
     display:none;
@@ -611,6 +615,7 @@ p{
     margin-bottom:0.5em;
 
 }
+
 #customs_insection_text .main_text{
     padding-right:0.5em;
 }
@@ -618,6 +623,7 @@ p{
 #customs_insection_text .main_text div{
     margin-bottom:0.5em;
 }
+
 footer{
     margin-top: 0;
 }
