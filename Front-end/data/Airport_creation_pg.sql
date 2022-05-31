@@ -62,7 +62,7 @@ CREATE TABLE public."Airline" (
 	"airline_name" varchar(255) NOT NULL,
 	"IATA" varchar(2) NOT NULL,
 	"ICAO" varchar(3),
-	"telephone" integer,
+	"telephone" varchar(10),
 	"email" varchar(255),
 	"gate_code" integer NOT NULL,
 	CONSTRAINT "Airline_pk" PRIMARY KEY ("airline_ID")
