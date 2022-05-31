@@ -136,8 +136,6 @@ CREATE TABLE public."processing" (
   OIDS=FALSE
 );
 
-
-
 ALTER TABLE "User" ADD CONSTRAINT "User_fk0" FOREIGN KEY ("username") REFERENCES "General_User"("username");
 ALTER TABLE "Admin" ADD CONSTRAINT "Admin_fk0" FOREIGN KEY ("username") REFERENCES "General_User"("username");
 ALTER TABLE "Airline" ADD CONSTRAINT "Airline_fk0" FOREIGN KEY ("gate_code") REFERENCES "Gate"("gate_ID");
@@ -148,15 +146,3 @@ ALTER TABLE "modifies" ADD CONSTRAINT "modifies_fk0" FOREIGN KEY ("username") RE
 ALTER TABLE "modifies" ADD CONSTRAINT "modifies_fk1" FOREIGN KEY ("info_ID") REFERENCES "General_info"("info_ID");
 ALTER TABLE "processing" ADD CONSTRAINT "processing_fk0" FOREIGN KEY ("username") REFERENCES "Admin"("username");
 ALTER TABLE "processing" ADD CONSTRAINT "processing_fk1" FOREIGN KEY ("airline_ID") REFERENCES "Airline"("airline_ID");
-
-
-
-
-
-
-
-
-
-
-
-
