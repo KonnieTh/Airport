@@ -13,7 +13,7 @@ CREATE TABLE public."General_User" (
 	"first_name" varchar(255) NOT NULL,
 	"last_name" varchar(255) NOT NULL,
 	"email" varchar(255) NOT NULL,
-	"telephone" integer NOT NULL,
+	"telephone" varchar(10) NOT NULL,
 	"age" integer NOT NULL,
 	"country" varchar(255) NOT NULL,
 	"city" varchar(255) NOT NULL,
