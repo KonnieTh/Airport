@@ -1,0 +1,319 @@
+:root{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("/Front-end/images/flights.jpg");
+    background-size:cover;
+    background-position: center;
+    scroll-behavior: smooth;
+}
+.flights{
+    font-weight: bold;
+}
+
+.choices button{
+    min-width: 140px;
+    margin:1em 0em;
+    width:25%;
+    display:inline;
+    padding:0.5em 0em;
+    border:none;
+    background-color:blue;
+    color:white;
+    font-size:1em;
+    cursor:pointer;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+.choices button.touched{
+    width:25%;
+    display:inline;
+    padding:0.5em 0em;
+    border:none;
+    background-color:rgb(171, 171, 15) ;
+    color:white;
+    font-size:1em;
+}
+
+.choices button:hover{
+    background-color:rgb(171, 171, 15) ;
+}
+
+.choices{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    gap:5px;
+    flex-wrap:wrap;
+    margin:auto;
+
+}
+
+.flights-menu{
+    margin: 0em 2em;
+    position:relative;
+}
+
+.arrivals-form,.departures-form{
+    background-color:rgba(0,0,0,0.9);
+    color:white;
+    padding:1em 0em 0em 0em;
+    display:none;
+    min-width: 320px;
+    margin-bottom: 15vh;
+    margin-top: 6vh;
+}
+
+.arrivals-form form,.departures-form form{
+    width:100%;
+    background-color:rgba(0,0,0,0.9);
+}
+
+
+.arrivals-form form .selection,.departures-form form .selection{
+    flex:1;
+    width:80%;
+    display:grid;
+    grid-template-columns: repeat(2,auto);
+    text-align:center;
+    margin:auto;
+    gap:0.5em 1em;
+}
+.selection .sub{
+    grid-column: 1/3;
+}
+.selection .via-flight{
+    align-self: center;
+}
+@media only screen and (max-width: 500px) {
+    .flights-menu{
+        width: 100%;
+        margin: 0;
+    }
+  }
+.arrivals-form form .selection select,.departures-form form .selection select{
+    width:75%;
+    margin:auto;
+    height:2em;
+    border-radius: 22px;
+    min-width: 100px;
+}
+.selection [type=date]{
+    width:30%;
+    margin:auto;
+    height:2em;
+    border-radius: 22px;
+    min-width: 100px;
+}
+
+.arrivals-form form input[type="submit"],.departures-form form input[type="submit"]{
+    background-color: rgb(34, 167, 212);
+    padding: 1em 2em;
+    border-radius:10px;
+    border:none;
+    color:white;
+    cursor:pointer; 
+    margin:auto;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    margin-bottom:1em;
+}
+
+.arrivals-form form input[type="submit"]:hover,.departures-form form input[type="submit"]:hover{
+    background-color:rgb(20, 115, 147);
+}
+
+.selection input[type="text"]{
+    width:33%;
+    margin:auto;
+    height:2em;
+    border-radius: 22px;
+    min-width: 100px;
+}
+
+.container{
+    height:30em;
+    background-color:white;
+    overflow-y:scroll;
+    width:101.3%;
+    font-size: 0.6em;
+    /* display:none; */
+}
+.container::-webkit-scrollbar {
+    width:10px;
+}
+
+.container::-webkit-scrollbar-track{
+    background:#f1f1f1;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+.container ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+  
+
+
+
+.flights-header{
+    width:100.8%;
+    background-color:rgb(86, 85, 85);
+    padding:0.2em 0em;
+    font-size: 0.6em;
+    /* display:none; */
+}
+
+.flights-info .date{
+    margin:0.5em 0em;
+    padding:0em 0.5em;
+    font-size:1.7em;
+    /* display:none; */
+}
+
+.flight-arrivals,.flight-departures{
+    background-color:rgb(86, 85, 85);
+    margin:auto;
+    width:100%;
+}
+
+.row td,.row th{
+    padding:1em 0em 1em 0em;
+    text-align:center;
+}
+
+.nonvisible{
+    display:none;
+}
+iframe{
+    display:none;
+}
+footer{
+    margin-top:0;
+}
+
+
+.wrap div, .wrap h2{
+    padding: 1em 1em 0em 1em;
+}
+.wrap h2{
+    border-bottom: 1px solid white;
+}
+
+
+#covid{
+    position:fixed;
+    display:none;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    margin:auto;
+    background-color:rgba(0,0,0,0.3);
+    z-index:2;
+}
+
+#covid .close{
+    position:absolute;
+    top:13px;
+    right:13px;
+    width:13px;
+    height:13px;
+    padding: 0.1em;
+    background:rgb(160, 133, 133);
+    text-align:center;
+    line-height:15px;
+    border-radius:15px;
+    cursor:pointer;
+}
+#covid .wrap{
+    position: relative;
+    padding-left:0.2em;
+    max-width:50em;
+    height:32em;
+    margin:auto;
+    margin-top:1em;
+    background-color:rgb(90, 23, 38);
+    border:0.2em solid black;
+    border-radius:10px;
+    overflow-y:scroll;
+}
+#covid h2{
+    text-align:center;
+}
+#covid div{
+    line-height:150%;
+    text-align:justify;
+}
+#covid ::-webkit-scrollbar{
+    width:1em;
+    height:1em;
+}
+
+#covid ::-webkit-scrollbar-track{
+    background:lightblue;
+    border-radius:100vw;
+}
+
+#covid ::-webkit-scrollbar-thumb{
+    background:rgb(160, 133, 133);
+    border:0.1em solid lightblue;
+    border-radius:100vw;
+}
+
+#covid ::-webkit-scrollbar-hover{
+    background:hsl(120 100% 10%/1);
+}
+
+#covid ul{
+    list-style-type: square;
+    margin: 1em 2em 1em 2em;
+}
+#covid ul li{
+    margin-bottom: 1em;
+}
+
+
+
+@media only screen and (max-width: 1400px) {
+    .choices{
+        font-size:0.7em;
+    }
+    .arrivals-form,.departures-form{
+        font-size:0.7em;
+    }
+    .flights-info{
+        font-size:0.7em;
+    }
+    .container{
+        width:102.5%;
+    }
+    .flights-header{
+        width:101.8%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .choices{
+        font-size:0.7em;
+    }
+    .arrivals-form,.departures-form{
+        font-size:0.7em;
+    }
+    .flights-info{
+        font-size:0.6em;
+    }
+    .container{
+        width:99.5%;
+    }
+    .container::-webkit-scrollbar {
+        width:2px;
+    }
+    .flights-header{
+        width:99%;
+    }
+    
+}
+

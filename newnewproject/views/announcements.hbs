@@ -1,0 +1,37 @@
+<script src="announcements.js"></script>
+<div class="head">Ανακοινώσεις</div>
+<div class="main">
+    <div class="announcements-container">
+        <form class="search-announcements">
+            <div class="options">
+                <label for="priority">Προτεραιότητα</label>
+                <select id="priority" name="priority">
+                    <option value="normal">Κανονική</option>
+                    <option value="high">Υψηλή</option>
+                    <option value="all" selected>Όλες</option>
+                </select>
+                <label for="number">Εμφάνιση #</label>
+                <select id="limit" name="limit_by">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="15">15</option>
+                </select>
+                <input type="submit" value="Search">
+            </div>
+        </form>
+        <table>
+            <thead>
+                <tr class="title">
+                    <th>Τίτλος</th>
+                    <th>Ημερομηνία Δημοσίευσης</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="buttons">
+            <button class="previous"> < Προηγούμενη</button>
+            <button class="next"> Επόμενη > </button>
+        </div>
+    </div>
+</div>
