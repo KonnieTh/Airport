@@ -2,7 +2,7 @@
     min-height: 100vh;
     min-width: 100%;
     left:0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("/Front-end/images/athens.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("/images/athens.jpg");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -52,7 +52,7 @@ p{
 }
 
 .special-needs{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/wheelchair.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/wheelchair.jpg");
     background-size:cover;
 }
 .special-needs button{
@@ -93,7 +93,7 @@ p{
 }
 
 .covid-19{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/covid.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/covid.jpg");
     background-size:cover;
 }
 
@@ -104,7 +104,7 @@ p{
 }
 
 .parking-info{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/parking.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/parking.jpg");
     background-size:cover;
 }
 
@@ -116,7 +116,7 @@ p{
 }
 
 .pets{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/pets.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/pets.jpg");
     background-size:cover;
 }
 
@@ -507,7 +507,7 @@ p{
 
 
 .currency{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/currency.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/currency.jpg");
     background-size:cover;
 }
 
@@ -638,7 +638,7 @@ p{
 }
 
 .customs{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/Front-end/images/luggage.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/luggage.jpg");
     background-size:cover;
 }
 

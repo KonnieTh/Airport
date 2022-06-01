@@ -1,5 +1,5 @@
 :root{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("/Front-end/images/announcements.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("/images/announcements.jpg");
     background-size:cover;
     scroll-behavior: smooth;
 }
@@ -36,6 +36,7 @@
     flex-wrap:wrap;
     justify-content: center;
     gap:10px;
+    padding:1em;
 }
 
 
@@ -300,7 +301,7 @@ footer{
 
 
 footer{
-    margin-top: 9em;
+    margin-top: 8em !important;
 }
 
 @media only screen and (max-width: 1500px){

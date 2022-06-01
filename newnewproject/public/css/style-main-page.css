@@ -2,7 +2,7 @@
     min-height: 100vh;
     min-width: 100%;
     left:0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("http://localhost:3000/images/athens.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("/images/athens.jpg");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -50,7 +50,7 @@ p{
 }
 
 .special-needs{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("http://localhost:3000/images/wheelchair.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/wheelchair.jpg");
     background-size:cover;
 }
 .special-needs button{
@@ -91,7 +91,7 @@ p{
 }
 
 .covid-19{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("http://localhost:3000/images/covid.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/covid.jpg");
     background-size:cover;
 }
 
@@ -102,7 +102,7 @@ p{
 }
 
 .parking-info{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("http://localhost:3000/images/parking.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/parking.jpg");
     background-size:cover;
 }
 
@@ -114,7 +114,7 @@ p{
 }
 
 .pets{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("http://localhost:3000/images/pets.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/pets.jpg");
     background-size:cover;
 }
 
@@ -409,7 +409,7 @@ p{
 
 
 .currency{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("http://localhost:3000/images/currency.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/currency.jpg");
     background-size:cover;
 }
 
@@ -519,7 +519,7 @@ p{
 }
 
 .customs{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("http://localhost:3000/images/luggage.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("/images/luggage.jpg");
     background-size:cover;
 }
 
