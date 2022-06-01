@@ -194,6 +194,13 @@ footer{
     margin-top:0;
 }
 
+.wrap div, .wrap h2{
+    padding: 1em 1em 0em 1em;
+}
+.wrap h2{
+    border-bottom: 1px solid white;
+}
+
 
 #covid{
     position:fixed;

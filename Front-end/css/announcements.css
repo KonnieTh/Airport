@@ -1,0 +1,373 @@
+:root{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("/Front-end/images/announcements.jpg");
+    background-size:cover;
+    scroll-behavior: smooth;
+}
+
+.head{
+    font-size:2em;
+    margin-bottom:0.5em;
+    text-align:center;
+}
+
+.main{
+    width:95%;
+    height:auto;
+    margin:auto;
+    margin-bottom:1em;
+}
+
+.announcements-container form{
+    width:100%;
+    padding-top:0.1em;
+}
+
+.announcements-container{
+    background-color:rgb(60, 59, 59);
+    border-radius:10px;
+}
+
+
+.options{
+    float:right;
+    margin-bottom:2em;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: center;
+    gap:10px;
+}
+
+.options #priority{
+    margin-right:1em;
+}
+
+.options label{
+    gap:10px;
+}
+
+.options select{
+    border-radius:10px;
+    padding:0.3em 0em;
+}
+
+form [type="submit"]{
+    padding:0.3em 0.3em;
+    border-radius:10px;
+    cursor:pointer;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+form [type="submit"]:hover{
+    background-color:orange;
+}
+
+table{
+    width:90%;
+    margin:auto;
+    margin-bottom:2em;
+    border-style: collapse;
+    
+}
+
+table th{
+    border: 1px solid #ddd;
+    padding:1em;
+}
+
+table td:first-child{
+    padding:0.5em;
+    width:100%;
+    text-align:justify;
+    line-height: 1.2em;
+    word-break:break-all;
+    font-size:0.8em;
+    border: 1px solid #ddd;
+    height:3em;
+}
+
+table a{
+    color:white;
+    text-decoration:none;
+    transition: 0.3s ease;
+}
+
+table a:hover{
+    color:rgb(249, 249, 142);
+    cursor:pointer;
+}
+
+
+table td:nth-child(2){
+    border: 1px solid #ddd;
+    font-size:0.6em;
+    text-align:center;
+}
+
+.buttons{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+
+.previous,.next,.new{
+    display:inline;
+    padding:0.5em 0.5em;
+    background-color:white;
+    border:none;
+    color:black;
+    font-size:1em;
+    cursor:pointer;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    font-size:0.8em;
+    margin:1.5em 3em;
+}
+
+.previous:hover,.next:hover,.new:hover{
+    cursor:pointer;
+    background-color:grey;
+    color:white;
+}
+
+
+footer{
+    margin-top: 2em;
+}
+
+.text-editor-title{
+    font-size:2em;
+    margin-bottom:0.5em;
+    text-align:center;
+    display:none;
+}
+
+#text-editor{
+    color:black;
+    display:none;
+    margin:2em 0em;
+    background-color:white;
+    padding:1em 0em;
+}
+
+.text-editor-header{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:auto;
+}
+
+
+#text-editor form{
+    background-color:white !important;
+    margin:auto;
+    width:100%;
+}
+
+
+#text-editor #priority{
+    margin-left:0.5em;
+}
+
+#text-editor label:first-child{
+    margin-left:2em;
+}
+
+#text-editor label:first-child input{
+    width:70%;
+}
+
+#text-editor label:nth-child(2){
+    margin-left:2em;
+}
+
+#text-editor div{
+    margin-top:1em;
+}
+
+.text-editor-header .btn{
+    padding:0em 1em;
+    cursor:pointer;
+}
+.text-editor-header .btn:hover{
+    background-color: orange;
+}
+
+#text-editor .content{
+    min-height:25em;
+    width:70%;
+    border:0.2em solid black;
+    border-radius:10px;
+    margin:auto;
+    margin-top:1em;
+    padding:2% 5% 1% 5%;
+    overflow-y:scroll;
+    /* margin-right:3em; */
+}
+.text-editor-header .save{
+    text-decoration:none;
+}
+.text-editor-header .save:hover{
+    background-color:orange;
+}
+
+.wrap div, .wrap h2{
+    padding: 1em 1em 0em 1em;
+}
+.wrap h2{
+    border-bottom: 1px solid white;
+}
+
+
+#covid{
+    position:fixed;
+    display:none;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    margin:auto;
+    background-color:rgba(0,0,0,0.3);
+    z-index:2;
+}
+
+#covid .close{
+    position:absolute;
+    top:13px;
+    right:13px;
+    width:13px;
+    height:13px;
+    padding: 0.1em;
+    background:rgb(160, 133, 133);
+    text-align:center;
+    line-height:15px;
+    border-radius:15px;
+    cursor:pointer;
+}
+#covid .wrap{
+    position: relative;
+    padding-left:0.2em;
+    max-width:50em;
+    height:32em;
+    margin:auto;
+    margin-top:1em;
+    background-color:rgb(90, 23, 38);
+    border:0.2em solid black;
+    border-radius:10px;
+    overflow-y:scroll;
+}
+#covid h2{
+    text-align:center;
+}
+#covid div{
+    line-height:150%;
+    text-align:justify;
+}
+#covid ::-webkit-scrollbar{
+    width:1em;
+    height:1em;
+}
+
+#covid ::-webkit-scrollbar-track{
+    background:lightblue;
+    border-radius:100vw;
+}
+
+#covid ::-webkit-scrollbar-thumb{
+    background:rgb(160, 133, 133);
+    border:0.1em solid lightblue;
+    border-radius:100vw;
+}
+
+#covid ::-webkit-scrollbar-hover{
+    background:hsl(120 100% 10%/1);
+}
+
+#covid ul{
+    list-style-type: square;
+    margin: 1em 2em 1em 2em;
+}
+#covid ul li{
+    margin-bottom: 1em;
+}
+
+footer{
+    margin-top: 9em;
+}
+
+@media only screen and (max-width: 1500px){
+    #text-editor label:first-child input{
+        width:70%;
+    }
+    #text-editor label:nth-child(2){
+        margin-left:2em;
+    }
+}
+
+@media only screen and (max-width: 1290px){
+    #text-editor label:nth-child(2){
+        margin-left:4em;
+    }
+}
+
+
+@media only screen and (max-width: 1000px){
+    #text-editor label:first-child input{
+        width:70%;
+    }
+    #text-editor label:nth-child(2){
+        margin-left:2em;
+    }
+
+}
+
+
+@media only screen and (max-width: 550px) {
+    #text-editor label:first-child{
+        width:30%;
+    }
+    form table td:nth-child(2){
+        font-size:0.5em;
+        text-align:center;
+    }
+    .options{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+    .options #priority{
+        margin-right:2em;
+    }
+    .buttons{
+        margin-left:2em;
+    }
+    #text-editor label:first-child input{
+        width:70%;
+    }
+    #text-editor label:nth-child(2){
+        margin-left:2em;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .options #priority,.options label:first-child{
+        margin-bottom:1em;
+    }
+}
+
+
+@media only screen and (max-width: 380px) {
+    #text-editor label:first-child input{
+        width:50%;
+    }
+    #text-editor label:nth-child(2){
+        margin-left:2em;
+    }
+}

@@ -224,6 +224,10 @@ tbody tr:last-child{
     display:none;
 }
 
+/* .gate{
+    margin-right:0.5em;
+    color
+} */
 
 .buttons{
     display:grid;
@@ -231,6 +235,13 @@ tbody tr:last-child{
     gap:10px;
 }
 
+/* .entrance{
+    font-size:0.8em;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction: row;
+    justify-content: center;
+} */
 
 button.edit,button.remove,button.submit{
     background-color: blue;
@@ -243,6 +254,7 @@ button.edit,button.remove,button.submit{
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
     margin-top:1em;
+    margin-right:0.4em;
 }
 
 button.insert{
@@ -309,9 +321,15 @@ form.new_airline input[type="submit"]:hover{
     background-color:orange;
 }
 
-
 form.new_airline{
     display:none;
+}
+
+.wrap div, .wrap h2{
+    padding: 1em 1em 0em 1em;
+}
+.wrap h2{
+    border-bottom: 1px solid white;
 }
 
 
@@ -415,6 +433,9 @@ form.new_airline{
     } */
     form.new_airline{
         width:60%;
+    }
+    #terminal,#gate{
+        font-size:0.8em;
     }
 }
 
