@@ -5,10 +5,10 @@ import pg from "pg";
 
 const pool = new pg.Pool({
     user:"postgres",
-    password:"abcd123!",
+    password:"test1234",
     host:"localhost",
     port:5432,
-    database:"Airport"
+    database:"airport"
 })
 
 async function connect(){
@@ -91,13 +91,12 @@ async function insertAirline(airline,callback){
     }
 }
 
-async function insertText(textTitle,callback){
+async function getText(textTitle,callback){
     const sql = `select * from "General_info" where "title"='${textTitle}' `;
     try{
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
-        console.log(res.rows)
         callback(null,res.rows);
     }
     catch(err){
@@ -106,13 +105,13 @@ async function insertText(textTitle,callback){
 }
 
 
-async function editText(text,callback){
+async function editInfo(text,callback){
+    console.log(2,text);
     const sql = `update "General_info" set "description"='${text.keimeno}' where "title"='${text.titlos}' `;
     try{
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
-        console.log(res.rows)
         callback(null,res.rows);
     }
     catch(err){
@@ -173,7 +172,7 @@ async function getAnnouncements(params,callback){
     }
 }
 
-export{getAirlinebyletter,editAirline,deleteAirline,insertAirline,insertText,editText,createAnnouncement,getAnnouncements}
+export{getAirlinebyletter,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,getAnnouncements}
 
 
 

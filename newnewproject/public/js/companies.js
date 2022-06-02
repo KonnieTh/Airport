@@ -147,87 +147,94 @@ function flights_catalog(airline,flight_type){
 }
 
 
-async function display(firstletter){
-    let editbtns = [];
-    let deletebtns = [];
-    let index=0;
-    dis.innerHTML="";
-    dis = document.querySelector(".company-info");
-    let response = await fetch(`http://localhost:3000/airlines/filter/${firstletter}`);
-    if(response.status==200){
-        let data = await response.json();
-        console.log(data);
-        for(let i=0;i<data.length;i++){
-            const element_row = document.createElement("div");
-            element_row.classList.add("row");
-            const airline_name = document.createElement("div");
-            airline_name.classList.add("company");
-            const text = document.createTextNode(data[i].airline_name);
-            airline_name.appendChild(text);
-            const links = document.createElement("a");
-            links.addEventListener('click',function(){
-                const flights = document.getElementById("companies-flights");
-                flights.style.display = "block";
-            });
-            links.href="#companies-flights";
-            links.target="_self";
-            const text1 = document.createTextNode("Πτήσεις >");
-            links.appendChild(text1);
-            links.addEventListener("click",function(){
-                flights_catalog(data[i],"arrivals");
-            })
-            element_row.appendChild(airline_name);
-            element_row.appendChild(links);
-            dis.appendChild(element_row);
-            const element_row_info = document.createElement("div");
-            element_row_info.classList.add("row-info");
-            const icon = document.createElement('img');
-            icon.classList.add("icon");
-            // console.log(names[index],airlines[index].iata_code);
-            fetch(`http://pics.avs.io/150/150/${data[i].IATA}.png`)
-                .then(response=> response.blob())
-                .then(blob =>
-                     icon.src = URL.createObjectURL(blob))
-                .catch(error => console.log(error))
+// async function display(firstletter){
+//     let editbtns = [];
+//     let deletebtns = [];
+//     let index=0;
+//     dis.innerHTML="";
+//     dis = document.querySelector(".company-info");
+//     let response = await fetch(`http://localhost:3000/airlines/filter/${firstletter}`);
+//     if(response.status==200){
+//         let data = await response.json();
+//         console.log(data);
+//         for(let i=0;i<data.length;i++){
+//             const element_row = document.createElement("div");
+//             element_row.classList.add("row");
+//             const airline_name = document.createElement("div");
+//             airline_name.classList.add("company");
+//             const text = document.createTextNode(data[i].airline_name);
+//             airline_name.appendChild(text);
+//             const links = document.createElement("a");
+//             links.addEventListener('click',function(){
+//                 const flights = document.getElementById("companies-flights");
+//                 flights.style.display = "block";
+//             });
+//             links.href="#companies-flights";
+//             links.target="_self";
+//             const text1 = document.createTextNode("Πτήσεις >");
+//             links.appendChild(text1);
+//             links.addEventListener("click",function(){
+//                 flights_catalog(data[i],"arrivals");
+//             })
+//             element_row.appendChild(airline_name);
+//             element_row.appendChild(links);
+//             dis.appendChild(element_row);
+//             const element_row_info = document.createElement("div");
+//             element_row_info.classList.add("row-info");
+//             const icon = document.createElement('img');
+//             icon.classList.add("icon");
+//             // console.log(names[index],airlines[index].iata_code);
+//             fetch(`http://pics.avs.io/150/150/${data[i].IATA}.png`)
+//                 .then(response=> response.blob())
+//                 .then(blob =>
+//                      icon.src = URL.createObjectURL(blob))
+//                 .catch(error => console.log(error))
             
-            icon.style.backgroundColor="white";
-            element_row_info.appendChild(icon);
-            const details = document.createElement('div');
-            details.classList.add("details");
+//             icon.style.backgroundColor="white";
+//             element_row_info.appendChild(icon);
+//             const details = document.createElement('div');
+//             details.classList.add("details");
             
-            const tel = document.createElement('div');
-            tel.classList.add("telephone");
-            const text2 = document.createTextNode(`Τηλέφωνο: `);
-            tel.appendChild(text2);
-            const teltext = document.createElement('div');
-            teltext.appendChild(document.createTextNode(data[i].telephone));
-            tel.appendChild(teltext);          
+//             const tel = document.createElement('div');
+//             tel.classList.add("telephone");
+//             const text2 = document.createTextNode(`Τηλέφωνο: `);
+//             tel.appendChild(text2);
+//             const teltext = document.createElement('div');
+//             teltext.appendChild(document.createTextNode(data[i].telephone));
+//             tel.appendChild(teltext);          
             
-            const web = document.createElement('div');
-            web.classList.add("website");
-            const text3 = document.createTextNode(`Email: `);
-            web.appendChild(text3);
-            const telweb = document.createElement('div');
-            telweb.appendChild(document.createTextNode(data[i].email));
-            web.appendChild(telweb);
+//             const web = document.createElement('div');
+//             web.classList.add("website");
+//             const text3 = document.createTextNode(`Email: `);
+//             web.appendChild(text3);
+//             const telweb = document.createElement('div');
+//             telweb.appendChild(document.createTextNode(data[i].email));
+//             web.appendChild(telweb);
 
-            const gate = document.createElement("div");
-            gate.classList.add("entrance");
-            const text5 = document.createTextNode(`Τερματικός: `);
-            gate.appendChild(text5);
-            const en = document.createElement('div');
-            en.appendChild(document.createTextNode(data[i].terminal + " - Πύλη: " + data[i].gate_name + data[i].gate_number));
-            gate.appendChild(en);
+//             const gate = document.createElement("div");
+//             gate.classList.add("entrance");
+//             const text5 = document.createTextNode(`Τερματικός: `);
+//             gate.appendChild(text5);
+//             const en = document.createElement('div');
+//             en.appendChild(document.createTextNode(data[i].terminal + " - Πύλη: " + data[i].gate_name + data[i].gate_number));
+//             gate.appendChild(en);
             
-            details.appendChild(tel);
-            details.appendChild(web);
-            details.appendChild(gate);
+//             details.appendChild(tel);
+//             details.appendChild(web);
+//             details.appendChild(gate);
 
-            element_row_info.appendChild(details);
-            dis.appendChild(element_row_info);
-        }
-    }
+//             element_row_info.appendChild(details);
+//             dis.appendChild(element_row_info);
+//         }
+//     }
+// }
+
+function display(firstletter){
+    fetch(`/airlines/filter/${firstletter}`)
+    .then(response => response.json())
+    .then(data => console.log(data))
 }
+
 
 let Div = document.querySelector("div.choices");
 for (let i = 65; i < 91; i++) {
@@ -254,4 +261,6 @@ for (let i = 65; i < 91; i++) {
 const buttonA = document.querySelector(".btn");
 buttonA.classList.add("touched");
 
-display("A");
+fetch(`/airlines/filter/${"A"}`)
+.then(response => response.json())
+.then(data => console.log(data))

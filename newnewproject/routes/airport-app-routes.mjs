@@ -39,7 +39,7 @@ router.get('/main-page',(req,res)=>{
 router.get('/main-page-admin',(req,res)=>{
     res.render('main-page-admin',{
         style:'style-main-page-admin.css',
-        script:'main-admin.js',
+        script:'main.js',
         layout:'layout-main-page-admin'
     })
 })
@@ -93,6 +93,9 @@ router.put('/airlines_edit',appController.editAirlineInfo);
 router.delete('/airlines_delete',appController.deleteAirline);
 router.post('/new_airline',appController.AddAirline);
 router.get('/text/:titlos',appController.getText);
-router.put('/edit_text',appController.editText);
+router.put('/edit_info',(req,res)=>{
+    console.log(req.body,res);
+});
+
 
 export default router;

@@ -48,6 +48,7 @@ function edit(a, b) {
     for(let i of list){
         if (i[0]==a){
             titlos = i[1];
+            console.log(titlos);
         }
     }
     document.querySelector(`#${b}`).style.display = "none";
@@ -64,17 +65,18 @@ function edit(a, b) {
 
 function save() {
     let text2 = document.getElementById("textarea");
-    const keimeno = text2.innerHTML;
+    const keimeno = ``+ text2.innerHTML;
     const inputs = {titlos,keimeno};
+    console.log(inputs);
     let date = new Date();
     date = `${date}`;
     console.log(date.slice(0,24));
-    fetch('http://localhost:3000/edit_text',{
-        method:"PUT",
+    fetch(`http://localhost:3000/edit_info`,{
+        method:"put",
         headers:{
             'Content-Type': 'application/json',
         },
-        body:JSON.stringify(inputs)
+        body: JSON.stringify(inputs)
     })
     .then(response => response.json())
     .then(data => {
@@ -83,6 +85,7 @@ function save() {
     .catch((error) =>{
         console.error("Error:",error);
     })
+
     document.getElementById("customs_insection_text").style.display = "none";
     document.getElementById("text-editor").style.display = "none";
     document.getElementById("description").style.display = "block";
@@ -114,10 +117,10 @@ function getTexts(){
     for(let i of texts){
         const text = document.querySelector(`${i[0]}`);
         text.innerHTML="";
-        fetch(`http://localhost:3000/text/${i[1]}`)
+        fetch(`/text/${i[1]}`)
         .then(response => response.json())
         .then(data => {
-            // console.log("Success:",data);
+            console.log(data);
             for(let i of data){
                 text.innerHTML = i.description;
             }

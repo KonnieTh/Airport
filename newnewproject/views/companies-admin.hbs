@@ -2,7 +2,25 @@
     <div class="choices"></div>
     <div class="selection">
         <div class="airlines-container">
-            <div class="company-info"></div>
+            <div class="company-info">
+                {{#each airline}}
+                <div class="row">
+                    <div class="company"></div>
+                    <a href="#companies-flights" target="_self">Πτήσεις</a>
+                </div>
+                <div class="row-info">
+                    <img class="icon" src="" style="background-color: white;">
+                    <div class="details">
+                        <div class="telephone">Τηλέφωνο: <div></div></div>
+                        <div class="website">Email: <div></div></div>
+                        <div class="entrance">Τερματικός: <div></div></div>
+                        <div class="buttons">
+                            <button class="edit">Επεξεργασία</button>
+                            <button class="remove">Διαγραφή</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="companies-flights" id="companies-flights">
             <div class="company"></div>
@@ -42,7 +60,7 @@
 <div class="insertbutton">
     <button class="insert" onclick="add_airline()">Πρσθήκη Αεροπορικής Εταιρείας</button>
 </div>
-<form class="new_airline" action="http://localhost:3000/new_airline" method="POST">
+<form class="new_airline" action="/new_airline" method="POST">
     <div class="airline">
         <label for="name">Όνομα Αεροπορικής Εταιρείας: <input type="text" name="name" placeholder="Όνομα" required></label>
     </div>

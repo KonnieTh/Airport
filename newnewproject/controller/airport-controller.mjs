@@ -33,7 +33,7 @@ export async function getAirlinesByLetter(req,res){
         if(err){
             return console.error(err.message);
         }
-        res.render(rows);
+        res.render(z);
     })
 }
 
@@ -71,7 +71,8 @@ export async function AddAirline(req,res){
 }
 
 export async function getText(req,res){
-    model.insertText(title,(err,data) =>{
+    const title = req.params.titlos;
+    model.getText(title,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -83,12 +84,13 @@ export async function getText(req,res){
 
 export async function editText(req,res){
     const text = req.body;
-    model.editText(text,(err,data) =>{
+    console.log(1,text);
+    model.editInfo(text,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
         else{
-            res.json(data);
+            res.render({text:data});
         }
     })
 }

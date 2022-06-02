@@ -1,5 +1,6 @@
 import express from 'express'
 const app = express()
+import cors from 'cors';
 
 // import dotenv from 'dotenv'
 // if (process.env.NODE_ENV !== 'production') {
@@ -10,7 +11,7 @@ const app = express()
 import exphbs from 'express-handlebars';
 
 app.use(express.urlencoded({ extended: false }));
-
+app.use(cors());
 //Ενεργοποίηση συνεδρίας
 // app.use(taskListSession)
 
