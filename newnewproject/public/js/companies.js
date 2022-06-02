@@ -261,6 +261,4 @@ for (let i = 65; i < 91; i++) {
 const buttonA = document.querySelector(".btn");
 buttonA.classList.add("touched");
 
-fetch(`/airlines/filter/${"A"}`)
-.then(response => response.json())
-.then(data => console.log(data))
+display("A");

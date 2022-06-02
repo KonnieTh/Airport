@@ -29,11 +29,12 @@ export function createAnnouncements(req,res){
 }
 
 export async function getAirlinesByLetter(req,res){
+    const letter=req.params.letter;
     model.getAirlinebyletter(letter,(err,rows) => {
         if(err){
             return console.error(err.message);
         }
-        res.render(z);
+    res.render('companies',{airlines:rows});
     })
 }
 
@@ -72,6 +73,7 @@ export async function AddAirline(req,res){
 
 export async function getText(req,res){
     const title = req.params.titlos;
+    console.log(req.params.titlos);
     model.getText(title,(err,data) =>{
         if(err){
             return console.error(err.message);

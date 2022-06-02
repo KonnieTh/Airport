@@ -11,6 +11,7 @@ import cors from 'cors';
 import exphbs from 'express-handlebars';
 
 app.use(express.urlencoded({ extended: false }));
+
 app.use(cors());
 //Ενεργοποίηση συνεδρίας
 // app.use(taskListSession)

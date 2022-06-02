@@ -5,10 +5,10 @@ import pg from "pg";
 
 const pool = new pg.Pool({
     user:"postgres",
-    password:"test1234",
+    password:"abcd123!",
     host:"localhost",
     port:5432,
-    database:"airport"
+    database:"Airport"
 })
 
 async function connect(){
@@ -22,7 +22,7 @@ async function connect(){
 }
 
 async function getAirlinebyletter(letter,callback){
-    const sql =   `select * from "Airline" INNER JOIN "Gate" on "Airline"."gate_code"="Gate"."gate_ID" where substr(airline_name,1,1)='${letter}' order by airline_name`;
+    const sql =   `select * from public."Airline" INNER JOIN public."Gate" on public."Airline"."gate_code"="Gate"."gate_ID" where substr(airline_name,1,1)='${letter}' order by airline_name`;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -36,7 +36,7 @@ async function getAirlinebyletter(letter,callback){
 
 async function editAirline(airline,callback){
     const sql = `update "Airline" 
-                set telephone='${airline.telephone}',email='${airline.email}',"gate_code" = (SELECT "gate_ID" from "Gate" where terminal='${airline.terminal}' and gate_name='${airline.gate}' and gate_number='${airline.gate_number}')
+                set telephone='${airline.telephone}',email='${airline.email}',"gate_code" = (SELECT "gate_ID" from public."Gate" where terminal='${airline.terminal}' and gate_name='${airline.gate}' and gate_number='${airline.gate_number}')
                 where "IATA" = '${airline.iata}'`;
     try{
         const client = await connect();
@@ -52,7 +52,7 @@ async function editAirline(airline,callback){
 
 
 async function deleteAirline(airline,callback){
-    const sql = `delete from "Airline" where "IATA" = '${airline.IATA}'`;
+    const sql = `delete from public."Airline" where "IATA" = '${airline.IATA}'`;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -65,7 +65,7 @@ async function deleteAirline(airline,callback){
 }
 
 async function insertAirline(airline,callback){
-    const sql1 = `select * from "Airline" where "airline_name"='${airline.name}' or "IATA" = '${airline.iata}'`;
+    const sql1 = `select * from public."Airline" where "airline_name"='${airline.name}' or "IATA" = '${airline.iata}'`;
     try{
         const client = await connect();
         const res = await client.query(sql1);
@@ -74,7 +74,7 @@ async function insertAirline(airline,callback){
             console.log("Η αεροπορική εταιρεία που πήγες να προσθέσεις ήδη υπάρχει! Μπορείς να αλλάξεις τα στοιχεία της πατώντας επεξεργασία στην συγκεκριμένη αεροπορική εταιρεία!");
         }   
         else{
-            const sql2 = `insert into "Airline" ("airline_ID","airline_name","IATA","ICAO","telephone","email","gate_code") VALUES((select max("airline_ID")+1 from "Airline"),'${airline.name}','${airline.iata}','${airline.icao}','${airline.telephone}','${airline.email}', (select "gate_ID" from "Gate" where "terminal"='${airline.terminal}' and "gate_name"='${airline.gate}' and "gate_number" = '${airline.gate_number}'))`;
+            const sql2 = `insert into public."Airline" ("airline_ID","airline_name","IATA","ICAO","telephone","email","gate_code") VALUES((select max("airline_ID")+1 from "Airline"),'${airline.name}','${airline.iata}','${airline.icao}','${airline.telephone}','${airline.email}', (select "gate_ID" from "Gate" where "terminal"='${airline.terminal}' and "gate_name"='${airline.gate}' and "gate_number" = '${airline.gate_number}'))`;
             try{
                 const client = await connect();
                 const res1 = await client.query(sql2);
@@ -92,7 +92,7 @@ async function insertAirline(airline,callback){
 }
 
 async function getText(textTitle,callback){
-    const sql = `select * from "General_info" where "title"='${textTitle}' `;
+    const sql = `select * from public."General_info" where "title"='${textTitle}' `;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -107,7 +107,7 @@ async function getText(textTitle,callback){
 
 async function editInfo(text,callback){
     console.log(2,text);
-    const sql = `update "General_info" set "description"='${text.keimeno}' where "title"='${text.titlos}' `;
+    const sql = `update public."General_info" set "description"='${text.keimeno}' where "title"='${text.titlos}' `;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -120,14 +120,14 @@ async function editInfo(text,callback){
 }
 
 async function createAnnouncement(text,callback){
-    const sql1 = 'select "announcement_ID" from "Announcement"'
+    const sql1 = 'select "announcement_ID" from public."Announcement"'
     try{
         const client = await connect();
         const res = await client.query(sql1);
         await client.release();
         let sql;
         if (res.rows.length>0){
-            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;
+            sql = `insert into public."Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;
             try{
                 const client = await connect();
                 const res = await client.query(sql);
@@ -140,7 +140,7 @@ async function createAnnouncement(text,callback){
             }
         }
         else{
-            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES(0,'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;
+            sql = `insert into public."Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES(0,'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;
             try{
                 const client = await connect();
                 const res = await client.query(sql);
@@ -159,7 +159,7 @@ async function createAnnouncement(text,callback){
 }
 
 async function getAnnouncements(params,callback){
-    const sql = `Select * from "Announcement" where "airline_ID">'${params.index} and "airline_ID"<'${params.index + params.limit}''`;
+    const sql = `Select * from public."Announcement" where "airline_ID">'${params.index} and "airline_ID"<'${params.index + params.limit}''`;
     try{
         const client = await connect();
         const res = await client.query(sql);
