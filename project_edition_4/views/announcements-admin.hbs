@@ -1,0 +1,62 @@
+<div class="text-editor-title">Δημιουργία Ανακοίνωσης</div>
+<div id="text-editor">
+    <form>
+        <label for="title">Τίτλος: <input type="text" size="100" name="title" id="title"></label>
+        <label for="priority-admin">Προτεραιότητα: <select id="priority-admin" name="priority-admin">
+            <option value="normal">Κανονική</option>
+            <option value="high">Υψηλή</option></select>
+        </label>
+    </form>
+    <div class="text-editor-header">
+        <button class="btn" title="Bold Text" data-element="bold"><i class="fa fa-bold"></i></button>
+        <button class="btn" title="Italic Text" data-element="italic"><i class="fa fa-italic"></i></button>
+        <button class="btn" title="Underline" data-element="underline"><i class="fa fa-underline"></i></button>
+        <button class="btn" title="Ordered list" data-element="insertOrderedList"><i class="fa fa-list-ol"></i></button>
+        <button class="btn" title="Unordered list" data-element="insertUnorderedList"><i class="fa fa-list-ul"></i></button>
+        <button class="btn" title="Create a link" data-element="createLink"><i class="fa fa-link"></i></button>
+        <button class="btn" title="Left Align" data-element="justifyLeft"><i class="fa fa-align-left"></i></button>
+        <button class="btn" title="Center Align" data-element="justifyCenter"><i class="fa fa-align-center"></i></button>
+        <button class="btn" title="Right Align" data-element="justifyRight"><i class="fa fa-align-right"></i></button>
+        <button class="btn" title="Justify Full" data-element="justifyFull" ><i class="fa fa-align-justify"></i></button>
+        <button class="save btn" title="Save text" onclick="save()">Save</button>
+    </div>
+    <div class="content" id="textarea" contenteditable="true"></div>
+</div>
+
+<div class="head">Ανακοινώσεις</div>
+<div class="main">
+    <div class="announcements-container">
+        <form class="search-announcements" method="POST" action="http://localhost:3000/get_announcements">
+            <div class="options">
+                <label for="priority">Προτεραιότητα</label>
+                <select id="priority" name="priority">
+                    <option value="normal">Κανονική</option>
+                    <option value="high">Υψηλή</option>
+                    <option value="all" selected>Όλες</option>
+                </select>
+                <label for="number">Εμφάνιση #</label>
+                <select id="limit" name="limit_by">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="15">15</option>
+                </select>
+                <input type="submit" value="Search">
+            </div>
+        </form>
+        <table>
+            <thead>
+                <tr class="title">
+                    <th>Τίτλος</th>
+                    <th>Ημερομηνία Δημοσίευσης</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="buttons">
+            <button class="previous"> < Προηγούμενη</button>
+            <button  onclick="createAnnouncement()" class="new"> Νέα Ανακοίνωση </button>
+            <button class="next"> Επόμενη > </button>
+        </div>
+    </div>
+</div>
