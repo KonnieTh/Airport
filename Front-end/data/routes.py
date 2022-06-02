@@ -59,4 +59,5 @@ routes_after['hours'] = lis2
 routes_after['airport_ID1']=id1
 routes_after['airport_ID2']=id2
 
-routes_after.to_csv('Front-end/data/flies.csv', index=True)
+routes_after.columns = ["i","airline_IATA","airport1_IATA","airport2_IATA","airline_ID","hours","airport_ID1","airport_ID2"]
+routes_after.to_csv('Front-end/data/flies.csv', index=False)

@@ -78,7 +78,6 @@ CREATE TABLE public."flies" (
 	"airline_ID" integer NOT NULL,
 	"flight_date" DATE NOT NULL,
 	"expected_time" TIME NOT NULL,
-	"capacity" integer NOT NULL,
 	"is_destination" BOOLEAN NOT NULL,
 	CONSTRAINT "flies_pk" PRIMARY KEY ("flight_ID","airport_ID","airline_ID")
 ) WITH (

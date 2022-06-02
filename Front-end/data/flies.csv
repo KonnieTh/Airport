@@ -1,4 +1,4 @@
-,0,2,4,airline_ID,hours,airport_ID1,airport_ID2
+i,airline_IATA,airport1_IATA,airport2_IATA,airline_ID,hours,airport_ID1,airport_ID2
 0,4U,ATH,CGN,88,2.444,3115,301
 1,4U,ATH,STR,88,2.096,3115,307
 2,9U,ATH,KIV,103,1.361,3115,1290
