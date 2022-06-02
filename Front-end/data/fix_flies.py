@@ -26,7 +26,8 @@ for j in range(30):
             if(hour_arrived>23):
                 hour_arrived-=23
                 flag_d=1
-
+            if(minute_arrived>59):
+                minute_arrived=59
             if(len(str(hour_left))==1 and len(str(minute_left))!=1):
                 time_left="0"+str(hour_left)+":"+str(minute_left)+":00"
             elif(len(str(hour_left))!=1 and len(str(minute_left))==1):
@@ -65,4 +66,4 @@ for j in range(30):
 flies=pd.DataFrame(lis)
 flies.columns = ["flight_ID", "airport_ID", "airline_ID","flight_date","expected_time","is_destination"]
 
-flies.to_csv('Front-end/data/flies_june.csv', index=False)
+flies.to_csv('Front-end/data/Flies_.csv', index=False)

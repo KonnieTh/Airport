@@ -27,3 +27,8 @@ await pool.query(`COPY public."General_info"("info_ID","title","description")
 FROM 'E:\GeneralInfo.csv'
 DELIMITER ','
 CSV HEADER;`)
+
+await pool.query(`COPY public."flies"("flight_ID","airport_ID","airline_ID","flight_date","expected_time","is_destination")
+FROM 'E:\Flies_.csv'
+DELIMITER ','
+CSV HEADER;`)
