@@ -251,7 +251,6 @@ async function addFlightFrom(callback){
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
-        console.log(res.rows)
         callback(null,res.rows);
     }
     catch(err){
@@ -279,7 +278,6 @@ async function addFlightTo(callback){
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
-        console.log(res.rows)
         callback(null,res.rows);
     }
     catch(err){
@@ -287,7 +285,48 @@ async function addFlightTo(callback){
     }
 }
 
-export{getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,addFlightFrom,addFlightTo}
+async function getAirports(callback){
+    const sql = ` Select "airport_name","city" from "Airport" order by "airport_name"`;
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        callback(null,res.rows);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
+
+async function getAirlines(callback){
+    const sql = ` Select "airline_name" from "Airline" order by "airline_name"`;
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        callback(null,res.rows);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
+
+async function getRoutes(airlineName,date_c,airportName,isDest,callback){
+    if(airlineName!=null && date_c!=null && airportName!=null && isDest!=null){
+        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}'and "Airline"."airline_name"='${airlineName}' order by expected_time"`;
+    }
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        callback(null,res.rows);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
+
+export{getRoutes,getAirlines,getAirports,getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,addFlightFrom,addFlightTo}
 
 
 

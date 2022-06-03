@@ -187,12 +187,57 @@ app.post('/new_airline',(req,res)=>{
 
 
 app.get('/flights',(req,res)=>{
-    res.render('flights',{
-        style:'flights.css',
-        script:'flights.js',
-        layout:'layout'
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    var full_date=year + "-" + month + "-" + date;
+    let newday1=("0" +(parseInt(date)+1).toString()).slice(-2);
+    var full_date1=year + "-" + month + "-" + newday1;
+    let newday2=("0" +(parseInt(date)+2).toString()).slice(-2);
+    var full_date2=year + "-" + month + "-" + newday2;
+    let newday3=("0" +(parseInt(date)+3).toString()).slice(-2);
+    var full_date3=year + "-" + month + "-" + newday3;
+
+    model.getAirports((err,rows) => {
+        if(err){
+            return console.error(err.message);
+        }
+        model.getAirlines((err2,rows2) => {
+            if(err2){
+                return console.error(err2.message);
+            }
+            res.render('flights',{
+                style:'flights.css',
+                script:'flights.js',
+                layout:'layout',
+                airports:rows,
+                airlines:rows2,
+                bool3:true,
+                dates:[
+                    {date:full_date},
+                    {date:full_date1},
+                    {date:full_date2},
+                    {date:full_date3}
+                ]
+            })
+        })
     })
 })
+
+app.post('/flights/done', function (req, res) {
+    console.log(req.body)
+    // model.getRoutes((err,rows) => {
+    //     if(err){
+    //         return console.error(err.message);
+    //     }
+    //     res.render('flights',{
+    //         style:'flights.css',
+    //         script:'flights.js',
+    //         layout:'layout'
+    //     })
+    // })
+});
 
 app.get('/flights-admin',(req,res)=>{
     res.render('flights-admin',{
