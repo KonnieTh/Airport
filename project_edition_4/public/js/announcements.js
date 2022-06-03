@@ -5,10 +5,41 @@ function covid_off() {
     document.getElementById("covid").style.display = "none";
 }
 
+let dates = document.querySelectorAll("tbody tr td");
+for(let i=0;i<dates.length;i++){
+    if (i%2!=0){
+        const date = dates[i].innerText.slice(0,15);
+        const time = dates[i].innerText.slice(-9);
+        dates[i].innerText = `${date} ${time}`;
+    }
+}
 
-let index=0;
-let limit=10;
+const text = document.querySelector("table .message");
+const keimeno= text.innerText;
+text.innerHTML = keimeno;
 
+
+// async function getAnnouncements(index){
+//     const element = document.querySelector("#priority");
+//     const priority=element.value;
+//     console.log(index,priority);
+//     fetch(`http://localhost:3000/announcements/next/${index}/${priority}`)
+//     .then(response=>response.json())
+//     .catch((err)=>console.error(err));
+
+// }
+
+
+// function getAnnouncements(start,limit){
+//     fetch(`/announcements/`)
+//     .then(response=>response.json())
+//     .catch((error)=>{
+//         console.log("Error:",error);
+//     })
+// }
+
+// getAnnouncements(index,limit);
+// index=limit;
 // fetch('http://localhost:3000/index/limit',{
 //         method:"POST",
 //         headers:{
@@ -140,3 +171,18 @@ function getDateTime(){
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
+
+
+fetch(`/text/covid`)
+.then(response=>response.json())
+.then(data=>{
+    console.log(data);
+    const text = document.querySelector('.covidtext');
+    text.innerHTML="";
+    for(let i of data){
+        text.innerHTML = i.description;
+    }
+})
+.catch((error)=>{
+    console.log("Error:",error);
+})

@@ -266,9 +266,57 @@ for (let i = 65; i < 91; i++) {
 }
 
 const link = window.location.href;
+console.log(link);
 const selected_letter = link.slice(-1);
-const place = selected_letter.charCodeAt(0);
-const selected_button = document.querySelectorAll(".btn")[place-65];
-selected_button.classList.add("touched");
-
+console.log(selected_letter);
+if(selected_letter=="1"){
+    const selected_button = document.querySelectorAll(".btn")[0];
+    selected_button.classList.add("touched");
+}
+else{
+    const place = selected_letter.charCodeAt(0);
+    const selected_button = document.querySelectorAll(".btn")[place-65];
+    selected_button.classList.add("touched");
+}
 // display("A");
+
+
+
+async function getImages(){
+    const elements_row = document.querySelectorAll(".company-info .row .company");
+    const images = document.querySelectorAll(".company-info .row-info .icon");
+    for(let i=0;i<elements_row.length;i++){
+        const name = elements_row[i].innerText;
+        const response = await fetch(`/airlines/${name}`);
+        if(response.status==200){
+            const data = await response.json();
+            for(let j of data){
+                console.log(j.IATA);
+                fetch(`http://pics.avs.io/150/150/${j.IATA}.png`)
+                .then(response=> response.blob())
+                .then(blob =>{
+                    images[i].src = URL.createObjectURL(blob) ;
+                })
+                .catch(error => console.log(error))
+            }
+        }
+    }
+}
+
+getImages();
+
+fetch(`/text/covid`)
+.then(response=>response.json())
+.then(data=>{
+    console.log(data);
+    const text = document.querySelector('.covidtext');
+    text.innerHTML="";
+    for(let i of data){
+        text.innerHTML = i.description;
+    }
+})
+.catch((error)=>{
+    console.log("Error:",error);
+})
+
+
