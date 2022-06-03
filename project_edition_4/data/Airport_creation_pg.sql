@@ -76,8 +76,8 @@ CREATE TABLE public."flies" (
 	"flight_ID" serial NOT NULL,
 	"airport_ID" integer NOT NULL,
 	"airline_ID" integer NOT NULL,
-	"flight_date" DATE NOT NULL,
-	"expected_time" TIME NOT NULL,
+	"flight_date" varchar(10) NOT NULL,
+	"expected_time" varchar(8) NOT NULL,
 	"is_destination" BOOLEAN NOT NULL,
 	CONSTRAINT "flies_pk" PRIMARY KEY ("flight_ID","airport_ID","airline_ID")
 ) WITH (
@@ -105,8 +105,8 @@ CREATE TABLE public."Announcement" (
 	"username" varchar(255) NOT NULL,
 	"theme" varchar(255) NOT NULL,
 	"ann_text" TEXT NOT NULL,
-	"ann_date" DATE NOT NULL,
-	"ann_time" TIME NOT NULL,
+	"ann_date" varchar(10) NOT NULL,
+	"ann_time" varchar(8) NOT NULL,
 	"priority" varchar(255) NOT NULL,
 	CONSTRAINT "Announcement_pk" PRIMARY KEY ("announcement_ID","username")
 ) WITH (
@@ -118,7 +118,7 @@ CREATE TABLE public."Announcement" (
 CREATE TABLE public."modifies" (
 	"username" varchar(255) NOT NULL,
 	"info_ID" integer NOT NULL,
-	"modification_date" timestamp NOT NULL,
+	"modification_date" varchar(20) NOT NULL,
 	CONSTRAINT "modifies_pk" PRIMARY KEY ("username","info_ID")
 ) WITH (
   OIDS=FALSE
@@ -129,7 +129,7 @@ CREATE TABLE public."modifies" (
 CREATE TABLE public."processing" (
 	"username" varchar(255) NOT NULL,
 	"airline_ID" integer NOT NULL,
-	"processing_date" timestamp NOT NULL,
+	"processing_date" varchar(20) NOT NULL,
 	CONSTRAINT "processing_pk" PRIMARY KEY ("username","airline_ID")
 ) WITH (
   OIDS=FALSE

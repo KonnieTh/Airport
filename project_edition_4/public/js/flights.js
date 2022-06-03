@@ -1,120 +1,120 @@
-airports_arrivals=document.getElementById('departure-airport');
-airports_departures=document.getElementById('arrival-airport');
-airlines_arrivals=document.getElementById('airline_arrival');
-airlines_departures=document.getElementById('airline_departure');
+// airports_arrivals=document.getElementById('departure-airport');
+// airports_departures=document.getElementById('arrival-airport');
+// airlines_arrivals=document.getElementById('airline_arrival');
+// airlines_departures=document.getElementById('airline_departure');
 
-fetch("http://localhost:3000/airports/arrivals")
-.then(response=>{
-    return response.json()
-})
-.then(data => {
-    const locations = [];
-    const airlines = [];
-    for(let i of data){
-        if(i.location!=undefined){
-            const str = i.location;
-            const str1 = str + "," +i.iata;  
-            locations.push(str1);
+// fetch("http://localhost:3000/airports/arrivals")
+// .then(response=>{
+//     return response.json()
+// })
+// .then(data => {
+//     const locations = [];
+//     const airlines = [];
+//     for(let i of data){
+//         if(i.location!=undefined){
+//             const str = i.location;
+//             const str1 = str + "," +i.iata;  
+//             locations.push(str1);
             
-        }
-        if(i.airline_name!=undefined){
-            const str = i.airline_name.name;
-            const str1 = str.charAt(0).toUpperCase() + str.slice(1);
-            // const str2 = i.iata;
-            // const str3 = str1 + ","+ str2
-            airlines.push(str1);
-        }
-    }
-    let locations_new = [];
-    let airlines_new = [];
-    for(let i of locations){
-        if (locations.includes(i)==true && locations_new.includes(i)!=true){
-            locations_new.push(i);
-        }
-    }
-    for(let i of airlines){
-        if (airlines.includes(i)==true && airlines_new.includes(i)!=true){
-            airlines_new.push(i);
-        }
-    }   
-    locations_new = locations_new.sort();
-    airlines_new = airlines_new.sort();
-    for(let i of locations_new){
-        const airport_option = document.createElement("option");
-        airport_option.appendChild(document.createTextNode(i));
-        airport_option.value = i;
-        airports_arrivals.appendChild(airport_option);
-    }
-    for(let i of airlines_new){
-        const airline_option = document.createElement("option");
-        airline_option.appendChild(document.createTextNode(i));
-        airline_option.value = i;
-        airlines_arrivals.appendChild(airline_option);
-    }
-})
-.catch(error =>{
-    console.log(error);
-})
+//         }
+//         if(i.airline_name!=undefined){
+//             const str = i.airline_name.name;
+//             const str1 = str.charAt(0).toUpperCase() + str.slice(1);
+//             // const str2 = i.iata;
+//             // const str3 = str1 + ","+ str2
+//             airlines.push(str1);
+//         }
+//     }
+//     let locations_new = [];
+//     let airlines_new = [];
+//     for(let i of locations){
+//         if (locations.includes(i)==true && locations_new.includes(i)!=true){
+//             locations_new.push(i);
+//         }
+//     }
+//     for(let i of airlines){
+//         if (airlines.includes(i)==true && airlines_new.includes(i)!=true){
+//             airlines_new.push(i);
+//         }
+//     }   
+//     locations_new = locations_new.sort();
+//     airlines_new = airlines_new.sort();
+//     for(let i of locations_new){
+//         const airport_option = document.createElement("option");
+//         airport_option.appendChild(document.createTextNode(i));
+//         airport_option.value = i;
+//         airports_arrivals.appendChild(airport_option);
+//     }
+//     for(let i of airlines_new){
+//         const airline_option = document.createElement("option");
+//         airline_option.appendChild(document.createTextNode(i));
+//         airline_option.value = i;
+//         airlines_arrivals.appendChild(airline_option);
+//     }
+// })
+// .catch(error =>{
+//     console.log(error);
+// })
 
-fetch("http://localhost:3000/airports/departures")
-    .then(response=>{
-        return response.json()
-    })
-    .then(data => {
-        const locations = [];
-        const airlines = [];
-        for(let i of data){
-            if(i.location!=undefined){
-                const str = i.location;
-                const str1 = str + "," +i.iata;  
-                locations.push(str1);
-            }
-            if(i.airline_name!=undefined){
-                const str = i.airline_name.name;
-                const str1 = str.charAt(0).toUpperCase() + str.slice(1);
-                // const str2 = i.iata;
-                // const str3 = str1 + ","+ str2
-                airlines.push(str1);
-            }
-        }
-        let locations_new = [];
-        let airlines_new = [];
-        for(let i of locations){
-            if (locations.includes(i)==true && locations_new.includes(i)!=true){
-                locations_new.push(i);
-            }
-        }
-        for(let i of airlines){
-            if (airlines.includes(i)==true && airlines_new.includes(i)!=true){
-                airlines_new.push(i);
-            }
-        }   
-        locations_new = locations_new.sort();
-        airlines_new = airlines_new.sort();
-        for(let i of locations_new){
-            const airport_option = document.createElement("option");
-            airport_option.appendChild(document.createTextNode(i));
-            airport_option.value = i;
-            airports_departures.appendChild(airport_option);
-        }
-        for(let i of airlines_new){
-            const airline_option = document.createElement("option");
-            airline_option.appendChild(document.createTextNode(i));
-            airline_option.value = i;
-            airlines_departures.appendChild(airline_option);
-        }
-    })
-    .catch(error =>{
-        console.log(error);
-    })
+// fetch("http://localhost:3000/airports/departures")
+//     .then(response=>{
+//         return response.json()
+//     })
+//     .then(data => {
+//         const locations = [];
+//         const airlines = [];
+//         for(let i of data){
+//             if(i.location!=undefined){
+//                 const str = i.location;
+//                 const str1 = str + "," +i.iata;  
+//                 locations.push(str1);
+//             }
+//             if(i.airline_name!=undefined){
+//                 const str = i.airline_name.name;
+//                 const str1 = str.charAt(0).toUpperCase() + str.slice(1);
+//                 // const str2 = i.iata;
+//                 // const str3 = str1 + ","+ str2
+//                 airlines.push(str1);
+//             }
+//         }
+//         let locations_new = [];
+//         let airlines_new = [];
+//         for(let i of locations){
+//             if (locations.includes(i)==true && locations_new.includes(i)!=true){
+//                 locations_new.push(i);
+//             }
+//         }
+//         for(let i of airlines){
+//             if (airlines.includes(i)==true && airlines_new.includes(i)!=true){
+//                 airlines_new.push(i);
+//             }
+//         }   
+//         locations_new = locations_new.sort();
+//         airlines_new = airlines_new.sort();
+//         for(let i of locations_new){
+//             const airport_option = document.createElement("option");
+//             airport_option.appendChild(document.createTextNode(i));
+//             airport_option.value = i;
+//             airports_departures.appendChild(airport_option);
+//         }
+//         for(let i of airlines_new){
+//             const airline_option = document.createElement("option");
+//             airline_option.appendChild(document.createTextNode(i));
+//             airline_option.value = i;
+//             airlines_departures.appendChild(airline_option);
+//         }
+//     })
+//     .catch(error =>{
+//         console.log(error);
+//     })
 
-const arrivalbutton=document.querySelector("button.arrivals");
-arrivalbutton.classList.add("touched");
-document.getElementById("arrivals").style.display="block";
-const departures=document.querySelector(".flight-departures");
-departures.classList.add("nonvisible");
-document.querySelector(".departures-table").style.display="none";
-// document.querySelector(".flights-info").style.display="none";
+// const arrivalbutton=document.querySelector("button.arrivals");
+// arrivalbutton.classList.add("touched");
+// document.getElementById("arrivals").style.display="block";
+// const departures=document.querySelector(".flight-departures");
+// departures.classList.add("nonvisible");
+// document.querySelector(".departures-table").style.display="none";
+// // document.querySelector(".flights-info").style.display="none";
 
 function arrivals_form(){
     document.getElementById("arrivals").style.display="block";

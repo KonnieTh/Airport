@@ -5,10 +5,10 @@ import pg from "pg";
 
 const pool = new pg.Pool({
     user:"postgres",
-    password:"test1234",
+    password:"abcd123!",
     host:"localhost",
     port:5432,
-    database:"airport"
+    database:"Airport"
 })
 
 async function connect(){
@@ -231,7 +231,53 @@ async function getAnnouncementById(id,callback){
     }
 }
 
-export{getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement}
+async function addFlightFrom(callback){
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let hours = ("0" + (date_ob.getHours())).slice(-2);
+    let minutes = ("0" + (date_ob.getMinutes() + 1)).slice(-2);
+    let full_date=year + "-" + month + "-" + date;
+    let cur_time=hours + ":" + minutes + ":00"
+    let cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
+    const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${full_date}' and "is_destination"=false and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}' order by expected_time `;
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        console.log(res.rows)
+        callback(null,res.rows);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
+
+async function addFlightTo(callback){
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let hours = ("0" + (date_ob.getHours())).slice(-2);
+    let minutes = ("0" + (date_ob.getMinutes() + 1)).slice(-2);
+    let full_date=year + "-" + month + "-" + date;
+    let cur_time=hours + ":" + minutes + ":00"
+    let cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
+    const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${full_date}' and "is_destination"=true and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}' order by expected_time `;
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        console.log(res.rows)
+        callback(null,res.rows);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
+
+export{getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,addFlightFrom,addFlightTo}
 
 
 

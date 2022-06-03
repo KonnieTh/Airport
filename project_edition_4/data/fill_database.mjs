@@ -2,7 +2,7 @@ import pg from "pg";
 
 const pool = new pg.Pool({
   user: 'postgres',
-  database: 'Airport',
+  database: 'airport',
   password: 'abcd123!',
   port: 5432,
   host: 'localhost',

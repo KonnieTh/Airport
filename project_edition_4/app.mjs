@@ -1,7 +1,6 @@
 import express from 'express'
 const app = express()
 import cors from 'cors';
-import handlebars from 'hbs';
 // import dotenv from 'dotenv'
 // if (process.env.NODE_ENV !== 'production') {
 //     dotenv.config();
@@ -177,11 +176,41 @@ app.post('/new_airline',(req,res)=>{
 });
 
 
-app.get('/flights',(req,res)=>{
+app.get('/flights/arrivals',(req,res)=>{
+    model.addFlightFrom((err,rows) => {
+        if(err){
+            return console.error(err.message);
+        }
+        res.render('flights',{
+            style:'flights.css',
+            script:'flights.js',
+            layout:'layout',
+            flights:rows
+        })
     res.render('flights',{
         style:'flights.css',
         script:'flights.js',
         layout:'layout'
+    })
+    })
+})
+
+app.get('/flights/departures',(req,res)=>{
+    model.addFlightTo((err,rows) => {
+        if(err){
+            return console.error(err.message);
+        }
+        res.render('flights',{
+            style:'flights.css',
+            script:'flights.js',
+            layout:'layout',
+            flights2:rows
+        })
+    res.render('flights',{
+        style:'flights.css',
+        script:'flights.js',
+        layout:'layout'
+    })
     })
 })
 

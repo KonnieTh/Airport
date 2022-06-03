@@ -49,15 +49,21 @@ for j in range(30):
             if(day_a==31 and month==6):
                 month_a=7
                 day_a="01"
-            if(len(str(j))==1 and len(str(month))==1):
+            if(len(str(j+1))==1 and len(str(month))==1):
                 lis.append([id,flies_before.loc[i].at["airport_ID1"],flies_before.loc[i].at["airline_ID"],"2022-0"+str(month)+"-0"+str(j+1),time_left,False])
-                lis.append([id,flies_before.loc[i].at["airport_ID2"],flies_before.loc[i].at["airline_ID"],"2022-0"+str(month_a)+"-0"+str(day_a),time_arrived,True])
-            elif(len(str(j))!=1 and len(str(month))==1):
+                if(len(str(day_a))==1):
+                    lis.append([id,flies_before.loc[i].at["airport_ID2"],flies_before.loc[i].at["airline_ID"],"2022-0"+str(month_a)+"-0"+str(day_a),time_arrived,True])
+                else: 
+                    lis.append([id,flies_before.loc[i].at["airport_ID2"],flies_before.loc[i].at["airline_ID"],"2022-0"+str(month_a)+"-"+str(day_a),time_arrived,True])
+            elif(len(str(j+1))!=1 and len(str(month))==1):
                 lis.append([id,flies_before.loc[i].at["airport_ID1"],flies_before.loc[i].at["airline_ID"],"2022-0"+str(month)+"-"+str(j+1),time_left,False])
                 lis.append([id,flies_before.loc[i].at["airport_ID2"],flies_before.loc[i].at["airline_ID"],"2022-0"+str(month_a)+"-"+str(day_a),time_arrived,True])
-            elif(len(str(j))==1 and len(str(month))!=1):
+            elif(len(str(j+1))==1 and len(str(month))!=1):
                 lis.append([id,flies_before.loc[i].at["airport_ID1"],flies_before.loc[i].at["airline_ID"],"2022-"+str(month)+"-0"+str(j+1),time_left,False])
-                lis.append([id,flies_before.loc[i].at["airport_ID2"],flies_before.loc[i].at["airline_ID"],"2022-"+str(month_a)+"-0"+str(day_a),time_arrived,True])
+                if(len(str(day_a))==1):
+                    lis.append([id,flies_before.loc[i].at["airport_ID2"],flies_before.loc[i].at["airline_ID"],"2022-"+str(month_a)+"-0"+str(day_a),time_arrived,True])
+                else: 
+                    lis.append([id,flies_before.loc[i].at["airport_ID2"],flies_before.loc[i].at["airline_ID"],"2022-"+str(month_a)+"-"+str(day_a),time_arrived,True])
             else:
                 lis.append([id,flies_before.loc[i].at["airport_ID1"],flies_before.loc[i].at["airline_ID"],"2022-"+str(month)+"-"+str(j+1),time_left,False])
                 lis.append([id,flies_before.loc[i].at["airport_ID2"],flies_before.loc[i].at["airline_ID"],"2022-"+str(month_a)+"-"+str(day_a),time_arrived,True])
@@ -66,4 +72,4 @@ for j in range(30):
 flies=pd.DataFrame(lis)
 flies.columns = ["flight_ID", "airport_ID", "airline_ID","flight_date","expected_time","is_destination"]
 
-flies.to_csv('Front-end/data/Flies_.csv', index=False)
+flies.to_csv('project_edition_4/data/Flies_.csv', index=False)
