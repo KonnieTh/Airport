@@ -346,13 +346,10 @@ app.get('/flights/arrivals',(req,res)=>{
             style:'flights.css',
             script:'flights.js',
             layout:'layout',
-            flights:rows
+            flights:rows,
+            bool:true,
+            bool2:false
         })
-    res.render('flights',{
-        style:'flights.css',
-        script:'flights.js',
-        layout:'layout'
-    })
     })
 })
 
@@ -365,13 +362,10 @@ app.get('/flights/departures',(req,res)=>{
             style:'flights.css',
             script:'flights.js',
             layout:'layout',
-            flights2:rows
+            flights2:rows,
+            bool:false,
+            bool2:true
         })
-    res.render('flights',{
-        style:'flights.css',
-        script:'flights.js',
-        layout:'layout'
-    })
     })
 })
 

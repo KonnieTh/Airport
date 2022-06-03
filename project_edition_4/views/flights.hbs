@@ -1,6 +1,6 @@
 <div class="choices">
-    <a href='http://localhost:3000/flights/arrivals' class="arrivals" , onclick="arrivals_form()"> Αφίξεις</a>
-    <a href='http://localhost:3000/flights/departures' class="departures" onclick="departures_form()">Αναχωρήσεις</a>
+    <a href='http://localhost:3000/flights/arrivals' class="arrivals" , onclick="arrivals_form()"{{#if bool}} style="background-color: rgb(50, 26, 26);"{{/if}}> Αφίξεις</a>
+    <a href='http://localhost:3000/flights/departures' class="departures" onclick="departures_form()"{{#if bool2}} style="background-color: rgb(50, 26, 26);"{{/if}}>Αναχωρήσεις</a>
 </div>
     {{!-- <iframe name="hiddenFrame" class="hide"></iframe>
     <div class="flights-menu">
@@ -59,8 +59,11 @@
                 </div>
             </form>
         </div> --}}
+        
         <div class="flights-info">
-            <table class="arrivals-table flights-header",id= "arrivals">
+            {{#if bool}}
+            <div class="arr">
+                <table class="arrivals-table flights-header",id= "arrivals">
                 <thead>
                     <tr class="row">
                         <th rowspan="2">Αεροπορική Εταιρεία</th>
@@ -81,8 +84,12 @@
                         <th>{{terminal}}-{{gate_name}}{{gate_number}}</th>
                 </tr>
                 {{/each}}
-            </table>
-            <table class="departures-table flights-header",id= "departures">
+                </table>
+            </div>
+            {{/if}}
+            {{#if bool2}}
+            <div class="dep">
+                <table class="departures-table flights-header",id= "departures">
                 <thead>
                     <tr class="row">
                         <th rowspan="2">Αεροπορική Εταιρεία</th>
@@ -104,5 +111,7 @@
                 </tr>
                 {{/each}}
             </table>
+            </div>
+            {{/if}}
         </div>
     </div>

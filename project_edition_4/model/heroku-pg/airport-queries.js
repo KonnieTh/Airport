@@ -237,10 +237,15 @@ async function addFlightFrom(callback){
     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
     let year = date_ob.getFullYear();
     let hours = ("0" + (date_ob.getHours())).slice(-2);
-    let minutes = ("0" + (date_ob.getMinutes() + 1)).slice(-2);
+    let minutes = ("0" + (date_ob.getMinutes())).slice(-2);
     let full_date=year + "-" + month + "-" + date;
     let cur_time=hours + ":" + minutes + ":00"
-    let cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
+    console.log(parseInt(hours))
+    if(parseInt(hours)+1>24){
+        var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + minutes + ":00"
+    }else{
+        var cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
+    }
     const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${full_date}' and "is_destination"=false and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}' order by expected_time `;
     try{
         const client = await connect();
@@ -263,7 +268,12 @@ async function addFlightTo(callback){
     let minutes = ("0" + (date_ob.getMinutes() + 1)).slice(-2);
     let full_date=year + "-" + month + "-" + date;
     let cur_time=hours + ":" + minutes + ":00"
-    let cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
+    
+    if(parseInt(hours)+1>24){
+        var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + minutes + ":00"
+    }else{
+        var cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
+    }
     const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${full_date}' and "is_destination"=true and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}' order by expected_time `;
     try{
         const client = await connect();

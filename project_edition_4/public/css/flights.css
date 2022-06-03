@@ -7,7 +7,6 @@
 .flights{
     font-weight: bold;
 }
-
 .choices a{
     min-width: 140px;
     margin:1em 0em;
@@ -15,7 +14,7 @@
     display:inline;
     padding:0.5em 0em;
     border:none;
-    background-color:rgb(142 52 52);
+    background-color:rgb(163, 56, 56);
     color:white;
     font-size:1em;
     cursor:pointer;
