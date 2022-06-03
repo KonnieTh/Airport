@@ -1,6 +1,7 @@
 import express from 'express'
 const app = express()
 import cors from 'cors';
+import handlebars from 'hbs';
 // import dotenv from 'dotenv'
 // if (process.env.NODE_ENV !== 'production') {
 //     dotenv.config();
@@ -32,7 +33,9 @@ app.use(express.static('public'))
 //Διαδρομές. Αντί να γράψουμε τις διαδρομές μας εδώ, τις φορτώνουμε από ένα άλλο αρχείο
 //και τώρα χρησιμοποιούμε αυτές τις διαδρομές
 
-app.engine('hbs', exphbs.engine({
+
+
+app.engine('hbs',exphbs.engine({
     defaultLayout: 'layout', // το default είναι main, αλλά το "layout" ίσως πιο διαισθητικό
     extname: 'hbs'
 }));
@@ -175,16 +178,10 @@ app.post('/new_airline',(req,res)=>{
 
 
 app.get('/flights',(req,res)=>{
-    model.addFlightFrom((err,rows) => {
-        if(err){
-            return console.error(err.message);
-        }
-        res.render('flights',{
-            style:'flights.css',
-            script:'flights.js',
-            layout:'layout',
-            flights:rows
-        })
+    res.render('flights',{
+        style:'flights.css',
+        script:'flights.js',
+        layout:'layout'
     })
 })
 
@@ -213,6 +210,110 @@ app.get(`/shops-admin`,(req,res)=>{
     })
 })
 
+
+app.get('/announcements',(req,res)=>{
+    model.getAnnouncements((err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.render('announcements',{
+                style:'announcements.css',
+                script:'announcements.js',
+                layout:'layout',
+                announcements:data
+            })
+        }
+    })
+})
+
+app.get('/announcements/id/:id',(req,res)=>{
+    // console.log(req.query);
+    model.getAnnouncementById(req.params.id,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.render('show-announcement',{
+                style:'announcements.css',
+                script:'announcements.js',
+                layout:'layout',
+                announcements:data
+            })
+        }
+    })
+})
+
+app.get('/announcements/search',(req,res)=>{
+    const priority = req.query.priority;
+    console.log(priority);
+    model.getAnnouncementsByPriority(priority,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.render('announcements',{
+                style:'announcements.css',
+                script:'announcements.js',
+                layout:'layout',
+                announcements:data
+            })
+        }
+    })
+})
+
+
+app.get('/announcements-admin',(req,res)=>{
+    model.getAnnouncements((err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.render('announcements-admin',{
+                style:'announcements-admin.css',
+                script:'announcements.js',
+                layout:'layout-admin',
+                announcements:data
+            })
+        }
+    })
+})
+
+app.get('/announcements-admin/search',(req,res)=>{
+    const priority = req.query.priority;
+    console.log(priority);
+    model.getAnnouncementsByPriority(priority,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.render('announcements-admin',{
+                style:'announcements-admin.css',
+                script:'announcements.js',
+                layout:'layout-admin',
+                announcements:data
+            })
+        }
+    })
+})
+
+app.get('/announcements-admin/id/:id',(req,res)=>{
+    // console.log(req.query);
+    model.getAnnouncementById(req.params.id,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.render('announcements-admin',{
+                style:'announcements-admin.css',
+                script:'announcements.js',
+                layout:'layout-admin',
+                announcements:data
+            })
+        }
+    })
+})
+
 app.post('/create_announcement',(req,res)=>{
     const text = req.body;
     console.log(text);
@@ -224,40 +325,46 @@ app.post('/create_announcement',(req,res)=>{
             res.json(data);
         }
     })
-
-})
-
-app.get('/announcements/start/:start/limit/:limit',(req,res)=>{
-    const params = req.params;
-    console.log(params);
-    model.getAnnouncements(params,(err,data) =>{
-        if(err){
-            return console.error(err.message);
-        }        
-        else{
-            res.render('announcements',{
-                style:'announcements.css',
-                script:'announcements.js',
-                layout:'layout',
-                airlines:data
-            })
-        }
-    })
 })
 
 
-app.get('/get_announcement/:id',(req,res)=>{
-    const params = req.body;
-    console.log(params);
-    model.getAnnouncements((err,data) =>{
-        if(err){
-            return console.error(err.message);
-        }        
-        else{
-            res.json(data);
-        }
-    })
-})
+
+
+// app.get('/announcements/',(req,res)=>{
+//     console.log(req.query)
+//     // model.getAnnouncementsStart(0,10,(err,data) =>{
+//     //     if(err){
+//     //         return console.error(err.message);
+//     //     }
+//     //     else{
+//     //         res.render('announcements',{
+//     //             style:'announcements.css',
+//     //             script:'announcements.js',
+//     //             layout:'layout',
+//     //             announcements:data
+//     //         })
+//     //     }
+//     // })
+// })
+
+
+// app.get('/get_announcement/:id',(req,res)=>{
+//     const params = req.body;
+//     console.log(params);
+//     model.getAnnouncements((err,data) =>{
+//         if(err){
+//             return console.error(err.message);
+//         }        
+//         else{
+//             res.json(data);
+//         }
+//     })
+// })
+
+
+
+
+
 
 
 export { app as Airport};
