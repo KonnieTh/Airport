@@ -25,6 +25,9 @@
 .announcements-container{
     background-color:rgb(60, 59, 59);
     border-radius:10px;
+    padding-bottom:1em;
+    overflow-y:scroll;
+    height:30em;
 }
 
 
@@ -126,6 +129,7 @@ table td:nth-child(2){
     transition-delay: 0s;
     font-size:0.8em;
     margin:1.5em 3em;
+    text-decoration: none;
 }
 
 .previous:hover,.next:hover,.new:hover{
@@ -133,7 +137,6 @@ table td:nth-child(2){
     background-color:grey;
     color:white;
 }
-
 
 footer{
     margin-top: 2em;
@@ -301,6 +304,19 @@ footer{
     margin-top: 9em !important;
 }
 
+.message{
+    border: 1px solid #ddd;
+    width:95%;
+    margin:auto;
+    margin-top:-2.5em;
+    padding:1em;
+    text-align:justify;
+    line-height: 1.2em;
+    word-break:break-all;
+    font-size:0.8em;
+}
+
+
 @media only screen and (max-width: 1500px){
     #text-editor label:first-child input{
         width:70%;
@@ -308,6 +324,7 @@ footer{
     #text-editor label:nth-child(2){
         margin-left:2em;
     }
+  
 }
 
 @media only screen and (max-width: 1290px){
@@ -323,6 +340,9 @@ footer{
     }
     #text-editor label:nth-child(2){
         margin-left:2em;
+    }
+    .message{
+        width:90%;
     }
 
 }
@@ -354,11 +374,17 @@ footer{
     #text-editor label:nth-child(2){
         margin-left:2em;
     }
+    .message{
+        width:80%;
+    }
 }
 
 @media only screen and (max-width: 425px) {
     .options #priority,.options label:first-child{
         margin-bottom:1em;
+    }
+    .message{
+        width:75%;
     }
 }
 

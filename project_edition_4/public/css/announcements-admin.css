@@ -25,6 +25,9 @@
 .announcements-container{
     background-color:rgb(60, 59, 59);
     border-radius:10px;
+    padding-bottom:1em;
+    overflow-y:scroll;
+    height:30em;
 }
 
 
@@ -112,7 +115,7 @@ table td:nth-child(2){
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
-    justify-content:space-between;
+    justify-content:center;
 }
 
 .previous,.next,.new{
@@ -128,6 +131,7 @@ table td:nth-child(2){
     transition-delay: 0s;
     font-size:0.8em;
     margin:1.5em 3em;
+    text-decoration:none;
 }
 
 .previous:hover,.next:hover,.new:hover{
