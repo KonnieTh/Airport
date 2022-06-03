@@ -27,6 +27,19 @@ async function getAirlinebyletter(letter,callback){
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
+        callback(null,res.rows);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
+
+async function getAirlineName(id,callback){
+    const sql =   `select * from "Airline" where "airline_ID"='${id}'`;
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
         console.log(res.rows);
         callback(null,res.rows);
     }
@@ -34,6 +47,7 @@ async function getAirlinebyletter(letter,callback){
         callback(err,null);
     }
 }
+
 
 async function editAirline(airline,callback){
     const sql = `update "Airline" 
@@ -113,6 +127,7 @@ async function editInfo(text,callback){
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
+        console.log(res.rows);
         callback(null,res.rows);
     }
     catch(err){
@@ -146,7 +161,6 @@ async function createAnnouncement(text,callback){
                 const client = await connect();
                 const res = await client.query(sql);
                 await client.release();
-                console.log(res.rows)
                 callback(null,res.rows);
             }
             catch(err){
@@ -160,7 +174,7 @@ async function createAnnouncement(text,callback){
 }
 
 async function getAnnouncements(params,callback){
-    const sql = `Select * from "Announcement" where "airline_ID">'${params.index} and "airline_ID"<'${params.index + params.limit}''`;
+    const sql = `Select * from "Announcement" where "announcement_ID">${params.start} and "announcement_ID"<${parseInt(params.start) + parseInt(params.limit)}'`;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -173,7 +187,7 @@ async function getAnnouncements(params,callback){
     }
 }
 
-export{getAirlinebyletter,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,getAnnouncements}
+export{getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,getAnnouncements}
 
 
 

@@ -60,7 +60,7 @@
     display:none;
     min-width: 320px;
     margin-bottom: 15vh;
-    margin-top: 6vh;
+    margin-top: 0vh;
 }
 
 .arrivals-form form,.departures-form form{
@@ -132,7 +132,7 @@
 }
 
 .container{
-    height:30em;
+    height:40em;
     background-color:white;
     overflow-y:scroll;
     width:101.3%;
@@ -155,7 +155,9 @@
     background: #555; 
 }
   
-
+.flights-info{
+    margin-bottom:8em;
+}
 
 
 .flights-header{
@@ -193,6 +195,7 @@ iframe{
 footer{
     margin-top:0;
 }
+
 
 .wrap div, .wrap h2{
     padding: 1em 1em 0em 1em;
@@ -273,6 +276,9 @@ footer{
 #covid ul li{
     margin-bottom: 1em;
 }
+
+
+
 @media only screen and (max-width: 1400px) {
     .choices{
         font-size:0.7em;
@@ -312,3 +318,4 @@ footer{
     }
     
 }
+

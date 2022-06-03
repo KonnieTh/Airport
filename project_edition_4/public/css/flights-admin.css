@@ -60,7 +60,7 @@
     display:none;
     min-width: 320px;
     margin-bottom: 15vh;
-    margin-top: 6vh;
+    margin-top: 0vh;
 }
 
 .arrivals-form form,.departures-form form{
@@ -132,7 +132,7 @@
 }
 
 .container{
-    height:30em;
+    height:40em;
     background-color:white;
     overflow-y:scroll;
     width:101.3%;
@@ -155,7 +155,9 @@
     background: #555; 
 }
   
-
+.flights-info{
+    margin-bottom:8em;
+}
 
 
 .flights-header{

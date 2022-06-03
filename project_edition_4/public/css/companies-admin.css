@@ -286,6 +286,7 @@ form.new_airline{
     margin:auto;
     background-color:rgba(111,111,111,0.6);
     border-radius:10px;
+    margin-bottom:2em;
 }
 
 form.new_airline .airline{

@@ -147,256 +147,314 @@ function flights_catalog(airline,flight_type){
     }
 }
 
-
-async function display(firstletter){
-    let editbtns = [];
-    let deletebtns = [];
-    let index=0;
-    dis.innerHTML="";
-    dis = document.querySelector(".company-info");
-    let response = await fetch(`http://localhost:3000/airlines/filter/${firstletter}`);
-    if(response.status==200){
-        let data = await response.json();
-        for(let i=0;i<data.length;i++){
-            const element_row = document.createElement("div");
-            element_row.classList.add("row");
-            const airline_name = document.createElement("div");
-            airline_name.classList.add("company");
-            const text = document.createTextNode(data[i].airline_name);
-            airline_name.appendChild(text);
-            const links = document.createElement("a");
-            links.addEventListener('click',function(){
-                const flights = document.getElementById("companies-flights");
-                flights.style.display = "block";
-            });
-            links.href="#companies-flights";
-            links.target="_self";
-            const text1 = document.createTextNode("Πτήσεις >");
-            links.appendChild(text1);
-            links.addEventListener("click",function(){
-                flights_catalog(data[i],"arrivals");
-            })
-            element_row.appendChild(airline_name);
-            element_row.appendChild(links);
-            dis.appendChild(element_row);
-            const element_row_info = document.createElement("div");
-            element_row_info.classList.add("row-info");
-            const icon = document.createElement('img');
-            icon.classList.add("icon");
-            // console.log(names[index],airlines[index].iata_code);
-            fetch(`http://pics.avs.io/150/150/${data[i].IATA}.png`)
-                .then(response=> response.blob())
-                .then(blob =>
-                     icon.src = URL.createObjectURL(blob))
-                .catch(error => console.log(error))
-            
-            icon.style.backgroundColor="white";
-            element_row_info.appendChild(icon);
-            const details = document.createElement('div');
-            details.classList.add("details");
-            
-            const tel = document.createElement('div');
-            tel.classList.add("telephone");
-            const text2 = document.createTextNode(`Τηλέφωνο: `);
-            tel.appendChild(text2);
-            const teltext = document.createElement('div');
-            teltext.appendChild(document.createTextNode(data[i].telephone));
-            tel.appendChild(teltext);          
-            
-            const web = document.createElement('div');
-            web.classList.add("website");
-            const text3 = document.createTextNode(`Email: `);
-            web.appendChild(text3);
-            const telweb = document.createElement('div');
-            telweb.appendChild(document.createTextNode(data[i].email));
-            web.appendChild(telweb);
-
-            const gate = document.createElement("div");
-            gate.classList.add("entrance");
-            const text5 = document.createTextNode(`Τερματικός: `);
-            gate.appendChild(text5);
-            const en = document.createElement('div');
-            en.appendChild(document.createTextNode(data[i].terminal + " - Πύλη: " + data[i].gate_name + data[i].gate_number));
-            gate.appendChild(en);
-            
-            details.appendChild(tel);
-            details.appendChild(web);
-            details.appendChild(gate);
-
-            element_row_info.appendChild(details);
-            dis.appendChild(element_row_info);
-            const buttons = document.createElement("div");
-            buttons.classList.add("buttons");
-
-            const editbtn = document.createElement("button");
-            editbtn.classList.add("edit");
-            editbtn.addEventListener('click', function(){
-                editInfo(i,data[i],editbtn);
-                console.log(i,data[i]);
-            });
-            const comment1 = document.createTextNode("Επεξεργασία");
-            editbtn.appendChild(comment1);
-            editbtns.push(editbtn);
-            buttons.appendChild(editbtn);
-
-            const deletebtn = document.createElement("button");
-            deletebtn.classList.add("remove");
-            deletebtn.addEventListener('click', function(){
-                console.log(i,data[i]);
-                deleteInfo(data[i]);
-            });
-            const comment2 = document.createTextNode("Διαγραφή");
-            deletebtn.appendChild(comment2);
-            deletebtns.push(deletebtn);
-            buttons.appendChild(deletebtn);
-
-            details.appendChild(buttons);
-            index+=1;
-        }
-    }
+async function display(letter){
+    fetch(`/companies-admin/${letter}`)
+    .then(response=>response.json())
+    .then(data=>{
+        console.log(data);
+    })
+    .catch((error)=>{
+        console.log("Error:",error);
+    })
 }
 
 
-function editInfo(index,data,editbtn){
+
+// async function display(firstletter){
+//     let editbtns = [];
+//     let deletebtns = [];
+//     let index=0;
+//     dis.innerHTML="";
+//     dis = document.querySelector(".company-info");
+//     let response = await fetch(`http://localhost:3000/airlines/filter/${firstletter}`);
+//     if(response.status==200){
+//         let data = await response.json();
+//         for(let i=0;i<data.length;i++){
+//             const element_row = document.createElement("div");
+//             element_row.classList.add("row");
+//             const airline_name = document.createElement("div");
+//             airline_name.classList.add("company");
+//             const text = document.createTextNode(data[i].airline_name);
+//             airline_name.appendChild(text);
+//             const links = document.createElement("a");
+//             links.addEventListener('click',function(){
+//                 const flights = document.getElementById("companies-flights");
+//                 flights.style.display = "block";
+//             });
+//             links.href="#companies-flights";
+//             links.target="_self";
+//             const text1 = document.createTextNode("Πτήσεις >");
+//             links.appendChild(text1);
+//             links.addEventListener("click",function(){
+//                 flights_catalog(data[i],"arrivals");
+//             })
+//             element_row.appendChild(airline_name);
+//             element_row.appendChild(links);
+//             dis.appendChild(element_row);
+//             const element_row_info = document.createElement("div");
+//             element_row_info.classList.add("row-info");
+//             const icon = document.createElement('img');
+//             icon.classList.add("icon");
+//             // console.log(names[index],airlines[index].iata_code);
+//             fetch(`http://pics.avs.io/150/150/${data[i].IATA}.png`)
+//                 .then(response=> response.blob())
+//                 .then(blob =>
+//                      icon.src = URL.createObjectURL(blob))
+//                 .catch(error => console.log(error))
+            
+//             icon.style.backgroundColor="white";
+//             element_row_info.appendChild(icon);
+//             const details = document.createElement('div');
+//             details.classList.add("details");
+            
+//             const tel = document.createElement('div');
+//             tel.classList.add("telephone");
+//             const text2 = document.createTextNode(`Τηλέφωνο: `);
+//             tel.appendChild(text2);
+//             const teltext = document.createElement('div');
+//             teltext.appendChild(document.createTextNode(data[i].telephone));
+//             tel.appendChild(teltext);          
+            
+//             const web = document.createElement('div');
+//             web.classList.add("website");
+//             const text3 = document.createTextNode(`Email: `);
+//             web.appendChild(text3);
+//             const telweb = document.createElement('div');
+//             telweb.appendChild(document.createTextNode(data[i].email));
+//             web.appendChild(telweb);
+
+//             const gate = document.createElement("div");
+//             gate.classList.add("entrance");
+//             const text5 = document.createTextNode(`Τερματικός: `);
+//             gate.appendChild(text5);
+//             const en = document.createElement('div');
+//             en.appendChild(document.createTextNode(data[i].terminal + " - Πύλη: " + data[i].gate_name + data[i].gate_number));
+//             gate.appendChild(en);
+            
+//             details.appendChild(tel);
+//             details.appendChild(web);
+//             details.appendChild(gate);
+
+//             element_row_info.appendChild(details);
+//             dis.appendChild(element_row_info);
+//             const buttons = document.createElement("div");
+//             buttons.classList.add("buttons");
+
+//             const editbtn = document.createElement("button");
+//             editbtn.classList.add("edit");
+//             editbtn.addEventListener('click', function(){
+//                 editInfo(i,data[i],editbtn);
+//                 console.log(i,data[i]);
+//             });
+//             const comment1 = document.createTextNode("Επεξεργασία");
+//             editbtn.appendChild(comment1);
+//             editbtns.push(editbtn);
+//             buttons.appendChild(editbtn);
+
+//             const deletebtn = document.createElement("button");
+//             deletebtn.classList.add("remove");
+//             deletebtn.addEventListener('click', function(){
+//                 console.log(i,data[i]);
+//                 deleteInfo(data[i]);
+//             });
+//             const comment2 = document.createTextNode("Διαγραφή");
+//             deletebtn.appendChild(comment2);
+//             deletebtns.push(deletebtn);
+//             buttons.appendChild(deletebtn);
+
+//             details.appendChild(buttons);
+//             index+=1;
+//         }
+//     }
+// }
+
+async function editInfo(airline){
     const telephonevalid = /[0-9]{10}/;
     const emailvalid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    let index = 0;
+    let infos = airline.split(" ");
+    let response = await fetch(`/airline_name/${infos[0]}`);
+    if(response.status==200){
+        let data = await response.json();
+        const name = data[0].airline_name;
+        const elements = document.querySelectorAll(".company-info .row .company");
+        for(let i=0;i<elements.length;i++){
+            if (elements[i].innerText == name){
+                console.log(i);
+                index = i;
+            }
+        }
+        const details = document.querySelectorAll(".row-info .details .buttons")[index];
+        const deletebtn = details.querySelector(".remove");
+        details.removeChild(deletebtn);
+        const submitbtn = document.createElement("button");
+        submitbtn.classList.add("submit");
+        const comment = document.createTextNode("Υποβολή");
+        submitbtn.appendChild(comment);
+        const editbtn = details.querySelector(".edit");
 
-    const details = document.querySelectorAll(".row-info .details .buttons")[index];
-    const deletebtn = details.querySelector(".remove");
-    details.removeChild(deletebtn);
-    const submitbtn = document.createElement("button");
-    submitbtn.classList.add("submit");
-    const comment = document.createTextNode("Υποβολή");
-    submitbtn.appendChild(comment);
+        editbtn.classList.add("touched");
+        editbtn.disabled = "true";
 
-    editbtn.classList.add("touched");
-    editbtn.disabled = "true";
+        let telephone = document.querySelectorAll(".details .telephone")[index];
+        telephone = telephone.querySelector("div");
+        const newItem = document.createElement("input");
+        newItem.setAttribute("type", "tel");
+        newItem.setAttribute("placeholder","Τηλέφωνο");
+        telephone.parentNode.replaceChild(newItem, telephone);  
 
-    let telephone = document.querySelectorAll(".details .telephone")[index];
-    telephone = telephone.querySelector("div");
-    const newItem = document.createElement("input");
-    newItem.setAttribute("type", "tel");
-    newItem.setAttribute("placeholder","Τηλέφωνο");
-    telephone.parentNode.replaceChild(newItem, telephone);  
+        let website = document.querySelectorAll(".details .website")[index];
+        website = website.querySelector("div");
+        const newItem1 = document.createElement("input");
+        newItem1.setAttribute("type", "email");
+        newItem1.placeholder="Διεύθυνση email";
+        website.parentNode.replaceChild(newItem1, website);
 
-    let website = document.querySelectorAll(".details .website")[index];
-    website = website.querySelector("div");
-    const newItem1 = document.createElement("input");
-    newItem1.setAttribute("type", "email");
-    newItem1.placeholder="Διεύθυνση email";
-    website.parentNode.replaceChild(newItem1, website);
+        let entrance = document.querySelectorAll(".details .entrance")[index];
+        entrance.innerHTML="";
+        
+        const terminal = document.createElement("div");
+        terminal.appendChild(document.createTextNode("Terminal: "))
+        const newItem2 = document.createElement("select");
+        for(let i=0;i<4;i++){
+            let option = document.createElement("option");
+            option.value = `${i+1}`;
+            option.appendChild(document.createTextNode(`${i+1}`));
+            newItem2.appendChild(option);
+        }
 
-    let entrance = document.querySelectorAll(".details .entrance")[index];
-    entrance.innerHTML="";
-    
-    const terminal = document.createElement("div");
-    terminal.appendChild(document.createTextNode("Terminal: "))
-    const newItem2 = document.createElement("select");
-    for(let i=0;i<4;i++){
+        terminal.appendChild(newItem2);
+
+        const gate = document.createElement("div");
+        gate.appendChild(document.createTextNode("Gate: "))
+        const newItem3 = document.createElement("select");
         let option = document.createElement("option");
-        option.value = `${i+1}`;
-        option.appendChild(document.createTextNode(`${i+1}`));
-        newItem2.appendChild(option);
+        option.value = "A";
+        option.appendChild(document.createTextNode("A"));
+        newItem3.appendChild(option);
+        option = document.createElement("option");
+        option.value = "B";
+        option.appendChild(document.createTextNode("B"));
+        newItem3.appendChild(option);
+        gate.appendChild(newItem3);
+
+
+        const gate_number = document.createElement("div");
+        gate_number.appendChild(document.createTextNode("Αριθμός Πύλης: "))
+        const newItem4 = document.createElement("select");
+        for(let i=0;i<20;i++){
+            let option = document.createElement("option");
+            option.value = `${i+1}`;
+            option.appendChild(document.createTextNode(`${i+1}`));
+            newItem4.appendChild(option);
+        }
+        gate_number.appendChild(newItem4);
+        
+        entrance.appendChild(terminal);
+        entrance.appendChild(gate);
+        entrance.appendChild(gate_number);
+        entrance.style.fontSize="0.8em";
+        entrance.style.display="flex";
+        entrance.style.flexWrap="wrap";
+        entrance.style.flexDirection="row";
+        entrance.style.justifyContent="center";
+
+
+        submitbtn.addEventListener("click",function(){
+            const iata = data[0].IATA;
+            const telephone = newItem.value;
+            const email = newItem1.value;
+            const terminal = newItem2.value;
+            const gate = newItem3.value;
+            const gate_number=newItem4.value;
+            let errors = 0;
+            const length = telephone.length;
+            if(length!=10){
+                errors+=1;
+            }
+            // && telephonevalid.test(airport) && telephonevalid.test(lostfound) && emailvalid.test(email)
+            if(telephonevalid.test(telephone)==false && telephone!=""){
+                errors+=1;
+            }
+            if(emailvalid.test(email)==false && email!=""){
+                errors+=1;
+            }
+            if(errors>0){
+                alert("Κάτι δεν πήγε καλά με τα στοιχεία που έβαλες. Προσπάθησε ξανά!!!")
+            }
+            if(errors==0){
+                inputs = {iata,telephone,email,terminal,gate,gate_number};
+                console.log(inputs);
+                fetch('/airlines_edit',{
+                    method:"PUT",
+                    headers:{
+                        'Content-Type': 'application/json',
+                    },
+                    body:JSON.stringify(inputs)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Success:",data);
+                })
+                .catch((error) =>{
+                    console.error("Error:",error);
+                })
+            }
+        })
+        details.appendChild(submitbtn);
     }
-
-    terminal.appendChild(newItem2);
-
-    const gate = document.createElement("div");
-    gate.appendChild(document.createTextNode("Gate: "))
-    const newItem3 = document.createElement("select");
-    let option = document.createElement("option");
-    option.value = "A";
-    option.appendChild(document.createTextNode("A"));
-    newItem3.appendChild(option);
-    option = document.createElement("option");
-    option.value = "B";
-    option.appendChild(document.createTextNode("B"));
-    newItem3.appendChild(option);
-    gate.appendChild(newItem3);
+};
 
 
-    const gate_number = document.createElement("div");
-    gate_number.appendChild(document.createTextNode("Αριθμός Πύλης: "))
-    const newItem4 = document.createElement("select");
-    for(let i=0;i<20;i++){
-        let option = document.createElement("option");
-        option.value = `${i+1}`;
-        option.appendChild(document.createTextNode(`${i+1}`));
-        newItem4.appendChild(option);
+async function deleteInfo(airline){
+    let index = 0;
+    let infos = airline.split(" ");
+    let response = await fetch(`/airline_name/${infos[0]}`);
+    if(response.status==200){
+        let data = await response.json();
+        const name = data[0].airline_name;
+        const elements = document.querySelectorAll(".company-info .row .company");
+        for(let i=0;i<elements.length;i++){
+            if (elements[i].innerText == name){
+                console.log(i);
+                index = i;
+            }
+        }
+        alert("Προσοχή! Η ακόλουθη κίνηση οδηγεί στη διαγραφή του στοιχείου από τη βάση δεδομένων!");
+        fetch('http://localhost:3000/airlines_delete',{
+            method:"DELETE",
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(data[0])
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Success:",data);
+        })
+        .catch((error) =>{
+            console.error("Error:",error);
+        })
     }
-    gate_number.appendChild(newItem4);
-    
-    entrance.appendChild(terminal);
-    entrance.appendChild(gate);
-    entrance.appendChild(gate_number);
-    entrance.style.fontSize="0.8em";
-    entrance.style.display="flex";
-    entrance.style.flexWrap="wrap";
-    entrance.style.flexDirection="row";
-    entrance.style.justifyContent="center";
+};
 
-
-    submitbtn.addEventListener("click",function(){
-        const iata = data.IATA;
-        const telephone = newItem.value;
-        const email = newItem1.value;
-        const terminal = newItem2.value;
-        const gate = newItem3.value;
-        const gate_number=newItem4.value;
-        let errors = 0;
-        const length = telephone.length;
-        if(length!=10){
-            errors+=1;
-        }
-        // && telephonevalid.test(airport) && telephonevalid.test(lostfound) && emailvalid.test(email)
-        if(telephonevalid.test(telephone)==false && telephone!=""){
-            errors+=1;
-        }
-        if(emailvalid.test(email)==false && email!=""){
-            errors+=1;
-        }
-        if(errors>0){
-            alert("Κάτι δεν πήγε καλά με τα στοιχεία που έβαλες. Προσπάθησε ξανά!!!")
-        }
-        if(errors==0){
-            inputs = {iata,telephone,email,terminal,gate,gate_number};
-            console.log(inputs);
-            fetch('http://localhost:3000/airlines_edit',{
-                method:"PUT",
-                headers:{
-                    'Content-Type': 'application/json',
-                },
-                body:JSON.stringify(inputs)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Success:",data);
-            })
-            .catch((error) =>{
-                console.error("Error:",error);
-            })
-        }
-    })
-    details.appendChild(submitbtn);
-}
-
-function deleteInfo(data){
-    alert("Προσοχή! Η ακόλουθη κίνηση οδηγεί στη διαγραφή του στοιχείου από τη βάση δεδομένων!")
-    fetch('http://localhost:3000/airlines_delete',{
-        method:"DELETE",
-        headers:{
-            'Content-Type': 'application/json',
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Success:",data);
-    })
-    .catch((error) =>{
-        console.error("Error:",error);
-    })
-}
+// function deleteInfo(data){
+//     alert("Προσοχή! Η ακόλουθη κίνηση οδηγεί στη διαγραφή του στοιχείου από τη βάση δεδομένων!")
+//     fetch('http://localhost:3000/airlines_delete',{
+//         method:"DELETE",
+//         headers:{
+//             'Content-Type': 'application/json',
+//         },
+//         body:JSON.stringify(data)
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log("Success:",data);
+//     })
+//     .catch((error) =>{
+//         console.error("Error:",error);
+//     })
+// }
 
 function add_airline() {
     const insert_form = document.querySelector(".new_airline");
@@ -405,6 +463,7 @@ function add_airline() {
 
 let Div = document.querySelector("div.choices");
 for (let i = 65; i < 91; i++) {
+    const link = document.createElement("a");
     const newButton = document.createElement("button");
     newButton.classList.add("btn");
     newButton.addEventListener("click", function () {
@@ -422,11 +481,16 @@ for (let i = 65; i < 91; i++) {
     const letter = String.fromCodePoint(i);
     const content = document.createTextNode(letter);
     newButton.appendChild(content);
-    Div.appendChild(newButton);
+    link.appendChild(newButton);
+    link.setAttribute("href",`http://localhost:3000/companies-admin/${letter}`)
+    Div.appendChild(link);
 }
 
-const buttonA = document.querySelector(".btn");
-buttonA.classList.add("touched");
+const link = window.location.href;
+const selected_letter = link.slice(-1);
+const place = selected_letter.charCodeAt(0);
+const selected_button = document.querySelectorAll(".btn")[place-65];
+selected_button.classList.add("touched");
 
 display("A");
 

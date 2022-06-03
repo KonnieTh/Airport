@@ -51,8 +51,46 @@ app.route('/').get((req, res) => { res.redirect('/main-page') });
 //     })
 // })
 
+app.get('/main-page',(req,res)=>{
+    res.render('main-page',{
+        style:'style-main-page.css',
+        script:'main.js',
+        layout:'layout-main-page'
+    })
+})
 
+app.get('/main-page-admin',(req,res)=>{
+    res.render('main-page-admin',{
+        style:'style-main-page-admin.css',
+        script:'main.js',
+        layout:'layout-main-page-admin'
+    })
+})
 
+app.get('/text/:titlos',(req,res)=>{
+    const title = req.params.titlos;
+    model.getText(title,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.json(data);
+        }
+    })
+})
+
+app.put('/edit_text',(req,res)=>{
+    const text = req.body;
+    console.log(text,req.body);
+    model.editInfo(text,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.json(data);
+        }
+    })
+})
 
 
 app.get('/companies/:letter',(req,res)=>{
@@ -68,10 +106,152 @@ app.get('/companies/:letter',(req,res)=>{
             layout:'layout',
             airlines:rows
         })
-        
     })
 })
 
+app.get('/companies-admin/:letter',(req,res)=>{
+    let letter=req.params.letter;
+    console.log(letter=req.params.letter);
+    model.getAirlinebyletter(letter,(err,rows) => {
+        if(err){
+            return console.error(err.message);
+        }
+        res.render('companies-admin',{
+            style:'companies-admin.css',
+            script:'companies-admin.js',
+            layout:'layout-admin',
+            airlines:rows
+        })
+    })
+})
+
+app.get('/airline_name/:iata',(req,res)=>{
+    let iata = req.params.iata;
+    model.getAirlineName(iata,(err,data)=>{
+        if(err){
+            return console.error(err.message);
+        }
+        res.json(data);
+    })
+})
+
+app.put('/airlines_edit',(req,res)=>{
+    const airline=req.body;
+    console.log(airline);
+    model.editAirline(airline,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.json(data);
+            res.redirect('/companies/A');
+        }
+    })
+})
+
+app.delete('/airlines_delete',(req,res)=>{
+    const airline=req.body;
+    model.deleteAirline(airline,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.json(data);
+        }
+    })
+})
+
+app.post('/new_airline',(req,res)=>{
+    const airline=req.body;
+    model.insertAirline(airline,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.json(data);
+        }
+    })
+});
+
+
+app.get('/flights',(req,res)=>{
+    res.render('flights',{
+        style:'flights.css',
+        script:'flights.js',
+        layout:'layout'
+    })
+})
+
+app.get('/flights-admin',(req,res)=>{
+    res.render('flights-admin',{
+        style:'flights-admin.css',
+        script:'flights.js',
+        layout:'layout-admin'
+    })
+})
+
+
+app.get(`/shops`,(req,res)=>{
+    res.render('shops',{
+        style:'shops.css',
+        script:'shops.js',
+        layout:'layout'
+    })
+})
+
+app.get(`/shops-admin`,(req,res)=>{
+    res.render('shops',{
+        style:'shops.css',
+        script:'shops.js',
+        layout:'layout-admin'
+    })
+})
+
+app.post('/create_announcement',(req,res)=>{
+    const text = req.body;
+    console.log(text);
+    model.createAnnouncement(text,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }
+        else{
+            res.json(data);
+        }
+    })
+
+})
+
+app.get('/announcements/start/:start/limit/:limit',(req,res)=>{
+    const params = req.params;
+    console.log(params);
+    model.getAnnouncements(params,(err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }        
+        else{
+            res.render('announcements',{
+                style:'announcements.css',
+                script:'announcements.js',
+                layout:'layout',
+                airlines:data
+            })
+        }
+    })
+})
+
+
+app.get('/get_announcement/:id',(req,res)=>{
+    const params = req.body;
+    console.log(params);
+    model.getAnnouncements((err,data) =>{
+        if(err){
+            return console.error(err.message);
+        }        
+        else{
+            res.json(data);
+        }
+    })
+})
 
 
 

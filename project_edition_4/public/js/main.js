@@ -71,8 +71,8 @@ function save() {
     let date = new Date();
     date = `${date}`;
     console.log(date.slice(0,24));
-    fetch(`http://localhost:3000/edit_info`,{
-        method:"put",
+    fetch(`/edit_text`,{
+        method:"PUT",
         headers:{
             'Content-Type': 'application/json',
         },
@@ -107,7 +107,6 @@ elements.forEach(element => {
         else {
             document.execCommand(command, false, null);
         }
-
     });
 });
 
