@@ -18,3 +18,17 @@ function covid_on() {
 function covid_off() {
     document.getElementById("covid").style.display = "none";
 }
+
+fetch(`/text/covid`)
+.then(response=>response.json())
+.then(data=>{
+    console.log(data);
+    const text = document.querySelector('.covidtext');
+    text.innerHTML="";
+    for(let i of data){
+        text.innerHTML = i.description;
+    }
+})
+.catch((error)=>{
+    console.log("Error:",error);
+})
