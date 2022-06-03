@@ -5,10 +5,10 @@ import pg from "pg";
 
 const pool = new pg.Pool({
     user:"postgres",
-    password:"abcd123!",
+    password:"test1234",
     host:"localhost",
     port:5432,
-    database:"Airport"
+    database:"airport"
 })
 
 async function connect(){
@@ -173,8 +173,8 @@ async function createAnnouncement(text,callback){
     }
 }
 
-async function getAnnouncements(params,callback){
-    const sql = `Select * from "Announcement" where "announcement_ID">${params.start} and "announcement_ID"<${parseInt(params.start) + parseInt(params.limit)}'`;
+async function getAnnouncements(callback){
+    const sql = ` Select * from "Announcement"`;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -187,14 +187,38 @@ async function getAnnouncements(params,callback){
     }
 }
 
-async function addFlightFrom(callback){
-    let date_ob = new Date();
-    let date = ("0" + date_ob.getDate()).slice(-2);
-    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-    let year = date_ob.getFullYear();
-    let full_date=year + "-" + month + "-" + date;
-    console.log(full_date)
-    const sql = `Select * from "flies" where "flight_date"==${full_date} `;
+
+async function getAnnouncementsByPriority(priority,callback){
+    if(priority=="all"){
+        const sql = ` Select * from "Announcement"`;
+        try{
+            const client = await connect();
+            const res = await client.query(sql);
+            await client.release();
+            console.log(res.rows)
+            callback(null,res.rows);
+        }
+        catch(err){
+            callback(err,null);
+        }
+    }
+    else{
+        const sql = ` Select * from "Announcement" where "priority"='${priority}'`;
+        try{
+            const client = await connect();
+            const res = await client.query(sql);
+            await client.release();
+            console.log(res.rows)
+            callback(null,res.rows);
+        }
+        catch(err){
+            callback(err,null);
+        }
+    }
+}
+
+async function getAnnouncementById(id,callback){
+    const sql = ` Select * from "Announcement" where "announcement_ID" = ${id}`;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -207,7 +231,7 @@ async function addFlightFrom(callback){
     }
 }
 
-export{getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,getAnnouncements,addFlightFrom}
+export{getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement}
 
 
 
