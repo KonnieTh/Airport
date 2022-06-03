@@ -94,6 +94,16 @@ app.put('/edit_text',(req,res)=>{
     })
 })
 
+app.get('/airlines/:name',(req,res)=>{
+    let name = req.params.name;
+    model.getAirline(name,(err,data)=>{
+        if(err){
+            return console.error(err.message);
+        }
+        res.json(data);
+    })
+})
+
 
 app.get('/companies/:letter',(req,res)=>{
     let letter=req.params.letter;
@@ -176,41 +186,11 @@ app.post('/new_airline',(req,res)=>{
 });
 
 
-app.get('/flights/arrivals',(req,res)=>{
-    model.addFlightFrom((err,rows) => {
-        if(err){
-            return console.error(err.message);
-        }
-        res.render('flights',{
-            style:'flights.css',
-            script:'flights.js',
-            layout:'layout',
-            flights:rows
-        })
+app.get('/flights',(req,res)=>{
     res.render('flights',{
         style:'flights.css',
         script:'flights.js',
         layout:'layout'
-    })
-    })
-})
-
-app.get('/flights/departures',(req,res)=>{
-    model.addFlightTo((err,rows) => {
-        if(err){
-            return console.error(err.message);
-        }
-        res.render('flights',{
-            style:'flights.css',
-            script:'flights.js',
-            layout:'layout',
-            flights2:rows
-        })
-    res.render('flights',{
-        style:'flights.css',
-        script:'flights.js',
-        layout:'layout'
-    })
     })
 })
 
@@ -355,6 +335,48 @@ app.post('/create_announcement',(req,res)=>{
         }
     })
 })
+
+
+app.get('/flights/arrivals',(req,res)=>{
+    model.addFlightFrom((err,rows) => {
+        if(err){
+            return console.error(err.message);
+        }
+        res.render('flights',{
+            style:'flights.css',
+            script:'flights.js',
+            layout:'layout',
+            flights:rows
+        })
+    res.render('flights',{
+        style:'flights.css',
+        script:'flights.js',
+        layout:'layout'
+    })
+    })
+})
+
+app.get('/flights/departures',(req,res)=>{
+    model.addFlightTo((err,rows) => {
+        if(err){
+            return console.error(err.message);
+        }
+        res.render('flights',{
+            style:'flights.css',
+            script:'flights.js',
+            layout:'layout',
+            flights2:rows
+        })
+    res.render('flights',{
+        style:'flights.css',
+        script:'flights.js',
+        layout:'layout'
+    })
+    })
+})
+
+
+
 
 
 
