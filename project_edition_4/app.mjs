@@ -175,10 +175,16 @@ app.post('/new_airline',(req,res)=>{
 
 
 app.get('/flights',(req,res)=>{
-    res.render('flights',{
-        style:'flights.css',
-        script:'flights.js',
-        layout:'layout'
+    model.addFlightFrom((err,rows) => {
+        if(err){
+            return console.error(err.message);
+        }
+        res.render('flights',{
+            style:'flights.css',
+            script:'flights.js',
+            layout:'layout',
+            flights:rows
+        })
     })
 })
 
@@ -252,7 +258,6 @@ app.get('/get_announcement/:id',(req,res)=>{
         }
     })
 })
-
 
 
 export { app as Airport};

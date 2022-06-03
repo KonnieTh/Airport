@@ -1,8 +1,8 @@
 <div class="choices">
-        <button class="arrivals" onclick="arrivals_form()">Αφίξεις</button>
-        <button class="departures" onclick="departures_form()">Αναχωρήσεις</button>
-    </div>
-    <iframe name="hiddenFrame" class="hide"></iframe>
+    <button class="arrivals" onclick="arrivals_form()">Αφίξεις</button>
+    <button class="departures" onclick="departures_form()">Αναχωρήσεις</button>
+</div>
+    {{!-- <iframe name="hiddenFrame" class="hide"></iframe>
     <div class="flights-menu">
         <div class="arrivals-form" id="arrivals">
             <form action="http://localhost:3000/user_arrivals" method="post" onsubmit="arrivals_on()" target="hiddenFrame">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div> --}}
         <div class="flights-info">
             <table class="arrivals-table flights-header">
                 <thead>
@@ -72,7 +72,10 @@
                     </tr>
                 </thead>
             </table>
-            <table class="departures-table flights-header">
+            {{#each flights}}
+            <div class="company">{{flight_date}}</div>
+            {{/each}}
+            {{!-- <table class="departures-table flights-header">
                 <thead>
                     <tr class="row">
                         <th rowspan="2">Αεροπορική Εταιρεία</th>
@@ -83,8 +86,8 @@
                         <th>Terminal</th>
                     </tr>
                 </thead>
-            </table>
-            <div class="date">Date</div>
+            </table> --}}
+            {{!-- <div class="date">Date</div>
             <div class="container">
                 <table class="flight-arrivals">
                     <tbody>
@@ -286,6 +289,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
         </div>
     </div>

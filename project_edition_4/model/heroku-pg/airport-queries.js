@@ -5,10 +5,10 @@ import pg from "pg";
 
 const pool = new pg.Pool({
     user:"postgres",
-    password:"test1234",
+    password:"abcd123!",
     host:"localhost",
     port:5432,
-    database:"airport"
+    database:"Airport"
 })
 
 async function connect(){
@@ -187,7 +187,27 @@ async function getAnnouncements(params,callback){
     }
 }
 
-export{getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,getAnnouncements}
+async function addFlightFrom(callback){
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let full_date=year + "-" + month + "-" + date;
+    console.log(full_date)
+    const sql = `Select * from "flies" where "flight_date"==${full_date} `;
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        console.log(res.rows)
+        callback(null,res.rows);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
+
+export{getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,getAnnouncements,addFlightFrom}
 
 
 
