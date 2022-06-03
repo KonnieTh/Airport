@@ -35,7 +35,7 @@ footer .anakoinoseis div{
    align-self: center;
 }
 
-footer .anakoinoseis .anak:hover{
+footer .anakoinoseis .anak a:hover{
     color:rgb(249, 249, 142);
     cursor:pointer;
 }
