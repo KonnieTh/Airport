@@ -286,7 +286,7 @@ async function addFlightTo(callback){
 }
 
 async function getAirports(callback){
-    const sql = ` Select "airport_name","city" from "Airport" order by "airport_name"`;
+    const sql = ` select distinct "airport_name" from "flies" natural join "Airport" order by "airport_name"`;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -299,7 +299,7 @@ async function getAirports(callback){
 }
 
 async function getAirlines(callback){
-    const sql = ` Select "airline_name" from "Airline" order by "airline_name"`;
+    const sql = ` select distinct "airline_name" from "flies" natural join "Airline" order by "airline_name"`;
     try{
         const client = await connect();
         const res = await client.query(sql);
