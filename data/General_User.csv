@@ -1,4 +1,4 @@
-username,password,first_name,last_name,email,telephone,age,country,is_admin,gender
+username,password,first_name,last_name,email,telephone,age,country,is_admin,sex
 user1,Password1,Vasiliki,Mode,mode@gmail.com,6945552333,20,Greece,false,female
 user2,Password2,Panagiotis,Alex,panosalex@gmail.com,6945559764,29,Greece,false,male
 user3,Password3,Iro,Kariofili,iro@gmail.com,6945552191,24,Cyprus,false,female
