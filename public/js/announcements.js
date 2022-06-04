@@ -19,42 +19,6 @@ const keimeno= text.innerText;
 text.innerHTML = keimeno;
 
 
-// async function getAnnouncements(index){
-//     const element = document.querySelector("#priority");
-//     const priority=element.value;
-//     console.log(index,priority);
-//     fetch(`http://localhost:3000/announcements/next/${index}/${priority}`)
-//     .then(response=>response.json())
-//     .catch((err)=>console.error(err));
-
-// }
-
-
-// function getAnnouncements(start,limit){
-//     fetch(`/announcements/`)
-//     .then(response=>response.json())
-//     .catch((error)=>{
-//         console.log("Error:",error);
-//     })
-// }
-
-// getAnnouncements(index,limit);
-// index=limit;
-// fetch('http://localhost:3000/index/limit',{
-//         method:"POST",
-//         headers:{
-//             'Content-Type': 'application/json',
-//         },
-//         body:JSON.stringify(inputs)
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log("Success:",data);
-//     })
-//     .catch((error) =>{
-//         console.error("Error:",error);
-//     })
-
 function createAnnouncement(){
     document.querySelector(`.main`).style.display = "none";
     document.querySelector(`.head`).style.display = "none";
@@ -100,7 +64,7 @@ function save() {
     const date = datetime[0];
     const time = datetime[1];
     const inputs = {titlos,keimeno,priority,date,time};
-    fetch('http://localhost:3000/create_announcement',{
+    fetch('/create_announcement',{
         method:"POST",
         headers:{
             'Content-Type': 'application/json',

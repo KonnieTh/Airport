@@ -29,7 +29,7 @@
 <div class="head">Ανακοινώσεις</div>
 <div class="main">
     <div class="announcements-container">
-        <form class="search-announcements" method="GET" action="http://localhost:3000/announcements-admin/search">
+        <form class="search-announcements" method="GET" action="/announcements-admin/search">
             <div class="options">
                 <label for="priority">Προτεραιότητα</label>
                 <select id="priority" name="priority">
@@ -50,7 +50,7 @@
             <tbody>
                 {{#each announcements}}
                 <tr class="title">
-                    <td><a href="http://localhost:3000/announcements/id/{{announcement_ID}}">{{theme}}</a></td>
+                    <td><a href="/announcements/id/{{announcement_ID}}">{{theme}}</a></td>
                     <td>{{ann_date}} {{ann_time}}</td>
                 </tr>
                 {{/each}}

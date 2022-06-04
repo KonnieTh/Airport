@@ -1,7 +1,7 @@
 {{#if both}}
 <div class="choices">
-    <a href='http://localhost:3000/flights/arrivals' class="arrivals" , onclick="arrivals_form()"{{#if bool}} style="background-color: rgb(50, 26, 26);"{{/if}}> Αφίξεις</a>
-    <a href='http://localhost:3000/flights/departures' class="departures" onclick="departures_form()"{{#if bool2}} style="background-color: rgb(50, 26, 26);"{{/if}}>Αναχωρήσεις</a>
+    <a href='/flights/arrivals' class="arrivals" , onclick="arrivals_form()"{{#if bool}} style="background-color: rgb(50, 26, 26);"{{/if}}> Αφίξεις</a>
+    <a href='/flights/departures' class="departures" onclick="departures_form()"{{#if bool2}} style="background-color: rgb(50, 26, 26);"{{/if}}>Αναχωρήσεις</a>
 </div>
     {{#if bool3}}
     <iframe name="hiddenFrame" class="hide"></iframe>
@@ -112,4 +112,11 @@
             {{/if}}
         </div>
     </div>
+    <div id="covid" >
+    <div class="wrap">
+        <div class="close" onclick="covid_off()">&times;</div>
+        <div class="covidtext"></div>
+    </div>
+    </div>
+
 {{/if}}
