@@ -1,11 +1,9 @@
 import pg from "pg";
-// import dotenv from "dotenv";
-
-// dotenv.config();
+import bcrypt from 'bcrypt';
 
 const pool = new pg.Pool({
     user:"postgres",
-    password:"test1234",
+    password:"abcd123!",
     host:"localhost",
     port:5432,
     database:"airport"
@@ -61,6 +59,7 @@ async function getAirlineName(id,callback){
     }
 }
 
+
 async function editAirline(airline,date,callback){
     const sql = `update "Airline" 
                 set telephone='${airline.telephone}',email='${airline.email}',"gate_code" = (SELECT "gate_ID" from "Gate" where terminal='${airline.terminal}' and gate_name='${airline.gate}' and gate_number='${airline.gate_number}')
@@ -70,7 +69,6 @@ async function editAirline(airline,date,callback){
         const client = await connect();
         const res = await client.query(sql);
         const res1 = await client.query(sql2);
-        console.log(res);
         await client.release();
         callback(null,res.rows);
     }
@@ -78,6 +76,7 @@ async function editAirline(airline,date,callback){
         callback(err,null);
     }
 }
+
 
 async function deleteAirline(airline,callback){
     const sql = `delete from "Airline" where "IATA" = '${airline.IATA}'`;
@@ -136,6 +135,7 @@ async function getText(textTitle,callback){
     }
 }
 
+
 async function editInfo(text,date,callback){
     console.log(2,text);
     const sql = `update "General_info" set "description"='${text.keimeno}' where "title"='${text.titlos}' `;
@@ -161,7 +161,8 @@ async function createAnnouncement(text,callback){
         await client.release();
         let sql;
         if (res.rows.length>0){
-            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;            try{
+            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;
+            try{
                 const client = await connect();
                 const res = await client.query(sql);
                 await client.release();
@@ -173,7 +174,7 @@ async function createAnnouncement(text,callback){
             }
         }
         else{
-            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES(0,'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;
+            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;            
             try{
                 const client = await connect();
                 const res = await client.query(sql);
@@ -203,6 +204,7 @@ async function getAnnouncements(callback){
         callback(err,null);
     }
 }
+
 
 async function getAnnouncementsByPriority(priority,callback){
     if(priority=="all"){
@@ -259,19 +261,14 @@ async function addFlightFrom(callback){
     let cur_time=hours + ":" + "00" + ":00"
     console.log(parseInt(hours))
     if(parseInt(hours)+1>24){
-        // var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + minutes + ":00"
         var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + "00" + ":00"
     }else{
-        // var cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
         var cur_time_2=(parseInt(hours)+1).toString() + ":" + "00" + ":00"
     }
-    console.log(cur_time,cur_time_3,cur_time_2);
-    // const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${full_date}' and "is_destination"=false and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}' order by expected_time `;
-    
     const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time_3}' THEN 1 WHEN "expected_time">'${cur_time_3}' THEN 0 END AS "left" 
-                from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  
-                WHERE "flight_date"='${full_date}' and "is_destination"=false and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}'  
-                order by expected_time;`;
+    from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  
+    WHERE "flight_date"='${full_date}' and "is_destination"=false and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}'  
+    order by expected_time;`;    
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -294,25 +291,19 @@ async function addFlightTo(callback){
     let cur_time=hours + ":" + "00" + ":00"
     
     if(parseInt(hours)+1>24){
-        // var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + minutes + ":00"
         var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + "00" + ":00"
-
     }else{
-        // var cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
         var cur_time_2=(parseInt(hours)+1).toString() + ":" + "00" + ":00"
     }
-    let cur_time_3=hours + ":" + minutes + ":00"
-    console.log(cur_time,cur_time_3,cur_time_2);
+    let cur_time_3=hours + ":" + minutes + ":00";
     const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time_3}' THEN 1 WHEN "expected_time">'${cur_time_3}' THEN 0 END AS "left" 
-                from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  
-                WHERE "flight_date"='${full_date}' and "is_destination"=true and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}'  
-                order by expected_time;`;
-    try{
-        const client = await connect();
-        const res = await client.query(sql);
-        await client.release();
-        console.log(res.rows);
-        callback(null,res.rows);
+            from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  
+            WHERE "flight_date"='${full_date}' and "is_destination"=true and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}'  
+            order by expected_time;`;    try{
+    const client = await connect();
+    const res = await client.query(sql);
+    await client.release();
+    callback(null,res.rows);
     }
     catch(err){
         callback(err,null);
@@ -345,6 +336,61 @@ async function getAirlines(callback){
     }
 }
 
+// async function insertUser(username,password,fname,lname,age,sex,email,phone,country,is_adm,callback){
+//     const sql = ` insert into "General_User"("username","password","first_name","last_name","email","telephone","age","country","city", "is_admin", "sex") values ('${username}','${password}', '${fname}', '${lname}' ,'${email}','${phone}','${age}','${country}','${is_adm}','${sex}')`;
+//     try{
+//         const client = await connect();
+//         const res = await client.query(sql);
+//         await client.release();
+//         callback(null,res.rows);
+//     }
+//     catch(err){
+//         callback(err,null);
+//     }
+// }
+
+let getUserByUsername = (username, callback) => {
+    const query = {
+        text: "SELECT \"username\", \"password\" FROM \"General_User\" WHERE \"username\" = $1 ORDER BY \"username\" LIMIT 1",
+        values: [username],
+    }
+    sql.query(query, (err, user) => {
+        if (err) {
+            console.log(err.stack)
+            callback(err.stack)
+        }
+        else {
+            callback(null, user.rows[0])
+        }
+    })
+}
+
+
+async function insertUser(username,password,fname,lname,age,sex,email,phone,country,is_adm,callback){
+    getUserByUsername(username, async (err, userId) => {
+        if (userId != undefined) {
+            callback(null, null, { message: "Υπάρχει ήδη χρήστης με αυτό το όνομα" })
+        } else {
+            try {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                const sql = ` insert into "General_User"("username","password","first_name","last_name","email","telephone","age","country","city", "is_admin", "sex") values ('${username}','${hashedPassword}', '${fname}', '${lname}' ,'${email}','${phone}','${age}','${country}','${is_adm}','${sex}')`;
+                try{
+                    const client = await connect();
+                    const res = await client.query(sql);
+                    await client.release();
+                    callback(null,res.rows);
+                }
+                catch(err){
+                    callback(err,null);
+                }
+            }catch (err) {
+                console.log(err)
+                callback(err)
+            }
+        }
+    })
+}
+
 async function getRoutes(airlineName,date_c,airportName,isDest,id1,callback){
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
@@ -352,9 +398,7 @@ async function getRoutes(airlineName,date_c,airportName,isDest,id1,callback){
     let year = date_ob.getFullYear();
     let hours = ("0" + (date_ob.getHours())).slice(-2);
     let minutes = ("0" + (date_ob.getMinutes())).slice(-2);
-    // let full_date=year + "-" + month + "-" + date;
     let cur_time=hours + ":" + minutes + ":00"
-    // let cur_time=hours + ":" + "00" + ":00"
     if(airlineName!='-' && airportName!='-' && id1!=''){
         var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' THEN 1 WHEN "expected_time">'${cur_time}' THEN 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}'and "Airline"."airline_name"='${airlineName}' and "flies"."flight_ID"='${id1}' order by "expected_time"`;
     }else if(airlineName=='-' && airportName!='-' && id1!=''){
@@ -379,7 +423,11 @@ async function getRoutes(airlineName,date_c,airportName,isDest,id1,callback){
     }
 }
 
-export{getAirline,getRoutes,getAirlines,getAirports,getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,addFlightFrom,addFlightTo}
+export{getUserByUsername,insertUser,getAirline,getRoutes,getAirlines,getAirports,getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,addFlightFrom,addFlightTo}
+
+
+
+
 
 
 
