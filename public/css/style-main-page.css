@@ -11,7 +11,13 @@
 p{
     text-align:center;
 }
-
+.alert-primary{
+    text-align: center;
+    background-color: rgba(133, 32, 32, 0.6);
+    width: 300px;
+    margin: auto;
+    padding: 1em;
+}
 .header .description{
     color: rgb(229, 223, 223);
     margin: 12% 15% 0% 15%;

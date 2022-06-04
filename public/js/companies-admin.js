@@ -517,7 +517,6 @@ const place = selected_letter.charCodeAt(0);
 const selected_button = document.querySelectorAll(".btn")[place-65];
 selected_button.classList.add("touched");
 
-display("A");
 
 fetch(`/text/covid`)
 .then(response=>response.json())

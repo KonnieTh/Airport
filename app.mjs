@@ -123,9 +123,9 @@ app.get('/text/:titlos',(req,res)=>{
 
 app.put('/edit_text',(req,res)=>{
     const text = req.body;
-    console.log(text,req.body);
     const date = getDateTime();
-    model.editInfo(text,date,(err,data) =>{
+    let admin_id=res.locals.adminId
+    model.editInfo(text,date,admin_id,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -148,7 +148,6 @@ app.get('/airlines/:name',(req,res)=>{
 
 app.get('/companies/:letter',(req,res)=>{
     let letter=req.params.letter;
-    console.log(letter=req.params.letter);
     model.getAirlinebyletter(letter,(err,rows) => {
         if(err){
             return console.error(err.message);
@@ -164,7 +163,6 @@ app.get('/companies/:letter',(req,res)=>{
 
 app.get('/companies-admin/:letter',(req,res)=>{
     let letter=req.params.letter;
-    console.log(letter=req.params.letter);
     model.getAirlinebyletter(letter,(err,rows) => {
         if(err){
             return console.error(err.message);
@@ -172,7 +170,7 @@ app.get('/companies-admin/:letter',(req,res)=>{
         res.render('companies-admin',{
             style:'companies-admin.css',
             script:'companies-admin.js',
-            layout:'layout-admin',
+            layout:'layout',
             airlines:rows
         })
     })
@@ -190,9 +188,9 @@ app.get('/airline_name/:iata',(req,res)=>{
 
 app.put('/airlines_edit',(req,res)=>{
     const airline=req.body;
-    console.log(airline);
     const date = getDateTime();
-    model.editAirline(airline,date,(err,data) =>{
+    let id=res.locals.adminId
+    model.editAirline(airline,date,id,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -206,7 +204,8 @@ app.put('/airlines_edit',(req,res)=>{
 app.delete('/airlines_delete',(req,res)=>{
     const airline=req.body;
     const date = getDateTime();
-    model.deleteAirline(airline,date,(err,data) =>{
+    let id = res.locals.adminId;
+    model.deleteAirline(airline,date,id,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -219,7 +218,8 @@ app.delete('/airlines_delete',(req,res)=>{
 app.post('/new_airline',(req,res)=>{
     const airline=req.body;
     const date = getDateTime();
-    model.insertAirline(airline,date,(err,data) =>{
+    let id=res.locals.adminId;
+    model.insertAirline(airline,date,id,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -324,7 +324,6 @@ app.get('/announcements',(req,res)=>{
 })
 
 app.get('/announcements/id/:id',(req,res)=>{
-    // console.log(req.query);
     model.getAnnouncementById(req.params.id,(err,data) =>{
         if(err){
             return console.error(err.message);
@@ -342,7 +341,6 @@ app.get('/announcements/id/:id',(req,res)=>{
 
 app.get('/announcements/search',(req,res)=>{
     const priority = req.query.priority;
-    console.log(priority);
     model.getAnnouncementsByPriority(priority,(err,data) =>{
         if(err){
             return console.error(err.message);
@@ -368,7 +366,7 @@ app.get('/announcements-admin',(req,res)=>{
             res.render('announcements-admin',{
                 style:'announcements-admin.css',
                 script:'announcements.js',
-                layout:'layout-admin',
+                layout:'layout',
                 announcements:data
             })
         }
@@ -377,7 +375,6 @@ app.get('/announcements-admin',(req,res)=>{
 
 app.get('/announcements-admin/search',(req,res)=>{
     const priority = req.query.priority;
-    console.log(priority);
     model.getAnnouncementsByPriority(priority,(err,data) =>{
         if(err){
             return console.error(err.message);
@@ -386,7 +383,7 @@ app.get('/announcements-admin/search',(req,res)=>{
             res.render('announcements-admin',{
                 style:'announcements-admin.css',
                 script:'announcements.js',
-                layout:'layout-admin',
+                layout:'layout',
                 announcements:data
             })
         }
@@ -394,7 +391,6 @@ app.get('/announcements-admin/search',(req,res)=>{
 })
 
 app.get('/announcements-admin/id/:id',(req,res)=>{
-    // console.log(req.query);
     model.getAnnouncementById(req.params.id,(err,data) =>{
         if(err){
             return console.error(err.message);
@@ -403,7 +399,7 @@ app.get('/announcements-admin/id/:id',(req,res)=>{
             res.render('announcements-admin',{
                 style:'announcements-admin.css',
                 script:'announcements.js',
-                layout:'layout-admin',
+                layout:'layout',
                 announcements:data
             })
         }
@@ -412,9 +408,9 @@ app.get('/announcements-admin/id/:id',(req,res)=>{
 
 app.post('/create_announcement',(req,res)=>{
     const text = req.body;
-    console.log(text);
     const date = getDateTime();
-    model.createAnnouncement(text,date,(err,data) =>{
+    let id=res.locals.adminId;
+    model.createAnnouncement(text,id,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -477,7 +473,11 @@ app.post('/log-in/done', function (req, res) {
             return console.error(err.message);
         }
         if (user == undefined) {
-            res.render('main-page', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
+            res.render('main-page',{
+                style:'style-main-page.css',
+                script:'main.js',
+                layout:'layout-main-page',
+                message: 'Δε βρέθηκε αυτός ο χρήστης' });
         }else if(user.is_admin==true){
             bcrypt.compare(req.body.password, user.password, (err, match) => {
                 if (match) {
@@ -485,7 +485,11 @@ app.post('/log-in/done', function (req, res) {
                     const redirectTo = req.session.originalUrl || "/main-page-admin";
                     res.redirect(redirectTo);
                 }else {
-                    res.render("main-page", { message: 'Ο κωδικός πρόσβασης είναι λάθος' })
+                    res.render("main-page",{
+                        style:'style-main-page.css',
+                        script:'main.js',
+                        layout:'layout-main-page',
+                        message: 'Δε βρέθηκε αυτός ο χρήστης', message: 'Ο κωδικός πρόσβασης είναι λάθος' })
                 }
             })
         }
@@ -496,7 +500,11 @@ app.post('/log-in/done', function (req, res) {
                     const redirectTo = req.session.originalUrl || "/main-page";
                     res.redirect(redirectTo);
                 }else {
-                    res.render("main-page", { message: 'Ο κωδικός πρόσβασης είναι λάθος' })
+                    res.render("main-page",{
+                        style:'style-main-page.css',
+                        script:'main.js',
+                        layout:'layout-main-page',
+                        message: 'Ο κωδικός πρόσβασης είναι λάθος' })
                 }
             })
         }
@@ -504,41 +512,5 @@ app.post('/log-in/done', function (req, res) {
 })
 
 
-//Τη χρησιμοποιούμε για να ανακατευθύνουμε στη σελίδα /login όλα τα αιτήματα από μη συνδεδεμένους χρήστες
-let checkAuthenticated = function (req, res, next) {
-    //Αν η μεταβλητή συνεδρίας έχει τεθεί, τότε ο χρήστης είναι συνεδεμένος
-    if (req.session.loggedUserId) {
-        console.log("user is authenticated", req.originalUrl);
-        //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
-        next();
-    }
-    else {
-        //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
-        //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
-        if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
-            next()
-        }
-        else {
-            //Στείλε το χρήστη στη "/login" 
-            console.log("not authenticated, redirecting to /login")
-            res.redirect('/login');
-        }
-    }
-}
-
-//Αιτήματα για σύνδεση
-//Δείξε τη φόρμα σύνδεσης. Το 1ο middleware ελέγχει αν έχει γίνει η σύνδεση
-// app.route('/log-in').get(checkAuthenticated, showLogInForm);
-
-// //Αυτή η διαδρομή καλείται όταν η φόρμα φτάσει με POST και διεκπεραιώνει τη σύνδεση
-// app.route('/log-in').post(doLogin);
-
-// //Αποσυνδέει το χρήστη
-// app.route('/logout').get(doLogout);
-
-// //Εγγραφή νέου χρήστη
-// app.route('/sign-up').get(checkAuthenticated, showRegisterForm);
-//FIXME θεωρεί πως POST στο /register ο χρήστης δεν είναι συνδεδεμένος
-// app.post('/sign-up', doRegister);
 
 export { app as Airport};

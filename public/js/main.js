@@ -53,7 +53,7 @@ function edit(a, b) {
     }
     document.querySelector(`#${b}`).style.display = "none";
     document.getElementById("text-editor").style.display = "block";
-    document.getElementById("description").style.display = "none";
+    document.getElementById("about-us").style.display = "none";
     document.getElementById("main-menu").style.display = "none";
     document.querySelector('.header').style.backgroundImage = "none";
     document.querySelector('.header').style.backgroundColor = "rgb(46, 46, 46)";
@@ -88,7 +88,7 @@ function save() {
 
     document.getElementById("customs_insection_text").style.display = "none";
     document.getElementById("text-editor").style.display = "none";
-    document.getElementById("description").style.display = "block";
+    document.getElementById("about-us").style.display = "block";
     document.getElementById("main-menu").style.display = "block";
     document.querySelector('.header').style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('/Front-end/images/athens.jpg')";
     document.querySelector('.header').style.minHeight = "100vh";

@@ -51,7 +51,6 @@ async function getAirlineName(id,callback){
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
-        console.log(res.rows);
         callback(null,res.rows);
     }
     catch(err){
@@ -60,16 +59,18 @@ async function getAirlineName(id,callback){
 }
 
 
-async function editAirline(airline,date,callback){
+async function editAirline(airline,date,id,callback){
     const sql = `update "Airline" 
                 set telephone='${airline.telephone}',email='${airline.email}',"gate_code" = (SELECT "gate_ID" from "Gate" where terminal='${airline.terminal}' and gate_name='${airline.gate}' and gate_number='${airline.gate_number}')
                 where "IATA" = '${airline.iata}'`;
-    const sql2 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${airline.username}',(select "airline_ID" from "Airline" where "airline_name"=${airline.name}),'${date}')`;
+    const sql2 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${id}',(select "airline_ID" from "Airline" where "IATA"='${airline.iata}'),'${date}')`;
     try{
         const client = await connect();
         const res = await client.query(sql);
-        const res1 = await client.query(sql2);
         await client.release();
+        const client2 = await connect();
+        const res1 = await client2.query(sql2);
+        await client2.release();
         callback(null,res.rows);
     }
     catch(err){
@@ -78,9 +79,9 @@ async function editAirline(airline,date,callback){
 }
 
 
-async function deleteAirline(airline,callback){
+async function deleteAirline(airline,date,id,callback){
     const sql = `delete from "Airline" where "IATA" = '${airline.IATA}'`;
-    const sql2 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${airline.username}',(select "airline_ID" from "Airline" where "airline_name"=${airline.name}),'${date}')`;
+    const sql2 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${id}',(select "airline_ID" from "Airline" where "airline_name"=${airline.name}),'${date}')`;
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -93,7 +94,7 @@ async function deleteAirline(airline,callback){
     }
 }
 
-async function insertAirline(airline,date,callback){
+async function insertAirline(airline,date,id,callback){
     const sql1 = `select * from "Airline" where "airline_name"='${airline.name}' or "IATA" = '${airline.iata}'`;
     try{
         const client = await connect();
@@ -104,7 +105,7 @@ async function insertAirline(airline,date,callback){
         }   
         else{
             const sql2 = `insert into "Airline" ("airline_ID","airline_name","IATA","ICAO","telephone","email","gate_code") VALUES((select max("airline_ID")+1 from "Airline"),'${airline.name}','${airline.iata}','${airline.icao}','${airline.telephone}','${airline.email}', (select "gate_ID" from "Gate" where "terminal"='${airline.terminal}' and "gate_name"='${airline.gate}' and "gate_number" = '${airline.gate_number}'))`;
-            const sql3 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${airline.username}',(select "airline_ID" from "Airline" where "airline_name"=${airline.name}),'${date}')`;
+            const sql3 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${id}',(select "airline_ID" from "Airline" where "airline_name"=${airline.name}),'${date}')`;
             try{
                 const client = await connect();
                 const res2 = await client.query(sql3);
@@ -136,16 +137,14 @@ async function getText(textTitle,callback){
 }
 
 
-async function editInfo(text,date,callback){
-    console.log(2,text);
+async function editInfo(text,date,id,callback){
     const sql = `update "General_info" set "description"='${text.keimeno}' where "title"='${text.titlos}' `;
-    const sql1 = `insert into "modifies" ("username","info_ID","modification_date") VALUES('test',(select "info_ID" from "General_info" where "title"='${text.titlos}'),'${date}')`;
+    const sql1 = `insert into "modifies" ("username","info_ID","modification_date") VALUES('${id}',(select "info_ID" from "General_info" where "title"='${text.titlos}'),'${date}')`;
     try{
         const client = await connect();
         const res = await client.query(sql);
         const res1 = await client.query(sql1);
         await client.release();
-        console.log(res.rows);
         callback(null,res.rows);
     }
     catch(err){
@@ -153,7 +152,7 @@ async function editInfo(text,date,callback){
     }
 }
 
-async function createAnnouncement(text,callback){
+async function createAnnouncement(text,id,callback){
     const sql1 = 'select "announcement_ID" from "Announcement"'
     try{
         const client = await connect();
@@ -161,12 +160,11 @@ async function createAnnouncement(text,callback){
         await client.release();
         let sql;
         if (res.rows.length>0){
-            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;
+            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'${id}','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;
             try{
                 const client = await connect();
                 const res = await client.query(sql);
                 await client.release();
-                console.log(res.rows)
                 callback(null,res.rows);
             }
             catch(err){
@@ -174,7 +172,7 @@ async function createAnnouncement(text,callback){
             }
         }
         else{
-            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'test','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;            
+            sql = `insert into "Announcement" ("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority") VALUES((select max("announcement_ID")+1 from "Announcement"),'${id}','${text.titlos}','${text.keimeno}','${text.date}','${text.time}','${text.priority}') `;            
             try{
                 const client = await connect();
                 const res = await client.query(sql);
@@ -197,7 +195,6 @@ async function getAnnouncements(callback){
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
-        console.log(res.rows)
         callback(null,res.rows);
     }
     catch(err){
@@ -213,7 +210,6 @@ async function getAnnouncementsByPriority(priority,callback){
             const client = await connect();
             const res = await client.query(sql);
             await client.release();
-            console.log(res.rows)
             callback(null,res.rows);
         }
         catch(err){
@@ -226,7 +222,6 @@ async function getAnnouncementsByPriority(priority,callback){
             const client = await connect();
             const res = await client.query(sql);
             await client.release();
-            console.log(res.rows)
             callback(null,res.rows);
         }
         catch(err){
@@ -241,7 +236,6 @@ async function getAnnouncementById(id,callback){
         const client = await connect();
         const res = await client.query(sql);
         await client.release();
-        console.log(res.rows)
         callback(null,res.rows);
     }
     catch(err){
@@ -257,13 +251,12 @@ async function addFlightFrom(callback){
     let hours = ("0" + (date_ob.getHours())).slice(-2);
     let minutes = ("0" + (date_ob.getMinutes())).slice(-2);
     let full_date=year + "-" + month + "-" + date;
-    let cur_time_3=hours + ":" + minutes + ":00"
-    let cur_time=hours + ":" + "00" + ":00"
-    console.log(parseInt(hours))
+    let cur_time_3=hours + ":" + minutes + ":00";
+    let cur_time=hours + ":" + "00" + ":00";
     if(parseInt(hours)+1>24){
-        var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + minutes + ":00"
+        var cur_time_2=("0" + (parseInt(hours)+1-24).toString()).slice(-2); + ":" + minutes + ":00"
     }else{
-        var cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
+        var cur_time_2=("0" + (parseInt(hours)+1).toString()).slice(-2) + ":" + minutes + ":00"
     }
     const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time_3}' THEN 1 WHEN "expected_time">'${cur_time_3}' THEN 0 END AS "left" 
     from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  
@@ -291,9 +284,9 @@ async function addFlightTo(callback){
     let cur_time=hours + ":" + "00" + ":00"
     
     if(parseInt(hours)+1>24){
-        var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + minutes + ":00"
+        var cur_time_2=("0" + (parseInt(hours)+1-24).toString()).slice(-2); + ":" + minutes + ":00"
     }else{
-        var cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
+        var cur_time_2=("0" + (parseInt(hours)+1).toString()).slice(-2) + ":" + minutes + ":00"
     }
     let cur_time_3=hours + ":" + minutes + ":00";
     const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time_3}' THEN 1 WHEN "expected_time">'${cur_time_3}' THEN 0 END AS "left" 
@@ -378,7 +371,6 @@ async function insertUser(username,password,fname,lname,age,sex,email,phone,coun
                     callback(err,null);
                 }
             }catch (err) {
-                console.log(err)
                 callback(err)
             }
         }
@@ -392,19 +384,20 @@ async function getRoutes(airlineName,date_c,airportName,isDest,id1,callback){
     let year = date_ob.getFullYear();
     let hours = ("0" + (date_ob.getHours())).slice(-2);
     let minutes = ("0" + (date_ob.getMinutes())).slice(-2);
+    let full_date=year+'-'+month+'-'+date
     let cur_time=hours + ":" + minutes + ":00"
     if(airlineName!='-' && airportName!='-' && id1!=''){
-        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' THEN 1 WHEN "expected_time">'${cur_time}' THEN 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}'and "Airline"."airline_name"='${airlineName}' and "flies"."flight_ID"='${id1}' order by "expected_time"`;
+        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' and "flight_date"='${full_date}' THEN 1 ELSE 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}'and "Airline"."airline_name"='${airlineName}' and "flies"."flight_ID"='${id1}' order by "expected_time"`;
     }else if(airlineName=='-' && airportName!='-' && id1!=''){
-        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' THEN 1 WHEN "expected_time">'${cur_time}' THEN 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}' and "flies"."flight_ID"='${id1}' order by "expected_time"`;
+        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' and "flight_date"='${full_date}' THEN 1 ELSE 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}' and "flies"."flight_ID"='${id1}' order by "expected_time"`;
     }else if(airlineName=='-' && airportName=='-' && id1!=''){
-        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' THEN 1 WHEN "expected_time">'${cur_time}' THEN 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "flies"."flight_ID"='${id1}' order by "expected_time"`;
+        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' and "flight_date"='${full_date}' THEN 1 ELSE 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "flies"."flight_ID"='${id1}' order by "expected_time"`;
     }else if(airlineName!='-' && airportName!='-' && id1==''){
-        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' THEN 1 WHEN "expected_time">'${cur_time}' THEN 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}'and "Airline"."airline_name"='${airlineName}' order by "expected_time"`;
+        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' and "flight_date"='${full_date}' THEN 1 ELSE 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}'and "Airline"."airline_name"='${airlineName}' order by "expected_time"`;
     }else if(airlineName=='-' && airportName!='-' && id1==''){
-        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' THEN 1 WHEN "expected_time">'${cur_time}' THEN 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}' order by "expected_time"`;
+        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' and "flight_date"='${full_date}' THEN 1 ELSE 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}' order by "expected_time"`;
     }else if(airlineName=='-' && airportName=='-' && id1==''){
-        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' THEN 1 WHEN "expected_time">'${cur_time}' THEN 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} order by "expected_time"`;
+        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time}' and "flight_date"='${full_date}' THEN 1 ELSE 0 END AS "left" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} order by "expected_time"`;
     }
     try{
         const client = await connect();

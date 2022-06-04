@@ -30,7 +30,7 @@
                 {{#if adminId}}
                 <div class="logo"><a href="/main-page-admin"><img src="/images/Icarus-logo.png"></a></div>
                 <div class="flights"><a href="/flights">Πτήσεις</a></div>
-                <div class="companies"><a href="http://localhost:3000/companies-admin/Α">Εταιρείες</a></div>
+                <div class="companies"><a href="/companies-admin/Α">Εταιρείες</a></div>
                 <div class="shops"><a href="/shops">Καταστήματα</a></div>
                 {{/if}}
             </div>
@@ -51,6 +51,11 @@
             </div>
             {{/if}}
         </div>
+        {{#if message}}
+        <div class="alert-primary" role="alert">
+        {{message}}
+        </div>
+        {{/if}}
         <div class="description" id="about-us">
             <p>
                 Το αεροδρόμιο Icarus είναι το μεγαλύτερο αεροδρόμιο της Ελλάδας και βρίσκεται στην πρωτεύουσα της, την Αθήνα.<br><br>Ξεκίνησε τη λειτουργία του το 1995 και σήμερα εξυπηρετεί πάνω από 1000 πτήσεις καθημερινά. <br><br>Ονομάστηκε έτσι προς τιμήν του Ίκαρου, από το μύθο του Ίκαρου και του Δαίδαλου. <br><br>~ Σας ευχόμαστε μια όμορφη πτήση ~
@@ -153,6 +158,16 @@
     </div>
     <footer>
         <div class="anakoinoseis">
+            {{#if adminId}}
+             <a><h3>Ανακοινώσεις</h3></a>
+            <div class="anak">
+                <a href="/announcements-admin/search?priority=high">Επείγουσες ανακοινώσεις</a>
+            </div>
+            <div class="anak">
+                <a href="/announcements-admin/search?priority=normal">Γενικές ανακοινώσεις</a>
+            </div>
+            {{/if}}
+            {{#if userId}}
             <a><h3>Ανακοινώσεις</h3></a>
             <div class="anak">
                 <a href="/announcements/search?priority=high">Επείγουσες ανακοινώσεις</a>
@@ -160,6 +175,16 @@
             <div class="anak">
                 <a href="/announcements/search?priority=normal">Γενικές ανακοινώσεις</a>
             </div>
+            {{/if}}
+            {{#unless both}}
+            <a><h3>Ανακοινώσεις</h3></a>
+            <div class="anak">
+                <a href="/announcements/search?priority=high">Επείγουσες ανακοινώσεις</a>
+            </div>
+            <div class="anak">
+                <a href="/announcements/search?priority=normal">Γενικές ανακοινώσεις</a>
+            </div>
+            {{/unless}}
         </div>
         <div class="communication-details"><h3>Στοιχεία επικοινωνίας</h3>
             <div>📞 2610567891</div>
@@ -175,7 +200,7 @@
             </div>
             {{/if}}
             <div class="lin">
-                <a href="/main-page#header">Σχετικά με εμάς</a>
+                <a href="/main-page-admin#header">Σχετικά με εμάς</a>
             </div>
             <div class="lin">
                 <a href="#covid" onclick="covid_on()">Μέτρα Covid</a>

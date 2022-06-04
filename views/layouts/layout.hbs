@@ -30,7 +30,7 @@
                 {{#if adminId}}
                 <div class="logo"><a href="/main-page-admin"><img src="/images/Icarus-logo.png"></a></div>
                 <div class="flights"><a href="/flights">Πτήσεις</a></div>
-                <div class="companies"><a href="http://localhost:3000/companies-admin/Α">Εταιρείες</a></div>
+                <div class="companies"><a href="/companies-admin/Α">Εταιρείες</a></div>
                 <div class="shops"><a href="/shops">Καταστήματα</a></div>
                 {{/if}}
             </div>
@@ -111,7 +111,11 @@
             </div>
         </form> 
     </div>
-
+    {{#if message}}
+        <div class="alert-primary" role="alert">
+            {{message}}
+        </div>
+    {{/if}}
     {{{body}}}
 
 
@@ -126,6 +130,7 @@
                 <a href="/announcements-admin/search?priority=normal">Γενικές ανακοινώσεις</a>
             </div>
             {{/if}}
+            {{#if userId}}
             <a><h3>Ανακοινώσεις</h3></a>
             <div class="anak">
                 <a href="/announcements/search?priority=high">Επείγουσες ανακοινώσεις</a>
@@ -133,6 +138,16 @@
             <div class="anak">
                 <a href="/announcements/search?priority=normal">Γενικές ανακοινώσεις</a>
             </div>
+            {{/if}}
+            {{#unless both}}
+            <a><h3>Ανακοινώσεις</h3></a>
+            <div class="anak">
+                <a href="/announcements/search?priority=high">Επείγουσες ανακοινώσεις</a>
+            </div>
+            <div class="anak">
+                <a href="/announcements/search?priority=normal">Γενικές ανακοινώσεις</a>
+            </div>
+            {{/unless}}
         </div>
         <div class="communication-details"><h3>Στοιχεία επικοινωνίας</h3>
             <div>📞 2610567891</div>
@@ -147,9 +162,16 @@
                 <a href="/flights">Aναχωρήσεις-Aφίξεις</a>
             </div>
             {{/if}}
+            {{#if userId}}
             <div class="lin">
                 <a href="/main-page#header">Σχετικά με εμάς</a>
             </div>
+            {{/if}}
+            {{#if adminId}}
+            <div class="lin">
+                <a href="/main-page-admin#header">Σχετικά με εμάς</a>
+            </div>
+            {{/if}}
             <div class="lin">
                 <a href="#covid" onclick="covid_on()">Μέτρα Covid</a>
             </div>
