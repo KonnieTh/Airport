@@ -1,0 +1,113 @@
+<div class="choices">
+    <a href='http://localhost:3000/flights/arrivals' class="arrivals" , onclick="arrivals_form()"{{#if bool}} style="background-color: rgb(50, 26, 26);"{{/if}}> Αφίξεις</a>
+    <a href='http://localhost:3000/flights/departures' class="departures" onclick="departures_form()"{{#if bool2}} style="background-color: rgb(50, 26, 26);"{{/if}}>Αναχωρήσεις</a>
+</div>
+    {{#if bool3}}
+    <iframe name="hiddenFrame" class="hide"></iframe>
+    <div class="flights-menu">
+        <div class="departures-form" id="departures">
+            <form action='/flights/done' method="post">
+                <div class="selection">
+                    <div class="departure">
+                        <label for="arrival-airport">Αναζήτηση Αεροδρομίου</label><br>
+                        <select id="arrival-airport" name="user_arrival_airport" required>
+                        <option selected>-</option>
+                        {{#each airports}}
+                        <option>{{airport_name}}</option>
+                        {{/each}}
+                        </select>
+                    </div>
+                    <div class="airline">
+                        <label for="airline_arrival">Αεροπορική Εταιρεία</label><br>
+                        <select id="airline_departure" name="user_airline_departure">
+                            <option selected>-</option>
+                            {{#each airlines}}
+                            <option>{{airline_name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="number_flight">
+                        <label for="number_of_flight">Κωδικός Πτήσης</label><br>
+                        <input type="text" id="number_of_flight" name="user_number_of_flight">
+                    </div>
+                    <div class="date-selection">
+                        <label for="date">Ημερομηνία</label><br>
+                        <select id="airline_departure" name="user_airline_departure">
+                            {{#each dates}}
+                            <option>{{date}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="via-flight">
+                        <label><input type="checkbox" name="destt" value="false">Προορισμός</label><br> 
+                    </div>
+                    <div class="sub">
+                        <input type="submit" value="Αναζήτηση">
+                    </div>
+                </div>
+            </form>
+        </div>
+        {{/if}}
+        <div class="flights-info">
+            {{#if bool}}
+            <div class="arr">
+                <table class="arrivals-table flights-header",id= "arrivals">
+                <thead>
+                    <tr class="row">
+                        <th rowspan="2">Αεροπορική Εταιρεία</th>
+                        <th>Προέλευση</th>
+                        <th>Αριθμός πτήσης</th>
+                        <th>Προγραμματισμένη ώρα</th>
+                        <th>Κατάσταση</th>
+                        <th>Terminal</th>
+                    </tr>
+                </thead>
+                {{#each flights}}
+                <tr class="row row-down">
+                        <th>{{airline_name}}</th>
+                        <th>{{city}}</th>
+                        <th>{{flight_ID}}</th>
+                        <th>{{flight_date}} {{expected_time}}</th>
+                        {{#if left includeZero=false}}
+                        <th>Αφίχθη</th>
+                        {{^}}
+                        <th>Προγραμματισμένη</th>
+                        {{/if}}
+                        <th>Term.{{terminal}}-{{gate_name}}{{gate_number}}</th>
+                </tr>
+                {{/each}}
+                </table>
+            </div>
+            {{/if}}
+            {{#if bool2}}
+            <div class="dep">
+                <table class="departures-table flights-header",id= "departures">
+                <thead>
+                    <tr class="row">
+                        <th rowspan="2">Αεροπορική Εταιρεία</th>
+                        <th>Προορισμός</th>
+                        <th>Αριθμός πτήσης</th>
+                        <th>Προγραμματισμένη ώρα</th>
+                        <th>Κατάσταση</th>
+                        <th>Terminal</th>
+                    </tr>
+                </thead>
+                {{#each flights2}}
+                <tr class="row row-down">
+                        <th>{{airline_name}}</th>
+                        <th>{{city}}</th>
+                        <th>{{flight_ID}}</th>
+                        <th>{{flight_date}} {{expected_time}}</th>
+                        {{#if left includeZero=false}}
+                        <th>Αναχώρησε</th>
+                        {{^}}
+                        <th>Προγραμματισμένη</th>
+                        {{/if}}
+                        <th>Term.{{terminal}}-{{gate_name}}{{gate_number}}</th>
+                </tr>
+                {{/each}}
+            </table>
+            </div>
+            {{/if}}
+        </div>
+    </div>
