@@ -247,8 +247,8 @@ app.post('/flights/done', function (req, res) {
             layout:'layout',
             flights:rows,
             flights2:rows,
-            bool2: des,
-            bool:arr
+            bool2: arr,
+            bool:des
         })
     })
 });
