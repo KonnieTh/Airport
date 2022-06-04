@@ -336,33 +336,18 @@ async function getAirlines(callback){
     }
 }
 
-// async function insertUser(username,password,fname,lname,age,sex,email,phone,country,is_adm,callback){
-//     const sql = ` insert into "General_User"("username","password","first_name","last_name","email","telephone","age","country","city", "is_admin", "sex") values ('${username}','${password}', '${fname}', '${lname}' ,'${email}','${phone}','${age}','${country}','${is_adm}','${sex}')`;
-//     try{
-//         const client = await connect();
-//         const res = await client.query(sql);
-//         await client.release();
-//         callback(null,res.rows);
-//     }
-//     catch(err){
-//         callback(err,null);
-//     }
-// }
 
-let getUserByUsername = (username, callback) => {
-    const query = {
-        text: "SELECT \"username\", \"password\" FROM \"General_User\" WHERE \"username\" = $1 ORDER BY \"username\" LIMIT 1",
-        values: [username],
+async function getUserByUsername(username, callback) {
+    const sql= `SELECT "username", "password" FROM "General_User" WHERE "username" = '${username}' ORDER BY "username" LIMIT 1`
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        callback(null,res.rows[0]);
     }
-    sql.query(query, (err, user) => {
-        if (err) {
-            console.log(err.stack)
-            callback(err.stack)
-        }
-        else {
-            callback(null, user.rows[0])
-        }
-    })
+    catch(err){
+        callback(err,null);
+    }
 }
 
 
@@ -373,11 +358,19 @@ async function insertUser(username,password,fname,lname,age,sex,email,phone,coun
         } else {
             try {
                 const hashedPassword = await bcrypt.hash(password, 10);
-                const sql = ` insert into "General_User"("username","password","first_name","last_name","email","telephone","age","country","city", "is_admin", "sex") values ('${username}','${hashedPassword}', '${fname}', '${lname}' ,'${email}','${phone}','${age}','${country}','${is_adm}','${sex}')`;
+                const sql = ` insert into "General_User"("username","password","first_name","last_name","email","telephone","age","country", "is_admin", "sex") values ('${username}','${hashedPassword}', '${fname}', '${lname}' ,'${email}','${phone}','${age}','${country}','${is_adm}','${sex}')`;
+                if(is_adm===true){
+                    var sql2 = ` insert into "Admin"("username") values ('${username}')`;
+                }else{
+                    var sql2 = ` insert into "User"("username") values ('${username}')`;
+                }
                 try{
                     const client = await connect();
                     const res = await client.query(sql);
                     await client.release();
+                    const client2 = await connect();
+                    const res2 = await client2.query(sql2);
+                    await client2.release();
                     callback(null,res.rows);
                 }
                 catch(err){

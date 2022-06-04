@@ -18,14 +18,8 @@
 <body>
     <div class="menu">
         <div class="menu-left">
-            {{#if adminId}}
-            <div class="logo"><a href="/main-page-admin"><img src="/images/Icarus-logo.png"></a></div>
-            <div class="flights"><a href="/flights">Πτήσεις</a></div>
-            <div class="companies"><a href="/companies-admin/A">Εταιρείες</a></div>
-            <div class="shops"><a href="/shops">Καταστήματα</a></div>
-            {{/if}}
-            {{#if userId}}
             <div class="logo"><a href="/main-page"><img src="/images/Icarus-logo.png"></a></div>
+            {{#if userId}}
             <div class="flights"><a href="/flights">Πτήσεις</a></div>
             <div class="companies"><a href="/companies/Α">Εταιρείες</a></div>
             <div class="shops"><a href="/shops">Καταστήματα</a></div>
@@ -36,15 +30,15 @@
             <a class="log-out" href="/log-out">Αποσύνδεση</a>
         </div>
         {{/if}}
-        {{#if adminId}}
-        <div class="menu-right">
-            <a class="log-out" href="/log-out">Αποσύνδεση</a>
-        </div>
-        {{/if}}
-        {{#if both}}
+        {{#unless both}}
         <div class="menu-right">
             <button class="sign-up">Εγγραφή</button>
             <button class="log-in">Είσοδος</button>
+        </div>
+        {{/unless}}
+        {{#if adminId}}
+        <div class="menu-right">
+            <a class="log-out" href="/log-out">Αποσύνδεση</a>
         </div>
         {{/if}}
     </div>

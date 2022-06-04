@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Icarus</title>
     <link rel="airport icon" href="images/airport_logo.png">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/sign-up.css">
-    <link rel="stylesheet" href="css/log-in.css">
-    <link rel="stylesheet" href="css/{{style}}">
-    <script defer src="js/sign-up.js"></script>
-    <script defer src="js/log-in.js"></script>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/sign-up.css">
+    <link rel="stylesheet" href="/css/log-in.css">
+    <link rel="stylesheet" href="/css/{{style}}">
+    <script defer src="/js/sign-up.js"></script>
+    <script defer src="/js/log-in.js"></script>
 </head>
 <body>
     <div class="header" id="header">
@@ -29,26 +29,16 @@
             <div class="menu-right">
                 <a class="log-out" href="/log-out">Αποσύνδεση</a>
             </div>
-            {{else}}
+            {{/if}}
+            {{#unless both}}
             <div class="menu-right">
                 <button class="sign-up">Εγγραφή</button>
                 <button class="log-in">Είσοδος</button>
             </div>
-            {{/if}}
-            {{#if userId}}
-            <div class="menu-right">
-                <a class="log-out" href="/log-out">Αποσύνδεση</a>
-            </div>
-            {{/if}}
+            {{/unless}}
             {{#if adminId}}
             <div class="menu-right">
                 <a class="log-out" href="/log-out">Αποσύνδεση</a>
-            </div>
-            {{/if}}
-            {{#if both}}
-            <div class="menu-right">
-                <button class="sign-up">Εγγραφή</button>
-                <button class="log-in">Είσοδος</button>
             </div>
             {{/if}}
         </div>
@@ -183,6 +173,6 @@
             </div>
         </div>
     </footer>
-    <script src="js/{{script}}"></script>
+    <script src="/js/{{script}}"></script>
 </body>
 </html>

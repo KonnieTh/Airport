@@ -569,12 +569,7 @@ app.get('/flights/departures',(req,res)=>{
     })
 })
 
-app.post('/sign-up/done', function (req, res) {
-    console.log(req.body)
-    model.insertUser(req.body.username,req.body.password,req.body.fname,req.body.lname,req.body.age,req.body.gender,req.body.mail,req.body.number,req.body.country,false,callback)
-    if(err){
-        return console.error(err.message);
-    }
+app.get('/main-page/logged',function (req, res) {
     res.render('main-page',{
         style:'style-main-page.css',
         script:'main.js',
@@ -582,6 +577,19 @@ app.post('/sign-up/done', function (req, res) {
         userId:true,
         both:true
     })
-});
+})
+
+app.post('/sign-up/done', function (req, res) {
+    model.insertUser(req.body.username,req.body.password,req.body.fname,req.body.lname,req.body.age,req.body.gender,req.body.mail,req.body.number,req.body.country,false,(err,rows)=>{
+    if(err){
+        return console.error(err.message);
+    }
+    res.redirect('/main-page/logged')
+    });
+})
+
+app.get('/logout',function(req,res){
+
+})
 
 export { app as Airport};

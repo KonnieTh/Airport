@@ -116,10 +116,11 @@ CREATE TABLE public."Announcement" (
 
 
 CREATE TABLE public."modifies" (
+	"modification_ID" serial NOT NULL,
 	"username" varchar(255) NOT NULL,
 	"info_ID" integer NOT NULL,
 	"modification_date" varchar(20) NOT NULL,
-	CONSTRAINT "modifies_pk" PRIMARY KEY ("username","info_ID")
+	CONSTRAINT "modifies_pk" PRIMARY KEY ("username","info_ID","modification_ID")
 ) WITH (
   OIDS=FALSE
 );
@@ -127,10 +128,11 @@ CREATE TABLE public."modifies" (
 
 
 CREATE TABLE public."processing" (
+	"processing_ID" serial NOT NULL,
 	"username" varchar(255) NOT NULL,
 	"airline_ID" integer NOT NULL,
 	"processing_date" varchar(20) NOT NULL,
-	CONSTRAINT "processing_pk" PRIMARY KEY ("username","airline_ID")
+	CONSTRAINT "processing_pk" PRIMARY KEY ("username","airline_ID","processing_ID")
 ) WITH (
   OIDS=FALSE
 );
