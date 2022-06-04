@@ -53,6 +53,51 @@ app.route('/').get((req, res) => { res.redirect('/main-page') });
 //     })
 // })
 
+function getDateTime(){
+    const date = new Date();
+    const year = date.getFullYear();
+    let month;
+    if (date.getMonth()+1<10){
+        month = '0' + (date.getMonth()+1);
+    }
+    else{
+        month = date.getMonth()+1;
+    }
+    let day;
+    if (date.getDate()<10){
+        day = '0' +date.getDate();
+    }
+    else{
+        day = date.getDate();
+    }
+    let hours;
+    if (date.getHours()<10){
+        hours = '0' +date.getHours();
+    }
+    else{
+        hours = date.getHours();
+    }
+    let minutes;
+    if (date.getMinutes()<10){
+        minutes = '0' +date.getMinutes();
+    }
+    else{
+        minutes = date.getMinutes();
+    }
+    let seconds;
+    if (date.getSeconds()<10){
+        seconds = '0' +date.getSeconds();
+    }
+    else{
+        seconds = date.getSeconds();
+    }
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+
+
+
 app.get('/main-page',(req,res)=>{
     res.render('main-page',{
         style:'style-main-page.css',
@@ -84,7 +129,8 @@ app.get('/text/:titlos',(req,res)=>{
 app.put('/edit_text',(req,res)=>{
     const text = req.body;
     console.log(text,req.body);
-    model.editInfo(text,(err,data) =>{
+    const date = getDateTime();
+    model.editInfo(text,date,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -150,7 +196,8 @@ app.get('/airline_name/:iata',(req,res)=>{
 app.put('/airlines_edit',(req,res)=>{
     const airline=req.body;
     console.log(airline);
-    model.editAirline(airline,(err,data) =>{
+    const date = getDateTime();
+    model.editAirline(airline,date,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -163,7 +210,8 @@ app.put('/airlines_edit',(req,res)=>{
 
 app.delete('/airlines_delete',(req,res)=>{
     const airline=req.body;
-    model.deleteAirline(airline,(err,data) =>{
+    const date = getDateTime();
+    model.deleteAirline(airline,date,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -175,7 +223,8 @@ app.delete('/airlines_delete',(req,res)=>{
 
 app.post('/new_airline',(req,res)=>{
     const airline=req.body;
-    model.insertAirline(airline,(err,data) =>{
+    const date = getDateTime();
+    model.insertAirline(airline,date,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -330,7 +379,6 @@ app.get('/announcements/search',(req,res)=>{
     })
 })
 
-
 app.get('/announcements-admin',(req,res)=>{
     model.getAnnouncements((err,data) =>{
         if(err){
@@ -385,7 +433,8 @@ app.get('/announcements-admin/id/:id',(req,res)=>{
 app.post('/create_announcement',(req,res)=>{
     const text = req.body;
     console.log(text);
-    model.createAnnouncement(text,(err,data) =>{
+    const date = getDateTime();
+    model.createAnnouncement(text,date,(err,data) =>{
         if(err){
             return console.error(err.message);
         }
@@ -394,7 +443,6 @@ app.post('/create_announcement',(req,res)=>{
         }
     })
 })
-
 
 app.get('/flights/arrivals',(req,res)=>{
     model.addFlightFrom((err,rows) => {
@@ -427,48 +475,5 @@ app.get('/flights/departures',(req,res)=>{
         })
     })
 })
-
-
-
-
-
-
-
-// app.get('/announcements/',(req,res)=>{
-//     console.log(req.query)
-//     // model.getAnnouncementsStart(0,10,(err,data) =>{
-//     //     if(err){
-//     //         return console.error(err.message);
-//     //     }
-//     //     else{
-//     //         res.render('announcements',{
-//     //             style:'announcements.css',
-//     //             script:'announcements.js',
-//     //             layout:'layout',
-//     //             announcements:data
-//     //         })
-//     //     }
-//     // })
-// })
-
-
-// app.get('/get_announcement/:id',(req,res)=>{
-//     const params = req.body;
-//     console.log(params);
-//     model.getAnnouncements((err,data) =>{
-//         if(err){
-//             return console.error(err.message);
-//         }        
-//         else{
-//             res.json(data);
-//         }
-//     })
-// })
-
-
-
-
-
-
 
 export { app as Airport};

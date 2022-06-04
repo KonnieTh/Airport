@@ -68,7 +68,11 @@
                         <th>{{city}}</th>
                         <th>{{flight_ID}}</th>
                         <th>{{flight_date}} {{expected_time}}</th>
-                        <th>Κατάσταση</th>
+                        {{#if left includeZero=false}}
+                        <th>Αφίχθη</th>
+                        {{^}}
+                        <th>Προγραμματισμένη</th>
+                        {{/if}}
                         <th>Term.{{terminal}}-{{gate_name}}{{gate_number}}</th>
                 </tr>
                 {{/each}}
@@ -94,13 +98,16 @@
                         <th>{{city}}</th>
                         <th>{{flight_ID}}</th>
                         <th>{{flight_date}} {{expected_time}}</th>
-                        <th>Κατάσταση</th>
+                        {{#if left includeZero=false}}
+                        <th>Αναχώρησε</th>
+                        {{^}}
+                        <th>Προγραμματισμένη</th>
+                        {{/if}}
                         <th>Term.{{terminal}}-{{gate_name}}{{gate_number}}</th>
                 </tr>
                 {{/each}}
             </table>
             </div>
             {{/if}}
-            
         </div>
     </div>
