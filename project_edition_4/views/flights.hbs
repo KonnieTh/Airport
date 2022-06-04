@@ -11,6 +11,7 @@
                     <div class="departure">
                         <label for="arrival-airport">Αναζήτηση Αεροδρομίου</label><br>
                         <select id="arrival-airport" name="user_arrival_airport" required>
+                        <option selected>-</option>
                         {{#each airports}}
                         <option>{{airport_name}}</option>
                         {{/each}}
@@ -19,6 +20,7 @@
                     <div class="airline">
                         <label for="airline_arrival">Αεροπορική Εταιρεία</label><br>
                         <select id="airline_departure" name="user_airline_departure">
+                            <option selected>-</option>
                             {{#each airlines}}
                             <option>{{airline_name}}</option>
                             {{/each}}
