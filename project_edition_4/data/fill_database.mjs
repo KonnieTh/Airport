@@ -13,6 +13,36 @@ FROM 'E:\Airports.csv'
 DELIMITER ','
 CSV HEADER;`)
 
+await pool.query(`COPY public."General_User"("username","password","first_name","last_name","email","telephone","age","country","city", "is_admin", "sex")
+FROM 'E:\Airports.csv'
+DELIMITER ','
+CSV HEADER;`)
+
+await pool.query(`COPY public."Admin"("username")
+FROM 'E:\Airports.csv'
+DELIMITER ','
+CSV HEADER;`)
+
+await pool.query(`COPY public."User"("username")
+FROM 'E:\Airports.csv'
+DELIMITER ','
+CSV HEADER;`)
+
+await pool.query(`COPY public."Announcement"("announcement_ID","username","theme","ann_text","ann_date","ann_time","priority")
+FROM 'E:\Airports.csv'
+DELIMITER ','
+CSV HEADER;`)
+
+await pool.query(`COPY public."modifies"("username","info_ID","modification_date")
+FROM 'E:\Airports.csv'
+DELIMITER ','
+CSV HEADER;`)
+
+await pool.query(`COPY public."processing"("username","airline_ID","processing_date")
+FROM 'E:\Airports.csv'
+DELIMITER ','
+CSV HEADER;`)
+
 await pool.query(`COPY public."Gate"("gate_ID","terminal","gate_name","gate_number")
 FROM 'E:\Gate.csv'
 DELIMITER ','

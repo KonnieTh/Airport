@@ -16,8 +16,8 @@ CREATE TABLE public."General_User" (
 	"telephone" varchar(10) NOT NULL,
 	"age" integer NOT NULL,
 	"country" varchar(255) NOT NULL,
-	"city" varchar(255) NOT NULL,
 	"is_admin" BOOLEAN NOT NULL,
+	"sex" varchar(255) NOT NULL,
 	CONSTRAINT "General_User_pk" PRIMARY KEY ("username")
 ) WITH (
   OIDS=FALSE
