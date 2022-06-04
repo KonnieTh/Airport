@@ -6,7 +6,7 @@ const pool = new pg.Pool({
     password:"abcd123!",
     host:"localhost",
     port:5432,
-    database:"airport"
+    database:"airport2"
 })
 
 async function connect(){
@@ -338,7 +338,7 @@ async function getAirlines(callback){
 
 
 async function getUserByUsername(username, callback) {
-    const sql= `SELECT "username", "password" FROM "General_User" WHERE "username" = '${username}' ORDER BY "username" LIMIT 1`
+    const sql= `SELECT "username", "password","is_admin" FROM "General_User" WHERE "username" = '${username}' ORDER BY "username" LIMIT 1`
     try{
         const client = await connect();
         const res = await client.query(sql);
@@ -417,18 +417,3 @@ async function getRoutes(airlineName,date_c,airportName,isDest,id1,callback){
 }
 
 export{getUserByUsername,insertUser,getAirline,getRoutes,getAirlines,getAirports,getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,addFlightFrom,addFlightTo}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

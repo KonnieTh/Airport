@@ -137,13 +137,13 @@ CREATE TABLE public."processing" (
   OIDS=FALSE
 );
 
-ALTER TABLE "User" ADD CONSTRAINT "User_fk0" FOREIGN KEY ("username") REFERENCES "General_User"("username");
-ALTER TABLE "Admin" ADD CONSTRAINT "Admin_fk0" FOREIGN KEY ("username") REFERENCES "General_User"("username");
-ALTER TABLE "Airline" ADD CONSTRAINT "Airline_fk0" FOREIGN KEY ("gate_code") REFERENCES "Gate"("gate_ID");
-ALTER TABLE "flies" ADD CONSTRAINT "flies_fk0" FOREIGN KEY ("airport_ID") REFERENCES "Airport"("airport_ID");
-ALTER TABLE "flies" ADD CONSTRAINT "flies_fk1" FOREIGN KEY ("airline_ID") REFERENCES "Airline"("airline_ID");
-ALTER TABLE "Announcement" ADD CONSTRAINT "Announcement_fk0" FOREIGN KEY ("username") REFERENCES "Admin"("username");
-ALTER TABLE "modifies" ADD CONSTRAINT "modifies_fk0" FOREIGN KEY ("username") REFERENCES "Admin"("username");
-ALTER TABLE "modifies" ADD CONSTRAINT "modifies_fk1" FOREIGN KEY ("info_ID") REFERENCES "General_info"("info_ID");
-ALTER TABLE "processing" ADD CONSTRAINT "processing_fk0" FOREIGN KEY ("username") REFERENCES "Admin"("username");
-ALTER TABLE "processing" ADD CONSTRAINT "processing_fk1" FOREIGN KEY ("airline_ID") REFERENCES "Airline"("airline_ID");
+ALTER TABLE "User" ADD CONSTRAINT "User_fk0" FOREIGN KEY ("username") REFERENCES "General_User"("username") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "Admin" ADD CONSTRAINT "Admin_fk0" FOREIGN KEY ("username") REFERENCES "General_User"("username") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "Airline" ADD CONSTRAINT "Airline_fk0" FOREIGN KEY ("gate_code") REFERENCES "Gate"("gate_ID") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "flies" ADD CONSTRAINT "flies_fk0" FOREIGN KEY ("airport_ID") REFERENCES "Airport"("airport_ID") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "flies" ADD CONSTRAINT "flies_fk1" FOREIGN KEY ("airline_ID") REFERENCES "Airline"("airline_ID") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "Announcement" ADD CONSTRAINT "Announcement_fk0" FOREIGN KEY ("username") REFERENCES "Admin"("username") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "modifies" ADD CONSTRAINT "modifies_fk0" FOREIGN KEY ("username") REFERENCES "Admin"("username") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "modifies" ADD CONSTRAINT "modifies_fk1" FOREIGN KEY ("info_ID") REFERENCES "General_info"("info_ID") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "processing" ADD CONSTRAINT "processing_fk0" FOREIGN KEY ("username") REFERENCES "Admin"("username") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "processing" ADD CONSTRAINT "processing_fk1" FOREIGN KEY ("airline_ID") REFERENCES "Airline"("airline_ID") ON UPDATE CASCADE ON DELETE CASCADE;

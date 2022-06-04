@@ -1,6 +1,7 @@
 import express from 'express'
 const app = express()
 import cors from 'cors';
+import bcrypt from 'bcrypt';
 
 import dotenv from 'dotenv'
 if (process.env.NODE_ENV !== 'production') {
@@ -63,6 +64,7 @@ app.use(airportSession);
 app.use((req, res, next) => {
     console.log(req.session.loggedUserId)
     res.locals.userId = req.session.loggedUserId;
+    res.locals.both = req.session.loggedUserId;
     next();
 })
 
@@ -87,22 +89,6 @@ app.get('/main-page',(req,res)=>{
     })
 })
 
-
-// app.get('/companies',(req,res)=>{
-//     res.render('companies',{
-//         style:'companies.css',
-//         script:'companies.js',
-//         layout:'layout'
-//     })
-// })
-
-app.get('/main-page',(req,res)=>{
-    res.render('main-page',{
-        style:'style-main-page.css',
-        script:'main.js',
-        layout:'layout-main-page'
-    })
-})
 
 app.get('/main-page-admin',(req,res)=>{
     res.render('main-page-admin',{
@@ -476,55 +462,52 @@ app.get('/flights/departures',(req,res)=>{
     })
 })
 
-app.get('/main-page/logged',function (req, res) {
-    res.render('main-page',{
-        style:'style-main-page.css',
-        script:'main.js',
-        layout:'layout-main-page',
-        userId:true,
-        both:true
-    })
-})
-
 app.post('/sign-up/done', function (req, res) {
     model.insertUser(req.body.username,req.body.password,req.body.fname,req.body.lname,req.body.age,req.body.gender,req.body.mail,req.body.number,req.body.country,false,(err,rows)=>{
     if(err){
         return console.error(err.message);
     }
-    res.redirect('/main-page/logged')
+    res.redirect('/main-page')
     });
 })
 
-app.get('/logout',function(req,res){
+app.get('/log-out',function(req,res){
     req.session.destroy();
     res.redirect('/');
 })
 
-let doLogin = function (req, res) {
-    //Ελέγχει αν το username και το password είναι σωστά και εκτελεί την
-    //συνάρτηση επιστροφής authenticated
-
-    userModel.getUserByUsername(req.body.username, (err, user) => {
-        if (user == undefined) {
-            res.render('/log-in', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
+app.post('/log-in/done', function (req, res) {
+    model.getUserByUsername(req.body.username,(err,user)=>{     
+        if(err){
+            return console.error(err.message);
         }
-        else {
-            const match = bcrypt.compare(req.body.password, user.password, (err, match) => {
+        if (user == undefined) {
+            res.render('main-page', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
+        }else if(user.is_admin==true){
+            bcrypt.compare(req.body.password, user.password, (err, match) => {
                 if (match) {
-                    //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
-                    req.session.loggedUserId = user.id;
-                    //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/" 
-                    const redirectTo = req.session.originalUrl || "/tasks";
-                    // res.redirect("/");
+                    req.session.loggedUserId = user.username;
+                    const redirectTo = req.session.originalUrl || "/main-page-admin";
                     res.redirect(redirectTo);
-                }
-                else {
-                    res.render("/log-in", { message: 'Ο κωδικός πρόσβασης είναι λάθος' })
+                }else {
+                    res.render("main-page", { message: 'Ο κωδικός πρόσβασης είναι λάθος' })
                 }
             })
         }
-    })
-}
+        else {
+            bcrypt.compare(req.body.password, user.password, (err, match) => {
+                if (match) {
+                    req.session.loggedUserId = user.username;
+                    const redirectTo = req.session.originalUrl || "/main-page";
+                    res.redirect(redirectTo);
+                }else {
+                    res.render("main-page", { message: 'Ο κωδικός πρόσβασης είναι λάθος' })
+                }
+            })
+        }
+    });
+})
+
 
 //Τη χρησιμοποιούμε για να ανακατευθύνουμε στη σελίδα /login όλα τα αιτήματα από μη συνδεδεμένους χρήστες
 let checkAuthenticated = function (req, res, next) {
