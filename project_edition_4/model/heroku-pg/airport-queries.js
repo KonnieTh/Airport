@@ -8,7 +8,7 @@ const pool = new pg.Pool({
     password:"abcd123!",
     host:"localhost",
     port:5432,
-    database:"Airport"
+    database:"airport"
 })
 
 async function connect(){
@@ -313,7 +313,7 @@ async function getAirlines(callback){
 
 async function getRoutes(airlineName,date_c,airportName,isDest,callback){
     if(airlineName!=null && date_c!=null && airportName!=null && isDest!=null){
-        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}'and "Airline"."airline_name"='${airlineName}' order by expected_time"`;
+        var sql = ` Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name" from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  WHERE "flight_date"='${date_c}' and "is_destination"=${isDest} and "Airport"."airport_name"='${airportName}'and "Airline"."airline_name"='${airlineName}' order by "expected_time"`;
     }
     try{
         const client = await connect();

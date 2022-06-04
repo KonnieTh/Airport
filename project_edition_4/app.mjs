@@ -227,16 +227,24 @@ app.get('/flights',(req,res)=>{
 
 app.post('/flights/done', function (req, res) {
     console.log(req.body)
-    // model.getRoutes((err,rows) => {
-    //     if(err){
-    //         return console.error(err.message);
-    //     }
-    //     res.render('flights',{
-    //         style:'flights.css',
-    //         script:'flights.js',
-    //         layout:'layout'
-    //     })
-    // })
+    console.log(req.body.user_airline_departure[0]);
+    console.log(req.body.user_airline_departure[1]);
+    console.log(req.body.user_arrival_airport);
+    let {destt}=req.body;
+    if(destt===undefined){
+        destt=true;
+    }
+    console.log(destt)
+    model.getRoutes(req.body.user_airline_departure[0],req.body.user_airline_departure[1],req.body.user_arrival_airport,destt,(err,rows) => {
+        if(err){
+            return console.error(err.message);
+        }
+        res.render('flights',{
+            style:'flights.css',
+            script:'flights.js',
+            layout:'layout'
+        })
+    })
 });
 
 app.get('/flights-admin',(req,res)=>{
