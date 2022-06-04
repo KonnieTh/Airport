@@ -8,7 +8,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 import * as model from './model/heroku-pg/airport-queries.js'
-//import bcrypt from 'bcrypt';
 import exphbs from 'express-handlebars';
 import airportSession from './app-setup-session.mjs'
 
@@ -55,109 +54,17 @@ function getDateTime(){
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-
-let showLogInForm = function (req, res) {
-    res.render('/log-in');
-}
-
-let showRegisterForm = function (req, res) {
-    res.render('/sign-up');
-}
-
-let doRegister = function (req, res) {
-    userModel.registerUser(req.body.username, req.body.password, (err, result, message) => {
-        if (err) {
-            console.error('registration error: ' + err);
-            //FIXME: δε θα έπρεπε να περνάμε το εσωτερικό σφάλμα στον χρήστη
-            res.render('/sign-up', { message: err });
-        }
-        else if (message) {
-            res.render('/sign-up', message)
-        }
-        else {
-            res.redirect('/log-in');
-        }
-    })
-}
-
-let doLogin = function (req, res) {
-    //Ελέγχει αν το username και το password είναι σωστά και εκτελεί την
-    //συνάρτηση επιστροφής authenticated
-
-    userModel.getUserByUsername(req.body.username, (err, user) => {
-        if (user == undefined) {
-            res.render('/log-in', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
-        }
-        else {
-            const match = bcrypt.compare(req.body.password, user.password, (err, match) => {
-                if (match) {
-                    //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
-                    req.session.loggedUserId = user.id;
-                    //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/" 
-                    const redirectTo = req.session.originalUrl || "/tasks";
-                    // res.redirect("/");
-                    res.redirect(redirectTo);
-                }
-                else {
-                    res.render("/log-in", { message: 'Ο κωδικός πρόσβασης είναι λάθος' })
-                }
-            })
-        }
-    })
-}
-
-let doLogout = (req, res) => {
-    //Σημειώνουμε πως ο χρήστης δεν είναι πια συνδεδεμένος
-    req.session.destroy();
-    res.redirect('/');
-}
-
-//Τη χρησιμοποιούμε για να ανακατευθύνουμε στη σελίδα /login όλα τα αιτήματα από μη συνδεδεμένους χρήστες
-let checkAuthenticated = function (req, res, next) {
-    //Αν η μεταβλητή συνεδρίας έχει τεθεί, τότε ο χρήστης είναι συνεδεμένος
-    if (req.session.loggedUserId) {
-        console.log("user is authenticated", req.originalUrl);
-        //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
-        next();
-    }
-    else {
-        //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
-        //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
-        if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
-            next()
-        }
-        else {
-            //Στείλε το χρήστη στη "/login" 
-            console.log("not authenticated, redirecting to /login")
-            res.redirect('/login');
-        }
-    }
-}
-
-//Αιτήματα για σύνδεση
-//Δείξε τη φόρμα σύνδεσης. Το 1ο middleware ελέγχει αν έχει γίνει η σύνδεση
-// app.route('/log-in').get(checkAuthenticated, showLogInForm);
-
-// //Αυτή η διαδρομή καλείται όταν η φόρμα φτάσει με POST και διεκπεραιώνει τη σύνδεση
-// app.route('/log-in').post(doLogin);
-
-// //Αποσυνδέει το χρήστη
-// app.route('/logout').get(doLogout);
-
-// //Εγγραφή νέου χρήστη
-// app.route('/sign-up').get(checkAuthenticated, showRegisterForm);
-//FIXME θεωρεί πως POST στο /register ο χρήστης δεν είναι συνδεδεμένος
-// app.post('/sign-up', doRegister);
-
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
  
-// app.use((req, res, next) => {
-//     res.locals.userId = req.session.loggedUserId;
-//     next();
-// })
+app.use(airportSession);
+
+app.use((req, res, next) => {
+    console.log(req.session.loggedUserId)
+    res.locals.userId = req.session.loggedUserId;
+    next();
+})
 
 app.use(express.static('public'))
 
@@ -180,7 +87,7 @@ app.get('/main-page',(req,res)=>{
     })
 })
 
-app.use(airportSession);
+
 // app.get('/companies',(req,res)=>{
 //     res.render('companies',{
 //         style:'companies.css',
@@ -589,7 +496,71 @@ app.post('/sign-up/done', function (req, res) {
 })
 
 app.get('/logout',function(req,res){
-
+    req.session.destroy();
+    res.redirect('/');
 })
+
+let doLogin = function (req, res) {
+    //Ελέγχει αν το username και το password είναι σωστά και εκτελεί την
+    //συνάρτηση επιστροφής authenticated
+
+    userModel.getUserByUsername(req.body.username, (err, user) => {
+        if (user == undefined) {
+            res.render('/log-in', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
+        }
+        else {
+            const match = bcrypt.compare(req.body.password, user.password, (err, match) => {
+                if (match) {
+                    //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
+                    req.session.loggedUserId = user.id;
+                    //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/" 
+                    const redirectTo = req.session.originalUrl || "/tasks";
+                    // res.redirect("/");
+                    res.redirect(redirectTo);
+                }
+                else {
+                    res.render("/log-in", { message: 'Ο κωδικός πρόσβασης είναι λάθος' })
+                }
+            })
+        }
+    })
+}
+
+//Τη χρησιμοποιούμε για να ανακατευθύνουμε στη σελίδα /login όλα τα αιτήματα από μη συνδεδεμένους χρήστες
+let checkAuthenticated = function (req, res, next) {
+    //Αν η μεταβλητή συνεδρίας έχει τεθεί, τότε ο χρήστης είναι συνεδεμένος
+    if (req.session.loggedUserId) {
+        console.log("user is authenticated", req.originalUrl);
+        //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
+        next();
+    }
+    else {
+        //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
+        //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
+        if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
+            next()
+        }
+        else {
+            //Στείλε το χρήστη στη "/login" 
+            console.log("not authenticated, redirecting to /login")
+            res.redirect('/login');
+        }
+    }
+}
+
+//Αιτήματα για σύνδεση
+//Δείξε τη φόρμα σύνδεσης. Το 1ο middleware ελέγχει αν έχει γίνει η σύνδεση
+// app.route('/log-in').get(checkAuthenticated, showLogInForm);
+
+// //Αυτή η διαδρομή καλείται όταν η φόρμα φτάσει με POST και διεκπεραιώνει τη σύνδεση
+// app.route('/log-in').post(doLogin);
+
+// //Αποσυνδέει το χρήστη
+// app.route('/logout').get(doLogout);
+
+// //Εγγραφή νέου χρήστη
+// app.route('/sign-up').get(checkAuthenticated, showRegisterForm);
+//FIXME θεωρεί πως POST στο /register ο χρήστης δεν είναι συνδεδεμένος
+// app.post('/sign-up', doRegister);
 
 export { app as Airport};
