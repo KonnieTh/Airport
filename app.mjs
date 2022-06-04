@@ -62,11 +62,25 @@ app.use(cors());
 app.use(airportSession);
 
 app.use((req, res, next) => {
-    console.log(req.session.loggedUserId)
-    res.locals.userId = req.session.loggedUserId;
+    model.getAdmin(req.session.loggedUserId,(err,user)=>{     
+        if(err){
+            return console.error(err.message);
+        }
+        if (user == undefined) {
+            res.locals.userId = req.session.loggedUserId;
+            console.log("USER",res.locals.userId);
+        }else{
+            res.locals.adminId=req.session.loggedUserId;
+            console.log("ADMIN",res.locals.adminId)
+        }
+    })    
     res.locals.both = req.session.loggedUserId;
     next();
 })
+
+
+
+
 
 app.use(express.static('public'))
 
@@ -94,7 +108,7 @@ app.get('/main-page-admin',(req,res)=>{
     res.render('main-page-admin',{
         style:'style-main-page-admin.css',
         script:'main.js',
-        layout:'layout-main-page-admin'
+        layout:'layout-main-page'
     })
 })
 
