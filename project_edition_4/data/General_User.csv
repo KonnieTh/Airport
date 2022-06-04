@@ -1,0 +1,11 @@
+username,password,first_name,last_name,email,telephone,age,country,is_admin,gender
+user1,Password1,Vasiliki,Mode,mode@gmail.com,6945552333,20,Greece,false,female
+user2,Password2,Panagiotis,Alex,panosalex@gmail.com,6945559764,29,Greece,false,male
+user3,Password3,Iro,Kariofili,iro@gmail.com,6945552191,24,Cyprus,false,female
+user4,Password4,Stauros,Depountis,depountis@gmail.gr,2105551153,22,Greece,false,male
+user5,Password5,Athanasia,Pegkou,pathapeg@gmail.com,2105550570,25,Cyprus,false,female
+user6,Password6,Giorgos,pappas,pappasgeorge@yahoo.gr,6955552510,18,Greece,false,male
+user7,Password7,Christos,Den,ChrisDen@gmail.com,6985558855,35,Another-country,false,male
+user8,Password8,Γιάννης,Κατοίκος,gianniskatoikos123@gmai.com,6955557383,21,Greece,true,male
+user9,Password9,Κωνσταντίνα,Θανοπούλου,konnathap@yahoo.gr,6975557367,21,Greece,true,female
+user10,Password10,Penny,Wise,pennywise@gmail.com,6955551916,30,Another-country,false,other
