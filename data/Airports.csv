@@ -291,7 +291,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 289,Rechlin-Lärz Airport,REB,EDAX,Germany,Rechlin-laerz
 290,Schönhagen Airport,QXH,EDAZ,Germany,Schoenhagen
 291,Barth Airport,BBH,EDBH,Germany,Barth
-"292,""Magdeburg """"City"""" Airport"",ZMG,EDBM,Germany,Magdeburg"
+292,Magdeburg City Airport,ZMG,EDBM,Germany,Magdeburg
 293,Cottbus-Drewitz Airport,CBU,EDCD,Germany,Cottbus
 294,Berlin-Schönefeld Airport,SXF,EDDB,Germany,Berlin
 295,Dresden Airport,DRS,EDDC,Germany,Dresden
@@ -511,7 +511,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 509,Kristiansand Airport,KRS,ENCN,Norway,Kristiansand
 510,Geilo Airport Dagali,DLD,ENDI,Norway,Geilo
 511,Bardufoss Airport,BDU,ENDU,Norway,Bardufoss
-"512,""Harstad/Narvik Airport, Evenes"",EVE,ENEV,Norway,Harstad/Narvik"
+512,Harstad/Narvik Airport Evenes,EVE,ENEV,Norway,Harstad/Narvik
 513,Leirin Airport,VDB,ENFG,Norway,Fagernes
 514,Florø Airport,FRO,ENFL,Norway,Floro
 515,Oslo Lufthavn,OSL,ENGM,Norway,Oslo
@@ -526,13 +526,13 @@ airport_ID,airport_name,IATA,ICAO,country,city
 524,Notodden Airport,NTB,ENNO,Norway,Notodden
 525,Ørland Airport,OLA,ENOL,Norway,Orland
 526,Røros Airport,RRS,ENRO,Norway,Roros
-"527,""Moss Airport, Rygge"",RYG,ENRY,Norway,Rygge"
-"528,""Svalbard Airport, Longyear"",LYR,ENSB,Norway,Svalbard"
+527,Moss Airport,RYG,ENRY,Norway,Rygge
+528,Svalbard Airport,LYR,ENSB,Norway,Svalbard
 529,Skien Airport,SKE,ENSN,Norway,Skien
 530,Stord Airport,SRP,ENSO,Norway,Stord
 531,Sandnessjøen Airport (Stokka),SSJ,ENST,Norway,Sandnessjoen
-"532,""Tromsø Airport,"",TOS,ENTC,Norway,Tromso"
-"533,""Sandefjord Airport, Torp"",TRF,ENTO,Norway,Sandefjord"
+532,Tromsø Airport,TOS,ENTC,Norway,Tromso
+533,Sandefjord Airport,TRF,ENTO,Norway,Sandefjord
 534,Trondheim Airport Værnes,TRD,ENVA,Norway,Trondheim
 535,Stavanger Airport Sola,SVG,ENZV,Norway,Stavanger
 536,Gdańsk Lech Wałęsa Airport,GDN,EPGD,Poland,Gdansk
@@ -540,7 +540,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 538,Katowice International Airport,KTW,EPKT,Poland,Katowice
 539,Poznań-Ławica Airport,POZ,EPPO,Poland,Poznan
 540,Rzeszów-Jasionka Airport,RZE,EPRZ,Poland,Rzeszow
-"541,""Szczecin-Goleniów """"Solidarność"""" Airport"",SZZ,EPSC,Poland,Szczecin"
+541,Szczecin-Goleniów Solidarność Airport,SZZ,EPSC,Poland,Szczecin
 542,Redzikowo Air Base,OSP,EPSK,Poland,Slupsk
 543,Warsaw Chopin Airport,WAW,EPWA,Poland,Warsaw
 544,Copernicus Wrocław Airport,WRO,EPWR,Poland,Wroclaw
@@ -1028,7 +1028,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 1026,Valence-Chabeuil Airport,VAF,LFLU,France,Valence
 1027,Vichy-Charmeil Airport,VHY,LFLV,France,Vichy
 1028,Aurillac Airport,AUR,LFLW,France,Aurillac
-"1029,""Châteauroux-Déols """"Marcel Dassault"""" Airport"",CHR,LFLX,France,Chateauroux"
+1029,Châteauroux-Déols Marcel Dassault Airport,CHR,LFLX,France,Chateauroux
 1030,Lyon-Bron Airport,LYN,LFLY,France,Lyon
 1031,Cannes-Mandelieu Airport,CEQ,LFMD,France,Cannes
 1032,Saint-Étienne-Bouthéon Airport,EBU,LFMH,France,St-Etienne
@@ -1127,13 +1127,13 @@ airport_ID,airport_name,IATA,ICAO,country,city
 1125,Sitia Airport,JSH,LGST,Greece,Sitia
 1126,Skiros Airport,SKU,LGSY,Greece,Skiros
 1127,Thessaloniki Macedonia International Airport,SKG,LGTS,Greece,Thessaloniki
-"1128,""Zakynthos International Airport """"Dionysios Solomos"""""",ZTH,LGZA,Greece,Zakynthos"
+1128,Zakynthos International Airport Dionysios Solomos,ZTH,LGZA,Greece,Zakynthos
 1129,Budapest Liszt Ferenc International Airport,BUD,LHBP,Hungary,Budapest
 1130,Debrecen International Airport,DEB,LHDC,Hungary,Debrecen
 1131,Crotone Airport,CRV,LIBC,Italy,Crotone
 1132,Bari Karol Wojtyła Airport,BRI,LIBD,Italy,Bari
-"1133,""Foggia """"Gino Lisa"""" Airport"",FOG,LIBF,Italy,Foggia"
-"1134,""Taranto-Grottaglie """"Marcello Arlotta"""" Airport"",TAR,LIBG,Italy,Grottaglie"
+1133,Foggia Gino Lisa Airport,FOG,LIBF,Italy,Foggia
+1134,Taranto-Grottaglie Marcello Arlotta Airport,TAR,LIBG,Italy,Grottaglie
 1135,Lecce Galatina Air Base,LCC,LIBN,Italy,Lecce
 1136,Pescara International Airport,PSR,LIBP,Italy,Pescara
 1137,Brindisi – Salento Airport,BDS,LIBR,Italy,Brindisi
@@ -2140,7 +2140,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 2138,General José Antonio Anzoategui International Airport,BLA,SVBC,Venezuela,Barcelona
 2139,Barinas Airport,BNS,SVBI,Venezuela,Barinas
 2140,Barquisimeto International Airport,BRM,SVBM,Venezuela,Barquisimeto
-"2141,""Aeropuerto """"General Tomas de Heres"""". Ciudad Bolivar"",CBL,SVCB,Venezuela,Ciudad Bolivar"
+2141,Aeropuerto General Tomas de Heres. Ciudad Bolivar,CBL,SVCB,Venezuela,Ciudad Bolivar
 2142,Caicara del Orinoco Airport,CXA,SVCD,Venezuela,Caicara De Orinoco
 2143,Calabozo Airport,CLZ,SVCL,Venezuela,Calabozo
 2144,Canaima Airport,CAJ,SVCN,Venezuela,Canaima
@@ -2480,7 +2480,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 2478,Pitu Airport,OTI,WAMR,Indonesia,Morotai Island
 2479,Sultan Khairun Babullah Airport,TTE,WAMT,Indonesia,Ternate
 2480,Syukuran Aminuddin Amir Airport,LUW,WAMW,Indonesia,Luwuk
-"2481,""Pattimura Airport, Ambon"",AMQ,WAPP,Indonesia,Ambon"
+2481,Pattimura Airport,AMQ,WAPP,Indonesia,Ambon
 2482,Fakfak Airport,FKQ,WASF,Indonesia,Fak Fak
 2483,Kaimana Airport,KNG,WASK,Indonesia,Kaimana
 2484,Babo Airport,BXB,WASO,Indonesia,Babo
@@ -2645,7 +2645,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 2643,Ponca City Regional Airport,PNC,KPNC,United States,Ponca City
 2644,Hunter Army Air Field,SVN,KSVN,United States,Hunter Aaf
 2645,Grand Forks International Airport,GFK,KGFK,United States,Grand Forks
-"2646,""Pine Bluff Regional Airport, Grider Field"",PBF,KPBF,United States,Pine Bluff"
+2646,Pine Bluff Regional Airport,PBF,KPBF,United States,Pine Bluff
 2647,Whiting Field Naval Air Station - North,NSE,KNSE,United States,Milton
 2648,Hana Airport,HNM,PHHN,United States,Hana
 2649,Ernest A. Love Field,PRC,KPRC,United States,Prescott
@@ -2763,7 +2763,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 2761,William P Hobby Airport,HOU,KHOU,United States,Houston
 2762,Buckley Air Force Base,BFK,KBKF,United States,Buckley
 2763,Northway Airport,ORT,PAOR,United States,Northway
-"2764,""Warren """"Bud"""" Woods Palmer Municipal Airport"",PAQ,PAAQ,United States,Palmer"
+2764,Warren Bud Woods Palmer Municipal Airport,PAQ,PAAQ,United States,Palmer
 2765,Pittsburgh International Airport,PIT,KPIT,United States,Pittsburgh
 2766,Wiley Post Will Rogers Memorial Airport,BRW,PABR,United States,Barrow
 2767,Ellington Airport,EFD,KEFD,United States,Houston
@@ -2797,7 +2797,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 2795,Bowman Field,LOU,KLOU,United States,Louisville
 2796,Sierra Vista Municipal Libby Army Air Field,FHU,KFHU,United States,Fort Huachuca
 2797,Lihue Airport,LIH,PHLI,United States,Lihue
-"2798,""Terre Haute Regional Airport, Hulman Field"",HUF,KHUF,United States,Terre Haute"
+2798,Terre Haute Regional Airport,HUF,KHUF,United States,Terre Haute
 2799,Havre City County Airport,HVR,KHVR,United States,Havre
 2800,Grant County International Airport,MWH,KMWH,United States,Grant County Airport
 2801,Edward F Knapp State Airport,MPV,KMPV,United States,Montpelier
@@ -3442,12 +3442,12 @@ airport_ID,airport_name,IATA,ICAO,country,city
 3440,Lamar Municipal Airport,LAA,KLAA,United States,Lamar
 3441,Renner Field-Goodland Municipal Airport,GLD,KGLD,United States,Goodland
 3442,Yellowstone Regional Airport,COD,KCOD,United States,Cody
-"3443,""Ørsta-Volda Airport, Hovden"",HOV,ENOV,Norway,Orsta-Volda"
+3443,Ørsta-Volda Airport,HOV,ENOV,Norway,Orsta-Volda
 3444,St. Mary's Airport,ISC,EGHE,United Kingdom,ST MARY\'S
 3445,Springfield Branson National Airport,SGF,KSGF,United States,Springfield
 3446,Narvik Framnes Airport,NVK,ENNK,Norway,Narvik
 3447,Berlevåg Airport,BVG,ENBV,Norway,Berlevag
-"3448,""Oslo, Fornebu Airport"",FBU,ENFB,Norway,Oslo"
+3448,Fornebu Airport,FBU,ENFB,Norway,Oslo
 3449,Norilsk-Alykel Airport,NSK,UOOO,Russia,Norilsk
 3450,Anapa Vityazevo Airport,AAQ,URKA,Russia,Anapa
 3451,Joplin Regional Airport,JLN,KJLN,United States,Joplin
@@ -3631,7 +3631,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 3629,Helgoland-Düne Airport,HGL,EDXH,Germany,Helgoland
 3630,Seinäjoki Airport,SJY,EFSI,Finland,Seinäjoki / Ilmajoki
 3631,Nottingham Airport,NQT,EGBN,United Kingdom,Nottingham
-"3632,Robin Hood Doncaster Sheffield Airport,DSA,EGCN,United Kingdom,""Doncaster, Sheffield"""
+3632,Robin Hood Doncaster Sheffield Airport,DSA,EGCN,United Kingdom,Sheffield
 3633,Campbeltown Airport,CAL,EGEC,United Kingdom,Campbeltown
 3634,Eday Airport,EOI,EGED,United Kingdom,Eday
 3635,Fair Isle Airport,FIE,EGEF,United Kingdom,Fair Isle
@@ -3649,14 +3649,14 @@ airport_ID,airport_name,IATA,ICAO,country,city
 3647,Sindal Airport,CNL,EKSN,Denmark,Sindal
 3648,Leknes Airport,LKN,ENLK,Norway,Leknes
 3649,Namsos Høknesøra Airport,OSY,ENNM,Norway,Namsos
-"3650,""Mo i Rana Airport, Røssvoll"",MQN,ENRA,Norway,Mo i Rana"
-"3651,""Rørvik Airport, Ryum"",RVK,ENRM,Norway,Rørvik"
+3650,Mo i Rana Airport,MQN,ENRA,Norway,Mo i Rana
+3651,Rørvik Airport,RVK,ENRM,Norway,Rørvik
 3652,Røst Airport,RET,ENRS,Norway,Røst
 3653,Sandane Airport (Anda),SDN,ENSD,Norway,Sandane
 3654,Sogndal Airport,SOG,ENSG,Norway,Sogndal
 3655,Svolvær Helle Airport,SVJ,ENSH,Norway,Svolvær
 3656,Sørkjosen Airport,SOJ,ENSR,Norway,Sorkjosen
-"3657,""Vardø Airport, Svartnes"",VAW,ENSS,Norway,Vardø"
+3657,Vardø Airport,VAW,ENSS,Norway,Vardø
 3658,Værøy Heliport,VRY,ENVR,Norway,Værøy
 3659,Bydgoszcz Ignacy Jan Paderewski Airport,BZG,EPBY,Poland,Bydgoszcz
 3660,Łódź Władysław Reymont Airport,LCJ,EPLL,Poland,Lodz
@@ -3727,8 +3727,8 @@ airport_ID,airport_name,IATA,ICAO,country,city
 3725,Mogador Airport,ESU,GMMI,Morocco,Essadouira
 3726,Hassan I Airport,EUN,GMML,Western Sahara,El Aaiún
 3727,Nador International Airport,NDR,GMMW,Morocco,El Aroui
-"3728,Praia International Airport,RAI,GVNP,Cape Verde,""Praia, Santiago Island"""
-"3729,São Filipe Airport,SFL,GVSF,Cape Verde,""Sao Filipe, Fogo Island"""
+3728,Praia International Airport,RAI,GVNP,Cape Verde,Santiago Island
+3729,São Filipe Airport,SFL,GVSF,Cape Verde,Fogo Island
 3730,Baco Airport,BCO,HABC,Ethiopia,Baco
 3731,Beica Airport,BEI,HABE,Ethiopia,Beica
 3732,Combolcha Airport,DSE,HADC,Ethiopia,Dessie
@@ -3904,7 +3904,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 3902,Savusavu Airport,SVU,NFNS,Fiji,Savusavu
 3903,Kaufana Airport,EUA,NFTE,Tonga,Eua Island
 3904,Lifuka Island Airport,HPA,NFTL,Tonga,Lifuka
-"3905,Mata'aho Airport,NFO,NFTO,Tonga,""Angaha, Niuafo'ou Island"""
+3905,Mata'aho Airport,NFO,NFTO,Tonga,Niuafoou Island
 3906,Kuini Lavenia Airport,NTT,NFTP,Tonga,Niuatoputapu
 3907,Vanua Balavu Airport,VBV,NFVB,Fiji,Vanua Balavu
 3908,Niue International Airport,IUE,NIUE,Niue,Alofi
@@ -6048,7 +6048,7 @@ airport_ID,airport_name,IATA,ICAO,country,city
 6046,Seldovia Airport,SOV,PASO,United States,Seldovia
 6047,Lutselk'e Airport,YSG,CYLK,Canada,Lutselk'e
 6048,Dwangwa Airport,DWA,FWDW,Malawi,Dwangwa
-"6049,""Paloich Airport, Heliport"",HGI,HSFA,South Sudan,Higleig"
+6049,Paloich Airport,HGI,HSFA,South Sudan,Higleig
 6050,Kishangarh Airport,KQH,VIKG,India,Ajmer
 6051,Kannur International Airport,CNN,VOKN,India,Kannur
 6052,La Araucanía Airport,ZCO,SCQP,Chile,Temuco
