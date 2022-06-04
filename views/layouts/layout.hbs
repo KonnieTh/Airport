@@ -18,29 +18,38 @@
 <body>
     <div class="menu">
         <div class="menu-left">
-            <div class="logo"><a href="/main-page"><img src="/images/Icarus-logo.png"></a></div>
+            {{#unless both}}
+                <div class="logo"><a href="/main-page"><img src="/images/Icarus-logo.png"></a></div>
+                {{/unless}}
+                {{#if userId}}
+                <div class="logo"><a href="/main-page"><img src="/images/Icarus-logo.png"></a></div>
+                <div class="flights"><a href="/flights">Πτήσεις</a></div>
+                <div class="companies"><a href="/companies/Α">Εταιρείες</a></div>
+                <div class="shops"><a href="/shops">Καταστήματα</a></div>
+                {{/if}}
+                {{#if adminId}}
+                <div class="logo"><a href="/main-page-admin"><img src="/images/Icarus-logo.png"></a></div>
+                <div class="flights"><a href="/flights">Πτήσεις</a></div>
+                <div class="companies"><a href="http://localhost:3000/companies-admin/Α">Εταιρείες</a></div>
+                <div class="shops"><a href="/shops">Καταστήματα</a></div>
+                {{/if}}
+            </div>
             {{#if userId}}
-            <div class="flights"><a href="/flights">Πτήσεις</a></div>
-            <div class="companies"><a href="/companies/Α">Εταιρείες</a></div>
-            <div class="shops"><a href="/shops">Καταστήματα</a></div>
+            <div class="menu-right">
+                <a class="log-out" href="/log-out">Αποσύνδεση</a>
+            </div>
             {{/if}}
-        </div>
-        {{#if userId}}
-        <div class="menu-right">
-            <a class="log-out" href="/log-out">Αποσύνδεση</a>
-        </div>
-        {{/if}}
-        {{#unless both}}
-        <div class="menu-right">
-            <button class="sign-up">Εγγραφή</button>
-            <button class="log-in">Είσοδος</button>
-        </div>
-        {{/unless}}
-        {{#if adminId}}
-        <div class="menu-right">
-            <a class="log-out" href="/log-out">Αποσύνδεση</a>
-        </div>
-        {{/if}}
+            {{#unless both}}
+            <div class="menu-right">
+                <button class="sign-up">Εγγραφή</button>
+                <button class="log-in">Είσοδος</button>
+            </div>
+            {{/unless}}
+            {{#if adminId}}
+            <div class="menu-right">
+                <a class="log-out" href="/log-out">Αποσύνδεση</a>
+            </div>
+            {{/if}}
     </div>
     <div class="signup">
         <form action='/sign-up/done' method="post">
@@ -133,7 +142,7 @@
         </div>
         <div class="links">
             <h3>Χρήσιμα links</h3>
-            {{#if userId}}
+            {{#if both}}
             <div class="lin">
                 <a href="/flights">Aναχωρήσεις-Aφίξεις</a>
             </div>

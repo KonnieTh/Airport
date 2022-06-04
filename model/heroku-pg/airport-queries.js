@@ -3,10 +3,10 @@ import bcrypt from 'bcrypt';
 
 const pool = new pg.Pool({
     user:"postgres",
-    password:"test1234",
+    password:"abcd123!",
     host:"localhost",
     port:5432,
-    database:"airport"
+    database:"airport2"
 })
 
 async function connect(){
@@ -261,9 +261,9 @@ async function addFlightFrom(callback){
     let cur_time=hours + ":" + "00" + ":00"
     console.log(parseInt(hours))
     if(parseInt(hours)+1>24){
-        var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + "00" + ":00"
+        var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + minutes + ":00"
     }else{
-        var cur_time_2=(parseInt(hours)+1).toString() + ":" + "00" + ":00"
+        var cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
     }
     const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time_3}' THEN 1 WHEN "expected_time">'${cur_time_3}' THEN 0 END AS "left" 
     from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  
@@ -291,19 +291,20 @@ async function addFlightTo(callback){
     let cur_time=hours + ":" + "00" + ":00"
     
     if(parseInt(hours)+1>24){
-        var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + "00" + ":00"
+        var cur_time_2=(parseInt(hours)+1-24).toString() + ":" + minutes + ":00"
     }else{
-        var cur_time_2=(parseInt(hours)+1).toString() + ":" + "00" + ":00"
+        var cur_time_2=(parseInt(hours)+1).toString() + ":" + minutes + ":00"
     }
     let cur_time_3=hours + ":" + minutes + ":00";
     const sql = `Select "airline_name","flight_ID" ,"city","flight_date"::text,"expected_time","terminal","gate_number","gate_name",CASE WHEN "expected_time"<='${cur_time_3}' THEN 1 WHEN "expected_time">'${cur_time_3}' THEN 0 END AS "left" 
             from "flies" natural join "Airport" join "Airline" on "flies"."airline_ID" = "Airline"."airline_ID" join "Gate" on "Airline".gate_code = "Gate"."gate_ID"  
             WHERE "flight_date"='${full_date}' and "is_destination"=true and "Airport"."IATA"!='ATH' and "expected_time">'${cur_time}' and "expected_time"<'${cur_time_2}'  
-            order by expected_time;`;    try{
-    const client = await connect();
-    const res = await client.query(sql);
-    await client.release();
-    callback(null,res.rows);
+            order by expected_time;`;    
+    try{
+        const client = await connect();
+        const res = await client.query(sql);
+        await client.release();
+        callback(null,res.rows);
     }
     catch(err){
         callback(err,null);
@@ -416,18 +417,6 @@ async function getRoutes(airlineName,date_c,airportName,isDest,id1,callback){
     }
 }
 
-async function getAdmin(username, callback) {
-    const sql= `SELECT "username"  from "Admin" WHERE "username" = '${username}' ORDER BY "username" LIMIT 1`
-    try{
-        const client = await connect();
-        const res = await client.query(sql);
-        await client.release();
-        callback(null,res.rows[0]);
-    }
-    catch(err){
-        callback(err,null);
-    }
-}
 
 
-export{getAdmin,getUserByUsername,insertUser,getAirline,getRoutes,getAirlines,getAirports,getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,addFlightFrom,addFlightTo}
+export{getUserByUsername,insertUser,getAirline,getRoutes,getAirlines,getAirports,getAnnouncementsByPriority,getAnnouncements,getAnnouncementById,getAirlinebyletter,getAirlineName,editAirline,deleteAirline,insertAirline,getText,editInfo,createAnnouncement,addFlightFrom,addFlightTo}

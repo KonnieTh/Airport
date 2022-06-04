@@ -18,6 +18,9 @@
     <div class="header" id="header">
         <div class="menu">
             <div class="menu-left">
+                {{#unless both}}
+                <div class="logo"><a href="/main-page"><img src="/images/Icarus-logo.png"></a></div>
+                {{/unless}}
                 {{#if userId}}
                 <div class="logo"><a href="/main-page"><img src="/images/Icarus-logo.png"></a></div>
                 <div class="flights"><a href="/flights">Πτήσεις</a></div>
@@ -166,7 +169,7 @@
         </div>
         <div class="links">
             <h3>Χρήσιμα links</h3>
-            {{#if userId}}
+            {{#if both}}
             <div class="lin">
                 <a href="/flights">Aναχωρήσεις-Aφίξεις</a>
             </div>

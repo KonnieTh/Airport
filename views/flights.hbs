@@ -1,3 +1,4 @@
+{{#if both}}
 <div class="choices">
     <a href='http://localhost:3000/flights/arrivals' class="arrivals" , onclick="arrivals_form()"{{#if bool}} style="background-color: rgb(50, 26, 26);"{{/if}}> Αφίξεις</a>
     <a href='http://localhost:3000/flights/departures' class="departures" onclick="departures_form()"{{#if bool2}} style="background-color: rgb(50, 26, 26);"{{/if}}>Αναχωρήσεις</a>
@@ -111,3 +112,4 @@
             {{/if}}
         </div>
     </div>
+{{/if}}

@@ -62,20 +62,17 @@ app.use(cors());
 app.use(airportSession);
 
 app.use((req, res, next) => {
-    model.getAdmin(req.session.loggedUserId,(err,user)=>{     
-        if(err){
-            return console.error(err.message);
-        }
-        if (user == undefined) {
-            res.locals.userId = req.session.loggedUserId;
-            console.log("USER",res.locals.userId);
+    try{
+        if(req.session.loggedUserId[1]){
+            res.locals.adminId=req.session.loggedUserId[0];
         }else{
-            res.locals.adminId=req.session.loggedUserId;
-            console.log("ADMIN",res.locals.adminId)
+            res.locals.userId = req.session.loggedUserId[0];
         }
-    })    
-    res.locals.both = req.session.loggedUserId;
-    next();
+        res.locals.both = req.session.loggedUserId;
+        next();
+    }catch{
+        next();
+    }
 })
 
 
@@ -300,28 +297,12 @@ app.post('/flights/done', function (req, res) {
     })
 });
 
-app.get('/flights-admin',(req,res)=>{
-    res.render('flights-admin',{
-        style:'flights-admin.css',
-        script:'flights.js',
-        layout:'layout-admin'
-    })
-})
-
 
 app.get(`/shops`,(req,res)=>{
     res.render('shops',{
         style:'shops.css',
         script:'shops.js',
         layout:'layout'
-    })
-})
-
-app.get(`/shops-admin`,(req,res)=>{
-    res.render('shops',{
-        style:'shops.css',
-        script:'shops.js',
-        layout:'layout-admin'
     })
 })
 
@@ -500,7 +481,7 @@ app.post('/log-in/done', function (req, res) {
         }else if(user.is_admin==true){
             bcrypt.compare(req.body.password, user.password, (err, match) => {
                 if (match) {
-                    req.session.loggedUserId = user.username;
+                    req.session.loggedUserId = [user.username, user.is_admin];
                     const redirectTo = req.session.originalUrl || "/main-page-admin";
                     res.redirect(redirectTo);
                 }else {
@@ -511,7 +492,7 @@ app.post('/log-in/done', function (req, res) {
         else {
             bcrypt.compare(req.body.password, user.password, (err, match) => {
                 if (match) {
-                    req.session.loggedUserId = user.username;
+                    req.session.loggedUserId = [user.username, user.is_admin];
                     const redirectTo = req.session.originalUrl || "/main-page";
                     res.redirect(redirectTo);
                 }else {
