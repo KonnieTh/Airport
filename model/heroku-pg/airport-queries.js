@@ -2,12 +2,11 @@ import pg from "pg";
 import bcrypt from 'bcrypt';
 
 const pool = new pg.Pool({
-    user:"postgres",
-    password:"abcd123!",
-    host:"localhost",
-    port:5432,
-    database:"airport2"
-})
+    connectionString: process.env.DATABASE_URL, //μεταβλητή περιβάλλοντος
+    ssl: {
+      rejectUnauthorized: false
+    }
+});
 
 async function connect(){
     try{

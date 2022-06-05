@@ -1,12 +1,11 @@
 import pg from "pg";
 
 const pool = new pg.Pool({
-  user: 'postgres',
-  database: 'airport2',
-  password: 'abcd123!',
-  port: 5432,
-  host: 'localhost',
-})
+  connectionString: process.env.DATABASE_URL, //μεταβλητή περιβάλλοντος
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 await pool.query(`COPY public."Airport"("airport_ID","airport_name","IATA","ICAO","country","city")
 FROM 'E:\Airports.csv'
