@@ -526,6 +526,9 @@ form.new_airline{
     form.new_airline{
         width:70%;
     }
+    .choices a .btn{
+        padding:0.5em 0.6em;
+    }
 }
 
 

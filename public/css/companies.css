@@ -362,6 +362,9 @@ tbody tr:last-child{
     div.selection{
         width:90%;
     }
+    .choices a .btn{
+        padding:0.5em 0.6em;
+    }
 }
 
 @media only screen and (max-width: 450px) {

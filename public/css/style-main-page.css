@@ -637,6 +637,9 @@ footer{
         font-size:0.6em;
     }#about-us{
         font-size:0.75em;
+    }.wrap {
+        height: 90vh !important;
+        margin: 1em 0em !important;
     }
 }
 
