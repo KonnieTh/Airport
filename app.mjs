@@ -12,7 +12,7 @@ import * as model from './model/heroku-pg/airport-queries.js'
 import exphbs from 'express-handlebars';
 import airportSession from './app-setup-session.mjs'
 
-
+//Εύρεση τωρινής ημερομηνίας και ώρας
 function getDateTime(){
     const date = new Date();
     const year = date.getFullYear();
@@ -54,13 +54,14 @@ function getDateTime(){
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
-
+//Χρειάζεται για το χειρισμό των αιτημάτων που έρχονται με POST
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
- 
+//Ενεργοποίηση συνεδρίας
 app.use(airportSession);
 
+//Εδώ καθορίζεται ο τύπος του User, αν είναι δηλαδή Admin ή Απλός User ή και μη-εγγεγραμμένος User. Παίζει ρόλο στο τι θα φαίνεται στη σελίδα.
 app.use((req, res, next) => {
     try{
         if(req.session.loggedUserId[1]){
@@ -78,20 +79,21 @@ app.use((req, res, next) => {
 
 
 
-
+//Προκειμένου να παίρνουμε τα scripts ,τα styles και τις εικόνες από το φάκελο public 
 app.use(express.static('public'))
-
+//Χρήση των views
 app.engine('hbs',exphbs.engine({
     defaultLayout: 'layout',
     extname: 'hbs'
 }));
-
+//και ορίζουμε πως θα χρησιμοποιήσουμε τη μηχανή template με όνομα 'hbs'
 app.set('view engine', 'hbs');
 
 
-
+//Αρχική σελίδα της ιστοσελίδας μας το main-page.
 app.route('/').get((req, res) => { res.redirect('/main-page') });
 
+//Αρχική σελίδα απλού χρήστη.
 app.get('/main-page',(req,res)=>{
     res.render('main-page',{
         style:'style-main-page.css',
@@ -100,7 +102,7 @@ app.get('/main-page',(req,res)=>{
     })
 })
 
-
+//Αρχική σελίδα διαχειριστή
 app.get('/main-page-admin',(req,res)=>{
     res.render('main-page-admin',{
         style:'style-main-page-admin.css',
@@ -108,7 +110,7 @@ app.get('/main-page-admin',(req,res)=>{
         layout:'layout-main-page'
     })
 })
-
+//Λινκ από το οποίο παίρνουμε τις γενικές πληροφορίες της αρχικής σελίδας με βάση τον τίτλο
 app.get('/text/:titlos',(req,res)=>{
     const title = req.params.titlos;
     model.getText(title,(err,data) =>{
@@ -120,7 +122,7 @@ app.get('/text/:titlos',(req,res)=>{
         }
     })
 })
-
+//Λινκ επεξεργασίας κειμένων αρχικής σελίδας 
 app.put('/edit_text',(req,res)=>{
     const text = req.body;
     const date = getDateTime();
@@ -134,7 +136,7 @@ app.put('/edit_text',(req,res)=>{
         }
     })
 })
-
+//Λινκ από το οποίο παίρνουμε αεροπορική εταιρεία με βάση το όνομα
 app.get('/airlines/:name',(req,res)=>{
     let name = req.params.name;
     model.getAirline(name,(err,data)=>{
@@ -145,7 +147,7 @@ app.get('/airlines/:name',(req,res)=>{
     })
 })
 
-
+//Λινκ από το οποίο παίρνουμε τις αεροπορικές εταιρείες με βάση το γράμμα από το οποίο ξεκινάμε (User)
 app.get('/companies/:letter',(req,res)=>{
     let letter=req.params.letter;
     model.getAirlinebyletter(letter,(err,rows) => {
@@ -160,7 +162,7 @@ app.get('/companies/:letter',(req,res)=>{
         })
     })
 })
-
+//Λινκ από το οποίο παίρνουμε τις αεροπορικές εταιρείες με βάση το γράμμα από το οποίο ξεκινάμε (Admin)
 app.get('/companies-admin/:letter',(req,res)=>{
     let letter=req.params.letter;
     model.getAirlinebyletter(letter,(err,rows) => {
@@ -175,7 +177,7 @@ app.get('/companies-admin/:letter',(req,res)=>{
         })
     })
 })
-
+//Λινκ από το οποίο παίρνουμε αεροπορική εταιρεία με βάση το κωδικό ΙΑΤΑ
 app.get('/airline_name/:iata',(req,res)=>{
     let iata = req.params.iata;
     model.getAirlineName(iata,(err,data)=>{
@@ -185,7 +187,7 @@ app.get('/airline_name/:iata',(req,res)=>{
         res.json(data);
     })
 })
-
+//Λινκ από το οποίο ενημερώνουμε τα στοιχεία μιας αεροπορικής εταιρείας 
 app.put('/airlines_edit',(req,res)=>{
     const airline=req.body;
     const date = getDateTime();
@@ -200,7 +202,7 @@ app.put('/airlines_edit',(req,res)=>{
         }
     })
 })
-
+//Λινκ από το οποίο διαγράφουμε μια αεροπορική εταιρείας 
 app.delete('/airlines_delete',(req,res)=>{
     const airline=req.body;
     const date = getDateTime();
@@ -214,7 +216,7 @@ app.delete('/airlines_delete',(req,res)=>{
         }
     })
 })
-
+//Λινκ από το οποίο δημιουργούμε μια αεροπορική εταιρεία
 app.post('/new_airline',(req,res)=>{
     const airline=req.body;
     const date = getDateTime();
@@ -229,7 +231,7 @@ app.post('/new_airline',(req,res)=>{
     })
 });
 
-
+//Λινκ από το οποίο παίρνουμε τη σημερινή ημερομηνία και τις επόμενες 3 ημερομηνίες
 app.get('/flights',(req,res)=>{
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
@@ -268,7 +270,7 @@ app.get('/flights',(req,res)=>{
         })
     })
 })
-
+//Λινκ από το οποίο παίρνουμε τις πτήσεις όταν ο χρήστης συμπληρώσει τη φόρμα
 app.post('/flights/done', function (req, res) {
     var {destt}=req.body;
     var des=false;
@@ -297,7 +299,7 @@ app.post('/flights/done', function (req, res) {
     })
 });
 
-
+//Λινκ από το οποίο παίρνουμε τα μαγαζια του αεροδρομίου
 app.get(`/shops`,(req,res)=>{
     res.render('shops',{
         style:'shops.css',
@@ -306,7 +308,7 @@ app.get(`/shops`,(req,res)=>{
     })
 })
 
-
+//Λινκ από το οποίο παίρνουμε τις ανακοινώσεις
 app.get('/announcements',(req,res)=>{
     model.getAnnouncements((err,data) =>{
         if(err){
@@ -322,7 +324,7 @@ app.get('/announcements',(req,res)=>{
         }
     })
 })
-
+//Λινκ από το οποίο παίρνουμε τις ανακοινώσεις με βάση το id.
 app.get('/announcements/id/:id',(req,res)=>{
     model.getAnnouncementById(req.params.id,(err,data) =>{
         if(err){
@@ -338,7 +340,7 @@ app.get('/announcements/id/:id',(req,res)=>{
         }
     })
 })
-
+//Λινκ από το οποίο παίρνουμε τις ανακοινώσεις με βάση τη προτεραιότητα που έχει δώσει ο χρήστης
 app.get('/announcements/search',(req,res)=>{
     const priority = req.query.priority;
     model.getAnnouncementsByPriority(priority,(err,data) =>{
@@ -356,7 +358,7 @@ app.get('/announcements/search',(req,res)=>{
     })
 })
 
-
+//Λινκ από το οποίο παίρνουμε τις ανακοινώσεις (Admin)
 app.get('/announcements-admin',(req,res)=>{
     model.getAnnouncements((err,data) =>{
         if(err){
@@ -372,7 +374,7 @@ app.get('/announcements-admin',(req,res)=>{
         }
     })
 })
-
+//Λινκ από το οποίο παίρνουμε τις ανακοινώσεις με βάση τη προτεραιότητα που έχει δώσει ο χρήστης (Admin)
 app.get('/announcements-admin/search',(req,res)=>{
     const priority = req.query.priority;
     model.getAnnouncementsByPriority(priority,(err,data) =>{
@@ -389,7 +391,7 @@ app.get('/announcements-admin/search',(req,res)=>{
         }
     })
 })
-
+//Λινκ από το οποίο παίρνουμε τις ανακοινώσεις με βάση το id. (Admin)
 app.get('/announcements-admin/id/:id',(req,res)=>{
     model.getAnnouncementById(req.params.id,(err,data) =>{
         if(err){
@@ -405,7 +407,7 @@ app.get('/announcements-admin/id/:id',(req,res)=>{
         }
     })
 })
-
+//Λινκ από το οποίο ο Admin δημιουργεί μια νέα ανακοίνωση 
 app.post('/create_announcement',(req,res)=>{
     const text = req.body;
     const date = getDateTime();
@@ -420,7 +422,7 @@ app.post('/create_announcement',(req,res)=>{
     })
 })
 
-
+//Λινκ από το οποίο παίρνουμε τις αφίξεις
 app.get('/flights/arrivals',(req,res)=>{
     model.addFlightFrom((err,rows) => {
         if(err){
@@ -436,7 +438,7 @@ app.get('/flights/arrivals',(req,res)=>{
         })
     })
 })
-
+//Λινκ από το οποίο παίρνουμε τις αναχωρίσεις
 app.get('/flights/departures',(req,res)=>{
     model.addFlightTo((err,rows) => {
         if(err){
@@ -452,7 +454,7 @@ app.get('/flights/departures',(req,res)=>{
         })
     })
 })
-
+//Λινκ από το οποίο κάνει ο χρήστης εγγραφή
 app.post('/sign-up/done', function (req, res) {
     model.insertUser(req.body.username,req.body.password,req.body.fname,req.body.lname,req.body.age,req.body.gender,req.body.mail,req.body.number,req.body.country,false,(err,rows)=>{
     if(err){
@@ -461,12 +463,12 @@ app.post('/sign-up/done', function (req, res) {
     res.redirect('/main-page')
     });
 })
-
+//Λινκ από το οποίο ο χρήστης κάνει αποσύνδεση οπότε και σταματάει το session
 app.get('/log-out',function(req,res){
     req.session.destroy();
     res.redirect('/');
 })
-
+//Λινκ από το οποίο ο χρήστης κάνει login και καθορίζεται αν ο χρήστης ειαι User ή Admin, ενώ αν τα στοιχεία που έβαλε είναι λάθος, εμφανίζεται μύνημα λάθους
 app.post('/log-in/done', function (req, res) {
     model.getUserByUsername(req.body.username,(err,user)=>{     
         if(err){
