@@ -49,3 +49,9 @@ footer .links .lin a:hover{
     color:rgb(249, 249, 142);
     cursor:pointer;
 }
+
+@media only screen and (max-width: 800px){
+    .footer div{
+        font-size:0.8em;
+    }
+} 
