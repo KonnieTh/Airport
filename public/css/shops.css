@@ -146,7 +146,7 @@
 }
 @media only screen and (max-width: 800px){
     p{
-        font-size:0.8em;
+        font-size:0.75em !important;
     }
 } 
 @media only screen and (max-width: 1400px){

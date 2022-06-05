@@ -67,13 +67,10 @@
 }
 @media only screen and (max-width: 800px){
     .menu div{
-        font-size:0.85em;
+        font-size:0.8em;
     }
-    .menu a{
-        font-size:0.85em;
-    }
-    .menu button{
-        font-size:0.85em;
+    .menu-right{
+        font-size:0.8em;
     }
     .logo a img{
         height: 30px;
