@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 export let airportSession =
     session({
         name: 'airport-session',
-        secret: process.env.SESSION_SECRET,
+        secret: "assbcskcbskcbsdkhcvshdjcsdk",
         resave: false, // https://www.npmjs.com/package/express-session#user-content-resave
         saveUninitialized: false, // https://www.npmjs.com/package/express-session#user-content-saveuninitialized
         cookie: {
