@@ -8,15 +8,11 @@ function covid_off() {
 let dates = document.querySelectorAll("tbody tr td");
 for(let i=0;i<dates.length;i++){
     if (i%2!=0){
-        const date = dates[i].innerText.slice(0,15);
+        const date = dates[i].innerText.slice(0,10);
         const time = dates[i].innerText.slice(-9);
         dates[i].innerText = `${date} ${time}`;
     }
 }
-
-const text = document.querySelector("table .message");
-const keimeno= text.innerText;
-text.innerHTML = keimeno;
 
 
 function createAnnouncement(){

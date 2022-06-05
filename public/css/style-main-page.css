@@ -631,3 +631,15 @@ p{
 footer{
     margin-top: 0;
 }
+
+@media only screen and (max-width: 800px){
+    .currencytext,.customstext,.petstext,.covidtext,.specialneedstext,.parkingtext{
+        font-size:0.6em;
+    }
+} 
+
+@media only screen and (max-width: 1400px){
+    .currencytext,.customstext,.petstext,.covidtext,.specialneedstext,.parkingtext{
+        font-size:0.7em;
+    }
+}
