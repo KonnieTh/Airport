@@ -76,7 +76,7 @@ async function getImages(){
     const images = document.querySelectorAll(".company-info .row-info .icon");
     for(let i=0;i<elements_row.length;i++){
         const name = elements_row[i].innerText;
-        const response = await fetch(`/airlines/${name}`);
+        const response = await fetch(`http://icarus-airport.herokuapp.com/airlines/${name}`);
         if(response.status==200){
             const data = await response.json();
             for(let j of data){
