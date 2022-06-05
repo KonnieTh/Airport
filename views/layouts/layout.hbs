@@ -33,23 +33,23 @@
                 <div class="companies"><a href="/companies-admin/Α">Εταιρείες</a></div>
                 <div class="shops"><a href="/shops">Καταστήματα</a></div>
                 {{/if}}
-            </div>
-            {{#if userId}}
-            <div class="menu-right">
-                <a class="log-out" href="/log-out">Αποσύνδεση</a>
-            </div>
-            {{/if}}
-            {{#unless both}}
-            <div class="menu-right">
-                <button class="sign-up">Εγγραφή</button>
-                <button class="log-in">Είσοδος</button>
-            </div>
-            {{/unless}}
-            {{#if adminId}}
-            <div class="menu-right">
-                <a class="log-out" href="/log-out">Αποσύνδεση</a>
-            </div>
-            {{/if}}
+        </div>
+        {{#if userId}}
+        <div class="menu-right">
+            <a class="log-out" href="/log-out">Αποσύνδεση</a>
+        </div>
+        {{/if}}
+        {{#unless both}}
+        <div class="menu-right">
+            <button class="sign-up">Εγγραφή</button>
+            <button class="log-in">Είσοδος</button>
+        </div>
+        {{/unless}}
+        {{#if adminId}}
+        <div class="menu-right">
+            <a class="log-out" href="/log-out">Αποσύνδεση</a>
+        </div>
+        {{/if}}
     </div>
     <div class="signup">
         <form action='/sign-up/done' method="post">
