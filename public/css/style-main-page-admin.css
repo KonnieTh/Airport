@@ -769,6 +769,8 @@ p{
     }.wrap {
         height: 90vh !important;
         margin: 1em 0em !important;
+    }.passengers-information {
+        font-size: 1.1em !important;
     }
 } 
 
