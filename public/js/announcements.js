@@ -119,7 +119,6 @@ function getDateTime(){
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-
 fetch(`/text/covid`)
 .then(response=>response.json())
 .then(data=>{
@@ -133,3 +132,7 @@ fetch(`/text/covid`)
 .catch((error)=>{
     console.log("Error:",error);
 })
+
+const text = document.querySelector("table .message");
+const keimeno= text.innerText;
+text.innerHTML = keimeno;

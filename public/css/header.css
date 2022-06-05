@@ -69,6 +69,12 @@
     .menu div{
         font-size:0.85em;
     }
+    .menu a{
+        font-size:0.85em;
+    }
+    .menu button{
+        font-size:0.85em;
+    }
     .logo a img{
         height: 30px;
         width: 90px;
