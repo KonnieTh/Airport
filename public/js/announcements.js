@@ -42,13 +42,6 @@ elements.forEach(element => {
 
     });
 });
-    // document.getElementById("main-menu").style.display = "none";
-    // document.querySelector('.header').style.backgroundImage = "none";
-    // document.querySelector('.header').style.backgroundColor = "rgb(46, 46, 46)";
-    // document.querySelector('.header').style.minHeight = "10em";
-    // let text = document.querySelector(`${a}`);
-    // let text2 = document.getElementById("textarea");
-    // text2.innerHTML = text.innerHTML;
 
 function save() {
     let text = document.getElementById("textarea");
@@ -83,12 +76,6 @@ function save() {
     document.querySelector(`.head`).style.display = "block";
     document.querySelector('.text-editor-title').style.display = "none";
     document.getElementById("text-editor").style.display = "none";
-    // document.getElementById("customs_insection_text").style.display = "none";
-    // document.getElementById("text-editor").style.display = "none";
-    // document.getElementById("description").style.display = "block";
-    // document.getElementById("main-menu").style.display = "block";
-    // document.querySelector('.header').style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('/Front-end/images/athens.jpg')";
-    // document.querySelector('.header').style.minHeight = "100vh";
 }
 
 
