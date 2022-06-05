@@ -1,0 +1,106 @@
+"airport_ID","airport_name","IATA","ICAO","country","city"
+140,Montreal / Pierre Elliott Trudeau International Airport,YUL,CYUL,Canada,Montreal
+187,Lester B. Pearson International Airport,YYZ,CYYZ,Canada,Toronto
+281,Brussels Airport,BRU,EBBR,Belgium,Brussels
+294,Berlin-Schönefeld Airport,SXF,EDDB,Germany,Berlin
+297,Frankfurt am Main Airport,FRA,EDDF,Germany,Frankfurt
+299,Hamburg Airport,HAM,EDDH,Germany,Hamburg
+301,Cologne Bonn Airport,CGN,EDDK,Germany,Cologne
+302,Düsseldorf Airport,DUS,EDDL,Germany,Duesseldorf
+303,Munich Airport,MUC,EDDM,Germany,Munich
+307,Stuttgart Airport,STR,EDDS,Germany,Stuttgart
+308,Berlin-Tegel Airport,TXL,EDDT,Germany,Berlin
+351,Helsinki Vantaa Airport,HEL,EFHK,Finland,Helsinki
+388,Manchester Airport,MAN,EGCC,United Kingdom,Manchester
+407,London Gatwick Airport,LGW,EGKK,United Kingdom,London
+411,London Heathrow Airport,LHR,EGLL,United Kingdom,London
+432,Edinburgh Airport,EDI,EGPH,United Kingdom,Edinburgh
+444,London Stansted Airport,STN,EGSS,United Kingdom,London
+463,Amsterdam Airport Schiphol,AMS,EHAM,Netherlands,Amsterdam
+465,Eindhoven Airport,EIN,EHEH,Netherlands,Eindhoven
+478,Dublin Airport,DUB,EIDW,Ireland,Dublin
+486,Copenhagen Kastrup Airport,CPH,EKCH,Denmark,Copenhagen
+515,Oslo Lufthavn,OSL,ENGM,Norway,Oslo
+543,Warsaw Chopin Airport,WAW,EPWA,Poland,Warsaw
+577,Stockholm-Arlanda Airport,ARN,ESSA,Sweden,Stockholm
+877,Cairo International Airport,CAI,HECA,Egypt,Cairo
+929,Tirana International Airport Mother Teresa,TIA,LATI,Albania,Tirana
+933,Sofia Airport,SOF,LBSF,Bulgaria,Sofia
+936,Larnaca International Airport,LCA,LCLK,Cyprus,Larnaca
+937,Paphos International Airport,PFO,LCPH,Cyprus,Paphos
+939,Dubrovnik Airport,DBV,LDDU,Croatia,Dubrovnik
+943,Split Airport,SPU,LDSP,Croatia,Split
+952,Barcelona International Airport,BCN,LEBL,Spain,Barcelona
+960,Adolfo Suárez Madrid–Barajas Airport,MAD,LEMD,Spain,Madrid
+991,Toulouse-Blagnac Airport,TLS,LFBO,France,Toulouse
+1021,Lyon Saint-Exupéry Airport,LYS,LFLL,France,Lyon
+1034,Marseille Provence Airport,MRS,LFML,France,Marseille
+1055,Charles de Gaulle International Airport,CDG,LFPG,France,Paris
+1057,Paris-Orly Airport,ORY,LFPO,France,Paris
+1079,Nantes Atlantique Airport,NTE,LFRS,France,Nantes
+1097,Dimokritos Airport,AXD,LGAL,Greece,Alexandroupolis
+1099,Chios Island National Airport,JKH,LGHI,Greece,Chios
+1100,Ioannina Airport,IOA,LGIO,Greece,Ioannina
+1101,Heraklion International Nikos Kazantzakis Airport,HER,LGIR,Greece,Heraklion
+1102,Kastoria National Airport,KSO,LGKA,Greece,Kastoria
+1103,Kithira Airport,KIT,LGKC,Greece,Kithira
+1104,Kefallinia Airport,EFL,LGKF,Greece,Keffallinia
+1106,Kos Airport,KGS,LGKO,Greece,Kos
+1107,Karpathos Airport,AOK,LGKP,Greece,Karpathos
+1108,Ioannis Kapodistrias International Airport,CFU,LGKR,Greece,Kerkyra/corfu
+1110,Alexander the Great International Airport,KVA,LGKV,Greece,Kavala
+1111,Filippos Airport,KZI,LGKZ,Greece,Kozani
+1112,Leros Airport,LRS,LGLE,Greece,Leros
+1113,Limnos Airport,LXS,LGLM,Greece,Limnos
+1115,Mikonos Airport,JMK,LGMK,Greece,Mykonos
+1116,Mytilene International Airport,MJT,LGMT,Greece,Mytilini
+1118,Diagoras Airport,RHO,LGRP,Greece,Rhodos
+1120,Chania International Airport,CHQ,LGSA,Greece,Chania
+1121,Skiathos Island National Airport,JSI,LGSK,Greece,Skiathos
+1122,Samos Airport,SMI,LGSM,Greece,Samos
+1124,Santorini Airport,JTR,LGSR,Greece,Thira
+1125,Sitia Airport,JSH,LGST,Greece,Sitia
+1126,Skiros Airport,SKU,LGSY,Greece,Skiros
+1127,Thessaloniki Macedonia International Airport,SKG,LGTS,Greece,Thessaloniki
+1128,"Zakynthos International Airport ""Dionysios Solomos""",ZTH,LGZA,Greece,Zakynthos
+1129,Budapest Liszt Ferenc International Airport,BUD,LHBP,Hungary,Budapest
+1151,Malpensa International Airport,MXP,LIMC,Italy,Milano
+1152,Il Caravaggio International Airport,BGY,LIME,Italy,Bergamo
+1170,Venice Marco Polo Airport,VCE,LIPZ,Italy,Venice
+1173,Leonardo da Vinci–Fiumicino Airport,FCO,LIRF,Italy,Rome
+1189,Václav Havel Airport Prague,PRG,LKPR,Czech Republic,Prague
+1192,Ben Gurion International Airport,TLV,LLBG,Israel,Tel-aviv
+1203,Malta International Airport,MLA,LMML,Malta,Malta
+1208,Vienna International Airport,VIE,LOWW,Austria,Vienna
+1242,Henri Coandă International Airport,OTP,LROP,Romania,Bucharest
+1249,Geneva Cointrin International Airport,GVA,LSGG,Switzerland,Geneva
+1255,Zürich Airport,ZRH,LSZH,Switzerland,Zurich
+1276,Adnan Menderes International Airport,ADB,LTBJ,Turkey,Izmir
+1290,Chişinău International Airport,KIV,LUKK,Moldova,Chisinau
+1294,Belgrade Nikola Tesla Airport,BEG,LYBE,Serbia,Belgrade
+1639,Queen Alia International Airport,AMM,OJAI,Jordan,Amman
+1644,Beirut Rafic Hariri International Airport,BEY,OLBA,Lebanon,Beirut
+1646,Abu Dhabi International Airport,AUH,OMAA,United Arab Emirates,Abu Dhabi
+1649,Dubai International Airport,DXB,OMDB,United Arab Emirates,Dubai
+2239,Boryspil International Airport,KBP,UKBB,Ukraine,Kiev
+2243,Kiev Zhuliany International Airport,IEV,UKKK,Ukraine,Kiev
+2246,Pulkovo Airport,LED,ULLI,Russia,St. Petersburg
+2257,Krasnodar Pashkovsky International Airport,KRR,URKK,Russia,Krasnodar
+2279,Sheremetyevo International Airport,SVO,UUEE,Russia,Moscow
+2616,Borg El Arab International Airport,HBE,HEBA,Egypt,Alexandria
+2940,Philadelphia International Airport,PHL,KPHL,United States,Philadelphia
+3115,Eleftherios Venizelos International Airport,ATH,LGAV,Greece,Athens
+3126,Riga International Airport,RIX,EVRA,Latvia,Riga
+3133,Zvartnots International Airport,EVN,UDYZ,Armenia,Yerevan
+3141,Tbilisi International Airport,TBS,UGTB,Georgia,Tbilisi
+3191,Domodedovo International Airport,DME,UUDD,Russia,Moscow
+3328,Astypalaia Airport,JTY,LGPL,Greece,Astypalaia
+3329,Ikaria Airport,JIK,LGIK,Greece,Ikaria
+3330,Kalymnos Airport,JKL,LGKY,Greece,Kalymnos
+3331,Milos Airport,MLO,LGML,Greece,Milos
+3332,Naxos Airport,JNX,LGNX,Greece,Cyclades Islands
+3333,Paros National Airport,PAS,LGPA,Greece,Paros
+3422,Sabiha Gökçen International Airport,SAW,LTFJ,Turkey,Istanbul
+3836,Syros Airport,JSY,LGSO,Greece,Syros Island
+5607,Hamad International Airport,DOH,OTHH,Qatar,Doha
+6045,Istanbul Airport,IST,LTFM,Turkey,Istanbul
