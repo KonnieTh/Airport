@@ -1,6 +1,7 @@
 import pg from "pg";
 import bcrypt from 'bcrypt';
 
+//Σύνδεση με τη βάση Δεδομένων
 const pool = new pg.Pool({
     connectionString: process.env.DATABASE_URL, //μεταβλητή περιβάλλοντος
     ssl: {
@@ -17,7 +18,7 @@ async function connect(){
         console.error(`Failed to connect ${e}`)
     }
 }
-
+//Εύρεση Αεροπορικής Εταιρείας με βάση το όνομα της
 async function getAirline(name,callback){
     const sql =   `select * from "Airline" where "airline_name"='${name}'`;
     try{
@@ -30,7 +31,7 @@ async function getAirline(name,callback){
         callback(err,null);
     }
 }
-
+//Εύρεση Αεροπορικής Εταιρείας με βάση το γράμμα με το οποίο ξεκινάει
 async function getAirlinebyletter(letter,callback){
     const sql =   `select * from "Airline" INNER JOIN "Gate" on "Airline"."gate_code"="Gate"."gate_ID" where substr(airline_name,1,1)='${letter}' order by airline_name`;
     try{
@@ -43,7 +44,7 @@ async function getAirlinebyletter(letter,callback){
         callback(err,null);
     }
 }
-
+//Εύρεση Αεροπορικής Εταιρείας με βάση το id της
 async function getAirlineName(id,callback){
     const sql =   `select * from "Airline" where "airline_ID"='${id}'`;
     try{
@@ -56,7 +57,7 @@ async function getAirlineName(id,callback){
         callback(err,null);
     }
 }
-
+//Ανανέωση στοιχείων Αεροπορικής Εταιρείας και εγγραφή στον πίνακα processing.
 async function editAirline(airline,date,id,callback){
     const sql = `update "Airline" 
                 set telephone='${airline.telephone}',email='${airline.email}',"gate_code" = (SELECT "gate_ID" from "Gate" where terminal='${airline.terminal}' and gate_name='${airline.gate}' and gate_number='${airline.gate_number}')
@@ -76,7 +77,7 @@ async function editAirline(airline,date,id,callback){
     }
 }
 
-
+//Διαγραφή Αεροπορικής Εταιρείας
 async function deleteAirline(airline,date,id,callback){
     const sql = `delete from "Airline" where "IATA" = '${airline.IATA}'`;
     const sql2 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${id}',(select "airline_ID" from "Airline" where "IATA"='${airline.IATA}'),'${date}')`;
@@ -91,7 +92,7 @@ async function deleteAirline(airline,date,id,callback){
         callback(err,null);
     }
 }
-
+//Δημιουργία Αεροπορικής Εταιρείας και εγγραφή στον πίνακα processing.
 async function insertAirline(airline,date,id,callback){
     const sql1 = `select * from "Airline" where "airline_name"='${airline.name}' or "IATA" = '${airline.iata}'`;
     try{
@@ -120,7 +121,7 @@ async function insertAirline(airline,date,id,callback){
         callback(err,null);
     }
 }
-
+//Εύρεση κειμένου Γενικών Ανακοινώσεων με βάση τον τίτλο
 async function getText(textTitle,callback){
     const sql = `select * from "General_info" where "title"='${textTitle}' `;
     try{
@@ -134,7 +135,7 @@ async function getText(textTitle,callback){
     }
 }
 
-
+//Ανανέωση κειμένου Γενικών Ανακοινώσεων και εγγραφή της αλλαγή στον πίνακα modifies
 async function editInfo(text,date,id,callback){
     const sql = `update "General_info" set "description"='${text.keimeno}' where "title"='${text.titlos}' `;
     const sql1 = `insert into "modifies" ("username","info_ID","modification_date") VALUES('${id}',(select "info_ID" from "General_info" where "title"='${text.titlos}'),'${date}')`;
@@ -149,7 +150,7 @@ async function editInfo(text,date,id,callback){
         callback(err,null);
     }
 }
-
+//Δημιουργία Ανακοίνωσης
 async function createAnnouncement(text,id,callback){
     const sql1 = 'select "announcement_ID" from "Announcement"'
     try{
@@ -186,7 +187,7 @@ async function createAnnouncement(text,id,callback){
         callback(err,null);
     }
 }
-
+//Εύρεση όλων των ανακοινώσεων
 async function getAnnouncements(callback){
     const sql = ` Select * from "Announcement"`;
     try{
@@ -200,7 +201,7 @@ async function getAnnouncements(callback){
     }
 }
 
-
+//Εύρεση ανακοινώσεων βάση τη προτεραιότητα που δίνει ο χρήστης
 async function getAnnouncementsByPriority(priority,callback){
     if(priority=="all"){
         const sql = ` Select * from "Announcement"`;
@@ -227,7 +228,7 @@ async function getAnnouncementsByPriority(priority,callback){
         }
     }
 }
-
+//Εύρεση ανακοινώσεων με βάση το id.
 async function getAnnouncementById(id,callback){
     const sql = ` Select * from "Announcement" where "announcement_ID" = ${id}`;
     try{
@@ -240,7 +241,7 @@ async function getAnnouncementById(id,callback){
         callback(err,null);
     }
 }
-
+//Εύρεση αφίξεων με βάση την τωρινή ημερομηνία από ακριβώς μέχρι και μία ώρα μετά την τωρινή ώρα.
 async function addFlightFrom(callback){
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
@@ -270,7 +271,7 @@ async function addFlightFrom(callback){
         callback(err,null);
     }
 }
-
+//Εύρεση αναχωρήσεων με βάση την τωρινή ημερομηνία από ακριβώς μέχρι και μία ώρα μετά την τωρινή ώρα.
 async function addFlightTo(callback){
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
@@ -301,7 +302,7 @@ async function addFlightTo(callback){
         callback(err,null);
     }
 }
-
+//Εύρεση διακριτών αεροδρομίων που έχουν πτήσεις
 async function getAirports(callback){
     const sql = ` select distinct "airport_name" from "flies" natural join "Airport" order by "airport_name"`;
     try{
@@ -314,7 +315,7 @@ async function getAirports(callback){
         callback(err,null);
     }
 }
-
+//Εύρεση διακριτών αεροπορικών εταιρειών που έχουν πτήσεις.
 async function getAirlines(callback){
     const sql = ` select distinct "airline_name" from "flies" natural join "Airline" order by "airline_name"`;
     try{
@@ -328,7 +329,7 @@ async function getAirlines(callback){
     }
 }
 
-
+//Εύρεση χρήστη με βάση το username του.
 async function getUserByUsername(username, callback) {
     const sql= `SELECT "username", "password","is_admin" FROM "General_User" WHERE "username" = '${username}' ORDER BY "username" LIMIT 1`
     try{
@@ -342,7 +343,7 @@ async function getUserByUsername(username, callback) {
     }
 }
 
-
+//Εισαγωγή καινούργιου user που κάνει εγγραφή
 async function insertUser(username,password,fname,lname,age,sex,email,phone,country,is_adm,callback){
     getUserByUsername(username, async (err, userId) => {
         if (userId != undefined) {
@@ -375,6 +376,7 @@ async function insertUser(username,password,fname,lname,age,sex,email,phone,coun
     })
 }
 
+//Εύρεση με πτήσεων με βάση τα στοιχεία που συμπληρώνει ο χρήστης στη φόρμα που υπάρχει στη σελίδα Πτήσεις
 async function getRoutes(airlineName,date_c,airportName,isDest,id1,callback){
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
