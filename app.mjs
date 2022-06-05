@@ -224,7 +224,7 @@ app.post('/new_airline',(req,res)=>{
             return console.error(err.message);
         }
         else{
-            res.json(data);
+            res.redirect('/main-page-admin');
         }
     })
 });

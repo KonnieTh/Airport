@@ -57,7 +57,6 @@ async function getAirlineName(id,callback){
     }
 }
 
-
 async function editAirline(airline,date,id,callback){
     const sql = `update "Airline" 
                 set telephone='${airline.telephone}',email='${airline.email}',"gate_code" = (SELECT "gate_ID" from "Gate" where terminal='${airline.terminal}' and gate_name='${airline.gate}' and gate_number='${airline.gate_number}')
@@ -80,11 +79,11 @@ async function editAirline(airline,date,id,callback){
 
 async function deleteAirline(airline,date,id,callback){
     const sql = `delete from "Airline" where "IATA" = '${airline.IATA}'`;
-    const sql2 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${id}',(select "airline_ID" from "Airline" where "airline_name"=${airline.name}),'${date}')`;
+    const sql2 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${id}',(select "airline_ID" from "Airline" where "IATA"='${airline.IATA}'),'${date}')`;
     try{
         const client = await connect();
-        const res = await client.query(sql);
         const res1 = await client.query(sql2);
+        const res = await client.query(sql);
         await client.release();
         callback(null,res.rows);
     }
@@ -104,11 +103,11 @@ async function insertAirline(airline,date,id,callback){
         }   
         else{
             const sql2 = `insert into "Airline" ("airline_ID","airline_name","IATA","ICAO","telephone","email","gate_code") VALUES((select max("airline_ID")+1 from "Airline"),'${airline.name}','${airline.iata}','${airline.icao}','${airline.telephone}','${airline.email}', (select "gate_ID" from "Gate" where "terminal"='${airline.terminal}' and "gate_name"='${airline.gate}' and "gate_number" = '${airline.gate_number}'))`;
-            const sql3 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${id}',(select "airline_ID" from "Airline" where "airline_name"=${airline.name}),'${date}')`;
+            const sql3 = `insert into "processing" ("username","airline_ID","processing_date") VALUES('${id}',(select "airline_ID" from "Airline" where "IATA"='${airline.iata}'),'${date}')`;
             try{
                 const client = await connect();
-                const res2 = await client.query(sql3);
                 const res1 = await client.query(sql2);
+                const res2 = await client.query(sql3);
                 await client.release();
                 callback(null,res1.rows);
             }
