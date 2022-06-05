@@ -67,14 +67,11 @@
 }
 @media only screen and (max-width: 800px){
     .menu div{
-        font-size:0.8em;
-    }
-    .menu-right{
-        font-size:0.8em;
+        font-size:0.75em;
     }
     .logo a img{
         height: 30px;
-        width: 90px;
+        width: 87px;
     }
 } 
 
