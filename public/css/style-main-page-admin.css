@@ -764,6 +764,8 @@ p{
 @media only screen and (max-width: 800px){
     .currencytext,.customstext,.petstext,.covidtext,.specialneedstext,.parkingtext{
         font-size:0.6em;
+    }#about-us{
+        font-size:0.75em;
     }
 } 
 

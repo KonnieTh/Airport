@@ -310,3 +310,8 @@ footer{
 .arrivals-table .row-down, .departures-table .row-down{
     background-color: rgb(88, 63, 63);
 }
+@media only screen and (max-width: 1400px){
+    .covidtext{
+        font-size:0.7em;
+    }
+}
