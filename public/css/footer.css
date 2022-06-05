@@ -51,7 +51,7 @@ footer .links .lin a:hover{
 }
 
 @media only screen and (max-width: 800px){
-    .footer div{
+    .footer{
         font-size:0.65em;
     }
 } 
