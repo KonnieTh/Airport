@@ -1,47 +1,55 @@
+//Άνοιγμα πεδίου Υπηρεσιών Επιβατών
 function sn_on() {
     document.getElementById("special-needs-text").style.display = "block";
 }
+//Κλείσιμο πεδίου Υπηρεσιών Επιβατών
 function sn_off() {
     document.getElementById("special-needs-text").style.display = "none";
 }
+//Άνοιγμα πεδίου covid 
 function covid_on() {
     document.getElementById("covid").style.display = "block";
 }
+//Κλείσιμο πεδίου covid
 function covid_off() {
     document.getElementById("covid").style.display = "none";
 }
-
+//Άνοιγμα πεδίου parking
 function parking_on() {
     document.getElementById("parking").style.display = "block";
 }
+//Κλείσιμο πεδίου parking
 function parking_off() {
     document.getElementById("parking").style.display = "none";
 }
-
+//Άνοιγμα πεδίου κατοικίδια
 function pets_on() {
     document.getElementById("pets_text").style.display = "block";
 }
+//Κλείσιμο πεδίου κατοικίδια
 function pets_off() {
     document.getElementById("pets_text").style.display = "none";
 }
-
+//Άνοιγμα πεδίου συναλλαγματικών περιορισμών
 function currency_on() {
     document.getElementById("currency_text").style.display = "block";
 }
+//Κλείσιμο πεδίου συναλλαγματικών περιορισμών
 function currency_off() {
     document.getElementById("currency_text").style.display = "none";
 }
-
+//Άνοιγμα πεδίου Σημείων Ελέγχου
 function customs_on() {
     document.getElementById("customs_insection_text").style.display = "block";
 }
+//Κλείσιμο πεδίου Σημείων Ελέγχου
 function customs_off() {
     document.getElementById("customs_insection_text").style.display = "none";
 }
 
 let d;
 let titlos; 
-
+//Επεξεργασία κειμένου 
 function edit(a, b) {
     d = a;
     const list = [[".currencytext","currency"],[".parkingtext","parking"],[".covidtext","covid"],[".specialneedstext","special_needs"],[".petstext","pets"],[".customstext","customs"]]
@@ -62,7 +70,7 @@ function edit(a, b) {
     let text2 = document.getElementById("textarea");
     text2.innerHTML = text.innerHTML;
 }
-
+//Κουμπί αποθήκευσης, εμφάνιση του αρχικού περιεχομένου της Αρχικής Σελίδας
 function save() {
     let text2 = document.getElementById("textarea");
     const keimeno = ``+ text2.innerHTML;
@@ -95,7 +103,7 @@ function save() {
 }
 
 const elements = document.querySelectorAll(".text-editor-header .btn");
-
+//Για links που βάζει στον text-editor
 elements.forEach(element => {
     element.addEventListener('click', () => {
         let command = element.dataset['element'];
@@ -110,7 +118,7 @@ elements.forEach(element => {
     });
 });
 
-
+//Φόρτωμα κειμένων Γενικών Πληροφοριών του Αεροδρομίου από τη βάση δεδομένων
 function getTexts(){
     texts=[[".currencytext","currency"],[".parkingtext","parking"],[".covidtext","covid"],[".specialneedstext","special_needs"],[".petstext","pets"],[".customstext","customs"]]
     for(let i of texts){

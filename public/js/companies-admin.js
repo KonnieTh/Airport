@@ -8,15 +8,16 @@ let airline_details;
 let airline_name = document.querySelector('.companies-flights .company');
 let dis = document.querySelector(".company-info");
 let selected_airline_iata;
-
+//Άνοιγμα πεδίου covid από τον footer της σελίδας
 function covid_on() {
     document.getElementById("covid").style.display = "block";
 }
+//Κλείσιμο πεδίου covid
 function covid_off() {
     document.getElementById("covid").style.display = "none";
 }
 
-
+//Φόρτωμα αεροπορικών εταιρειών που ξεκινάνε με το γράμμα που επιλέγει ο χρήστης
 async function display(letter){
     fetch(`/companies-admin/${letter}`)
     .then(response=>response.json())
@@ -28,7 +29,7 @@ async function display(letter){
     })
 }
 
-
+//Φόρτωμα εικόνων των αεροπορικών από την ιστοσελίδα http://pics.avs.io/150/150/${IATA}.png
 async function getImages(){
     const elements_row = document.querySelectorAll(".company-info .row .company");
     const images = document.querySelectorAll(".company-info .row-info .icon");
@@ -52,7 +53,7 @@ async function getImages(){
 
 getImages();
 
-
+//Δημιουργία φόρμας Επεξεργασίας Στοιχείων Αεροπορικής Εταιρείας και έλεγχος στοιχείων
 async function editInfo(airline){
     const telephonevalid = /[0-9]{10}/;
     const emailvalid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -190,7 +191,7 @@ async function editInfo(airline){
     }
 };
 
-
+//Διαγραφή Αεροπορικής Εταιρείας
 async function deleteInfo(airline){
     let index = 0;
     let infos = airline.split(" ");
@@ -223,12 +224,13 @@ async function deleteInfo(airline){
     }
 };
 
-
+//Εμφάνιση φόρμας για προσθήκη Αεροπορικής Εταιρείας 
 function add_airline() {
     const insert_form = document.querySelector(".new_airline");
     insert_form.style.display="block";
 }
 
+//Δημιουργία Κουμπιών Αναζήτησης στα οποία εμφανίζονται οι Αεροπορικές Εταιρείες που ξεκινάνε με το αντίστοιχο γράμμα.
 let Div = document.querySelector("div.choices");
 for (let i = 65; i < 91; i++) {
     const link = document.createElement("a");
@@ -253,14 +255,14 @@ for (let i = 65; i < 91; i++) {
     link.setAttribute("href",`/companies-admin/${letter}`)
     Div.appendChild(link);
 }
-
+//Προκειμένου να φαίνεται πατημένο το κουμπί
 const link = window.location.href;
 const selected_letter = link.slice(-1);
 const place = selected_letter.charCodeAt(0);
 const selected_button = document.querySelectorAll(".btn")[place-65];
 selected_button.classList.add("touched");
 
-
+//Κάνουμε fetch το κείμενο σχετικό με το covid από τη βάση δεδομένων
 fetch(`/text/covid`)
 .then(response=>response.json())
 .then(data=>{

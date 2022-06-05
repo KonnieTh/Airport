@@ -10,14 +10,15 @@ let airline_name = document.querySelector('.companies-flights .company');
 let dis = document.querySelector(".company-info");
 let selected_airline_iata;
 
-
+//Άνοιγμα πεδίου covid από τον footer της σελίδας
 function covid_on() {
     document.getElementById("covid").style.display = "block";
 }
+//Κλείσιμο πεδίου covid
 function covid_off() {
     document.getElementById("covid").style.display = "none";
 }
-
+//Φόρτωμα αεροπορικών εταιρειών που ξεκινάνε με το γράμμα που επιλέγει ο χρήστης
 async function display(letter){
     fetch(`/companies/${letter}`)
     .then(response=>response.json())
@@ -28,7 +29,7 @@ async function display(letter){
         console.log("Error:",error);
     })
 }
-
+//Δημιουργία Κουμπιών Αναζήτησης στα οποία εμφανίζονται οι Αεροπορικές Εταιρείες που ξεκινάνε με το αντίστοιχο γράμμα.
 let Div = document.querySelector("div.choices");
 for (let i = 65; i < 91; i++) {
     const link = document.createElement("a");
@@ -67,10 +68,10 @@ else{
     const selected_button = document.querySelectorAll(".btn")[place-65];
     selected_button.classList.add("touched");
 }
-// display("A");
 
 
 
+//Φόρτωμα εικόνων των αεροπορικών από την ιστοσελίδα http://pics.avs.io/150/150/${IATA}.png
 async function getImages(){
     const elements_row = document.querySelectorAll(".company-info .row .company");
     const images = document.querySelectorAll(".company-info .row-info .icon");
@@ -94,6 +95,7 @@ async function getImages(){
 
 getImages();
 
+//Κάνουμε fetch το κείμενο σχετικό με το covid από τη βάση δεδομένων
 fetch(`/text/covid`)
 .then(response=>response.json())
 .then(data=>{

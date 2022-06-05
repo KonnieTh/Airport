@@ -1,10 +1,12 @@
+//Άνοιγμα πεδίου covid από τον footer της σελίδας
 function covid_on() {
     document.getElementById("covid").style.display = "block";
 }
+//Κλείσιμο πεδίου covid
 function covid_off() {
     document.getElementById("covid").style.display = "none";
 }
-
+//Εύρεση τωρινής ημερομηνίας και ώρας
 let dates = document.querySelectorAll("tbody tr td");
 for(let i=0;i<dates.length;i++){
     if (i%2!=0){
@@ -14,7 +16,7 @@ for(let i=0;i<dates.length;i++){
     }
 }
 
-
+//Δημιουργία νέας ανακοίνωσης και εμφάνιση του text-editor για σύνταξη ανακοίνωσης
 function createAnnouncement(){
     document.querySelector(`.main`).style.display = "none";
     document.querySelector(`.head`).style.display = "none";
@@ -23,7 +25,7 @@ function createAnnouncement(){
 }
 
 const elements = document.querySelectorAll(".text-editor-header .btn");
-
+//Για links που βάζει στον text-editor
 elements.forEach(element => {
     element.addEventListener('click', () => {
         let command = element.dataset['element'];
@@ -38,7 +40,7 @@ elements.forEach(element => {
 
     });
 });
-
+//Κουμπί αποθήκευσης, δημιουργία ανακοίνωσης και εμφάνιση του αρχικού περιεχομένου της Σελίδας των Ανακοινώσεων
 function save() {
     let text = document.getElementById("textarea");
     const keimeno = text.innerHTML;
@@ -76,7 +78,7 @@ function save() {
 
 
 
-
+//Συνάρτηση εύρεσης τωρινής ημερομηνίας και ώρας
 function getDateTime(){
     const date = new Date();
     const year = date.getFullYear();
@@ -118,7 +120,7 @@ function getDateTime(){
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
-
+//Κάνουμε fetch το κείμενο σχετικό με το covid από τη βάση δεδομένων
 fetch(`/text/covid`)
 .then(response=>response.json())
 .then(data=>{
@@ -132,7 +134,7 @@ fetch(`/text/covid`)
 .catch((error)=>{
     console.log("Error:",error);
 })
-
+//Σε περίπτωση που κάνει κλικ ο χρήστης σε κάποια ανακοίνωση φορτώνεται το κείμενο της στο HTML του κομματιού αυτού, ώστε να φαίνεται η μορφοποίησή του.
 const text = document.querySelector("table .message");
 const keimeno= text.innerText;
 text.innerHTML = keimeno;
