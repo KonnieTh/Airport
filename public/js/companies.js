@@ -19,7 +19,7 @@ function covid_off() {
 }
 
 async function display(letter){
-    fetch(`https://icarus-airport.herokuapp.com/companies/${letter}`)
+    fetch(`/companies/${letter}`)
     .then(response=>response.json())
     .then(data=>{
         console.log(data);
@@ -76,7 +76,7 @@ async function getImages(){
     const images = document.querySelectorAll(".company-info .row-info .icon");
     for(let i=0;i<elements_row.length;i++){
         const name = elements_row[i].innerText;
-        const response = await fetch(`https://icarus-airport.herokuapp.com/airlines/${name}`);
+        const response = await fetch(`/airlines/${name}`);
         if(response.status==200){
             const data = await response.json();
             for(let j of data){
