@@ -19,7 +19,7 @@ function covid_off() {
 }
 
 async function display(letter){
-    fetch(`/companies/${letter}`)
+    fetch(`https://icarus-airport.herokuapp.com/companies/${letter}`)
     .then(response=>response.json())
     .then(data=>{
         console.log(data);
